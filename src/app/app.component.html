@@ -20,27 +20,11 @@
   <div class="hud-coin"></div>
 </div>
 
-<div id="toolbar">
-  <!-- <div id="brick">
-      <div id="brickheader">
-          Brick</div>
-  </div> -->
-
-  <button id="add-brick">Add Brick</button>
-  <button id="add-mystery">Add Mystery</button>
-  <button id="add-spike-ball">Add Spike Ball</button>
-  <button id="add-ram">Add Ram</button>
-  <button id="add-coin">Add Coin</button>
-  <button id="print-debug">Print Debug</button>
-  <button id="add-log">Add Log</button>
-  <button id="add-short-log">Add Short Log</button>
-  <button id="add-man-hole">Add Man Hole</button>
-  <button id="add-ice">Add Ice</button>
-  <button id="serialize">Save</button>
-  <!-- <button id="debug-rect-btn">Show Rect</button> -->
-</div>
+<app-tool-bar *ngIf="showToolbar"></app-tool-bar>
 
 <div id="snackbar">
   Here is a snackbar message
 </div>
 <div id="debugger"></div>
+
+<app-hud></app-hud>

@@ -72,18 +72,8 @@ export class GameSprite {
             const pos = this.body.position;
             this.domObject.style.left = `${pos.x - this.width / 2}px`;
             this.domObject.style.top = `${pos.y - this.height / 2}px`;
-
-
             this.x = pos.x;
             this.y = pos.y;
-
-            // const bounds = this.body.bounds.min;
-            // this.domObject.style.left = `${bounds.x}px`;
-            // this.domObject.style.top = `${bounds.y}px`;
-
-
-            // this.x = bounds.x;
-            // this.y = bounds.y;
         }
     }
 

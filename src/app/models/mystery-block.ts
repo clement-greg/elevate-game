@@ -35,7 +35,7 @@ export class MysteryBlock extends GameSprite {
 
     emptyIt() {
         if (this.empty) {
-            return;
+            return false;
         }
         this.empty = true;
         this.domObject.style.backgroundPositionX = '-72px';
@@ -53,5 +53,7 @@ export class MysteryBlock extends GameSprite {
         setTimeout(() => {
             PubSub.getInstance().publish('remove-game-sprite', coin);
         }, 1000);
+
+        return true;
     }
 }

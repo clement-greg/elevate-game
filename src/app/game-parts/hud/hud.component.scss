@@ -1,0 +1,13 @@
+.hud {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    backdrop-filter: blur(10px);
+    background-color: rgba(0,0,0,.2);
+    color: #fff;
+    min-width: 100px;
+}
+
+.hud h1 {
+    color: #fff;
+}

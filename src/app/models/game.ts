@@ -1,10 +1,10 @@
-declare var Matter :any;
+declare var Matter: any;
 
 import { World } from './world';
 import { Ground } from './ground';
 import { Brick } from './brick';
 import { HTTP } from './http';
-import { Editor } from './editor';
+// import { Editor } from './editor';
 import { MysteryBlock } from './mystery-block';
 import { SpikeBall } from './spike-ball';
 import { PubSub } from './pub-sub';
@@ -15,6 +15,7 @@ import { Log } from './log';
 import { ShortLog } from './short-log';
 import { ManHole } from './man-hole';
 import { Ice } from './ice';
+import { NgZone } from '@angular/core';
 
 var Engine = Matter.Engine,
     MatterWorld = Matter.World,
@@ -28,15 +29,20 @@ export class Game {
     internval;
     static gravity = 1;
     //player;
-    player2;
+    player2: Player2;
     ground;
 
     gameSprites = [];
     pubSub = PubSub.getInstance();
     //collisionDetection;
     engine;
+    gameHUD: GameHUD;
 
-    constructor() {
+    constructor(private zone: NgZone) {
+
+        if (!zone) {
+            console.error('no zone passed in')
+        }
 
         this.engine = Engine.create();
 
@@ -45,6 +51,7 @@ export class Game {
 
         this.player2 = new Player2(this.engine, 80, 0, 71, 96);
         this.addSprite(this.player2);
+        this.gameHUD = new GameHUD(zone);
 
 
         //const player = new Player();
@@ -69,7 +76,7 @@ export class Game {
         HTTP.getData('./assets/levels/level1.json').then(json => {
 
             this.setupGame(json);
-            new Editor(this);
+            //new Editor(this);
         });
 
         this.pubSub.subscribe('collision', data => {
@@ -87,15 +94,15 @@ export class Game {
     setupGame(json) {
         const sprites = JSON.parse(json);
 
-        Matter.Events.on(this.engine, 'collisionActive', event=> {
-            for(const pair of event.pairs) {
-                if(pair.bodyA.label === 'Player' || pair.bodyB.label === 'Player') {
-                    if(pair.bodyA.label === 'spike-ball' || pair.bodyB.label === 'spike-ball') {
+        Matter.Events.on(this.engine, 'collisionActive', event => {
+            for (const pair of event.pairs) {
+                if (pair.bodyA.label === 'Player' || pair.bodyB.label === 'Player') {
+                    if (pair.bodyA.label === 'spike-ball' || pair.bodyB.label === 'spike-ball') {
                         this.loseLife();
                     }
                 }
             }
-         });
+        });
         for (const sprite of sprites) {
             if (sprite.objectType === 'Brick') {
                 const brick = new Brick(this.engine, sprite.originalX, sprite.originalY);
@@ -146,7 +153,7 @@ export class Game {
                 log.x = sprite.originalX;
                 log.y = sprite.originalY;
                 this.addSprite(log);
-            }else if (sprite.objectType === 'Ice') {
+            } else if (sprite.objectType === 'Ice') {
                 const log = new Ice(this.engine, sprite.originalX, sprite.originalY);
                 log.x = sprite.originalX;
                 log.y = sprite.originalY;
@@ -177,11 +184,15 @@ export class Game {
             this.player2.isGrounded = false;
         }
         if (!this.player2.isGrounded) {
+            const spritesHandled = [];
             for (const sprite of this.gameSprites) {
+
                 if (sprite.objectType === 'Coin' && sprite.body) {
                     const col = Matter.Collision.collides(sprite.body, this.player2.body);
-                    if (col) {
+                    if (col && spritesHandled.indexOf(sprite) === -1) {
                         this.removeSprite(sprite);
+                        spritesHandled.push(sprite)
+                        this.gameHUD.incrementCoinCount();
                     }
                 }
                 if (sprite.objectType === 'Brick' || sprite.objectType === 'MysteryBlock' || sprite.objectType === 'Log' || sprite.objectType === 'ShortLog') {
@@ -201,7 +212,17 @@ export class Game {
                         if (brickCollision) {
                             const deltaX = Math.abs(brickCollision.bodyA.position.x - brickCollision.bodyB.position.x);
                             if (brickCollision.bodyA.position.y > brickCollision.bodyB.position.y && deltaX < 30) {
-                                sprite.emptyIt();
+                                if (sprite.emptyIt()) {
+                                    this.gameHUD.incrementCoinCount();
+                                }
+                            }
+                        }
+                    }
+                    if (sprite.objectType === 'Brick') {
+                        if (brickCollision) {
+                            const deltaX = Math.abs(brickCollision.bodyA.position.x - brickCollision.bodyB.position.x);
+                            if (brickCollision.bodyA.position.y > brickCollision.bodyB.position.y && deltaX < 30) {
+                                sprite.bounceIt();
                             }
                         }
                     }
@@ -234,14 +255,10 @@ export class Game {
     }
 
     loseLife() {
-        // this.removeSprite(this.player2);
-
-        // delete this.player2;
-        // this.player2 = new Player2(this.engine, 80, 0, 71, 96);
-        // this.addSprite(this.player2);
         this.player2.x = 0;
         this.player2.y = 0;
-        Matter.Body.setPosition(this.player2.body, {x: 0, y: 0});
+        Matter.Body.setPosition(this.player2.body, { x: 0, y: 0 });
+        Matter.Body.setVelocity(this.player2.body, { x: 0, y: 0 });
 
         document.getElementById('game-div').classList.add('reset');
         document.getElementById('bg-buildings').classList.add('reset');
@@ -260,6 +277,15 @@ export class Game {
             document.getElementById('bg-sky').classList.remove('reset');
 
         }, 2000);
+
+        setTimeout(() => {
+            if (this.player2.x < 0) {
+                this.player2.x = 0;
+                this.player2.y = 50;
+                Matter.Body.setPosition(this.player2.body, { x: 0, y: 50 });
+                Matter.Body.setVelocity(this.player2.body, { x: 0, y: 0 });
+            }
+        }, 1000);
     }
 
     addSprite(sprite) {
@@ -285,12 +311,12 @@ export class Game {
             document.getElementById('bg-plants').style.transform = 'translateX(-' + (offset * .5) + 'px)';
             document.getElementById('bg-sky').style.transform = 'translateX(-' + (offset * .01) + 'px)';
             this.world.scrollPosition = offset;
-        } 
+        }
     }
 
-    static getInstance(): Game {
+    static getInstance(zone: NgZone = null): Game {
         if (!Game.gameInstance) {
-            Game.gameInstance = new Game();
+            Game.gameInstance = new Game(zone);
         }
 
         return Game.gameInstance;
@@ -324,5 +350,26 @@ export class Game {
             sprite.advance();
         }
 
+    }
+}
+
+export class GameHUD {
+
+    constructor(private zone: NgZone) {
+
+    }
+
+    private _coinCount = 0;
+    get coinCount() {
+        return this._coinCount;
+    }
+    set coinCount(value: number) {
+        this.zone.run(() => {
+            this._coinCount = value;
+        });
+    }
+
+    incrementCoinCount() {
+        this.coinCount++;
     }
 }
