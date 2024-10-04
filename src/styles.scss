@@ -1,1 +1,318 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+    --grant-sprite-width: 72;
+    --grant-sprite-height: 95.06;
+
+    --game-height: 900px;
+}
+* {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+}
+
+/* document.getElementById('game-div').style.transform = 'translateX(0px)';
+document.getElementById('bg-buildings').style.transform = 'translateX(0px)';
+document.getElementById('bg-plants').style.transform = 'translateX(0px)';
+document.getElementById('bg-sky').style.transform = 'translateX(0px)'; */
+
+html, body {
+    margin: 0;
+    overflow: hidden;
+    background-color: #000;
+}
+
+#game-div.reset, #bg-buildings.reset, #bg-plants.reset, #bg-sky.reset {
+    transition: transform 1s ease;
+}
+
+#game-div {
+    position: relative;
+    height: var(--game-height);
+    width: 100%;
+    background-image: url(/assets/images/bg-sidewalk.png);
+    background-repeat: repeat-x;
+    background-position-y: bottom;
+}
+
+#toolbar {
+    position: absolute;
+    min-width: 150px;
+    left: 100px;
+    top: 100px;
+    display: none;
+    display: block;
+    max-height: 300px;
+    overflow: auto;
+    padding: 20px;
+}
+
+#toolbar>button {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+#brick {
+    position: absolute;
+    z-index: 9;
+    background-color: #f1f1f1;
+    border: 1px solid #d3d3d3;
+    text-align: center;
+}
+
+#brickheader {
+    padding: 10px;
+    cursor: move;
+    z-index: 10;
+    background-color: #2196F3;
+    color: #fff;
+}
+
+#game-container {
+    /* //transform: scale(.9); */
+    /* transform: scale(.9); */
+    transform-origin: 50% 0%; 
+    overflow: hidden;
+}
+
+.player {
+    display: inline-block;
+    position: absolute;
+    /* width: calc(1px *var(--grant-sprite-width));
+    height: calc(1px * var(--grant-sprite-height)); */
+    width: 71px;
+    height: 96px;
+    background-image: url(/assets/images/spritesheet_grant_small.png);
+    background-repeat: no-repeat;
+    left: 0px;
+    top: 0px;
+    background-position-y: -29px;
+    z-index: 1;
+}
+
+#hud {
+    position: fixed;
+    right: 200px;
+    top: 10px;
+}
+
+.brick {
+    display: inline-block;
+    width: 72px;
+    height: 72px;
+    background-image: url(/assets/images/brick.png);
+    background-size: cover;
+    position: absolute;
+}
+
+.ice {
+    display: inline-block;
+    width: 72px;
+    height: 72px;
+    background-image: url(/assets/images/ice-block.svg);
+    background-size: cover;
+    position: absolute;
+}
+
+.spike-ball {
+    display: inline-block;
+    width: 162px;
+    height: 150px;
+    background-image: url(/assets/images/spike-ball.png);
+    /* background-size: contain; */
+    position: absolute;
+    background-repeat: no-repeat;
+    background-position-x: -16px;
+}
+
+.ram {
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    background-image: url(/assets/images/ram.png);
+    /* background-size: contain; */
+    position: absolute;
+    background-repeat: no-repeat;
+    border: 1px solid pink;
+}
+
+.ram.invert {
+    transform: scaleX(-1);
+}
+
+@keyframes coin-animation {
+    from {
+        opacity: 1;
+        transform: translateY(70px);
+    }
+    to {
+        /* opacity: .5; */
+        transform: translateY(-70px);
+    }
+}
+
+.coin {
+    display: inline-block;
+    width: 72px;
+    height: 72px;
+    background-image: url(/assets/images/coin.png);
+    position: absolute;
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* transform: translateY(-70px); */
+    /* opacity: .5; */
+}
+
+.man-hole {
+    display: inline-block;
+    width: 288px;
+    height: 144px;
+    background-image: url(/assets/images/man-hole.svg);
+    position: absolute;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.coin:not(.static) {
+    animation: coin-animation .3s ease-out;
+    animation-fill-mode: forwards;
+}
+
+.log {
+    display: inline-block;
+    width: 576px;
+    height: 74px;
+    background-image: url('/assets/images/log.svg');
+    position: absolute;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.log-short {
+    display: inline-block;
+    width: 216px;
+    height: 74px;
+    background-image: url('/assets/images/log-short.svg');
+    position: absolute;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.mystery-block {
+    display: inline-block;
+    width: 72.8px;
+    height: 72.8px;
+    background-image: url(/assets/images/mystery-block.png);
+    background-size: cover;
+    position: absolute;
+    background-repeat: no-repeat;
+}
+
+@keyframes mystery-block-bounce {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+
+        transform: translateY(-15px);
+    }
+    100% {
+
+        transform: translateY(0);
+    }
+}
+
+.mystery-block.bounce, .brick.bounce {
+    animation: mystery-block-bounce .5s ease-out;
+}
+
+#bg-sky {
+    background-image: url(/assets/images/bg-sky.png);
+    background-repeat: repeat-x;
+    height: var(--game-height);
+    position: absolute;
+    background-position-y: bottom;
+}
+
+#bg-buildings {
+    background-image: url(/assets/images/bg-buildings.png);
+    background-repeat: repeat-x;
+    height: var(--game-height);
+    position: absolute;
+    background-position-y: bottom;
+}
+
+#bg-plants {
+    background-image: url(/assets/images/bg-plants.png);
+    background-repeat: repeat-x;
+    height: var(--game-height);
+    position: absolute;
+    background-position-y: bottom;
+}
+
+#foreground {
+    background-image: url(/assets/images/bg-sidewalk.png);
+    background-repeat: repeat-x;
+    height: var(--game-height);
+    position: absolute;
+}
+
+#snackbar {
+    position: fixed;
+    bottom: 0;
+    background-color: #444;
+    color: #fff;
+    border-radius: 3px 3px 0 0;
+    border: 1px solid #555;
+    /* min-height: 40px; */
+    width: 200px;
+    left: calc(50% - 100px);
+    text-align: center;
+    padding: 20px;
+    border-bottom: none;
+    box-shadow: 0px -2px 15px 5px rgb(0 0 0 / 32%);
+    transition: all .25s ease-out;
+    transform-origin: bottom left;
+    transform: translateY(100%);
+    opacity: 0;
+}
+
+#snackbar.show {
+    transform: translateY(0%);
+    opacity: 1;
+}
+
+
+button {
+    box-shadow: 0px 10px 14px -7px #276873;
+    background: linear-gradient(to bottom, #599bb3 5%, #408c99 100%);
+    background-color: #599bb3;
+    border-radius: 8px;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 13px 32px;
+    text-decoration: none;
+    text-shadow: 0px 1px 0px #3d768a;
+    border: none;
+}
+
+button:hover {
+    background: linear-gradient(to bottom, #408c99 5%, #599bb3 100%);
+    background-color: #408c99;
+}
+
+button:active {
+    position: relative;
+    top: 1px;
+}
+
+.debugger-rect {
+    position: absolute;
+    width: 100%;
+    display: inline-block;
+    z-index: 1;
+    border: 2px dashed orange;
+}

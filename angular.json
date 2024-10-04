@@ -20,12 +20,14 @@
             "outputPath": "dist/elevate-game",
             "index": "src/index.html",
             "browser": "src/main.ts",
+            
             "polyfills": [
               "zone.js"
             ],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
+              "src/assets",
               {
                 "glob": "**/*",
                 "input": "public"
@@ -62,6 +64,9 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "port": 7878
+          },
           "configurations": {
             "production": {
               "buildTarget": "elevate-game:build:production"
@@ -98,5 +103,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "d939a7e9-6b67-4647-a85d-ac0a903dcc9a"
   }
 }
