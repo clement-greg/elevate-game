@@ -38,12 +38,9 @@ export class Game {
     engine;
     gameHUD: GameHUD;
 
+    infoBarier: Ground;
+
     constructor(private zone: NgZone) {
-
-        if (!zone) {
-            console.error('no zone passed in')
-        }
-
         this.engine = Engine.create();
 
         Matter.Runner.run(this.engine);
@@ -53,12 +50,6 @@ export class Game {
         this.addSprite(this.player2);
         this.gameHUD = new GameHUD(zone);
 
-
-        //const player = new Player();
-        //this.player = player;
-
-
-        //this.addSprite(player);
         this.world = World.getInstance();
         const ground = new Ground(this.engine, 0, this.world.height - 65, this.world.width, 20);
         ground.width = this.world.width;
@@ -69,14 +60,10 @@ export class Game {
         const left = new Ground(this.engine, 0, 0, 2, 10000);
         left.body.friction = 0;
 
-        //this.collisionDetection = new CollisionDetection();
-
-        //this.addSprite(ground);
-
+        this.infoBarier = new Ground(this.engine, 1500, 0, 2, 10000);
+        this.infoBarier.body.friction = 0;
         HTTP.getData('./assets/levels/level1.json').then(json => {
-
             this.setupGame(json);
-            //new Editor(this);
         });
 
         this.pubSub.subscribe('collision', data => {
@@ -88,6 +75,13 @@ export class Game {
         });
         this.pubSub.subscribe('remove-game-sprite', data => {
             this.removeSprite(data);
+        });
+
+        document.addEventListener('keyup', key => {
+            if (key.key === ' ' && this.infoBarier) {
+                this.removeSprite(this.infoBarier);
+                delete this.infoBarier
+            }
         });
     }
 
@@ -162,6 +156,8 @@ export class Game {
         }
     }
 
+    coinCount = 0;
+
     advance() {
 
         this.player2.advance();
@@ -175,6 +171,11 @@ export class Game {
             }
         }
 
+        const count = this.gameSprites.filter(i => i.objectType === 'Coin').length;
+        if (count != this.coinCount) {
+            console.log(count);
+            this.coinCount = count;
+        }
 
         const groundCollision = Matter.Collision.collides(this.ground.body, this.player2.body);
         delete this.player2.groundSprite;

@@ -19,8 +19,8 @@ export class Coin extends MoveableObject {
         if (extraClass) {
             brickDiv.classList.add(extraClass);
         }
-        this.domObject = brickDiv;
 
+        this.domObject = brickDiv;
     }
 
     override advance() {
