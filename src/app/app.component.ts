@@ -4,6 +4,18 @@ import { Game } from './models/game';
 import { ToolBarComponent } from './utilities/tool-bar/tool-bar.component';
 import { CommonModule } from '@angular/common';
 import { HudComponent } from './game-parts/hud/hud.component';
+import { PubSub } from './models/pub-sub';
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogActions,
+  MatDialogClose,
+  MatDialogContent,
+  MatDialogRef,
+  MatDialogTitle,
+} from '@angular/material/dialog';
+import { BeginQuestComponent } from './begin-quest/begin-quest.component';
+import { ShopComponent } from './shop/shop.component';
 
 @Component({
   selector: 'app-root',
@@ -14,8 +26,20 @@ import { HudComponent } from './game-parts/hud/hud.component';
 })
 export class AppComponent implements AfterViewInit {
 
-  constructor(private zone: NgZone) {
+  questBeginRef: MatDialogRef<BeginQuestComponent>;
+  constructor(private zone: NgZone, dialog: MatDialog) {
 
+    PubSub.getInstance().subscribe('quest-begin',()=> {
+      this.questBeginRef =  dialog.open(BeginQuestComponent, { disableClose: true })
+    });
+
+    PubSub.getInstance().subscribe('close-begin-quest',()=> {
+      this.questBeginRef.close();
+    });
+
+    PubSub.getInstance().subscribe('show-shop', ()=> {
+      dialog.open(ShopComponent);
+    });
   }
   ngAfterViewInit(): void {
 
@@ -24,6 +48,10 @@ export class AppComponent implements AfterViewInit {
   title = 'elevate-game';
 
   showToolbar = false;
+
+  get applianceShopLeft() {
+    return Game.getInstance().applianceShopLeft + 'px';
+  }
 
   startGame() {
     if (!document.getElementById('game-container')) {

@@ -2,7 +2,7 @@ export class PubSub {
     static intance;
     subscribers = {};
 
-    static getInstance() {
+    static getInstance(): PubSub {
         if (!PubSub.intance) {
             PubSub.intance = new PubSub();
         }
@@ -26,7 +26,7 @@ export class PubSub {
         }
     }
 
-    publish(eventName, data) {
+    publish(eventName, data = null) {
         if(!Array.isArray(this.subscribers[eventName])) {
             return;
         }

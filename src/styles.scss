@@ -144,6 +144,11 @@ html, body {
     background-size: cover;
     /* transform: translateY(-70px); */
     /* opacity: .5; */
+    &.small {
+        background-image: url(/assets/images/coin-small.png);
+        height: 30px;
+        width: 30px;
+    }
 }
 
 .man-hole {
@@ -154,6 +159,10 @@ html, body {
     position: absolute;
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+.cdk-overlay-pane.mat-mdc-dialog-panel {
+     max-width: unset !important;
 }
 
 .coin:not(.static) {
@@ -299,4 +308,33 @@ button:active {
     display: inline-block;
     z-index: 1;
     border: 2px dashed orange;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.speech-bubble {
+    position: relative;
+    background: #d1fbff;
+    border-radius: 44px;
+    padding: 30px;
+    /* background: linear-gradient(0deg, rgba(62, 134, 200, 0) 0%, rgba(86, 68, 157, 1) 100%); */
+    background: linear-gradient(90deg, rgba(62, 134, 200, 1) 0%, rgba(86, 68, 157, 1) 100%);
+    color: #fff;
+    font-weight: bold;
+    min-height: 50px;
+}
+
+.speech-bubble:after {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 50%;
+	width: 0;
+	height: 0;
+	border: 20px solid transparent;
+	border-right-color: rgba(62, 134, 200, 1);
+	border-left: 0;
+	border-bottom: 0;
+	margin-top: -10px;
+	margin-left: -20px;
 }

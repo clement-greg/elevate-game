@@ -84,7 +84,13 @@ export class ToolBarComponent {
   }
 
   async save() {
-    navigator.clipboard.writeText(JSON.stringify(this.game.gameSprites, HTTP.replacer));
+    const striped = JSON.parse(JSON.stringify(this.game.gameSprites, HTTP.replacer));
+    for(const item of striped) {
+      delete item.domObject;
+      delete item.keyboardHandler;
+      delete item.pubsub;
+    }
+    navigator.clipboard.writeText(JSON.stringify(striped));
 
     const link = document.createElement('a');
     link.setAttribute('download', 'level1.json');

@@ -1,0 +1,29 @@
+.choices {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 40px;
+    text-align: center;
+    img {
+        display: inline-block;
+        height: 150px;
+    }
+    >div {
+        position: relative;
+    }
+}
+
+.speech-bubble:after {
+    top: 50px;
+}
+
+.price-container {
+    position: absolute;
+    top: 50px;
+    left: 0;
+
+}
+
+.dialog-container {
+    height: 500px;width: 850px;
+    padding: 30px;;
+}

@@ -39,6 +39,17 @@ export class Game {
     gameHUD: GameHUD;
 
     infoBarier: Ground;
+    showQuestBegin = false;
+    questShown = false;
+    applianceShopLeft = 600;
+
+    // get applianceShopAreaLeft() {
+    //     return this.applianceShopLeft - 100;
+    // }
+
+    get applianceShopAreaRight() {
+        return this.applianceShopLeft + 450;
+    }
 
     constructor(private zone: NgZone) {
         this.engine = Engine.create();
@@ -48,7 +59,7 @@ export class Game {
 
         this.player2 = new Player2(this.engine, 80, 0, 71, 96);
         this.addSprite(this.player2);
-        this.gameHUD = new GameHUD(zone);
+        this.gameHUD = new GameHUD(zone); 
 
         this.world = World.getInstance();
         const ground = new Ground(this.engine, 0, this.world.height - 65, this.world.width, 20);
@@ -62,6 +73,7 @@ export class Game {
 
         this.infoBarier = new Ground(this.engine, 1500, 0, 2, 10000);
         this.infoBarier.body.friction = 0;
+        this.gameSprites.push(this.infoBarier);
         HTTP.getData('./assets/levels/level1.json').then(json => {
             this.setupGame(json);
         });
@@ -79,8 +91,19 @@ export class Game {
 
         document.addEventListener('keyup', key => {
             if (key.key === ' ' && this.infoBarier) {
-                this.removeSprite(this.infoBarier);
-                delete this.infoBarier
+                if (this.showQuestBegin) {
+                    PubSub.getInstance().publish('close-begin-quest');
+                    this.removeSprite(this.infoBarier);
+                    delete this.infoBarier;
+                    this.showQuestBegin = false;
+                }
+            }
+            if(key.key === 'ArrowUp') {
+                console.log('arrowup');
+                console.log({playerLeft: this.playerLeft, left: this.applianceShopLeft, right: this.applianceShopAreaRight})
+                if(this.playerLeft >= this.applianceShopLeft && this.playerLeft <= this.applianceShopAreaRight) {
+                    PubSub.getInstance().publish('show-shop');
+                }
             }
         });
     }
@@ -158,7 +181,14 @@ export class Game {
 
     coinCount = 0;
 
+    get playerLeft() {
+        return parseFloat(this.player2.domObject.style.left.replace('px', ''));
+    }
+
     advance() {
+        if (this.showQuestBegin) {
+            return;
+        }
 
         this.player2.advance();
         for (const sprite of this.gameSprites) {
@@ -171,9 +201,19 @@ export class Game {
             }
         }
 
+        const left = this.playerLeft;
+        if (left > 1428 && !this.showQuestBegin && !this.questShown) {
+            this.questShown = true;
+            this.zone.run(() => {
+                this.showQuestBegin = true;
+                PubSub.getInstance().publish('quest-begin');
+                document.getElementById('construction-worker').parentNode.removeChild(document.getElementById('construction-worker'));
+            });
+        }
+
         const count = this.gameSprites.filter(i => i.objectType === 'Coin').length;
         if (count != this.coinCount) {
-            console.log(count);
+
             this.coinCount = count;
         }
 

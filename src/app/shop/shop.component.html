@@ -1,0 +1,28 @@
+<div class="dialog-container">
+
+    <div style="display: grid;grid-template-columns: auto 1fr;">
+
+        <div>
+            <img src="/assets/images/shop-keeper.svg" style="height: 200px;margin-top: 30px;">
+        </div>
+        <div style="padding-top: 40px; padding-right: 30px;">
+            <div class="speech-bubble" id="speech">
+                
+            </div>
+        </div>
+    </div>
+
+
+    <div class="choices">
+        <!-- <div><img src=""></div>
+        <div><img src="/assets/images/refrigerator2.svg" ></div>
+        <div><img src="/assets/images/refrigerator3.svg" ></div> -->
+        <div *ngFor="let item of items">
+            <img [src]="item.src">
+            <h2 style="margin-bottom: 0;">{{item.title}}</h2>
+            <div class="price-container">
+            <app-price-tag [price]="item.price"></app-price-tag>
+        </div>
+        </div>
+    </div>
+</div>

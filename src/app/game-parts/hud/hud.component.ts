@@ -1,11 +1,12 @@
 import { Component, NgZone } from '@angular/core';
 import { GameProviderService } from '../../services/game-provider.service';
 import { Game, GameHUD } from '../../models/game';
+import { HudCoinComponent } from '../../hud-coin/hud-coin.component';
 
 @Component({
   selector: 'app-hud',
   standalone: true,
-  imports: [],
+  imports: [HudCoinComponent],
   templateUrl: './hud.component.html',
   styleUrl: './hud.component.scss'
 })
