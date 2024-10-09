@@ -25,7 +25,7 @@ export class HudCoinComponent {
   }
 
   get backgroundPosition() {
-    return (this.runFrame * -29) + 'px'
+    return (this.runFrame * -29.1) + 'px'
   }
 
 }

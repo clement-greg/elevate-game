@@ -9,9 +9,12 @@ import { Component } from '@angular/core';
 })
 export class BeginQuestComponent {
 
-  private message = `Here is the text that I want to appear.  It should come in one character at a time and make it look like the construction worker is speaking the words to you.  
+  private message = `Jimmy!!!
+  Bad news!  Your refrigerator is broken and I can't fix it.  
   
-  We will see if it works.  But I don't know.  I will have to make it work.`;
+  My tools are scattered all over the place.
+  
+  But, if you can collect all my tools and buy a new refrigerator from the appliance store, I can get that fixed for you.`;
 
   constructor() {
     this.doWords();

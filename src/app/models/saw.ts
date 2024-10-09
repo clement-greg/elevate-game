@@ -11,7 +11,7 @@ export class Saw extends GameSprite {
 
         this.body.isStatic = true;
         this.body.friction = 0;
-        this.body.label = 'Saw';
+        this.body.label = 'saw';
     }
 }
 
@@ -25,7 +25,7 @@ export class Screwdriver extends GameSprite {
 
         this.body.isStatic = true;
         this.body.friction = 0;
-        this.body.label = 'Screwdriver';
+        this.body.label = 'screwdriver';
     }
 }
 
@@ -39,7 +39,7 @@ export class Wrench extends GameSprite {
 
         this.body.isStatic = true;
         this.body.friction = 0;
-        this.body.label = 'Wrench';
+        this.body.label = 'wrench';
     }
 }
 
@@ -53,7 +53,7 @@ export class Hammer extends GameSprite {
 
         this.body.isStatic = true;
         this.body.friction = 0;
-        this.body.label = 'Hammer';
+        this.body.label = 'hammer';
     }
 }
 

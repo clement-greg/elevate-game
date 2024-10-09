@@ -2,28 +2,39 @@
 
     <div style="display: flex;">
         <div style="flex: auto;padding-right: 40px;">
+            <div class="data-label info-2">Cash</div>
+            <h1 style="margin-bottom: 0;">{{gameHUD.coinCount}}</h1>
             <app-hud-coin></app-hud-coin>
-            <h1 style="margin-top: 30px">{{gameHUD.coinCount}}</h1>
         </div>
 
-        <div style="flex: auto; display: grid;grid-template-columns: 1fr 1fr;column-gap: 10px;row-gap: 10px;">
-            <div class="collectable"  [class.has]="gameHUD.hasHammer">
-                <img src="/assets/images/hammer.svg">
-            </div>
-            <div class="collectable"  [class.has]="gameHUD.hasDrill">
-                <img src="/assets/images/drill.svg">
-            </div>
-            <div class="collectable" [class.has]="gameHUD.hasWrench">
-                <img src="/assets/images/wrench.svg">
-            </div>
-            
-            <div class="collectable"  [class.has]="gameHUD.hasScrewdriver">
-                <img src="/assets/images/screwdriver.svg">
-            </div>
-            <div class="collectable"  [class.has]="gameHUD.hasSaw">
-                <img src="/assets/images/saw.svg">
+        <div style="flex: auto;padding-right: 40px;">
+            <div class="data-label info-2">Inventory</div>
+            <div style="flex: auto; display: grid;grid-template-columns: 1fr 1fr 1fr;column-gap: 10px;row-gap: 10px;">
+                <div class="collectable" [class.has]="gameHUD.hasHammer">
+                    <img src="/assets/images/hammer.svg">
+                </div>
+                <div class="collectable" [class.has]="gameHUD.hasDrill">
+                    <img src="/assets/images/drill.svg">
+                </div>
+                <div class="collectable" [class.has]="gameHUD.hasWrench">
+                    <img src="/assets/images/wrench.svg">
+                </div>
+    
+                <div class="collectable" [class.has]="gameHUD.hasScrewdriver">
+                    <img src="/assets/images/screwdriver.svg">
+                </div>
+                <div class="collectable" [class.has]="gameHUD.hasSaw">
+                    <img src="/assets/images/saw.svg">
+                </div>
             </div>
         </div>
+
+        <div style="flex: auto;">
+            <div class="data-label info-2">Time Remaining</div>
+            <h1>
+            {{gameHUD.timeRemaining}}</h1>
+        </div>
+
     </div>
 
 

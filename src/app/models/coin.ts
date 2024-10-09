@@ -16,6 +16,9 @@ export class Coin extends MoveableObject {
         const brickDiv = document.createElement('div');
         brickDiv.className = 'coin';
         this.objectType = 'Coin';
+        if (this.body) {
+            this.body.label = 'coin';
+        }
         if (extraClass) {
             brickDiv.classList.add(extraClass);
         }

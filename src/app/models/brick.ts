@@ -16,7 +16,7 @@ export class Brick extends GameSprite {
         this.domObject = brickDiv;
 
         this.body.isStatic = true;
-        this.body.friction = 1;
+        this.body.friction = 0;
         this.body.label = 'Brick';
 
         const frictionBody = Bodies.rectangle(x + 4, y - 36, this.width - 16, 2);

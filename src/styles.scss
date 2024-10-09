@@ -139,6 +139,37 @@ html, body {
     position: absolute;
 }
 
+
+.fridge1 {
+    display: inline-block;
+    position: absolute;
+    background-image: url(/assets/images/refrigerator1.svg);
+    background-repeat: no-repeat;
+    height: 144px;
+    width: 72px;
+    background-size: cover;
+}
+
+.fridge2 {
+    display: inline-block;
+    position: absolute;
+    background-image: url(/assets/images/refrigerator2.svg);
+    background-repeat: no-repeat;
+    height: 144px;
+    width: 72px;
+    background-size: cover;
+}
+
+.fridge3 {
+    display: inline-block;
+    position: absolute;
+    background-image: url(/assets/images/refrigerator3.svg);
+    background-repeat: no-repeat;
+    height: 144px;
+    width: 72px;
+    background-size: cover;
+}
+
 .spike-ball {
     display: inline-block;
     width: 162px;
@@ -164,6 +195,19 @@ html, body {
 .ram.invert {
     transform: scaleX(-1);
 }
+
+.info-2 {
+
+    font-family: 'Saruban Light', Helvetica, Arial, Lucida, sans-serif;
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 3px;
+    line-height: 1.4em;
+    padding-bottom: 10px;
+
+}
+
 
 @keyframes coin-animation {
     from {

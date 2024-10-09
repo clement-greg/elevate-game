@@ -17,6 +17,7 @@ import { ManHole } from './man-hole';
 import { Ice } from './ice';
 import { NgZone } from '@angular/core';
 import { Drill, Hammer, Saw, Screwdriver, Wrench } from './saw';
+import { Fridge1 } from './fridge';
 
 var Engine = Matter.Engine,
     MatterWorld = Matter.World,
@@ -44,6 +45,9 @@ export class Game {
     questShown = false;
     applianceShopLeft = 600;
     dialogOpen: boolean;
+    gameStartTime: Date;
+    gameTotalSeconds = 120;
+    remaining: string;
 
     // get applianceShopAreaLeft() {
     //     return this.applianceShopLeft - 100;
@@ -68,6 +72,7 @@ export class Game {
         ground.width = this.world.width;
         ground.x = 0;
         ground.y = this.world.height - ground.height;
+        ground.body.label = 'Ground'
         this.ground = ground;
 
         const left = new Ground(this.engine, 0, 0, 2, 10000);
@@ -107,8 +112,36 @@ export class Game {
                     PubSub.getInstance().publish('show-shop');
                 }
             }
+
+            if (key.key === 't' || key.key === 'T' && !this.fridge) {
+                this.fridge = new Fridge1(this.engine, this.playerLeft - 30, this.playerTop - 72);
+                Matter.Body.setMass(this.fridge.body, .1);
+                this.addSprite(this.fridge);
+                this.createFridgeConstraint();
+            }
+            if (key.key === 'D' || key.key === 'd') {
+                if (this.fridgeContraint) {
+                    Matter.Composite.remove(this.engine.world, this.fridgeContraint);
+                    delete this.fridgeContraint;
+                }
+            }
         });
     }
+
+
+
+    private createFridgeConstraint() {
+        this.fridgeContraint = Matter.Constraint.create({
+            bodyA: this.player2.body,
+            bodyB: this.fridge.body,
+            stiffness: .05,
+        });
+        Matter.Composite.add(this.engine.world, this.fridgeContraint);
+    }
+
+    fridge: any;
+
+    fridgeContraint;
 
     setupGame(json) {
         const sprites = JSON.parse(json);
@@ -213,6 +246,12 @@ export class Game {
         return parseFloat(this.player2.domObject.style.left.replace('px', ''));
     }
 
+    get playerTop() {
+        return parseFloat(this.player2.domObject.style.top.replace('px', ''));
+    }
+
+    private colletableLabels = ['saw', 'wrench', 'hammer', 'screwdriver', 'drill', 'coin']
+
     advance() {
         if (this.showQuestBegin) {
             return;
@@ -245,74 +284,60 @@ export class Game {
             this.coinCount = count;
         }
 
-        const groundCollision = Matter.Collision.collides(this.ground.body, this.player2.body);
+        const collisions = Matter.Detector.collisions(this.engine.world);
+        const playerCollisions = collisions.filter(i => i.bodyA.label === 'Player' || i.bodyB.label === 'Player');
+
+
+
+        const groundCollision = playerCollisions.find(i => i.bodyA.label === 'Ground' || i.bodyB.label === 'Ground');
+        //console.log(groundCollision);
         delete this.player2.groundSprite;
         if (groundCollision && groundCollision.collided) {
             this.player2.isGrounded = true;
         } else {
             this.player2.isGrounded = false;
         }
-        const collectables = this.gameSprites.filter(i => (i.objectType === 'Coin'
-            || i.objectType === 'Saw'
-            || i.objectType === 'Wrench'
-            || i.objectType === 'Hammer'
-            || i.objectType === 'Screwdriver'
-            || i.objectType === 'Drill') && i.body);
 
-        for (const sprite of collectables) {
+        if (this.fridge && !this.fridgeContraint) {
 
-            const col = Matter.Collision.collides(sprite.body, this.player2.body);
-            //const spritesHandled = [];
+            const col = playerCollisions.find(i=>i.bodyA.label === 'fridge' || i.bodyB.label === 'fridge');
             if (col) {
-                this.removeSprite(sprite);
-                switch (sprite.objectType) {
-                    case 'Coin':
-                        this.gameHUD.incrementCoinCount();
-                        break;
-                    case 'Hammer':
-                        this.gameHUD.collectHammer();
-                        break;
-                    case 'Saw':
-                        this.gameHUD.collectSaw();
-                        break;
-                    case 'Drill':
-                        this.gameHUD.collectDrill();
-                        break;
-                    case 'Screwdriver':
-                        this.gameHUD.collectScrewdriver();
-                        break;
-                    case 'Wrench':
-                        this.gameHUD.collectWrench();
-                        break;
-                }
-                // if (sprite.objectType === 'Coin') {
-                //     this.gameHUD.incrementCoinCount();
-                // }
-                // spritesHandled.push(sprite)
+                this.createFridgeConstraint();
             }
         }
-        if (!this.player2.isGrounded) {
-            const spritesHandled = [];
-            for (const sprite of this.gameSprites) {
 
-                // if (sprite.objectType === 'Coin' && sprite.body) {
-                //     const col = Matter.Collision.collides(sprite.body, this.player2.body);
-                //     if (col && spritesHandled.indexOf(sprite) === -1) {
-                //         this.removeSprite(sprite);
-                //         spritesHandled.push(sprite)
-                //         this.gameHUD.incrementCoinCount();
-                //     }
-                // }
-                // if(sprite.objectType === 'Drill' && sprite.body) {
-                //     console.log('here')
-                //     const col = Matter.Collision.collides(sprite.body, this.player2.body);
-                //     if (col && spritesHandled.indexOf(sprite) === -1) {
-                //         this.removeSprite(sprite);
-                //         spritesHandled.push(sprite)
-                //         // TODO: Update the HUD
-                //         //this.gameHUD.incrementCoinCount();
-                //     }
-                // }
+
+        const collectables = playerCollisions.filter(i => this.colletableLabels.indexOf(i.bodyA.label) > -1 || this.colletableLabels.indexOf(i.bodyB.label) > -1);
+
+        for (const collectableCollision of collectables) {
+            const colletableBody = this.colletableLabels.indexOf(collectableCollision.bodyA.label) > -1 ? collectableCollision.bodyA : collectableCollision.bodyB;
+
+            this.removeSprite(this.gameSprites.find(i=>i.body === colletableBody));
+            switch (colletableBody.label) {
+                case 'coin':
+                    this.gameHUD.incrementCoinCount();
+                    break;
+                case 'hammer':
+                    this.gameHUD.collectHammer();
+                    break;
+                case 'saw':
+                    this.gameHUD.collectSaw();
+                    break;
+                case 'drill':
+                    this.gameHUD.collectDrill();
+                    break;
+                case 'screwdriver':
+                    this.gameHUD.collectScrewdriver();
+                    break;
+                case 'wrench':
+                    this.gameHUD.collectWrench();
+                    break;
+            }
+        }
+
+
+        if (!this.player2.isGrounded) {
+            for (const sprite of this.gameSprites) {
                 if (sprite.objectType === 'Brick' || sprite.objectType === 'MysteryBlock' || sprite.objectType === 'Log' || sprite.objectType === 'ShortLog') {
                     const brickCollision = Matter.Collision.collides(sprite.body, this.player2.body);
                     if (brickCollision) {
@@ -329,7 +354,7 @@ export class Game {
                     if (sprite.objectType === 'MysteryBlock') {
                         if (brickCollision) {
                             const deltaX = Math.abs(brickCollision.bodyA.position.x - brickCollision.bodyB.position.x);
-                            if (brickCollision.bodyA.position.y > brickCollision.bodyB.position.y && deltaX < 30) {
+                            if (brickCollision.bodyA.position.y > brickCollision.bodyB.position.y && deltaX < 50) {
                                 if (sprite.emptyIt()) {
                                     this.gameHUD.incrementCoinCount();
                                 }
@@ -344,9 +369,6 @@ export class Game {
                             }
                         }
                     }
-
-
-
 
                     if (!this.player2.isGrounded) {
                         if (sprite.frictionTop) {
@@ -369,6 +391,8 @@ export class Game {
                 }
             }
         }
+
+        //console.log(collisions);
         this.centerPlayer();
     }
 
@@ -455,6 +479,7 @@ export class Game {
     }
 
     start() {
+        this.gameStartTime = new Date();
         this.internval = setInterval(() => this.doGameLoop(), 10);
     }
 
@@ -463,6 +488,19 @@ export class Game {
     }
 
     doGameLoop() {
+        const now = new Date();
+        let remainingSeconds = this.gameTotalSeconds - (now.getTime() - this.gameStartTime.getTime()) / 1000;
+        if (remainingSeconds < 0) {
+            remainingSeconds = 0;
+            // TODO: lose the game
+        }
+        const minutes = Math.floor(remainingSeconds / 60);
+        const seconds = Math.floor(remainingSeconds % 60);
+        this.zone.run(() => {
+            this.remaining = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+
+        });
+        this.gameHUD.setTimeRemaining(this.remaining);
         this.advance();
         for (const sprite of this.gameSprites) {
             sprite.advance();
@@ -492,6 +530,11 @@ export class GameHUD {
     hasDrill = false;
     hasHammer = false;
     hasScrewdriver = false;
+    timeRemaining: string;
+
+    setTimeRemaining(value: string) {
+        this.zone.run(() => this.timeRemaining = value);
+    }
 
     incrementCoinCount() {
         this.coinCount++;

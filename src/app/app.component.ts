@@ -62,11 +62,6 @@ export class AppComponent implements AfterViewInit {
       setTimeout(() => this.startGame(), 200);
       return;
     }
-    if(!this.zone) {
-      console.error('sorry, no zone here either');
-    } else {
-      console.info('yup, zone here!!!')
-    }
     Game.getInstance(this.zone).start();
   }
 

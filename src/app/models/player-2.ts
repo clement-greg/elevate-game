@@ -20,6 +20,7 @@ export class Player2 extends GameSprite {
     moveSprite = false;
     pubsub;
     isGrounded = false;
+    hasFridge = false;
 
 
     constructor(engine, x, y, width, height) {
@@ -36,16 +37,12 @@ export class Player2 extends GameSprite {
         this.keyboardHandler = KeyboardHandler.getInstance();
         this.body.staticFriction = 20;
 
-        // Matter.Body.setInertia(this.body, 1000000000)
-
-
-        // Body.setMass(this.body, 10);
-
 
         this.pubsub.subscribe('keydown', key => {
             if (key.code === 'Space' && this.isGrounded) {
                 Matter.Body.setVelocity(this.body, { x: this.body.velocity.x, y: 0 });
-                Matter.Body.applyForce(this.body, { x: this.body.position.x, y: this.body.position.y }, { x: 0, y: -0.32 });
+                let upForce = -0.32 * (this.hasFridge ? 300 : 1);
+                Matter.Body.applyForce(this.body, { x: this.body.position.x, y: this.body.position.y }, { x: 0, y: upForce });
                 this.isGrounded = false;
                 delete this.groundSprite;
             }
@@ -64,6 +61,9 @@ export class Player2 extends GameSprite {
             // if(this.groundSprite) {
             //     force = 0.007;
             // }
+            if(this.hasFridge) {
+                force *= 100;
+            }
             Matter.Body.applyForce(this.body, { x: this.body.position.x, y: this.body.position.y }, { x: force, y: 0 });
             this.domObject.style.transform = 'scaleX(1)';
             this.applyingLeft = false;
@@ -74,6 +74,9 @@ export class Player2 extends GameSprite {
             // if(this.groundSprite) {
             //     force = -0.007;
             // }
+            if(this.hasFridge) {
+                force *= 100;
+            }
             Matter.Body.applyForce(this.body, { x: this.body.position.x, y: this.body.position.y }, { x: force, y: 0 });
             this.domObject.style.transform = 'scaleX(-1)';
             this.applyingRight = false;

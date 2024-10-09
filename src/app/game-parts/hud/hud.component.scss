@@ -3,11 +3,13 @@
     top: 20px;
     right: 20px;
     backdrop-filter: blur(10px);
-    background-color: rgba(0,0,0,.2);
+    background-color: rgba(52, 235, 70, 1);
     color: #fff;
     min-width: 100px;
     padding: 30px;
     border-radius: 6px;
+    box-shadow: 0px 0px 55px 0px rgba(52, 235, 70, 0.75);
+
 }
 
 .hud h1 {
@@ -16,7 +18,7 @@
 
 .collectable {
     filter: grayscale(1);
-    opacity: .2;
+    opacity: .6;
     transition: 1s ease;
 
     &.has {
@@ -26,4 +28,9 @@
     img {
         height: 30px;
     }
+}
+
+.data-label {
+    border-bottom: 1px solid #fff;
+    margin-bottom: 20px;
 }
