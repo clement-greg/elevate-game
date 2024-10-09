@@ -11,6 +11,7 @@ import { ShortLog } from '../../models/short-log';
 import { ManHole } from '../../models/man-hole';
 import { Ice } from '../../models/ice';
 import { HTTP } from '../../models/http';
+import { Drill, Hammer, Saw, Screwdriver, Wrench } from '../../models/saw';
 
 @Component({
   selector: 'app-tool-bar',
@@ -42,6 +43,30 @@ export class ToolBarComponent {
   addMysteryBlock() {
     const mystery = new MysteryBlock(this.game.engine, 0, 0);
     this.createSprite(mystery);
+  }
+
+  addSaw() {
+    const saw = new Saw(this.game.engine, 0, 0);
+    this.createSprite(saw);
+  }
+
+  addScrewdriver() {
+    const tool = new Screwdriver(this.game.engine, 0, 0);
+    this.createSprite(tool);
+  }
+  addWrench() {
+    const tool = new Wrench(this.game.engine, 0, 0);
+    this.createSprite(tool);
+  }
+  
+  addHammer() {
+    const tool = new Hammer(this.game.engine, 0, 0);
+    this.createSprite(tool);
+  }
+  
+  addDrill() {
+    const tool = new Drill(this.game.engine, 0, 0);
+    this.createSprite(tool);
   }
 
   addSpikeBall() {

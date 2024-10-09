@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { PriceTagComponent } from '../price-tag/price-tag.component';
 
 @Component({
@@ -10,6 +10,8 @@ import { PriceTagComponent } from '../price-tag/price-tag.component';
   styleUrl: './shop.component.scss'
 })
 export class ShopComponent {
+
+  selectedItem: any;
 
   items: Item[] = [
     {src: '/assets/images/refrigerator1.svg',
@@ -28,12 +30,54 @@ export class ShopComponent {
     
 
   ];
-  private message = `Here is the text that I want to appear.  It should come in one character at a time and make it look like the construction worker is speaking the words to you.  
+  private message = `Hi Jimmy
+  Welcome to Elevate Appliances.  We just got some great new refrigerators in stock.
   
-  We will see if it works.  But I don't know.  I will have to make it work.`;
+  Find the refrigerator you want and then check out.  
+  
+  Any refrigerator will do, but remember: The nicer the appliance the happier the customer.`;
 
   constructor() {
     this.doWords();
+    this.selectedItem = this.items[0];
+
+  }
+
+  nextItem() {
+    let index = this.items.indexOf(this.selectedItem);
+    index++;
+    if(index >= this.items.length) {
+      index = 0;
+    }
+    this.selectedItem = this.items[index];
+  }
+
+  prevItem() {
+    let index = this.items.indexOf(this.selectedItem);
+    index--;
+    if(index < 0) {
+      index = this.items.length - 1;
+    }
+    this.selectedItem = this.items[index];
+  }
+
+  get selectedIndex() {
+    return this.items.indexOf(this.selectedItem);
+  }
+
+  @HostListener('window:keydown', ['$event'])
+  handleKeyDown(event: KeyboardEvent) {
+    if(event.key === 'ArrowLeft') {
+      this.prevItem();
+    }
+    if(event.key === 'ArrowRight') {
+      this.nextItem();
+    }
+    console.log(event.key)
+  }
+
+  get selectorPosition() {
+    return `translateX(${(97 + (this.selectedIndex * 300))}px)`; 
   }
 
   wordIndex = 0;

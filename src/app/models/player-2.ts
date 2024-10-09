@@ -5,6 +5,7 @@ var Engine = Matter.Engine,
     Bodies = Matter.Bodies,
     Body = Matter.Body,
     Composite = Matter.Composite;
+import { Game } from './game';
 import { GameSprite } from './game-sprite';
 import { KeyboardHandler } from './keyboard-handler';
 import { PubSub } from './pub-sub';
@@ -54,6 +55,9 @@ export class Player2 extends GameSprite {
     stickyX;
     stickyY;
     override advance() {
+        if(Game.getInstance().dialogOpen) {
+            return;
+        }
         const isGrounded = Math.abs(this.body.velocity.y) < 0.1;
         if (this.keyboardHandler.isKeyDown('ArrowRight') && this.body.velocity.x < 3) {
             let force = isGrounded ? 0.02 : 0.01;

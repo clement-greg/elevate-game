@@ -30,7 +30,9 @@ export class AppComponent implements AfterViewInit {
   constructor(private zone: NgZone, dialog: MatDialog) {
 
     PubSub.getInstance().subscribe('quest-begin',()=> {
-      this.questBeginRef =  dialog.open(BeginQuestComponent, { disableClose: true })
+      this.questBeginRef =  dialog.open(BeginQuestComponent, { disableClose: true });
+      Game.getInstance().dialogOpen = true;
+      this.questBeginRef.afterClosed().subscribe(()=> Game.getInstance().dialogOpen = false);
     });
 
     PubSub.getInstance().subscribe('close-begin-quest',()=> {
@@ -38,7 +40,9 @@ export class AppComponent implements AfterViewInit {
     });
 
     PubSub.getInstance().subscribe('show-shop', ()=> {
-      dialog.open(ShopComponent);
+      Game.getInstance().dialogOpen  = true;
+      const ref = dialog.open(ShopComponent);
+      ref.afterClosed().subscribe(()=> Game.getInstance().dialogOpen = false);
     });
   }
   ngAfterViewInit(): void {
