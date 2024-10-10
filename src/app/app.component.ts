@@ -69,6 +69,10 @@ export class AppComponent implements AfterViewInit {
     return Game.getInstance().homeLeft + 'px';
   }
 
+  get initialLeft() {
+    return Game.getInstance().initialLeft + 'px';
+  }
+
   startGame() {
     if (!document.getElementById('game-container')) {
       setTimeout(() => this.startGame(), 200);

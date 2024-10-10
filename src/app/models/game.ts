@@ -52,6 +52,7 @@ export class Game {
     remaining: string;
     homeLeft = 10000;
     homeLeftEnd = this.homeLeft + 300;
+    initialLeft = 400;
 
     // get applianceShopAreaLeft() {
     //     return this.applianceShopLeft - 100;
@@ -122,7 +123,8 @@ export class Game {
                 // Matter.Body.setMass(this.fridge.body, .1);
                 // this.addSprite(this.fridge);
                 // this.createFridgeConstraint();
-                PubSub.getInstance().publish('level-complete');
+                // PubSub.getInstance().publish('level-complete');
+                Matter.Body.applyForce(this.player2.body, { x: this.player2.body.position.x, y: this.player2.body.position.y }, { x: 0, y: -.3 });
             }
             if (key.key === 'D' || key.key === 'd') {
                 if (this.fridgeContraint) {
@@ -309,10 +311,10 @@ export class Game {
             }
         }
 
-        
+
 
         const left = this.playerLeft;
-        if (left > 1428 && !this.showQuestBegin && !this.questShown) {
+        if (left > (this.initialLeft - 50) && !this.showQuestBegin && !this.questShown && this.playerTop > 0) {
             this.questShown = true;
             this.zone.run(() => {
                 this.showQuestBegin = true;
@@ -322,7 +324,7 @@ export class Game {
         }
 
 
-        if(left > this.homeLeft && left < this.homeLeftEnd && this.gameHUD.hasAllTools && this.fridgeContraint) {
+        if (left > this.homeLeft && left < this.homeLeftEnd && this.gameHUD.hasAllTools && this.fridgeContraint) {
             PubSub.getInstance().publish('level-complete');
             this.gameHUD = new GameHUD(this.zone);
         }
@@ -379,8 +381,8 @@ export class Game {
                     break;
             }
         }
-        const enemyCollisions = playerCollisions.filter(i=>this.enemyLabels.indexOf(i.bodyA.label) > -1 || this.enemyLabels.indexOf(i.bodyB.label) > -1);
-        if(enemyCollisions.length > 0) {
+        const enemyCollisions = playerCollisions.filter(i => this.enemyLabels.indexOf(i.bodyA.label) > -1 || this.enemyLabels.indexOf(i.bodyB.label) > -1);
+        if (enemyCollisions.length > 0) {
             this.loseLife();
         }
 
@@ -584,7 +586,7 @@ export class GameHUD {
         return this.hasWrench && this.hasSaw && this.hasHammer && this.hasScrewdriver && this.hasDrill;
     }
 
- 
+
     get money() {
         return this._coinCount * 10;
     }

@@ -5,7 +5,7 @@ export class Log extends GameSprite {
     moveDirection;
     initialX;
     initialY;
-    moveDistance = 300;
+    moveDistance = 600;
     moveSpeed = 1.5;
     stationaryWait = 4;
     newlyCreated = false;
