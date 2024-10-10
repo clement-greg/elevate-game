@@ -1,10 +1,5 @@
 declare var Matter: any;
 
-var Engine = Matter.Engine,
-    MatterWorld = Matter.World,
-    Bodies = Matter.Bodies,
-    Body = Matter.Body,
-    Composite = Matter.Composite;
 import { Game } from './game';
 import { GameSprite } from './game-sprite';
 import { KeyboardHandler } from './keyboard-handler';
@@ -20,7 +15,6 @@ export class Player2 extends GameSprite {
     moveSprite = false;
     pubsub;
     isGrounded = false;
-    hasFridge = false;
 
 
     constructor(engine, x, y, width, height) {
@@ -31,17 +25,14 @@ export class Player2 extends GameSprite {
         playerDiv.style.position = 'absolute';
         this.domObject = playerDiv;
         this.body.label = 'Player';
-
         this.pubsub = PubSub.getInstance();
-
         this.keyboardHandler = KeyboardHandler.getInstance();
         this.body.staticFriction = 20;
 
-
         this.pubsub.subscribe('keydown', key => {
-            if (key.code === 'Space' && this.isGrounded) {
+            if (key.code === 'Space' && this.isGrounded && !Game.getInstance().dialogOpen) {
                 Matter.Body.setVelocity(this.body, { x: this.body.velocity.x, y: 0 });
-                let upForce = -0.32 * (this.hasFridge ? 300 : 1);
+                let upForce = -0.32;
                 Matter.Body.applyForce(this.body, { x: this.body.position.x, y: this.body.position.y }, { x: 0, y: upForce });
                 this.isGrounded = false;
                 delete this.groundSprite;
@@ -51,19 +42,16 @@ export class Player2 extends GameSprite {
 
     stickyX;
     stickyY;
+    isMoving = false;
     override advance() {
-        if(Game.getInstance().dialogOpen) {
+        if (Game.getInstance().dialogOpen) {
             return;
         }
+        this.isMoving = (this.keyboardHandler.isKeyDown('ArrowRight') || this.keyboardHandler.isKeyDown('ArrowLeft')) && this.isGrounded;
+
         const isGrounded = Math.abs(this.body.velocity.y) < 0.1;
         if (this.keyboardHandler.isKeyDown('ArrowRight') && this.body.velocity.x < 3) {
             let force = isGrounded ? 0.02 : 0.01;
-            // if(this.groundSprite) {
-            //     force = 0.007;
-            // }
-            if(this.hasFridge) {
-                force *= 100;
-            }
             Matter.Body.applyForce(this.body, { x: this.body.position.x, y: this.body.position.y }, { x: force, y: 0 });
             this.domObject.style.transform = 'scaleX(1)';
             this.applyingLeft = false;
@@ -71,18 +59,12 @@ export class Player2 extends GameSprite {
         }
         if (this.keyboardHandler.isKeyDown('ArrowLeft') && this.body.velocity.x > -3) {
             let force = isGrounded ? -0.02 : -0.01;
-            // if(this.groundSprite) {
-            //     force = -0.007;
-            // }
-            if(this.hasFridge) {
-                force *= 100;
-            }
             Matter.Body.applyForce(this.body, { x: this.body.position.x, y: this.body.position.y }, { x: force, y: 0 });
             this.domObject.style.transform = 'scaleX(-1)';
             this.applyingRight = false;
             this.applyingLeft = true;
         }
-        if (this.body.velocity.x > 1 || this.body.velocity.x < -1 || this.keyboardHandler.isKeyDown('ArrowRight') || this.keyboardHandler.isKeyDown('ArrowLeft')) {
+        if (this.isMoving) {
             this.frameDelay += 1;
             if (this.frameDelay === 6) {
                 this.runFrame += 1;
@@ -98,17 +80,17 @@ export class Player2 extends GameSprite {
                 this.stickyX = this.body.position.x - this.groundSprite?.body.position.x;
             } else {
                 if (!this.keyboardHandler.isKeyDown('ArrowLeft') && !this.keyboardHandler.isKeyDown('ArrowRight')) {
-                     Matter.Body.setPosition(this.body, { x: this.groundSprite.body.position.x + this.stickyX, y: this.body.position.y });
+                    Matter.Body.setPosition(this.body, { x: this.groundSprite.body.position.x + this.stickyX, y: this.body.position.y });
                 } else {
                     delete this.stickyX;
-                      }
+                }
             }
         } else {
             delete this.stickyX;
         }
         super.advance();
-        if(this.groundSprite?.objectType === 'ShortLog') {
-            Matter.Body.setPosition(this.body, {x: this.body.position.x, y: this.groundSprite.body.position.y - this.groundSprite.height});
+        if (this.groundSprite?.objectType === 'ShortLog') {
+            Matter.Body.setPosition(this.body, { x: this.body.position.x, y: this.groundSprite.body.position.y - this.groundSprite.height });
             this.isGrounded = true;
         }
         this.domObject.style.backgroundPositionX = (this.runFrame * -this.width) + 'px';

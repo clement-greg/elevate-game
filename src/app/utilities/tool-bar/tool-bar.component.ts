@@ -12,6 +12,7 @@ import { ManHole } from '../../models/man-hole';
 import { Ice } from '../../models/ice';
 import { HTTP } from '../../models/http';
 import { Drill, Hammer, Saw, Screwdriver, Wrench } from '../../models/saw';
+import { GameSprite } from '../../models/game-sprite';
 
 @Component({
   selector: 'app-tool-bar',
@@ -58,12 +59,12 @@ export class ToolBarComponent {
     const tool = new Wrench(this.game.engine, 0, 0);
     this.createSprite(tool);
   }
-  
+
   addHammer() {
     const tool = new Hammer(this.game.engine, 0, 0);
     this.createSprite(tool);
   }
-  
+
   addDrill() {
     const tool = new Drill(this.game.engine, 0, 0);
     this.createSprite(tool);
@@ -109,19 +110,29 @@ export class ToolBarComponent {
   }
 
   async save() {
-    const striped = JSON.parse(JSON.stringify(this.game.gameSprites, HTTP.replacer));
-    for(const item of striped) {
+
+    const striped: GameSprite[] = JSON.parse(JSON.stringify(this.game.gameSprites, HTTP.replacer));
+
+    for (const item of striped) {
       delete item.domObject;
-      delete item.keyboardHandler;
-      delete item.pubsub;
+      delete (item as any).keyboardHandler;
+      delete (item as any).pubsub;
     }
+
+    const ids = striped.filter(i => i.id).map(i => i.id);
+    const itemsToBringBack = this.game.originalSprites.filter(i => i.id && ids.indexOf(i.id) === -1);
+    console.log(itemsToBringBack);
+    for (const itemToBringBack of itemsToBringBack) {
+      striped.push(itemToBringBack);
+    }
+
     navigator.clipboard.writeText(JSON.stringify(striped));
 
     const link = document.createElement('a');
     link.setAttribute('download', 'level1.json');
     link.href = this.makeFile();
     document.body.appendChild(link);
-    window.requestAnimationFrame(()=> {
+    window.requestAnimationFrame(() => {
       const evt = new MouseEvent('click');
       link.dispatchEvent(evt);
       document.body.removeChild(link);
@@ -131,9 +142,9 @@ export class ToolBarComponent {
   private textFile = null;
   private makeFile() {
     const json = JSON.stringify(this.game.gameSprites, HTTP.replacer);
-    const data = new Blob([json], {type: 'text/plain'});
+    const data = new Blob([json], { type: 'text/plain' });
 
-    if(this.textFile) {
+    if (this.textFile) {
       window.URL.revokeObjectURL(this.textFile);
     }
 
@@ -144,7 +155,7 @@ export class ToolBarComponent {
   }
 
 
-  createSprite(sprite) {
+  createSprite(sprite: GameSprite) {
     sprite.y = 0;
     sprite.x = 0;
     new DragHelper(this.game).dragElement(sprite);
@@ -162,9 +173,18 @@ export class ToolBarComponent {
     }
     sprite.isNew = true;
     this.addDoubleClickHandler(sprite, this.game);
+    sprite.id = ToolBarComponent.newid();
   }
 
-  addDoubleClickHandler(sprite, game) {
+  public static newid() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+      const r = Math.random() * 16 | 0;
+      const v = c === 'x' ? r : (r & 0x3 | 0x8);
+      return v.toString(16);
+    });
+  }
+
+  addDoubleClickHandler(sprite, game: Game) {
     sprite.domObject.addEventListener('dblclick', e => {
 
       const sprite = game.gameSprites.find(i => i.domObject === e.srcElement);
@@ -172,6 +192,12 @@ export class ToolBarComponent {
       if (sprite) {
 
         game.removeSprite(sprite);
+        if (sprite.id) {
+          const original = game.originalSprites.find(i => i.id === sprite.id);
+          if (original) {
+            game.originalSprites.splice(game.originalSprites.indexOf(original), 1);
+          }
+        }
       }
     });
   }

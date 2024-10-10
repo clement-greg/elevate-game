@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ToolBarComponent } from '../../utilities/tool-bar/tool-bar.component';
 
 @Component({
   selector: 'app-begin-quest',
@@ -15,6 +16,7 @@ export class BeginQuestComponent {
   My tools are scattered all over the place.
   
   But, if you can collect all my tools and buy a new refrigerator from the appliance store, I can get that fixed for you.`;
+  id = ToolBarComponent.newid();
 
   constructor() {
     this.doWords();
@@ -22,12 +24,12 @@ export class BeginQuestComponent {
 
   wordIndex = 0;
   doWords() {
-    if (!document.getElementById('construction-worker-message')) {
+    if (!document.getElementById(this.id)) {
       setTimeout(() => this.doWords(), 100);
       return;
     }
 
-    const div = document.getElementById('construction-worker-message');
+    const div = document.getElementById(this.id);
 
     if(this.wordIndex < this.message.length) {
       this.wordIndex++;

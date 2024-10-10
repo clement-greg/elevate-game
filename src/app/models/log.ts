@@ -5,9 +5,9 @@ export class Log extends GameSprite {
     moveDirection;
     initialX;
     initialY;
-    moveDistance = 200;
-    moveSpeed = 2;
-    stationaryWait = 2;
+    moveDistance = 300;
+    moveSpeed = 1.5;
+    stationaryWait = 4;
     newlyCreated = false;
     frame = 0;
     frameCount = 4;
@@ -26,12 +26,10 @@ export class Log extends GameSprite {
         this.initialY = y;
         this.body.friction = 1;
         Matter.Body.setMass(this.body, 100000);
-
     }
 
     override advance() {
         const x = this.body.position.x;
-
         if (x >= this.initialX + this.moveDistance) {
             this.sign = -1;
         } else if (x <= this.initialX) {
@@ -39,6 +37,5 @@ export class Log extends GameSprite {
         }
         Matter.Body.setPosition(this.body, { x: this.body.position.x + this.moveSpeed * this.sign, y: this.initialY });
         super.advance();
-
     }
 }

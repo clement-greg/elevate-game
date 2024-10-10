@@ -20,6 +20,7 @@ export class GameSprite {
     originalX;
     originalY;
     dontUpdatePosition = false;
+    id: string;
 
     constructor(engine, x, y, width, height, log = false, drawOptions = null) {
         this.x = x;

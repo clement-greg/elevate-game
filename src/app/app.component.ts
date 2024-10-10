@@ -3,7 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { Game } from './models/game';
 import { ToolBarComponent } from './utilities/tool-bar/tool-bar.component';
 import { CommonModule } from '@angular/common';
-import { HudComponent } from './game-parts/hud/hud.component';
+import { HudComponent } from './components/hud/hud.component';
 import { PubSub } from './models/pub-sub';
 import {
   MAT_DIALOG_DATA,
@@ -14,8 +14,9 @@ import {
   MatDialogRef,
   MatDialogTitle,
 } from '@angular/material/dialog';
-import { BeginQuestComponent } from './begin-quest/begin-quest.component';
-import { ShopComponent } from './shop/shop.component';
+import { BeginQuestComponent } from './components/begin-quest/begin-quest.component';
+import { ShopComponent } from './components/shop/shop.component';
+import { WinGameComponent } from './components/win-game/win-game.component';
 
 @Component({
   selector: 'app-root',
@@ -29,20 +30,27 @@ export class AppComponent implements AfterViewInit {
   questBeginRef: MatDialogRef<BeginQuestComponent>;
   constructor(private zone: NgZone, dialog: MatDialog) {
 
-    PubSub.getInstance().subscribe('quest-begin',()=> {
-      this.questBeginRef =  dialog.open(BeginQuestComponent, { disableClose: true });
+    PubSub.getInstance().subscribe('quest-begin', () => {
+      this.questBeginRef = dialog.open(BeginQuestComponent, { disableClose: true });
       Game.getInstance().dialogOpen = true;
-      this.questBeginRef.afterClosed().subscribe(()=> Game.getInstance().dialogOpen = false);
+      this.questBeginRef.afterClosed().subscribe(() => Game.getInstance().dialogOpen = false);
     });
 
-    PubSub.getInstance().subscribe('close-begin-quest',()=> {
+    PubSub.getInstance().subscribe('level-complete', () => {
+      Game.getInstance().dialogOpen = true;
+      const ref = dialog.open(WinGameComponent, { disableClose: true });
+      ref.afterClosed().subscribe(() => Game.getInstance().dialogOpen = false);
+      setTimeout(() => ref.close(), 10000);
+    })
+
+    PubSub.getInstance().subscribe('close-begin-quest', () => {
       this.questBeginRef.close();
     });
 
-    PubSub.getInstance().subscribe('show-shop', ()=> {
-      Game.getInstance().dialogOpen  = true;
+    PubSub.getInstance().subscribe('show-shop', () => {
+      Game.getInstance().dialogOpen = true;
       const ref = dialog.open(ShopComponent);
-      ref.afterClosed().subscribe(()=> Game.getInstance().dialogOpen = false);
+      ref.afterClosed().subscribe(() => Game.getInstance().dialogOpen = false);
     });
   }
   ngAfterViewInit(): void {
@@ -57,6 +65,10 @@ export class AppComponent implements AfterViewInit {
     return Game.getInstance().applianceShopLeft + 'px';
   }
 
+  get homeLeft() {
+    return Game.getInstance().homeLeft + 'px';
+  }
+
   startGame() {
     if (!document.getElementById('game-container')) {
       setTimeout(() => this.startGame(), 200);
@@ -67,7 +79,7 @@ export class AppComponent implements AfterViewInit {
 
   @HostListener('window:keydown', ['$event'])
   handleKeyDown(event: KeyboardEvent) {
-    if(event.key === 'e' || event.key === 'E') {
+    if (event.key === 'e' || event.key === 'E') {
       this.showToolbar = !this.showToolbar;
     }
   }

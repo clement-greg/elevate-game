@@ -5,14 +5,14 @@
       position: absolute;
       bottom: 200px;
       left: 700px;">
-    <video class="bill-board video1" [autoplay]="'autoplay'" [loop]="'loop'" [muted]="'muted'"
-      src="https://elevateh.blob.core.windows.net/cdn/video/hard-knock-life.mp4"></video>
+    <!-- <video class="bill-board video1" [autoplay]="'autoplay'" [loop]="'loop'" [muted]="'muted'"
+      src="https://elevateh.blob.core.windows.net/cdn/video/hard-knock-life.mp4"></video> -->
     <img src="/assets/images/bill-board-2.png" style="    height: 400px;
       position: absolute;
       bottom: 200px;
       left: 2500px;">
-    <video class="bill-board video2" [autoplay]="'autoplay'" [loop]="'loop'" [muted]="'muted'"
-      src="https://elevateh.blob.core.windows.net/cdn/video/pool-and-pest.mp4"></video>
+    <!-- <video class="bill-board video2" [autoplay]="'autoplay'" [loop]="'loop'" [muted]="'muted'"
+      src="https://elevateh.blob.core.windows.net/cdn/video/pool-and-pest.mp4"></video> -->
 
   </div>
   <div id="bg-plants">
@@ -23,7 +23,7 @@
 
     <img src="/assets/images/appliance-shop.svg" style="height: 400px;position: absolute;bottom: 143px;"
       [style.left]="applianceShopLeft">
-    <img src="/assets/images/home.svg" style="height: 400px;position: absolute;bottom: 162px;left: 2400px">
+    <img src="/assets/images/home.svg" [style.left]="homeLeft" style="height: 400px;position: absolute;bottom: 162px;">
 
     <img src="/assets/images/construction-worker.svg" id="construction-worker"
       style="height: 135px;position: absolute;bottom: 64px;left: 1500px">

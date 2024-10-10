@@ -17,7 +17,9 @@ import { ManHole } from './man-hole';
 import { Ice } from './ice';
 import { NgZone } from '@angular/core';
 import { Drill, Hammer, Saw, Screwdriver, Wrench } from './saw';
-import { Fridge1 } from './fridge';
+import { Fridge1, Fridge2, Fridge3 } from './fridge';
+import { GameSprite } from './game-sprite';
+import { ToolBarComponent } from '../utilities/tool-bar/tool-bar.component';
 
 var Engine = Matter.Engine,
     MatterWorld = Matter.World,
@@ -43,11 +45,13 @@ export class Game {
     infoBarier: Ground;
     showQuestBegin = false;
     questShown = false;
-    applianceShopLeft = 600;
+    applianceShopLeft = 6000;
     dialogOpen: boolean;
     gameStartTime: Date;
     gameTotalSeconds = 120;
     remaining: string;
+    homeLeft = 10000;
+    homeLeftEnd = this.homeLeft + 300;
 
     // get applianceShopAreaLeft() {
     //     return this.applianceShopLeft - 100;
@@ -114,10 +118,11 @@ export class Game {
             }
 
             if (key.key === 't' || key.key === 'T' && !this.fridge) {
-                this.fridge = new Fridge1(this.engine, this.playerLeft - 30, this.playerTop - 72);
-                Matter.Body.setMass(this.fridge.body, .1);
-                this.addSprite(this.fridge);
-                this.createFridgeConstraint();
+                // this.fridge = new Fridge1(this.engine, this.playerLeft - 30, this.playerTop - 72);
+                // Matter.Body.setMass(this.fridge.body, .1);
+                // this.addSprite(this.fridge);
+                // this.createFridgeConstraint();
+                PubSub.getInstance().publish('level-complete');
             }
             if (key.key === 'D' || key.key === 'd') {
                 if (this.fridgeContraint) {
@@ -126,6 +131,23 @@ export class Game {
                 }
             }
         });
+    }
+
+    purchaseFridge(number = 1 | 2 | 3) {
+        switch (number) {
+            case 1:
+                this.fridge = new Fridge1(this.engine, this.playerLeft - 30, this.playerTop - 72);
+                break;
+            case 2:
+                this.fridge = new Fridge2(this.engine, this.playerLeft - 30, this.playerTop - 72);
+                break;
+            case 3:
+                this.fridge = new Fridge3(this.engine, this.playerLeft - 30, this.playerTop - 72);
+                break;
+        }
+        Matter.Body.setMass(this.fridge.body, .1);
+        this.addSprite(this.fridge);
+        this.createFridgeConstraint();
     }
 
 
@@ -143,8 +165,11 @@ export class Game {
 
     fridgeContraint;
 
+    originalSprites: GameSprite[];
+
     setupGame(json) {
         const sprites = JSON.parse(json);
+        this.originalSprites = sprites;
 
         Matter.Events.on(this.engine, 'collisionActive', event => {
             for (const pair of event.pairs) {
@@ -161,36 +186,43 @@ export class Game {
                 const brick = new Brick(this.engine, sprite.originalX, sprite.originalY);
                 brick.x = sprite.originalX;
                 brick.y = sprite.originalY;
+                brick.id = sprite.id ?? ToolBarComponent.newid();
                 this.addSprite(brick);
             } else if (sprite.objectType === 'Saw') {
                 const saw = new Saw(this.engine, sprite.originalX, sprite.originalY);
                 saw.x = sprite.originalX;
                 saw.y = sprite.originalY;
+                saw.id = sprite.id ?? ToolBarComponent.newid();
                 this.addSprite(saw);
             } else if (sprite.objectType === 'Screwdriver') {
                 const tool = new Screwdriver(this.engine, sprite.originalX, sprite.originalY);
                 tool.x = sprite.originalX;
                 tool.y = sprite.originalY;
+                tool.id = sprite.id ?? ToolBarComponent.newid();
                 this.addSprite(tool);
             } else if (sprite.objectType === 'Wrench') {
                 const tool = new Wrench(this.engine, sprite.originalX, sprite.originalY);
                 tool.x = sprite.originalX;
                 tool.y = sprite.originalY;
+                tool.id = sprite.id ?? ToolBarComponent.newid();
                 this.addSprite(tool);
             } else if (sprite.objectType === 'Hammer') {
                 const tool = new Hammer(this.engine, sprite.originalX, sprite.originalY);
                 tool.x = sprite.originalX;
                 tool.y = sprite.originalY;
+                tool.id = sprite.id ?? ToolBarComponent.newid();
                 this.addSprite(tool);
             } else if (sprite.objectType === 'Drill') {
                 const tool = new Drill(this.engine, sprite.originalX, sprite.originalY);
                 tool.x = sprite.originalX;
                 tool.y = sprite.originalY;
+                tool.id = sprite.id ?? ToolBarComponent.newid();
                 this.addSprite(tool);
             } else if (sprite.objectType === 'MysteryBlock') {
                 const mystery = new MysteryBlock(this.engine, sprite.originalX, sprite.originalY);
                 mystery.x = sprite.originalX;
                 mystery.y = sprite.originalY;
+                mystery.id = sprite.id ?? ToolBarComponent.newid();
                 this.addSprite(mystery);
 
             } else if (sprite.objectType === 'SpikeBall') {
@@ -201,6 +233,7 @@ export class Game {
                 spikeBall.initialY = spikeBall.y;
                 spikeBall.moveSpeed = spikeBall.moveSpeed;
                 spikeBall.moveDistance = spikeBall.moveDistance;
+                spikeBall.id = sprite.id ?? ToolBarComponent.newid();
                 this.addSprite(spikeBall);
             } else if (sprite.objectType === 'Ram') {
                 const ram = new Ram(this.engine, sprite.originalX, sprite.originalY);
@@ -210,31 +243,37 @@ export class Game {
                 ram.initialY = ram.y;
                 ram.moveSpeed = ram.moveSpeed;
                 ram.moveDistance = ram.moveDistance;
+                ram.id = sprite.id ?? ToolBarComponent.newid();
                 this.addSprite(ram);
             } else if (sprite.objectType === 'Coin') {
                 const coin = new Coin(this.engine, sprite.originalX, sprite.originalY, 'static');
                 coin.x = sprite.originalX;
                 coin.y = sprite.originalY;
+                coin.id = sprite.id ?? ToolBarComponent.newid();
                 this.addSprite(coin);
             } else if (sprite.objectType === 'Log') {
                 const log = new Log(this.engine, sprite.originalX, sprite.originalY);
                 log.x = sprite.originalX;
                 log.y = sprite.originalY;
+                log.id = sprite.id ?? ToolBarComponent.newid();
                 this.addSprite(log);
             } else if (sprite.objectType === 'ShortLog') {
                 const log = new ShortLog(this.engine, sprite.originalX, sprite.originalY);
                 log.x = sprite.originalX;
                 log.y = sprite.originalY;
+                log.id = sprite.id ?? ToolBarComponent.newid();
                 this.addSprite(log);
             } else if (sprite.objectType === 'ManHole') {
                 const log = new ManHole(this.engine, sprite.originalX, sprite.originalY);
                 log.x = sprite.originalX;
                 log.y = sprite.originalY;
+                log.id = sprite.id ?? ToolBarComponent.newid();
                 this.addSprite(log);
             } else if (sprite.objectType === 'Ice') {
                 const log = new Ice(this.engine, sprite.originalX, sprite.originalY);
                 log.x = sprite.originalX;
                 log.y = sprite.originalY;
+                log.id = sprite.id ?? ToolBarComponent.newid();
                 this.addSprite(log);
             }
         }
@@ -268,6 +307,8 @@ export class Game {
             }
         }
 
+        
+
         const left = this.playerLeft;
         if (left > 1428 && !this.showQuestBegin && !this.questShown) {
             this.questShown = true;
@@ -278,6 +319,11 @@ export class Game {
             });
         }
 
+
+        if(left > this.homeLeft && left < this.homeLeftEnd && this.gameHUD.hasAllTools && this.fridgeContraint) {
+            PubSub.getInstance().publish('level-complete');
+            this.gameHUD = new GameHUD(this.zone);
+        }
         const count = this.gameSprites.filter(i => i.objectType === 'Coin').length;
         if (count != this.coinCount) {
 
@@ -300,7 +346,7 @@ export class Game {
 
         if (this.fridge && !this.fridgeContraint) {
 
-            const col = playerCollisions.find(i=>i.bodyA.label === 'fridge' || i.bodyB.label === 'fridge');
+            const col = playerCollisions.find(i => i.bodyA.label === 'fridge' || i.bodyB.label === 'fridge');
             if (col) {
                 this.createFridgeConstraint();
             }
@@ -312,7 +358,7 @@ export class Game {
         for (const collectableCollision of collectables) {
             const colletableBody = this.colletableLabels.indexOf(collectableCollision.bodyA.label) > -1 ? collectableCollision.bodyA : collectableCollision.bodyB;
 
-            this.removeSprite(this.gameSprites.find(i=>i.body === colletableBody));
+            this.removeSprite(this.gameSprites.find(i => i.body === colletableBody));
             switch (colletableBody.label) {
                 case 'coin':
                     this.gameHUD.incrementCoinCount();
@@ -531,6 +577,15 @@ export class GameHUD {
     hasHammer = false;
     hasScrewdriver = false;
     timeRemaining: string;
+
+    get hasAllTools() {
+        return this.hasWrench && this.hasSaw && this.hasHammer && this.hasScrewdriver && this.hasDrill;
+    }
+
+ 
+    get money() {
+        return this._coinCount * 10;
+    }
 
     setTimeRemaining(value: string) {
         this.zone.run(() => this.timeRemaining = value);
