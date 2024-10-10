@@ -25,7 +25,6 @@ export class SpikeBall extends MoveableObject {
     }
 
     override advance() {
-        const currentX = this.body.position.x;
 
         if (this.delayCount === 20) {
             this.domObject.style.backgroundPositionX = `-${this.frame * 211 + 16}px`;

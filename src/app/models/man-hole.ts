@@ -22,6 +22,7 @@ export class ManHole extends GameSprite {
         this.body.isStatic = true;
 
         this.body.friction = 0;
+        this.body.label = 'man-hole';
         this.domObject.style.left = `${this.x - this.width / 2}px`;
         this.domObject.style.top = `${this.y - this.height / 2}px`;
 

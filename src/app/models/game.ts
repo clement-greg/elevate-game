@@ -171,15 +171,16 @@ export class Game {
         const sprites = JSON.parse(json);
         this.originalSprites = sprites;
 
-        Matter.Events.on(this.engine, 'collisionActive', event => {
-            for (const pair of event.pairs) {
-                if (pair.bodyA.label === 'Player' || pair.bodyB.label === 'Player') {
-                    if (pair.bodyA.label === 'spike-ball' || pair.bodyB.label === 'spike-ball') {
-                        this.loseLife();
-                    }
-                }
-            }
-        });
+        // Matter.Events.on(this.engine, 'collisionActive', event => {
+        //     for (const pair of event.pairs) {
+        //         if (pair.bodyA.label === 'Player' || pair.bodyB.label === 'Player') {
+        //             if (pair.bodyA.label === 'spike-ball' || pair.bodyB.label === 'spike-ball') {
+        //                 this.loseLife();
+        //             }
+        //         }
+        //     }
+        //     console.log(event);
+        // });
 
         for (const sprite of sprites) {
             if (sprite.objectType === 'Brick') {
@@ -289,7 +290,8 @@ export class Game {
         return parseFloat(this.player2.domObject.style.top.replace('px', ''));
     }
 
-    private colletableLabels = ['saw', 'wrench', 'hammer', 'screwdriver', 'drill', 'coin']
+    private colletableLabels = ['saw', 'wrench', 'hammer', 'screwdriver', 'drill', 'coin'];
+    private enemyLabels = ['Ram', 'spike-ball', 'man-hole'];
 
     advance() {
         if (this.showQuestBegin) {
@@ -332,11 +334,8 @@ export class Game {
 
         const collisions = Matter.Detector.collisions(this.engine.world);
         const playerCollisions = collisions.filter(i => i.bodyA.label === 'Player' || i.bodyB.label === 'Player');
-
-
-
         const groundCollision = playerCollisions.find(i => i.bodyA.label === 'Ground' || i.bodyB.label === 'Ground');
-        //console.log(groundCollision);
+
         delete this.player2.groundSprite;
         if (groundCollision && groundCollision.collided) {
             this.player2.isGrounded = true;
@@ -379,6 +378,10 @@ export class Game {
                     this.gameHUD.collectWrench();
                     break;
             }
+        }
+        const enemyCollisions = playerCollisions.filter(i=>this.enemyLabels.indexOf(i.bodyA.label) > -1 || this.enemyLabels.indexOf(i.bodyB.label) > -1);
+        if(enemyCollisions.length > 0) {
+            this.loseLife();
         }
 
 
@@ -429,16 +432,15 @@ export class Game {
                     }
                 }
 
-                if (sprite.objectType === 'ManHole' || sprite.objectType === 'Ram' || sprite.objectType === 'SpikeBall') {
-                    const col = Matter.Collision.collides(sprite.body, this.player2.body);
-                    if (col) {
-                        this.loseLife();
-                    }
-                }
+                // if (sprite.objectType === 'ManHole' || sprite.objectType === 'Ram' || sprite.objectType === 'SpikeBall') {
+                //     const col = Matter.Collision.collides(sprite.body, this.player2.body);
+                //     if (col) {
+                //         this.loseLife();
+                //     }
+                // }
             }
         }
 
-        //console.log(collisions);
         this.centerPlayer();
     }
 

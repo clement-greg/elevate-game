@@ -24,7 +24,7 @@ export class Log extends GameSprite {
 
         this.initialX = x;
         this.initialY = y;
-        this.body.friction = 1;
+        this.body.friction = 0;
         Matter.Body.setMass(this.body, 100000);
     }
 
