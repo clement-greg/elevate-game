@@ -6,6 +6,7 @@ export class Fridge1 extends GameSprite {
         const brickDiv = document.createElement('div');
         brickDiv.className = 'fridge1';
         this.domObject = brickDiv;
+        this.objectType = 'Fridge1';
 
         //this.body.isStatic = true;
         this.body.friction = 1;
@@ -19,6 +20,7 @@ export class Fridge2 extends GameSprite {
         const brickDiv = document.createElement('div');
         brickDiv.className = 'fridge2';
         this.domObject = brickDiv;
+        this.objectType = 'Fridge2';
 
         //this.body.isStatic = true;
         this.body.friction = 1;
@@ -32,6 +34,7 @@ export class Fridge3 extends GameSprite {
         const brickDiv = document.createElement('div');
         brickDiv.className = 'fridge3';
         this.domObject = brickDiv;
+        this.objectType = 'Fridge3';
 
         //this.body.isStatic = true;
         this.body.friction = 1;

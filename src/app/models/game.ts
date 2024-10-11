@@ -45,12 +45,12 @@ export class Game {
     infoBarier: Ground;
     showQuestBegin = false;
     questShown = false;
-    applianceShopLeft = 6000;
+    applianceShopLeft = 8000;
     dialogOpen: boolean;
     gameStartTime: Date;
     gameTotalSeconds = 120;
     remaining: string;
-    homeLeft = 10000;
+    homeLeft = 16000;
     homeLeftEnd = this.homeLeft + 300;
     initialLeft = 400;
 
@@ -124,7 +124,9 @@ export class Game {
                 // this.addSprite(this.fridge);
                 // this.createFridgeConstraint();
                 // PubSub.getInstance().publish('level-complete');
-                Matter.Body.applyForce(this.player2.body, { x: this.player2.body.position.x, y: this.player2.body.position.y }, { x: 0, y: -.3 });
+                if (this.playerTop > 0) {
+                    Matter.Body.applyForce(this.player2.body, { x: this.player2.body.position.x, y: this.player2.body.position.y }, { x: 0, y: -.3 });
+                }
             }
             if (key.key === 'D' || key.key === 'd') {
                 if (this.fridgeContraint) {
@@ -389,7 +391,13 @@ export class Game {
 
         if (!this.player2.isGrounded) {
             for (const sprite of this.gameSprites) {
-                if (sprite.objectType === 'Brick' || sprite.objectType === 'MysteryBlock' || sprite.objectType === 'Log' || sprite.objectType === 'ShortLog') {
+                if (sprite.objectType === 'Brick'
+                    || sprite.objectType === 'MysteryBlock'
+                    || sprite.objectType === 'Log'
+                    || sprite.objectType === 'Fridge1'
+                    || sprite.objectType === 'Fridge2'
+                    || sprite.objectType === 'Fridge3'
+                    || sprite.objectType === 'ShortLog') {
                     const brickCollision = Matter.Collision.collides(sprite.body, this.player2.body);
                     if (brickCollision) {
                         if (sprite.objectType === 'Log' || sprite.objectType === 'ShortLog') {
@@ -433,13 +441,6 @@ export class Game {
                         }
                     }
                 }
-
-                // if (sprite.objectType === 'ManHole' || sprite.objectType === 'Ram' || sprite.objectType === 'SpikeBall') {
-                //     const col = Matter.Collision.collides(sprite.body, this.player2.body);
-                //     if (col) {
-                //         this.loseLife();
-                //     }
-                // }
             }
         }
 
