@@ -18,6 +18,14 @@ export class HudComponent {
     zone: NgZone
   ) {
     
-    this.gameHUD = gameProvider.getInstance().gameHUD;
+    this.initializeGameHUD();
+  }
+
+  initializeGameHUD() {
+    if(!this.gameProvider.getInstance().gameHUD) {
+      setTimeout(()=> this.initializeGameHUD(), 100);
+      return;
+    }
+    this.gameHUD = this.gameProvider.getInstance().gameHUD;
   }
 }

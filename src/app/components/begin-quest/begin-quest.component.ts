@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ToolBarComponent } from '../../utilities/tool-bar/tool-bar.component';
+import { LottiePlayerComponent } from '../../lottie-player/lottie-player.component';
 
 @Component({
   selector: 'app-begin-quest',
   standalone: true,
-  imports: [],
+  imports: [LottiePlayerComponent],
   templateUrl: './begin-quest.component.html',
   styleUrl: './begin-quest.component.scss'
 })
@@ -17,6 +18,8 @@ export class BeginQuestComponent {
   
   But, if you can collect all my tools and buy a new refrigerator from the appliance store, I can get that fixed for you.`;
   id = ToolBarComponent.newid();
+
+  @ViewChild('lottiePlayer') lottiePlayer :LottiePlayerComponent;
 
   constructor() {
     this.doWords();
@@ -36,6 +39,8 @@ export class BeginQuestComponent {
       const msg = this.message.substring(0, this.wordIndex);
       div.innerText  = msg;
       setTimeout(()=> this.doWords(), 30);
+    } else {
+      this.lottiePlayer.pause();
     }
 
   }

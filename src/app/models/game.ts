@@ -63,6 +63,15 @@ export class Game {
     }
 
     constructor(private zone: NgZone) {
+        this.initialize(zone);
+    }
+
+    initialize(zone: NgZone) {
+
+        if (!document.getElementById('game-div')) {
+            setTimeout(() => this.initialize(zone), 100);
+            return;
+        }
         this.engine = Engine.create();
 
         Matter.Runner.run(this.engine);
@@ -70,7 +79,12 @@ export class Game {
 
         this.player2 = new Player2(this.engine, 80, 0, 71, 96);
         this.addSprite(this.player2);
-        this.gameHUD = new GameHUD(zone);
+
+        zone.run(() => {
+
+            this.gameHUD = new GameHUD(zone);
+            console.log('created game HUD')
+        });
 
         this.world = World.getInstance();
         const ground = new Ground(this.engine, 0, this.world.height - 65, this.world.width, 20);
@@ -551,11 +565,14 @@ export class Game {
             this.remaining = `${minutes}:${seconds.toString().padStart(2, '0')}`;
 
         });
-        this.gameHUD.setTimeRemaining(this.remaining);
-        this.advance();
-        for (const sprite of this.gameSprites) {
-            sprite.advance();
+        if (this.gameHUD) {
+            this.gameHUD.setTimeRemaining(this.remaining);
+            this.advance();
+            for (const sprite of this.gameSprites) {
+                sprite.advance();
+            }
         }
+
 
     }
 }

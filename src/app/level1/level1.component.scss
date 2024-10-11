@@ -1,0 +1,15 @@
+video.bill-board {
+    height: 169px;
+    position: absolute;
+    bottom: 407px;
+    /* transform: skewX(10deg); */
+    transform: perspective(77px) rotateY(-3.5deg) scaleX(1.16) scaleY(0.96);
+    &.video1 {
+        left: 717px;
+
+    }
+
+    &.video2 {
+        left: 2515px;
+    }
+}
