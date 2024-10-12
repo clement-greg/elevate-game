@@ -20,6 +20,7 @@ import { Drill, Hammer, Saw, Screwdriver, Wrench } from './saw';
 import { Fridge1, Fridge2, Fridge3 } from './fridge';
 import { GameSprite } from './game-sprite';
 import { ToolBarComponent } from '../utilities/tool-bar/tool-bar.component';
+import { Trampoline } from './trampoline';
 
 var Engine = Matter.Engine,
     MatterWorld = Matter.World,
@@ -53,6 +54,7 @@ export class Game {
     homeLeft = 16000;
     homeLeftEnd = this.homeLeft + 300;
     initialLeft = 400;
+    showCloseBarrier = false;
 
     // get applianceShopAreaLeft() {
     //     return this.applianceShopLeft - 100;
@@ -65,6 +67,7 @@ export class Game {
     constructor(private zone: NgZone) {
         this.initialize(zone);
     }
+    completionBarrier: any;
 
     initialize(zone: NgZone) {
 
@@ -100,6 +103,12 @@ export class Game {
         this.infoBarier = new Ground(this.engine, 1500, 0, 2, 10000);
         this.infoBarier.body.friction = 0;
         this.gameSprites.push(this.infoBarier);
+
+        this.completionBarrier = new Ground(this.engine, this.homeLeft - 150, 0, 2, 10000);
+        this.completionBarrier.body.label = 'completion-barrier';
+        this.completionBarrier.body.friction = 0;
+        this.gameSprites.push(this.completionBarrier);
+
         HTTP.getData('./assets/levels/level1.json').then(json => {
             this.setupGame(json);
         });
@@ -123,6 +132,11 @@ export class Game {
                     delete this.infoBarier;
                     this.showQuestBegin = false;
                 }
+            }
+            if (key.key === ' ' && this.showCloseBarrier) {
+                Matter.Body.applyForce(this.player2.body, { x: this.player2.body.position.x, y: this.player2.body.position.y }, { x: -1, y: 0 });
+                setTimeout(() => PubSub.getInstance().publish('close-info-barrier'), 100);
+                this.showCloseBarrier = false;
             }
             if (key.key === 'ArrowUp') {
                 console.log('arrowup');
@@ -188,17 +202,6 @@ export class Game {
     setupGame(json) {
         const sprites = JSON.parse(json);
         this.originalSprites = sprites;
-
-        // Matter.Events.on(this.engine, 'collisionActive', event => {
-        //     for (const pair of event.pairs) {
-        //         if (pair.bodyA.label === 'Player' || pair.bodyB.label === 'Player') {
-        //             if (pair.bodyA.label === 'spike-ball' || pair.bodyB.label === 'spike-ball') {
-        //                 this.loseLife();
-        //             }
-        //         }
-        //     }
-        //     console.log(event);
-        // });
 
         for (const sprite of sprites) {
             if (sprite.objectType === 'Brick') {
@@ -294,6 +297,12 @@ export class Game {
                 log.y = sprite.originalY;
                 log.id = sprite.id ?? ToolBarComponent.newid();
                 this.addSprite(log);
+            } else if (sprite.objectType === 'trampoline') {
+                const newSprite = new Trampoline(this.engine, sprite.originalX, sprite.originalY);
+                newSprite.x = sprite.originalX;
+                newSprite.y = sprite.originalY;
+                newSprite.id = sprite.id ?? ToolBarComponent.newid();
+                this.addSprite(newSprite);
             }
         }
     }
@@ -310,7 +319,9 @@ export class Game {
 
     private colletableLabels = ['saw', 'wrench', 'hammer', 'screwdriver', 'drill', 'coin'];
     private enemyLabels = ['Ram', 'spike-ball', 'man-hole'];
+    private impactObjectsLabels = ['trampoline'];
 
+    bounceCount = 0;
     advance() {
         if (this.showQuestBegin) {
             return;
@@ -322,12 +333,9 @@ export class Game {
                 if (!sprite.speedY) {
                     sprite.speedY = 0;
                 }
-
                 sprite.speedY += this.world.gravity;
             }
         }
-
-
 
         const left = this.playerLeft;
         if (left > (this.initialLeft - 50) && !this.showQuestBegin && !this.questShown && this.playerTop > 0) {
@@ -397,9 +405,40 @@ export class Game {
                     break;
             }
         }
+
+        const impactCollisions = playerCollisions.filter(i => this.impactObjectsLabels.indexOf(i.bodyA.label) > -1 || this.impactObjectsLabels.indexOf(i.bodyB.label) > -1);
+        for (const collision of impactCollisions) {
+
+            let forceY = (this.bounceCount + 1) * -0.1;
+            this.bounceCount++;
+            if (forceY < -0.6) {
+                forceY = -0.6;
+            }
+            if (collision.penetration.y < 0) {
+                Matter.Body.applyForce(this.player2.body, { x: this.player2.body.position.x, y: this.player2.body.position.y }, { x: 0, y: forceY });
+
+                const sprite = this.gameSprites.find(i => (i.body === collision.bodyA || i.body === collision.bodyB) && i !== this.player2);
+                if (sprite) {
+                    sprite.play();
+                }
+            }
+        }
+
         const enemyCollisions = playerCollisions.filter(i => this.enemyLabels.indexOf(i.bodyA.label) > -1 || this.enemyLabels.indexOf(i.bodyB.label) > -1);
         if (enemyCollisions.length > 0) {
             this.loseLife();
+        }
+
+        const completionBarrier = playerCollisions.filter(i => i.bodyA.label === 'completion-barrier' || i.bodyB.label === 'completion-barrier');
+        if (completionBarrier.length) {
+
+            if (this.gameHUD.hasAllTools && this.fridgeContraint) {
+                const sprite = this.gameSprites.find(i=>i.body.label === 'completion-barrier');
+                this.removeSprite(sprite);
+            } else {
+                this.showCloseBarrier = true;
+                PubSub.getInstance().publish('hit-completion-barrier');
+            }
         }
 
 
@@ -459,6 +498,9 @@ export class Game {
         }
 
         this.centerPlayer();
+        if (this.player2.isGrounded) {
+            this.bounceCount = 0;
+        }
     }
 
     loseLife() {

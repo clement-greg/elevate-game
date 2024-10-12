@@ -1,4 +1,5 @@
 import { MoveableObject } from "./moveable-object";
+declare var Matter: any;
 
 export class Coin extends MoveableObject {
     frames = 13;
@@ -24,6 +25,9 @@ export class Coin extends MoveableObject {
         }
 
         this.domObject = brickDiv;
+        if (this.body) {
+            Matter.Body.setMass(this.body, 0.00000001);
+        }
     }
 
     override advance() {

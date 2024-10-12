@@ -10,6 +10,7 @@ import { PubSub } from '../models/pub-sub';
 import { Game } from '../models/game';
 import { WinGameComponent } from '../components/win-game/win-game.component';
 import { ShopComponent } from '../components/shop/shop.component';
+import { NotCompleteComponent } from '../not-complete/not-complete.component';
 
 @Component({
   selector: 'app-level1',
@@ -20,6 +21,7 @@ import { ShopComponent } from '../components/shop/shop.component';
 })
 export class Level1Component implements AfterViewInit {
   questBeginRef: MatDialogRef<BeginQuestComponent>;
+  notCompletedRef: MatDialogRef<NotCompleteComponent>;
   constructor(private zone: NgZone, dialog: MatDialog) {
 
     PubSub.getInstance().subscribe('quest-begin', () => {
@@ -44,6 +46,18 @@ export class Level1Component implements AfterViewInit {
       const ref = dialog.open(ShopComponent);
       ref.afterClosed().subscribe(() => Game.getInstance().dialogOpen = false);
     });
+
+    PubSub.getInstance().subscribe('hit-completion-barrier', () => {
+      if (!Game.getInstance().dialogOpen) {
+        Game.getInstance().dialogOpen = true;
+        this.notCompletedRef = dialog.open(NotCompleteComponent);
+        this.notCompletedRef.afterClosed().subscribe(() => Game.getInstance().dialogOpen = false);
+      }
+    });
+
+    PubSub.getInstance().subscribe('close-info-barrier',()=> {
+      this.notCompletedRef.close();
+    });
   }
   ngAfterViewInit(): void {
 
@@ -59,6 +73,11 @@ export class Level1Component implements AfterViewInit {
 
   get homeLeft() {
     return Game.getInstance().homeLeft + 'px';
+  }
+
+
+  get lastGuyLeft() {
+    return (Game.getInstance().homeLeft - 200) + 'px';
   }
 
   get initialLeft() {

@@ -13,6 +13,7 @@ import { Ice } from '../../models/ice';
 import { HTTP } from '../../models/http';
 import { Drill, Hammer, Saw, Screwdriver, Wrench } from '../../models/saw';
 import { GameSprite } from '../../models/game-sprite';
+import { Trampoline } from '../../models/trampoline';
 
 @Component({
   selector: 'app-tool-bar',
@@ -92,6 +93,11 @@ export class ToolBarComponent {
   addLog() {
     const log = new Log(this.game.engine, 0, 0);
     this.createSprite(log);
+  }
+
+  addTrampoline() {
+    const tramp = new Trampoline(this.game.engine, 0 , 0);
+    this.createSprite(tramp);
   }
 
   addShortLog() {
@@ -187,7 +193,13 @@ export class ToolBarComponent {
   addDoubleClickHandler(sprite, game: Game) {
     sprite.domObject.addEventListener('dblclick', e => {
 
-      const sprite = game.gameSprites.find(i => i.domObject === e.srcElement);
+      let root: HTMLElement = e.srcElement;
+      while(root && !root.classList.contains('sprite')) {
+        root = root.parentElement;
+      }
+
+      console.log(root);
+      const sprite = game.gameSprites.find(i => i.domObject === root);
 
       if (sprite) {
 
