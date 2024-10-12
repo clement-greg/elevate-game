@@ -86,7 +86,6 @@ export class Game {
         zone.run(() => {
 
             this.gameHUD = new GameHUD(zone);
-            console.log('created game HUD')
         });
 
         this.world = World.getInstance();
@@ -139,8 +138,6 @@ export class Game {
                 this.showCloseBarrier = false;
             }
             if (key.key === 'ArrowUp') {
-                console.log('arrowup');
-                console.log({ playerLeft: this.playerLeft, left: this.applianceShopLeft, right: this.applianceShopAreaRight })
                 if (this.playerLeft >= this.applianceShopLeft && this.playerLeft <= this.applianceShopAreaRight) {
                     PubSub.getInstance().publish('show-shop');
                 }

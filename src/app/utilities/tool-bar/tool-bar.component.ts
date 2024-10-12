@@ -127,7 +127,6 @@ export class ToolBarComponent {
 
     const ids = striped.filter(i => i.id).map(i => i.id);
     const itemsToBringBack = this.game.originalSprites.filter(i => i.id && ids.indexOf(i.id) === -1);
-    console.log(itemsToBringBack);
     for (const itemToBringBack of itemsToBringBack) {
       striped.push(itemToBringBack);
     }
@@ -198,7 +197,6 @@ export class ToolBarComponent {
         root = root.parentElement;
       }
 
-      console.log(root);
       const sprite = game.gameSprites.find(i => i.domObject === root);
 
       if (sprite) {

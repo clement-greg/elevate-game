@@ -19,7 +19,6 @@ export class Trampoline extends GameSprite {
     }
 
     play() {
-        console.log('blah');
         const player = (document.getElementById(this.lottieId) as any);
         player.seek(0);
         player.play();
