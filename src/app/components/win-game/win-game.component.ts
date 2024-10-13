@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ToolBarComponent } from '../../utilities/tool-bar/tool-bar.component';
+import { ToolBarComponent } from '../tool-bar/tool-bar.component';
 
 @Component({
   selector: 'app-win-game',

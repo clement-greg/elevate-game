@@ -1,0 +1,8 @@
+.scrolled {
+    transform: translateY(-100vh);
+    transition: 1s ease;
+}
+
+.game-won-scrolled {
+    transform: translateY(-200vh);
+}

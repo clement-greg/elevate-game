@@ -43,4 +43,8 @@ export class World {
 
         return World.instance;
     }
+
+    static deleteInstance() {
+        delete World.instance;
+    }
 }

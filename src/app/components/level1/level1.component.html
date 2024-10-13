@@ -1,0 +1,58 @@
+<div id="game-container">
+    <div id="bg-sky"></div>
+    <div id="bg-buildings">
+        <img src="/assets/images/bill-board.png" style="    height: 400px;
+        position: absolute;
+        bottom: 200px;
+        left: 700px;">
+        <video class="bill-board video1" [autoplay]="'autoplay'" [loop]="'loop'" [muted]="'muted'"
+            src="https://elevateh.blob.core.windows.net/cdn/video/hard-knock-life.mp4"></video>
+        <img src="/assets/images/bill-board-2.png" style="    height: 400px;
+        position: absolute;
+        bottom: 200px;
+        left: 2500px;">
+        <video class="bill-board video2" [autoplay]="'autoplay'" [loop]="'loop'" [muted]="'muted'"
+            src="https://elevateh.blob.core.windows.net/cdn/video/pool-and-pest.mp4"></video>
+
+    </div>
+    <div id="bg-plants">
+
+    </div>
+
+    <div id="game-div">
+
+        <img src="/assets/images/appliance-shop.svg" style="height: 400px;position: absolute;bottom: 143px;"
+            [style.left]="applianceShopLeft">
+        <img src="/assets/images/home.svg" [style.left]="homeLeft"
+            style="height: 400px;position: absolute;bottom: 162px;">
+
+        <!-- <img src="/assets/images/eli.svg" id="construction-worker"
+        style="height: 135px;position: absolute;bottom: 64px;" [style.left]="initialLeft"> -->
+
+        <div id="construction-worker" style="position: absolute;bottom: 64px;height: 135px;" [style.left]="initialLeft">
+            <app-lottie-player src="https://lottie.host/a3b45688-2a32-46c4-8d10-07056718099d/QQfrmarepT.json"
+                height="135px" [intermission]="3000">
+
+            </app-lottie-player>
+
+  
+        </div>
+        
+        
+        <div [style.left]="lastGuyLeft" style="position: absolute;bottom: 64px;height: 135px">
+            <app-lottie-player src="https://lottie.host/33b46be8-bf4a-4b82-9277-a1c8c699dae4/fO1pefdcze.json" height="135px" [intermission]="5000"></app-lottie-player>
+        </div>
+
+
+    </div>
+</div>
+
+
+<app-tool-bar *ngIf="showToolbar"></app-tool-bar>
+
+<div id="snackbar">
+    Here is a snackbar message
+</div>
+<div id="debugger"></div>
+
+<app-hud></app-hud>

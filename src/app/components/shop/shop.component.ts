@@ -91,6 +91,7 @@ export class ShopComponent {
     }
     document.getElementById('speech').innerText = '';
     this.wordIndex = 0;
+    console.log(10)
     if (this.selectedItem.price > Game.getInstance().gameHUD.money) {
       this.message = `Oh sorry, you don't have enough money to buy that refrigerator.  
 That one costs ${this.selectedItem.price} but you only have ${Game.getInstance().gameHUD.money}

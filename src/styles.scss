@@ -9,14 +9,9 @@
     font-weight: 300;
 }
 
-/* document.getElementById('game-div').style.transform = 'translateX(0px)';
-document.getElementById('bg-buildings').style.transform = 'translateX(0px)';
-document.getElementById('bg-plants').style.transform = 'translateX(0px)';
-document.getElementById('bg-sky').style.transform = 'translateX(0px)'; */
-
 html, body {
     margin: 0;
-    overflow: hidden;
+    overflow: hidden !important;
     background-color: #000;
 }
 

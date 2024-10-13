@@ -19,7 +19,7 @@ import { NgZone } from '@angular/core';
 import { Drill, Hammer, Saw, Screwdriver, Wrench } from './saw';
 import { Fridge1, Fridge2, Fridge3 } from './fridge';
 import { GameSprite } from './game-sprite';
-import { ToolBarComponent } from '../utilities/tool-bar/tool-bar.component';
+import { ToolBarComponent } from '../components/tool-bar/tool-bar.component';
 import { Trampoline } from './trampoline';
 
 var Engine = Matter.Engine,
@@ -46,25 +46,26 @@ export class Game {
     infoBarier: Ground;
     showQuestBegin = false;
     questShown = false;
-    applianceShopLeft = 8000;
+    static applianceShopLeft = 8000;
     dialogOpen: boolean;
     gameStartTime: Date;
-    gameTotalSeconds = 120;
+    gameTotalSeconds = 240;
     remaining: string;
-    homeLeft = 16000;
-    homeLeftEnd = this.homeLeft + 300;
-    initialLeft = 400;
+    static homeLeft = 16000;
+    static homeLeftEnd = this.homeLeft + 300;
+    static initialLeft = 400;
     showCloseBarrier = false;
 
     // get applianceShopAreaLeft() {
     //     return this.applianceShopLeft - 100;
     // }
 
-    get applianceShopAreaRight() {
-        return this.applianceShopLeft + 450;
+    static get applianceShopAreaRight() {
+        return Game.applianceShopLeft + 450;
     }
 
     constructor(private zone: NgZone) {
+        console.log('game created');
         this.initialize(zone);
     }
     completionBarrier: any;
@@ -103,7 +104,7 @@ export class Game {
         this.infoBarier.body.friction = 0;
         this.gameSprites.push(this.infoBarier);
 
-        this.completionBarrier = new Ground(this.engine, this.homeLeft - 150, 0, 2, 10000);
+        this.completionBarrier = new Ground(this.engine, Game.homeLeft - 150, 0, 2, 10000);
         this.completionBarrier.body.label = 'completion-barrier';
         this.completionBarrier.body.friction = 0;
         this.gameSprites.push(this.completionBarrier);
@@ -122,44 +123,69 @@ export class Game {
         this.pubSub.subscribe('remove-game-sprite', data => {
             this.removeSprite(data);
         });
+    }
 
-        document.addEventListener('keyup', key => {
-            if (key.key === ' ' && this.infoBarier) {
-                if (this.showQuestBegin) {
-                    PubSub.getInstance().publish('close-begin-quest');
-                    this.removeSprite(this.infoBarier);
-                    delete this.infoBarier;
-                    this.showQuestBegin = false;
-                }
-            }
-            if (key.key === ' ' && this.showCloseBarrier) {
-                Matter.Body.applyForce(this.player2.body, { x: this.player2.body.position.x, y: this.player2.body.position.y }, { x: -1, y: 0 });
-                setTimeout(() => PubSub.getInstance().publish('close-info-barrier'), 100);
-                this.showCloseBarrier = false;
-            }
-            if (key.key === 'ArrowUp') {
-                if (this.playerLeft >= this.applianceShopLeft && this.playerLeft <= this.applianceShopAreaRight) {
-                    PubSub.getInstance().publish('show-shop');
-                }
-            }
 
-            if (key.key === 't' || key.key === 'T' && !this.fridge) {
-                // this.fridge = new Fridge1(this.engine, this.playerLeft - 30, this.playerTop - 72);
-                // Matter.Body.setMass(this.fridge.body, .1);
-                // this.addSprite(this.fridge);
-                // this.createFridgeConstraint();
-                // PubSub.getInstance().publish('level-complete');
-                if (this.playerTop > 0) {
-                    Matter.Body.applyForce(this.player2.body, { x: this.player2.body.position.x, y: this.player2.body.position.y }, { x: 0, y: -.3 });
-                }
+    processKeyDownEvent(key: KeyboardEvent) {
+        if(key.key == 'ArrowRight') {
+            this.player2.arrowRight = true;
+        }
+
+        if(key.key === 'ArrowLeft') {
+            this.player2.arrowLeft = true;
+        }
+        if(key.key === ' ') {
+            this.player2.jump();
+        }
+    }
+
+    processKeyUp(key: KeyboardEvent) {
+        if(key.key == 'ArrowRight') {
+            this.player2.arrowRight = false;
+        }
+
+        if(key.key === 'ArrowLeft') {
+            this.player2.arrowLeft = false;
+        }
+        if (key.key === ' ' && this.infoBarier) {
+            if (this.showQuestBegin) {
+                PubSub.getInstance().publish('close-begin-quest');
+                this.removeSprite(this.infoBarier);
+                delete this.infoBarier;
+                this.showQuestBegin = false;
+                this.gameStartTime = new Date();
+                this.gameHUD.startTimer();
             }
-            if (key.key === 'D' || key.key === 'd') {
-                if (this.fridgeContraint) {
-                    Matter.Composite.remove(this.engine.world, this.fridgeContraint);
-                    delete this.fridgeContraint;
-                }
+        }
+        if (key.key === ' ' && this.showCloseBarrier) {
+            Matter.Body.applyForce(this.player2.body, { x: this.player2.body.position.x, y: this.player2.body.position.y }, { x: -1, y: 0 });
+            setTimeout(() => PubSub.getInstance().publish('close-info-barrier'), 100);
+            this.showCloseBarrier = false;
+        }
+        if (key.key === 'ArrowUp') {
+            if (this.playerLeft >= Game.applianceShopLeft && this.playerLeft <= Game.applianceShopAreaRight) {
+                PubSub.getInstance().publish('show-shop');
             }
-        });
+        }
+
+
+
+        if (key.key === 't' || key.key === 'T' && !this.fridge) {
+            // this.fridge = new Fridge1(this.engine, this.playerLeft - 30, this.playerTop - 72);
+            // Matter.Body.setMass(this.fridge.body, .1);
+            // this.addSprite(this.fridge);
+            // this.createFridgeConstraint();
+            PubSub.getInstance().publish('level-complete');
+            // if (this.playerTop > 0) {
+            //     Matter.Body.applyForce(this.player2.body, { x: this.player2.body.position.x, y: this.player2.body.position.y }, { x: 0, y: -.3 });
+            // }
+        }
+        if (key.key === 'D' || key.key === 'd') {
+            if (this.fridgeContraint) {
+                Matter.Composite.remove(this.engine.world, this.fridgeContraint);
+                delete this.fridgeContraint;
+            }
+        }
     }
 
     purchaseFridge(number = 1 | 2 | 3) {
@@ -335,7 +361,7 @@ export class Game {
         }
 
         const left = this.playerLeft;
-        if (left > (this.initialLeft - 50) && !this.showQuestBegin && !this.questShown && this.playerTop > 0) {
+        if (left > (Game.initialLeft - 50) && !this.showQuestBegin && !this.questShown && this.playerTop > 0) {
             this.questShown = true;
             this.zone.run(() => {
                 this.showQuestBegin = true;
@@ -345,7 +371,7 @@ export class Game {
         }
 
 
-        if (left > this.homeLeft && left < this.homeLeftEnd && this.gameHUD.hasAllTools && this.fridgeContraint) {
+        if (left > Game.homeLeft && left < Game.homeLeftEnd && this.gameHUD.hasAllTools && this.fridgeContraint) {
             PubSub.getInstance().publish('level-complete');
             this.gameHUD = new GameHUD(this.zone);
         }
@@ -430,7 +456,7 @@ export class Game {
         if (completionBarrier.length) {
 
             if (this.gameHUD.hasAllTools && this.fridgeContraint) {
-                const sprite = this.gameSprites.find(i=>i.body.label === 'completion-barrier');
+                const sprite = this.gameSprites.find(i => i.body.label === 'completion-barrier');
                 this.removeSprite(sprite);
             } else {
                 this.showCloseBarrier = true;
@@ -501,7 +527,7 @@ export class Game {
     }
 
     loseLife() {
-        this.player2.x = 0;
+        this.player2.x = 0; 
         this.player2.y = 0;
         Matter.Body.setPosition(this.player2.body, { x: 0, y: 0 });
         Matter.Body.setVelocity(this.player2.body, { x: 0, y: 0 });
@@ -562,10 +588,28 @@ export class Game {
 
     static getInstance(zone: NgZone = null): Game {
         if (!Game.gameInstance) {
+            console.log('creating game')
             Game.gameInstance = new Game(zone);
         }
 
         return Game.gameInstance;
+    }
+
+    static deleteInstance() {
+        PubSub.deleteInstance();
+        World.deleteInstance();
+        if (Game.gameInstance) {
+            // if(Game.getInstance().player2) {
+            //     Game.getInstance().player2.subscriptionEvents.unsubscribe();
+     
+            // }
+            Game.gameInstance.stop();
+        }
+        delete Game.gameInstance;
+    }
+
+    static clearInstance(zone: NgZone) {
+        Game.gameInstance = new Game(zone);
     }
 
     removeSprite(sprite) {
@@ -632,12 +676,17 @@ export class GameHUD {
         });
     }
 
+    timerStarted = false;
     hasWrench = false;
     hasSaw = false;
     hasDrill = false;
     hasHammer = false;
     hasScrewdriver = false;
     timeRemaining: string;
+
+    startTimer() {
+        this.timerStarted = true;
+    }
 
     get hasAllTools() {
         return this.hasWrench && this.hasSaw && this.hasHammer && this.hasScrewdriver && this.hasDrill;

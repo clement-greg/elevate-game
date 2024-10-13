@@ -1,33 +1,53 @@
-import { PubSub } from "./pub-sub";
+// import { PubSub } from "./pub-sub";
 
-export class KeyboardHandler {
-    static instance;
-    pubsub;
+// export class KeyboardHandler {
+//     static instance;
+//     pubsub;
 
-    keyStates = {};
+//     keyStates = {};
 
-    constructor() {
-        this.pubsub = PubSub.getInstance();
-        document.addEventListener('keydown', event => {
-            this.keyStates[event.code] = true;
-            this.pubsub.publish('keydown', event);
-        });
-        document.addEventListener('keyup', event => {
-            this.keyStates[event.code] = false;
-            this.pubsub.publish('keyup', event);
-        });
-    }
+//     constructor() {
+//         this.pubsub = PubSub.getInstance();
+//         // document.addEventListener('keydown', event => {
+//         //     this.keyStates[event.code] = true;
+//         //     this.pubsub.publish('keydown', event);
+//         // });
+//         // document.addEventListener('keyup', event => {
+//         //     this.keyStates[event.code] = false;
+//         //     this.pubsub.publish('keyup', event);
+//         // });
+//         document.addEventListener('keydown', this.keyDownEvent);
+//         document.addEventListener('keyup', this.keyUpEvent);
+//     }
 
-    isKeyDown(key) {
-        return this.keyStates[key];
-    }
+//     keyDownEvent(event: KeyboardEvent) {
+//         this.keyStates[event.code] = true;
+//         this.pubsub.publish('keydown', event);
+//     }
 
-    static getInstance() {
-        if (!KeyboardHandler.instance) {
-            KeyboardHandler.instance = new KeyboardHandler();
-        }
+//     keyUpEvent(event: KeyboardEvent) {
+//         this.keyStates[event.code] = false;
+//         this.pubsub.publish('keyup', event);
+//     }
 
-        return KeyboardHandler.instance;
-    }
+//     static deleteInstance() {
+//         if (KeyboardHandler.instance) {
+//             document.removeEventListener('keydown', KeyboardHandler.instance.keyDownEvent);
+//             document.removeEventListener('keyup', KeyboardHandler.instance.keyUpEvent);
+//         }
+//         delete KeyboardHandler.instance;
+//     }
 
-}
+//     isKeyDown(key) {
+//         return this.keyStates[key];
+//     }
+
+//     static getInstance() {
+//         if (!KeyboardHandler.instance) {
+//             KeyboardHandler.instance = new KeyboardHandler();
+//         }
+
+//         return KeyboardHandler.instance;
+//     }
+
+// }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'app-hud-coin',
@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
   templateUrl: './hud-coin.component.html',
   styleUrl: './hud-coin.component.scss'
 })
-export class HudCoinComponent {
+export class HudCoinComponent implements OnDestroy {
   interval: any;
 
       frames = 13;
@@ -15,6 +15,9 @@ export class HudCoinComponent {
 
   constructor() {
     this.interval = setInterval(()=> this.advance(), 100);
+  }
+  ngOnDestroy(): void {
+    clearInterval(this.interval);
   }
 
   private advance() {

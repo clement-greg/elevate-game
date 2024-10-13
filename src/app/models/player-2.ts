@@ -2,11 +2,10 @@ declare var Matter: any;
 
 import { Game } from './game';
 import { GameSprite } from './game-sprite';
-import { KeyboardHandler } from './keyboard-handler';
 import { PubSub } from './pub-sub';
 
 export class Player2 extends GameSprite {
-    keyboardHandler;
+    //keyboardHandler;
     runFrame = 0;
     applyingLeft = false;
     applyingRight = false;
@@ -15,6 +14,7 @@ export class Player2 extends GameSprite {
     moveSprite = false;
     pubsub;
     isGrounded = false;
+    subscriptionEvents:any;
 
 
     constructor(engine, x, y, width, height) {
@@ -26,10 +26,10 @@ export class Player2 extends GameSprite {
         this.domObject = playerDiv;
         this.body.label = 'Player';
         this.pubsub = PubSub.getInstance();
-        this.keyboardHandler = KeyboardHandler.getInstance();
         this.body.staticFriction = 20;
 
-        this.pubsub.subscribe('keydown', key => {
+        this.subscriptionEvents =  this.pubsub.subscribe('keydown', key => {
+            console.log('11')
             if (key.code === 'Space' && this.isGrounded && !Game.getInstance().dialogOpen) {
                 Matter.Body.setVelocity(this.body, { x: this.body.velocity.x, y: 0 });
                 let upForce = -0.32;
@@ -40,24 +40,37 @@ export class Player2 extends GameSprite {
         });
     }
 
+
+    jump() {
+        if(this.isGrounded && !Game.getInstance().dialogOpen) {
+            Matter.Body.setVelocity(this.body, { x: this.body.velocity.x, y: 0 });
+            let upForce = -0.32;
+            Matter.Body.applyForce(this.body, { x: this.body.position.x, y: this.body.position.y }, { x: 0, y: upForce });
+            this.isGrounded = false;
+            delete this.groundSprite;
+        }
+    }
+
     stickyX;
     stickyY;
     isMoving = false;
+    arrowRight = false;
+    arrowLeft = false;
     override advance() {
         if (Game.getInstance().dialogOpen) {
             return;
         }
-        this.isMoving = (this.keyboardHandler.isKeyDown('ArrowRight') || this.keyboardHandler.isKeyDown('ArrowLeft')) && this.isGrounded;
+        this.isMoving = (this.arrowRight || this.arrowLeft) && this.isGrounded;
 
         const isGrounded = Math.abs(this.body.velocity.y) < 0.1;
-        if (this.keyboardHandler.isKeyDown('ArrowRight') && this.body.velocity.x < 3) {
+        if (this.arrowRight && this.body.velocity.x < 3) {
             let force = isGrounded ? 0.02 : 0.01;
             Matter.Body.applyForce(this.body, { x: this.body.position.x, y: this.body.position.y }, { x: force, y: 0 });
             this.domObject.style.transform = 'scaleX(1)';
             this.applyingLeft = false;
             this.applyingRight = true;
         }
-        if (this.keyboardHandler.isKeyDown('ArrowLeft') && this.body.velocity.x > -3) {
+        if (this.arrowLeft && this.body.velocity.x > -3) {
             let force = isGrounded ? -0.02 : -0.01;
             Matter.Body.applyForce(this.body, { x: this.body.position.x, y: this.body.position.y }, { x: force, y: 0 });
             this.domObject.style.transform = 'scaleX(-1)';
@@ -79,7 +92,7 @@ export class Player2 extends GameSprite {
             if (!this.stickyX) {
                 this.stickyX = this.body.position.x - this.groundSprite?.body.position.x;
             } else {
-                if (!this.keyboardHandler.isKeyDown('ArrowLeft') && !this.keyboardHandler.isKeyDown('ArrowRight')) {
+                if (!this.arrowLeft && !this.arrowRight) {
                     Matter.Body.setPosition(this.body, { x: this.groundSprite.body.position.x + this.stickyX, y: this.body.position.y });
                 } else {
                     delete this.stickyX;

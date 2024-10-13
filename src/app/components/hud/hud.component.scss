@@ -1,6 +1,6 @@
 .hud {
     position: fixed;
-    top: 20px;
+    top: calc(100vh + 20px);
     right: 20px;
     backdrop-filter: blur(10px);
     background-color: rgba(52, 235, 70, 1);

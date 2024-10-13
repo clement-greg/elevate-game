@@ -30,7 +30,7 @@
         </div>
         <div style="flex: auto;">
             <div class="data-label info-2">Time Remaining</div>
-            <h1>
+            <h1 *ngIf="gameHUD.timerStarted">
             {{gameHUD.timeRemaining}}</h1>
         </div>
     </div>

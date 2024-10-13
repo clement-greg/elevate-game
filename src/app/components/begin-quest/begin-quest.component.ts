@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
-import { ToolBarComponent } from '../../utilities/tool-bar/tool-bar.component';
-import { LottiePlayerComponent } from '../../lottie-player/lottie-player.component';
+import { ToolBarComponent } from '../tool-bar/tool-bar.component';
+import { LottiePlayerComponent } from '../lottie-player/lottie-player.component';
 
 @Component({
   selector: 'app-begin-quest',

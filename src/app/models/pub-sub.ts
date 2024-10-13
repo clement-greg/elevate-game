@@ -10,6 +10,10 @@ export class PubSub {
         return PubSub.intance;
     }
 
+    static deleteInstance() {
+        delete PubSub.intance;
+    }
+
     subscribe(eventName, callback) {
         if (!Array.isArray(this.subscribers[eventName])) {
             this.subscribers[eventName] = [];

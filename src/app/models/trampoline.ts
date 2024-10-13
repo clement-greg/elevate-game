@@ -1,4 +1,4 @@
-import { ToolBarComponent } from "../utilities/tool-bar/tool-bar.component";
+import { ToolBarComponent } from "../components/tool-bar/tool-bar.component";
 import { GameSprite } from "./game-sprite";
 
 export class Trampoline extends GameSprite {
