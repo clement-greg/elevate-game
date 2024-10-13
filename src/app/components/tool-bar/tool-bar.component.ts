@@ -1,7 +1,7 @@
 import { Component, NgZone } from '@angular/core';
 import { GameProviderService } from '../../services/game-provider.service';
 import { Game } from '../../models/game';
-import { Brick } from '../../models/brick';
+import { Brick, SolidBlock } from '../../models/brick';
 import { MysteryBlock } from '../../models/mystery-block';
 import { SpikeBall } from '../../models/spike-ball';
 import { Ram } from '../../models/ram';
@@ -99,6 +99,11 @@ export class ToolBarComponent {
   addTrampoline() {
     const tramp = new Trampoline(this.game.engine, 0 , 0);
     this.createSprite(tramp);
+  }
+
+  addSolidBlock() {
+    const sprite = new SolidBlock(this.game.engine, 0, 0);
+    this.createSprite(sprite); 
   }
 
   addSpikeBrick() {
@@ -270,13 +275,8 @@ class DragHelper {
     if (e.button !== 0) {
       return;
     }
-    const left = parseInt(this.sprite.domObject.style.left);
-    const top = parseInt(this.sprite.domObject.style.top);
-    //this.sprite.x = left + this.sprite.domObject.clientWidth / 2;
-    //this.sprite.y = top  + this.sprite.domObject.clientHeight / 2;
     this.sprite.originalX = this.sprite.x;
     this.sprite.originalY = this.sprite.y;
-
   }
 
   interval = 72;
@@ -316,6 +316,8 @@ class DragHelper {
       this.sprite.x = x + (this.sprite.width / 2);
     }
   }
+
+
 
   closeDragElement = () => {
     // stop moving when mouse button is released:

@@ -28,8 +28,8 @@ export class GameSprite {
         this.log = log;
         this.width = width;
         this.height = height;
-        this.originalX = x;
-        this.originalY = y;
+        //this.originalX = x;
+        //this.originalY = y;
 
         this.objectType = this.constructor.name;
 

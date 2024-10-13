@@ -84,6 +84,15 @@ html, body {
     position: absolute;
 }
 
+.solid-block {
+    display: inline-block;
+    width: 72px;
+    height: 72px;
+    background-image: url(/assets/images/solid-block.svg);
+    background-size: cover;
+    position: absolute;
+}
+
 .spike-brick {
     display: inline-block;
     width: 72px;

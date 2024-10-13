@@ -26,6 +26,8 @@ export class Ram extends MoveableObject {
         this.body.label = 'Ram';
         this.body.friction = 0;
         Body.setMass(this.body, 100000);
+        this.initialX = x;
+        this.initialY = y;
     }
 
     override advance() {

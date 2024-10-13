@@ -13,6 +13,7 @@ export class Log extends GameSprite {
     frameCount = 4;
     delayCount = 0;
     sign;
+    frictionTop;
 
     constructor(engine, x, y) {
         super(engine, x, y, 576, 72);
@@ -21,11 +22,18 @@ export class Log extends GameSprite {
         this.domObject = brickDiv;
 
         this.body.isStatic = true;
+        this.body.label = 'log';
 
         this.initialX = x;
         this.initialY = y;
         this.body.friction = 0;
         Matter.Body.setMass(this.body, 100000);
+        const frictionBody = Matter.Bodies.rectangle(x + 4, y - 36, this.width - 16, 2);
+        Matter.Composite.add(engine.world, frictionBody);
+        frictionBody.isStatic = true;
+        frictionBody.friction = 1;
+        frictionBody.label = 'log';
+        this.frictionTop = frictionBody;
     }
 
     override advance() {
@@ -35,7 +43,9 @@ export class Log extends GameSprite {
         } else if (x <= this.initialX) {
             this.sign = 1;
         }
-        Matter.Body.setPosition(this.body, { x: this.body.position.x + this.moveSpeed * this.sign, y: this.initialY });
+        const newX = this.body.position.x + this.moveSpeed * this.sign;
+        Matter.Body.setPosition(this.body, { x: newX, y: this.initialY });
+        Matter.Body.setPosition(this.frictionTop, { x: newX + 4, y: this.initialY });
         super.advance();
     }
 }

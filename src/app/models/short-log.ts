@@ -30,7 +30,7 @@ export class ShortLog extends GameSprite {
         Matter.Composite.add(engine.world, frictionBody);
         frictionBody.isStatic = true;
         frictionBody.friction = 1;
-        this.body.label = 'brick-top';
+        frictionBody.label = 'log-short';
         this.frictionTop = frictionBody;
 
     }
@@ -51,3 +51,7 @@ export class ShortLog extends GameSprite {
 
     }
 }
+
+
+
+

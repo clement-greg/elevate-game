@@ -28,7 +28,7 @@ export class MysteryBlock extends GameSprite {
         Composite.add(engine.world, frictionBody, { friction: 1, restitution: 1, inertia: Infinity });
         frictionBody.isStatic = true;
         frictionBody.friction = 1;
-        this.body.label = 'mystery-top';
+        frictionBody.label = 'Mystery';
         this.frictionTop = frictionBody;
         this.body.friction = 0;
     }
