@@ -4,7 +4,6 @@ import { World } from './world';
 import { Ground } from './ground';
 import { Brick } from './brick';
 import { HTTP } from './http';
-// import { Editor } from './editor';
 import { MysteryBlock } from './mystery-block';
 import { SpikeBall } from './spike-ball';
 import { PubSub } from './pub-sub';
@@ -21,6 +20,7 @@ import { Fridge1, Fridge2, Fridge3 } from './fridge';
 import { GameSprite } from './game-sprite';
 import { ToolBarComponent } from '../components/tool-bar/tool-bar.component';
 import { Trampoline } from './trampoline';
+import { SpikeBrick } from './spike-brick';
 
 var Engine = Matter.Engine,
     MatterWorld = Matter.World,
@@ -33,13 +33,11 @@ export class Game {
     world;
     internval;
     static gravity = 1;
-    //player;
     player2: Player2;
     ground;
 
     gameSprites = [];
     pubSub = PubSub.getInstance();
-    //collisionDetection;
     engine;
     gameHUD: GameHUD;
 
@@ -50,22 +48,19 @@ export class Game {
     dialogOpen: boolean;
     gameStartTime: Date;
     gameTotalSeconds = 240;
+    //gameTotalSeconds = 5;
     remaining: string;
     static homeLeft = 16000;
     static homeLeftEnd = this.homeLeft + 300;
     static initialLeft = 400;
     showCloseBarrier = false;
 
-    // get applianceShopAreaLeft() {
-    //     return this.applianceShopLeft - 100;
-    // }
 
     static get applianceShopAreaRight() {
         return Game.applianceShopLeft + 450;
     }
 
     constructor(private zone: NgZone) {
-        console.log('game created');
         this.initialize(zone);
     }
     completionBarrier: any;
@@ -127,24 +122,24 @@ export class Game {
 
 
     processKeyDownEvent(key: KeyboardEvent) {
-        if(key.key == 'ArrowRight') {
+        if (key.key == 'ArrowRight') {
             this.player2.arrowRight = true;
         }
 
-        if(key.key === 'ArrowLeft') {
+        if (key.key === 'ArrowLeft') {
             this.player2.arrowLeft = true;
         }
-        if(key.key === ' ') {
+        if (key.key === ' ') {
             this.player2.jump();
         }
     }
 
     processKeyUp(key: KeyboardEvent) {
-        if(key.key == 'ArrowRight') {
+        if (key.key == 'ArrowRight') {
             this.player2.arrowRight = false;
         }
 
-        if(key.key === 'ArrowLeft') {
+        if (key.key === 'ArrowLeft') {
             this.player2.arrowLeft = false;
         }
         if (key.key === ' ' && this.infoBarier) {
@@ -167,18 +162,16 @@ export class Game {
                 PubSub.getInstance().publish('show-shop');
             }
         }
-
-
-
-        if (key.key === 't' || key.key === 'T' && !this.fridge) {
-            // this.fridge = new Fridge1(this.engine, this.playerLeft - 30, this.playerTop - 72);
-            // Matter.Body.setMass(this.fridge.body, .1);
-            // this.addSprite(this.fridge);
-            // this.createFridgeConstraint();
+        if (key.key === 't' || key.key === 'T') {
+            if (this.playerTop > 0) {
+                Matter.Body.applyForce(this.player2.body, { x: this.player2.body.position.x, y: this.player2.body.position.y }, { x: 0, y: -.3 });
+            }
+        }
+        if (key.key === 'w' || key.key === 'W') {
             PubSub.getInstance().publish('level-complete');
-            // if (this.playerTop > 0) {
-            //     Matter.Body.applyForce(this.player2.body, { x: this.player2.body.position.x, y: this.player2.body.position.y }, { x: 0, y: -.3 });
-            // }
+        }
+        if (key.key === 'l' || key.key === 'L') {
+            PubSub.getInstance().publish('game-lost');
         }
         if (key.key === 'D' || key.key === 'd') {
             if (this.fridgeContraint) {
@@ -204,8 +197,6 @@ export class Game {
         this.addSprite(this.fridge);
         this.createFridgeConstraint();
     }
-
-
 
     private createFridgeConstraint() {
         this.fridgeContraint = Matter.Constraint.create({
@@ -326,11 +317,15 @@ export class Game {
                 newSprite.y = sprite.originalY;
                 newSprite.id = sprite.id ?? ToolBarComponent.newid();
                 this.addSprite(newSprite);
+            } else if (sprite.objectType === 'spike-brick') {
+                const newSprite = new SpikeBrick(this.engine, sprite.originalX, sprite.originalY);
+                newSprite.x = sprite.originalX;
+                newSprite.y = sprite.originalY;
+                newSprite.id = sprite.id ?? ToolBarComponent.newid();
+                this.addSprite(newSprite);
             }
         }
     }
-
-    coinCount = 0;
 
     get playerLeft() {
         return parseFloat(this.player2.domObject.style.left.replace('px', ''));
@@ -341,8 +336,8 @@ export class Game {
     }
 
     private colletableLabels = ['saw', 'wrench', 'hammer', 'screwdriver', 'drill', 'coin'];
-    private enemyLabels = ['Ram', 'spike-ball', 'man-hole'];
-    private impactObjectsLabels = ['trampoline'];
+    private enemyLabels = ['spike-ball', 'man-hole'];
+    private impactObjectsLabels = ['trampoline', 'spike-brick', 'Ram', 'Brick', 'brick-top','mystery-top'];
 
     bounceCount = 0;
     advance() {
@@ -375,14 +370,10 @@ export class Game {
             PubSub.getInstance().publish('level-complete');
             this.gameHUD = new GameHUD(this.zone);
         }
-        const count = this.gameSprites.filter(i => i.objectType === 'Coin').length;
-        if (count != this.coinCount) {
-
-            this.coinCount = count;
-        }
 
         const collisions = Matter.Detector.collisions(this.engine.world);
         const playerCollisions = collisions.filter(i => i.bodyA.label === 'Player' || i.bodyB.label === 'Player');
+
         const groundCollision = playerCollisions.find(i => i.bodyA.label === 'Ground' || i.bodyB.label === 'Ground');
 
         delete this.player2.groundSprite;
@@ -402,6 +393,7 @@ export class Game {
 
 
         const collectables = playerCollisions.filter(i => this.colletableLabels.indexOf(i.bodyA.label) > -1 || this.colletableLabels.indexOf(i.bodyB.label) > -1);
+        
 
         for (const collectableCollision of collectables) {
             const colletableBody = this.colletableLabels.indexOf(collectableCollision.bodyA.label) > -1 ? collectableCollision.bodyA : collectableCollision.bodyB;
@@ -430,6 +422,8 @@ export class Game {
         }
 
         const impactCollisions = playerCollisions.filter(i => this.impactObjectsLabels.indexOf(i.bodyA.label) > -1 || this.impactObjectsLabels.indexOf(i.bodyB.label) > -1);
+
+
         for (const collision of impactCollisions) {
 
             let forceY = (this.bounceCount + 1) * -0.1;
@@ -438,11 +432,50 @@ export class Game {
                 forceY = -0.6;
             }
             if (collision.penetration.y < 0) {
-                Matter.Body.applyForce(this.player2.body, { x: this.player2.body.position.x, y: this.player2.body.position.y }, { x: 0, y: forceY });
+                const label = collision.bodyA.label === 'Player' ? collision.bodyB.label : collision.bodyA.label;
+                switch (label) {
+                    case 'trampoline':
+                        Matter.Body.applyForce(this.player2.body, { x: this.player2.body.position.x, y: this.player2.body.position.y }, { x: 0, y: forceY });
 
-                const sprite = this.gameSprites.find(i => (i.body === collision.bodyA || i.body === collision.bodyB) && i !== this.player2);
-                if (sprite) {
-                    sprite.play();
+                        const sprite = this.gameSprites.find(i => (i.body === collision.bodyA || i.body === collision.bodyB) && i !== this.player2);
+                        if (sprite) {
+                            sprite.play();
+                        }
+                        break;
+                    case 'spike-brick':
+                        this.loseLife();
+                        break;
+                    case 'Ram':
+                        const ram = this.gameSprites.find(i => (i.body === collision.bodyA || i.body === collision.bodyB) && i !== this.player2);
+                        if (ram) {
+
+                            Matter.Body.applyForce(this.player2.body, { x: this.player2.body.position.x, y: this.player2.body.position.y }, { x: 0, y: -0.2 });
+                            this.removeSprite(ram);
+                        }
+                        break;
+                }
+
+            } else if (Math.abs(collision.penetration.x) > 0) {
+
+                const label = collision.bodyA.label === 'Player' ? collision.bodyB.label : collision.bodyA.label;
+                switch (label) {
+                    case 'Ram':
+                        this.loseLife();
+                        break;
+                }
+            }
+            if (collision.penetration.y > 0) {
+                const label = collision.bodyA.label === 'Player' ? collision.bodyB.label : collision.bodyA.label;
+                const otherSprite = this.gameSprites.find(i => (i.body === collision.bodyA || i.body === collision.bodyB) && i !== this.player2);
+                switch (label) {
+                    case 'brick-top':
+                    case 'Brick':
+                        otherSprite.bounceIt();
+                        break;
+                    case 'mystery-top':
+                        otherSprite.emptyIt();
+                        this.gameHUD.incrementCoinCount();
+                        break;
                 }
             }
         }
@@ -486,24 +519,6 @@ export class Game {
                             this.player2.groundSprite = sprite;
                         }
                     }
-                    if (sprite.objectType === 'MysteryBlock') {
-                        if (brickCollision) {
-                            const deltaX = Math.abs(brickCollision.bodyA.position.x - brickCollision.bodyB.position.x);
-                            if (brickCollision.bodyA.position.y > brickCollision.bodyB.position.y && deltaX < 50) {
-                                if (sprite.emptyIt()) {
-                                    this.gameHUD.incrementCoinCount();
-                                }
-                            }
-                        }
-                    }
-                    if (sprite.objectType === 'Brick') {
-                        if (brickCollision) {
-                            const deltaX = Math.abs(brickCollision.bodyA.position.x - brickCollision.bodyB.position.x);
-                            if (brickCollision.bodyA.position.y > brickCollision.bodyB.position.y && deltaX < 30) {
-                                sprite.bounceIt();
-                            }
-                        }
-                    }
 
                     if (!this.player2.isGrounded) {
                         if (sprite.frictionTop) {
@@ -527,12 +542,13 @@ export class Game {
     }
 
     loseLife() {
-        this.player2.x = 0; 
+        this.player2.x = 0;
         this.player2.y = 0;
         Matter.Body.setPosition(this.player2.body, { x: 0, y: 0 });
         Matter.Body.setVelocity(this.player2.body, { x: 0, y: 0 });
 
         document.getElementById('game-div').classList.add('reset');
+        document.getElementById('bottom-filler').classList.add('reset');
         document.getElementById('bg-buildings').classList.add('reset');
         document.getElementById('bg-plants').classList.add('reset');
         document.getElementById('bg-sky').classList.add('reset');
@@ -541,12 +557,14 @@ export class Game {
         document.getElementById('bg-buildings').style.transform = 'translateX(0px)';
         document.getElementById('bg-plants').style.transform = 'translateX(0px)';
         document.getElementById('bg-sky').style.transform = 'translateX(0px)';
+        document.getElementById('bottom-filler').style.transform = 'translateX(0px)';
 
         setTimeout(() => {
             document.getElementById('game-div').classList.remove('reset');
             document.getElementById('bg-buildings').classList.remove('reset');
             document.getElementById('bg-plants').classList.remove('reset');
             document.getElementById('bg-sky').classList.remove('reset');
+            document.getElementById('bottom-filler').classList.add('reset');
 
         }, 2000);
 
@@ -579,6 +597,7 @@ export class Game {
             const x = windowWidth - playerLeft;
             const offset = windowWidth / 2 - x;
             document.getElementById('game-div').style.transform = 'translateX(-' + offset + 'px)';
+            document.getElementById('bottom-filler').style.transform = 'translateX(-' + offset + 'px)';
             document.getElementById('bg-buildings').style.transform = 'translateX(-' + (offset * .1) + 'px)';
             document.getElementById('bg-plants').style.transform = 'translateX(-' + (offset * .5) + 'px)';
             document.getElementById('bg-sky').style.transform = 'translateX(-' + (offset * .01) + 'px)';
@@ -588,7 +607,6 @@ export class Game {
 
     static getInstance(zone: NgZone = null): Game {
         if (!Game.gameInstance) {
-            console.log('creating game')
             Game.gameInstance = new Game(zone);
         }
 
@@ -601,7 +619,7 @@ export class Game {
         if (Game.gameInstance) {
             // if(Game.getInstance().player2) {
             //     Game.getInstance().player2.subscriptionEvents.unsubscribe();
-     
+
             // }
             Game.gameInstance.stop();
         }
@@ -640,7 +658,7 @@ export class Game {
         let remainingSeconds = this.gameTotalSeconds - (now.getTime() - this.gameStartTime.getTime()) / 1000;
         if (remainingSeconds < 0) {
             remainingSeconds = 0;
-            // TODO: lose the game
+            PubSub.getInstance().publish('game-lost');
         }
         const minutes = Math.floor(remainingSeconds / 60);
         const seconds = Math.floor(remainingSeconds % 60);

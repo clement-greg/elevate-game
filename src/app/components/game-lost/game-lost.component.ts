@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { LottiePlayerComponent } from '../lottie-player/lottie-player.component';
 
 @Component({
-  selector: 'app-game-won',
+  selector: 'app-game-lost',
   standalone: true,
   imports: [LottiePlayerComponent],
-  templateUrl: './game-won.component.html',
-  styleUrl: './game-won.component.scss'
+  templateUrl: './game-lost.component.html',
+  styleUrl: './game-lost.component.scss'
 })
-export class GameWonComponent {
+export class GameLostComponent {
 
 }

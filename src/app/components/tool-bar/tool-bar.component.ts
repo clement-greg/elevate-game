@@ -14,6 +14,7 @@ import { HTTP } from '../../models/http';
 import { Drill, Hammer, Saw, Screwdriver, Wrench } from '../../models/saw';
 import { GameSprite } from '../../models/game-sprite';
 import { Trampoline } from '../../models/trampoline';
+import { SpikeBrick } from '../../models/spike-brick';
 
 @Component({
   selector: 'app-tool-bar',
@@ -98,6 +99,11 @@ export class ToolBarComponent {
   addTrampoline() {
     const tramp = new Trampoline(this.game.engine, 0 , 0);
     this.createSprite(tramp);
+  }
+
+  addSpikeBrick() {
+    const sprite = new SpikeBrick(this.game.engine, 0, 0);
+    this.createSprite(sprite);
   }
 
   addShortLog() {

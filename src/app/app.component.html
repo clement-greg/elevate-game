@@ -1,4 +1,4 @@
-<div style="overflow: hidden;height: 300vh;width: 100vw;" [class.scrolled]="startGame" [class.game-won-scrolled]="showGameWon">
+<div style="" class="scroller" [class.scrolled]="startGame" [class.game-won-scrolled]="showGameWon || showGameLost">
   <div style="height: 100vh;width: 100vw;">
 
     <app-title-screen *ngIf="!hideTitleScreen"></app-title-screen>
@@ -6,9 +6,13 @@
   <div style="height: 100vh;width: 100vw;">
 
     <app-level1 *ngIf="startGame"></app-level1>
+    <!-- <div *ngIf="!startGame" style="background-color: orange;width: 100%;height: 100%;">
+
+    </div> -->
   </div>
   <div style="height: 100vh;width: 100vw">
     
     <app-game-won *ngIf="showGameWon"></app-game-won>
+    <app-game-lost *ngIf="showGameLost"></app-game-lost>
   </div>
 </div>

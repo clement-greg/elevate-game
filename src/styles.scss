@@ -51,6 +51,7 @@ html, body {
     /* transform: scale(.9); */
     transform-origin: 50% 0%; 
     overflow: hidden;
+
 }
 
 .player {
@@ -80,6 +81,15 @@ html, body {
     height: 72px;
     background-image: url(/assets/images/brick.png);
     background-size: cover;
+    position: absolute;
+}
+
+.spike-brick {
+    display: inline-block;
+    width: 72px;
+    height: 72px;
+    background-image: url(/assets/images/spike-brick.svg);
+    background-size: initial;
     position: absolute;
 }
 

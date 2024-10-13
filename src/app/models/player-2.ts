@@ -29,7 +29,6 @@ export class Player2 extends GameSprite {
         this.body.staticFriction = 20;
 
         this.subscriptionEvents =  this.pubsub.subscribe('keydown', key => {
-            console.log('11')
             if (key.code === 'Space' && this.isGrounded && !Game.getInstance().dialogOpen) {
                 Matter.Body.setVelocity(this.body, { x: this.body.velocity.x, y: 0 });
                 let upForce = -0.32;

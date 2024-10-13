@@ -74,10 +74,10 @@ export class ShopComponent {
 
   @HostListener('window:keydown', ['$event'])
   handleKeyDown(event: KeyboardEvent) {
-    if (event.key === 'ArrowLeft') {
+    if (event.key === 'ArrowLeft' && !this.purchased) {
       this.prevItem();
     }
-    if (event.key === 'ArrowRight') {
+    if (event.key === 'ArrowRight' && !this.purchased) {
       this.nextItem();
     }
     if (event.key === ' ') {
@@ -91,7 +91,6 @@ export class ShopComponent {
     }
     document.getElementById('speech').innerText = '';
     this.wordIndex = 0;
-    console.log(10)
     if (this.selectedItem.price > Game.getInstance().gameHUD.money) {
       this.message = `Oh sorry, you don't have enough money to buy that refrigerator.  
 That one costs ${this.selectedItem.price} but you only have ${Game.getInstance().gameHUD.money}
@@ -102,10 +101,9 @@ That one costs ${this.selectedItem.price} but you only have ${Game.getInstance()
     this.purchased = true;
     let index = this.items.indexOf(this.selectedItem) + 1;
     Game.getInstance().purchaseFridge(index);
-    //this.dialogRef.close();
     this.message = `Thanks for your purchase.  Come again soon.`;
     this.doWords();
-    Game.getInstance().gameHUD.coinCount = (this.selectedItem.price / 10);
+    Game.getInstance().gameHUD.coinCount = Game.getInstance().gameHUD.coinCount -  (this.selectedItem.price / 10);
     setTimeout(() => this.dialogRef.close(), 4000);
   }
 

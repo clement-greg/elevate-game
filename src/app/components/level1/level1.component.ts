@@ -8,7 +8,6 @@ import { BeginQuestComponent } from '../begin-quest/begin-quest.component';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { PubSub } from '../../models/pub-sub';
 import { Game } from '../../models/game';
-import { WinGameComponent } from '../win-game/win-game.component';
 import { ShopComponent } from '../shop/shop.component';
 import { NotCompleteComponent } from '../not-complete/not-complete.component';
 
@@ -27,16 +26,8 @@ export class Level1Component implements AfterViewInit {
     PubSub.getInstance().subscribe('quest-begin', () => {
       this.questBeginRef = dialog.open(BeginQuestComponent, { disableClose: true });
       Game.getInstance().dialogOpen = true;
-      console.log('1')
-      this.questBeginRef.afterClosed().subscribe(() => { Game.getInstance().dialogOpen = false; console.log(2); });
+      this.questBeginRef.afterClosed().subscribe(() => { Game.getInstance().dialogOpen = false;  });
     });
-
-    // PubSub.getInstance().subscribe('level-complete', () => {
-    //   Game.getInstance().dialogOpen = true;
-    //   const ref = dialog.open(WinGameComponent, { disableClose: true });
-    //   ref.afterClosed().subscribe(() => Game.getInstance().dialogOpen = false);
-    //   setTimeout(() => ref.close(), 10000);
-    // })
 
     PubSub.getInstance().subscribe('close-begin-quest', () => {
       this.questBeginRef.close();
@@ -44,17 +35,15 @@ export class Level1Component implements AfterViewInit {
 
     PubSub.getInstance().subscribe('show-shop', () => {
       Game.getInstance().dialogOpen = true;
-      console.log(3);
       const ref = dialog.open(ShopComponent);
-      ref.afterClosed().subscribe(() => { Game.getInstance().dialogOpen = false; console.log(6); });
+      ref.afterClosed().subscribe(() => { Game.getInstance().dialogOpen = false;  });
     });
 
     PubSub.getInstance().subscribe('hit-completion-barrier', () => {
       if (!Game.getInstance().dialogOpen) {
         Game.getInstance().dialogOpen = true;
-        console.log(4);
         this.notCompletedRef = dialog.open(NotCompleteComponent);
-        this.notCompletedRef.afterClosed().subscribe(() => { Game.getInstance().dialogOpen = false; console.log(5); });
+        this.notCompletedRef.afterClosed().subscribe(() => { Game.getInstance().dialogOpen = false;  });
       }
     });
 

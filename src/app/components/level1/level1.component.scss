@@ -13,3 +13,15 @@ video.bill-board {
         left: 2515px;
     }
 }
+
+#bottom-filler {
+    background-image: url(/assets/images/grass-bg.svg);
+    background-position-x: left;
+    background-position-y: bottom;
+    background-repeat: repeat-x;
+    min-height: 100vh;
+    width: 100000px;
+    position: fixed;
+    top: 100vh;
+    left: 0;
+}

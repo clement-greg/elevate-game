@@ -1,4 +1,6 @@
 <div id="game-container">
+    <div id="bottom-filler">
+    </div>
     <div id="bg-sky"></div>
     <div id="bg-buildings">
         <img src="/assets/images/bill-board.png" style="    height: 400px;
@@ -35,18 +37,19 @@
 
             </app-lottie-player>
 
-  
+
         </div>
-        
-        
+
+
         <div [style.left]="lastGuyLeft" style="position: absolute;bottom: 64px;height: 135px">
-            <app-lottie-player src="https://lottie.host/33b46be8-bf4a-4b82-9277-a1c8c699dae4/fO1pefdcze.json" height="135px" [intermission]="5000"></app-lottie-player>
+            <app-lottie-player src="https://lottie.host/33b46be8-bf4a-4b82-9277-a1c8c699dae4/fO1pefdcze.json"
+                height="135px" [intermission]="5000"></app-lottie-player>
         </div>
 
 
     </div>
-</div>
 
+</div>
 
 <app-tool-bar *ngIf="showToolbar"></app-tool-bar>
 
