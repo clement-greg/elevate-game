@@ -21,6 +21,7 @@ import { GameSprite } from './game-sprite';
 import { ToolBarComponent } from '../components/tool-bar/tool-bar.component';
 import { Trampoline } from './trampoline';
 import { SpikeBrick } from './spike-brick';
+import { Cannon } from './cannon';
 
 var Engine = Matter.Engine,
     MatterWorld = Matter.World,
@@ -54,6 +55,7 @@ export class Game {
     static homeLeftEnd = this.homeLeft + 300;
     static initialLeft = 400;
     showCloseBarrier = false;
+    cannons: Cannon[] = [];
 
 
     static get applianceShopAreaRight() {
@@ -344,6 +346,16 @@ export class Game {
                 newSprite.originalX = sprite.originalX;
                 newSprite.originalY = sprite.originalY;
                 this.addSprite(newSprite);
+            } else if (sprite.objectType === 'cannon') {
+                const newSprite = new Cannon(this.engine, sprite.originalX, sprite.originalY);
+                newSprite.x = sprite.originalX;
+                newSprite.y = sprite.originalY;
+                newSprite.id = sprite.id ?? ToolBarComponent.newid();
+                newSprite.originalX = sprite.originalX;
+                newSprite.originalY = sprite.originalY;
+                this.cannons.push(newSprite);
+                this.addSprite(newSprite);
+
             } else if (sprite.objectType === 'spike-brick') {
                 const newSprite = new SpikeBrick(this.engine, sprite.originalX, sprite.originalY);
                 newSprite.x = sprite.originalX;
@@ -376,7 +388,13 @@ export class Game {
 
     private colletableLabels = ['saw', 'wrench', 'hammer', 'screwdriver', 'drill', 'coin'];
     private enemyLabels = ['spike-ball', 'man-hole'];
-    private impactObjectsLabels = ['trampoline', 'spike-brick', 'Ram', 'Brick', 'brick-top', 'mystery-top', 'Ice', 'Mystery', 'log-short', 'log', 'solid-block'];
+    private impactObjectsLabels = ['trampoline', 'spike-brick', 'cannon', 'Ram', 'Brick', 'brick-top', 'mystery-top', 'Ice', 'Mystery', 'log-short', 'log', 'solid-block'];
+
+    playCollectTool() {
+        const audio: HTMLAudioElement = document.getElementById('collect-tool-sound') as HTMLAudioElement;
+        audio.currentTime = 0;
+        audio.play();
+    }
 
     bounceCount = 0;
     advance() {
@@ -392,6 +410,14 @@ export class Game {
                 }
                 sprite.speedY += this.world.gravity;
             }
+        }
+
+        if (this.playerTop > 1000) {
+            this.loseLife();
+        }
+
+        for(const cannon of this.cannons) {
+            cannon.fire();
         }
 
         const left = this.playerLeft;
@@ -444,20 +470,26 @@ export class Game {
                     break;
                 case 'hammer':
                     this.gameHUD.collectHammer();
+                    //this.playCollectTool();
                     break;
                 case 'saw':
+                    console.log(collectableCollision);
                     this.gameHUD.collectSaw();
+                    this.playCollectTool();
                     break;
                 case 'drill':
                     this.gameHUD.collectDrill();
+                    this.playCollectTool();
                     break;
                 case 'screwdriver':
                     this.gameHUD.collectScrewdriver();
+                    this.playCollectTool();
                     break;
                 case 'wrench':
                     this.gameHUD.collectWrench();
+                    this.playCollectTool();
                     break;
-            }
+            } 
         }
 
         const impactCollisions = playerCollisions.filter(i => this.impactObjectsLabels.indexOf(i.bodyA.label) > -1 || this.impactObjectsLabels.indexOf(i.bodyB.label) > -1);
@@ -477,6 +509,9 @@ export class Game {
                     case 'trampoline':
                         Matter.Body.applyForce(this.player2.body, { x: this.player2.body.position.x, y: this.player2.body.position.y }, { x: 0, y: forceY });
 
+                        const trampSound: HTMLAudioElement = document.getElementById('bounce-sound') as HTMLAudioElement;
+                        trampSound.currentTime = 0;
+                        trampSound.play();
                         const sprite = this.gameSprites.find(i => (i.body === collision.bodyA || i.body === collision.bodyB) && i !== this.player2);
                         if (sprite) {
                             sprite.play();
@@ -489,6 +524,9 @@ export class Game {
                         const ram = this.gameSprites.find(i => (i.body === collision.bodyA || i.body === collision.bodyB) && i !== this.player2);
                         if (ram) {
 
+                            const killSound: HTMLAudioElement = document.getElementById('kill-enemy-sound') as HTMLAudioElement;
+                            killSound.currentTime = 0;
+                            killSound.play();
                             Matter.Body.applyForce(this.player2.body, { x: this.player2.body.position.x, y: this.player2.body.position.y }, { x: 0, y: -0.2 });
                             this.removeSprite(ram);
                         }
@@ -500,6 +538,7 @@ export class Game {
                     case 'log-short':
                     case 'log':
                     case 'Ice':
+                    case 'cannon':
                     case 'solid-block':
                         this.player2.isGrounded = true;
                         this.player2.groundSprite = this.gameSprites.find(i => (
@@ -526,12 +565,15 @@ export class Game {
                     case 'brick-top':
                     case 'Brick':
                         //otherSprite.bounceIt();
+                        otherSprite.breakIt();
                         this.removeSprite(otherSprite);
                         break;
                     case 'Mystery':
                     case 'mystery-top':
-                        otherSprite.emptyIt();
-                        this.gameHUD.incrementCoinCount();
+                        if (!otherSprite.empty) {
+                            otherSprite.emptyIt();
+                            this.gameHUD.incrementCoinCount();
+                        }
                         break;
                 }
             }
@@ -586,6 +628,10 @@ export class Game {
             document.getElementById('bottom-filler').classList.add('reset');
 
         }, 2000);
+
+        const el: HTMLAudioElement = document.getElementById('die-sound') as HTMLAudioElement;
+        el.currentTime = 0;
+        el.play();
 
         setTimeout(() => {
             if (this.player2.x < 0) {
@@ -739,6 +785,9 @@ export class GameHUD {
     }
 
     incrementCoinCount() {
+        const audio: HTMLAudioElement = document.getElementById('chime') as HTMLAudioElement;
+        audio.currentTime = 0;
+        audio.play();
         this.coinCount++;
     }
 

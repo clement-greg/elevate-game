@@ -79,7 +79,7 @@ html, body {
     display: inline-block;
     width: 72px;
     height: 72px;
-    background-image: url(/assets/images/brick.png);
+    background-image: url(/assets/images/brick.svg);
     background-size: cover;
     position: absolute;
 }
@@ -125,6 +125,14 @@ html, body {
     width: 210px;
     height: 124px;
     position: absolute;
+}
+
+.cannon {
+    display: inline-block;
+    width: 424px;
+    height: 200px;
+    position: absolute;
+    transform: translateX(-141px) translateY(-30px);
 }
 
 .screwdriver {

@@ -31,6 +31,31 @@ export class Brick extends GameSprite {
         this.domObject.classList.add('bounce');
         setTimeout(() => this.domObject.classList.remove('bounce'), 200);
     }
+
+    breakIt() {
+        //
+        const player: any = document.createElement('lottie-player');
+        player.style.height = '200px';
+        player.style.width = '200px';
+        player.loop = false;
+        player.autoplay = true;
+        player.style.position = 'absolute';
+        player.style.left = `${this.x - 110}px`;
+        player.style.top = `${this.y - 90}px`;
+        player.src = 'https://lottie.host/712046f0-d63c-44b3-8b31-b43c42998093/L6iZBWH4nN.json';
+        document.getElementById('game-div').appendChild(player);
+
+        setTimeout(() => player.parentNode.removeChild(player), 200);
+
+        const audio:HTMLAudioElement = document.getElementById('break-brick-sound') as HTMLAudioElement;
+        audio.currentTime = 0;
+        audio.play();
+
+
+        //         <lottie-player [id]="id" *ngIf="show" [style.height]="height" [src]="src" [loop]="loop ? 'loop': ''" [intermission]="intermission" [autoplay]="autoPlay ? 'autoplay' : ''" background="transparent" [speed]="speed">
+        // </lottie-player>
+
+    }
 }
 
 export class SolidBlock extends GameSprite {
@@ -54,5 +79,5 @@ export class SolidBlock extends GameSprite {
         this.frictionTop = frictionBody;
     }
 
-    
+
 }
