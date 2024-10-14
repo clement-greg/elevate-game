@@ -135,6 +135,14 @@ html, body {
     transform: translateX(-141px) translateY(-30px);
 }
 
+.cannon-ball {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    background-image: url(/assets/images/cannon-ball.svg);
+}
+
 .screwdriver {
     display: inline-block;
     width: 72px;
@@ -214,7 +222,7 @@ html, body {
     display: inline-block;
     width: 100px;
     height: 100px;
-    background-image: url(/assets/images/ram.png);
+    //background-image: url(/assets/images/ram.png);
     /* background-size: contain; */
     position: absolute;
     background-repeat: no-repeat;
@@ -389,32 +397,32 @@ html, body {
 }
 
 
-button {
-    box-shadow: 0px 10px 14px -7px #276873;
-    background: linear-gradient(to bottom, #599bb3 5%, #408c99 100%);
-    background-color: #599bb3;
-    border-radius: 8px;
-    display: inline-block;
-    cursor: pointer;
-    color: #ffffff;
-    font-family: Arial;
-    font-size: 20px;
-    font-weight: bold;
-    padding: 13px 32px;
-    text-decoration: none;
-    text-shadow: 0px 1px 0px #3d768a;
-    border: none;
-}
+// button {
+//     box-shadow: 0px 10px 14px -7px #276873;
+//     background: linear-gradient(to bottom, #599bb3 5%, #408c99 100%);
+//     background-color: #599bb3;
+//     border-radius: 8px;
+//     display: inline-block;
+//     cursor: pointer;
+//     color: #ffffff;
+//     font-family: Arial;
+//     font-size: 20px;
+//     font-weight: bold;
+//     padding: 13px 32px;
+//     text-decoration: none;
+//     text-shadow: 0px 1px 0px #3d768a;
+//     border: none;
+// }
 
-button:hover {
-    background: linear-gradient(to bottom, #408c99 5%, #599bb3 100%);
-    background-color: #408c99;
-}
+// button:hover {
+//     background: linear-gradient(to bottom, #408c99 5%, #599bb3 100%);
+//     background-color: #408c99;
+// }
 
-button:active {
-    position: relative;
-    top: 1px;
-}
+// button:active {
+//     position: relative;
+//     top: 1px;
+// }
 
 .debugger-rect {
     position: absolute;

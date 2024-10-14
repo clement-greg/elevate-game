@@ -22,6 +22,7 @@ import { ToolBarComponent } from '../components/tool-bar/tool-bar.component';
 import { Trampoline } from './trampoline';
 import { SpikeBrick } from './spike-brick';
 import { Cannon } from './cannon';
+import { CannonBall } from './cannon-ball';
 
 var Engine = Matter.Engine,
     MatterWorld = Matter.World,
@@ -313,14 +314,12 @@ export class Game {
                 newSprite.originalY = sprite.originalY;
                 this.addSprite(newSprite);
             } else if (sprite.objectType === 'ShortLog') {
-                console.log({ x: sprite.originalX, y: sprite.originalY });
                 const newSprite = new ShortLog(this.engine, sprite.originalX, sprite.originalY);
                 newSprite.x = sprite.originalX;
                 newSprite.y = sprite.originalY;
                 newSprite.id = sprite.id ?? ToolBarComponent.newid();
                 newSprite.originalX = sprite.originalX;
                 newSprite.originalY = sprite.originalY;
-                console.log(JSON.stringify(newSprite, HTTP.replacer));
                 this.addSprite(newSprite);
             } else if (sprite.objectType === 'ManHole') {
                 const newSprite = new ManHole(this.engine, sprite.originalX, sprite.originalY);
@@ -388,7 +387,7 @@ export class Game {
 
     private colletableLabels = ['saw', 'wrench', 'hammer', 'screwdriver', 'drill', 'coin'];
     private enemyLabels = ['spike-ball', 'man-hole'];
-    private impactObjectsLabels = ['trampoline', 'spike-brick', 'cannon', 'Ram', 'Brick', 'brick-top', 'mystery-top', 'Ice', 'Mystery', 'log-short', 'log', 'solid-block'];
+    private impactObjectsLabels = ['trampoline', 'cannon-ball', 'spike-brick', 'cannon', 'Ram', 'Brick', 'brick-top', 'mystery-top', 'Ice', 'Mystery', 'log-short', 'log', 'solid-block'];
 
     playCollectTool() {
         const audio: HTMLAudioElement = document.getElementById('collect-tool-sound') as HTMLAudioElement;
@@ -416,8 +415,19 @@ export class Game {
             this.loseLife();
         }
 
-        for(const cannon of this.cannons) {
-            cannon.fire();
+        for (const cannon of this.cannons) {
+
+            if (cannon.fire()) {
+                setTimeout(() => {
+
+                    const cannonBall = new CannonBall(this.engine, cannon.x - 100, cannon.y - 20);
+                    this.addSprite(cannonBall);
+
+                    setTimeout(() => {
+                        this.removeSprite(cannonBall);
+                    }, 4000);
+                }, 600);
+            }
         }
 
         const left = this.playerLeft;
@@ -473,7 +483,6 @@ export class Game {
                     //this.playCollectTool();
                     break;
                 case 'saw':
-                    console.log(collectableCollision);
                     this.gameHUD.collectSaw();
                     this.playCollectTool();
                     break;
@@ -489,13 +498,12 @@ export class Game {
                     this.gameHUD.collectWrench();
                     this.playCollectTool();
                     break;
-            } 
+            }
         }
 
         const impactCollisions = playerCollisions.filter(i => this.impactObjectsLabels.indexOf(i.bodyA.label) > -1 || this.impactObjectsLabels.indexOf(i.bodyB.label) > -1);
 
 
-        //console.log(playerCollisions);
         for (const collision of impactCollisions) {
 
             let forceY = (this.bounceCount + 1) * -0.1;
@@ -503,8 +511,16 @@ export class Game {
             if (forceY < -0.6) {
                 forceY = -0.6;
             }
+            const label = collision.bodyA.label === 'Player' ? collision.bodyB.label : collision.bodyA.label;
+            // switch(label) {
+            //     case 'cannon-ball':
+            //         console.log('got hit');
+            //         const cannonBall = this.gameSprites.find(i => (i.body === collision.bodyA || i.body === collision.bodyB) && i !== this.player2);
+            //         this.removeSprite(cannonBall);
+            //         this.loseLife();
+            //         break;
+            // }
             if (collision.penetration.y < 0) {
-                const label = collision.bodyA.label === 'Player' ? collision.bodyB.label : collision.bodyA.label;
                 switch (label) {
                     case 'trampoline':
                         Matter.Body.applyForce(this.player2.body, { x: this.player2.body.position.x, y: this.player2.body.position.y }, { x: 0, y: forceY });
@@ -529,6 +545,17 @@ export class Game {
                             killSound.play();
                             Matter.Body.applyForce(this.player2.body, { x: this.player2.body.position.x, y: this.player2.body.position.y }, { x: 0, y: -0.2 });
                             this.removeSprite(ram);
+                        }
+                        break;
+                    case 'cannon-ball':
+                        const cannonBall = this.gameSprites.find(i => (i.body === collision.bodyA || i.body === collision.bodyB) && i !== this.player2);
+                        if (cannonBall) {
+
+                            const killSound: HTMLAudioElement = document.getElementById('kill-enemy-sound') as HTMLAudioElement;
+                            killSound.currentTime = 0;
+                            killSound.play();
+                            Matter.Body.applyForce(this.player2.body, { x: this.player2.body.position.x, y: this.player2.body.position.y }, { x: 0, y: -0.6 });
+                            this.removeSprite(cannonBall);
                         }
                         break;
                     case 'Mystery':
@@ -556,6 +583,13 @@ export class Game {
                     case 'Ram':
                         this.loseLife();
                         break;
+                    case 'cannon-ball':
+                        console.log('got hit');
+                        const cannonBall = this.gameSprites.find(i => (i.body === collision.bodyA || i.body === collision.bodyB) && i !== this.player2);
+                        this.removeSprite(cannonBall);
+                        this.loseLife();
+                        break;
+
                 }
             }
             if (collision.penetration.y > 0) {

@@ -12,7 +12,7 @@ export class Cannon extends GameSprite {
     timeBetweenFire = 6000;
 
     constructor(engine, x, y) {
-        super(engine, x, y, 200, 95 );
+        super(engine, x, y, 200, 95);
         const div = document.createElement('div');
         div.className = 'cannon';
         this.domObject = div;
@@ -23,29 +23,46 @@ export class Cannon extends GameSprite {
         //this.id = ToolBarComponent.newid();
         this.objectType = 'cannon';
         Matter.Body.setMass(this.body, 1600);
-        div.innerHTML = `<lottie-player style="transform: translateY(-50px)" autoplay="false" id="${this.lottieId}" background="transparent" src="https://lottie.host/a581b223-f47b-48fd-9722-c96e896d940c/g8XouwblmA.json"></lottie-player>`
+        div.innerHTML = `<lottie-player style="transform: translateY(-50px)"  id="${this.lottieId}" background="transparent" src="https://lottie.host/a581b223-f47b-48fd-9722-c96e896d940c/g8XouwblmA.json"></lottie-player>`
     }
 
     fire() {
         const ellapsed = new Date().getTime() - this.lastFire.getTime();
-
-        if(ellapsed < this.timeBetweenFire)  {
+        if (ellapsed < this.timeBetweenFire) {
             return false;
         }
-        const player = (document.getElementById(this.lottieId) as any);
-        player.seek(0);
-        player.play();
-        this.lastFire = new Date();
-        setTimeout(()=> {
-            const audio:  HTMLAudioElement = document.getElementById('cannon-sound') as HTMLAudioElement;
-            audio.currentTime = 0;
-            audio.play();
+        if (!this.isInViewport) {
+            this.lastFire = new Date();
+            return false;
+        }
 
-        }, 500);
-        return true;
+        const player = (document.getElementById(this.lottieId) as any);
+        if (player) {
+            player.seek(0);
+            player.play();
+            this.lastFire = new Date();
+            setTimeout(() => {
+                const audio: HTMLAudioElement = document.getElementById('cannon-sound') as HTMLAudioElement;
+                audio.currentTime = 0;
+                audio.play();
+
+            }, 500);
+            return true;
+        }
+
+        return false;
     }
 
+    private parent: HTMLElement;
+
     get isInViewport() {
+        if (!this.parent) {
+            this.parent = document.getElementById('game-div');
+
+        }
+
+        const left = (this.parent.style.transform);
+        // console.log(left);
         const rect = this.domObject.getBoundingClientRect();
         return (
             rect.top >= 0 &&

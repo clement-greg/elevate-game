@@ -3,26 +3,94 @@
         <div id="brickheader">
             Brick</div>
     </div> -->
-  
-    <button id="add-brick" (click)="addBrick()">Add Brick</button>
-    <button id="add-mystery" (click)="addMysteryBlock()">Add Mystery</button>
-    <button id="add-spike-ball" (click)="addSpikeBall()">Add Spike Ball</button>
-    <button id="add-ram" (click)="addRam()">Add Ram</button>
-    <button id="add-coin" (click)="addCoin()">Add Coin</button>
-    <button id="print-debug" (click)="printDebug()">Print Debug</button>
-    <button id="add-log" (click)="addLog()">Add Log</button>
-    <button id="add-short-log" (click)="addShortLog()">Add Short Log</button>
-    <button id="add-man-hole" (click)="addManHole()">Add Man Hole</button>
-    <button id="add-ice" (click)="addIce()">Add Ice</button>
-    <button id="add-saw" (click)="addSaw()">Add Saw</button>
-    <button id="add-saw" (click)="addScrewdriver()">Add Screwdriver</button>
-    <button id="add-saw" (click)="addWrench()">Add Wrench</button>
-    <button id="add-saw" (click)="addHammer()">Add Hammer</button>
-    <button id="add-saw" (click)="addDrill()">Add Drill</button>
-    <button id="add-tramp" (click)="addTrampoline()">Trampoline</button>
-    <button id="add-spike-brick" (click)="addSpikeBrick()">Spike Brick</button>
-    <button id="add-solid-block" (click)="addSolidBlock()">Solid Block</button>
-    <button id="add-cannon" (click)="addCannon()">Cannon</button>
-    <button id="serialize" (click)="save()">Save</button>
+    <mat-accordion>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title> Blocks </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <div class="grid">
+                <button mat-button id="add-brick" (click)="addBrick()">
+                    <img src="/assets/images/brick.svg"><br>Brick</button>
+                <button mat-button id="add-mystery" (click)="addMysteryBlock()">
+                    <img src="/assets/images/mystery-block-single.png"><br>Mystery</button>
+                <button mat-button id="add-spike-brick" (click)="addSpikeBrick()">
+                    <img src="/assets/images/spike-brick.svg"><br>Spike Brick</button>
+                <button mat-button id="add-solid-block" (click)="addSolidBlock()">
+                    <img src="/assets/images/solid-block.svg"><br>Solid Block</button>
+                <button mat-button id="add-ice" (click)="addIce()">
+                    <img src="/assets/images/ice-block.svg"><br>Ice</button>
+            </div>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title> Enemies </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="grid">
+                <button mat-button id="add-spike-ball" (click)="addSpikeBall()">
+                    <img src="/assets/images/spike-ball-single.png"><br>Spike Ball</button>
+                <button mat-button id="add-ram" (click)="addRam()">
+                    <img src="/assets/images/goat.svg"><br>Ram</button>
+                <button mat-button id="add-cannon" (click)="addCannon()">
+                    <img src="/assets/images/cannon.svg"><br>Cannon</button>
+            </div>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title> Obsticles </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="grid">
+                <button mat-button id="add-log" (click)="addLog()">
+                    <img style="height: 10px;" src="/assets/images/log.svg"><br>
+                    Log</button>
+                <button mat-button id="add-short-log" (click)="addShortLog()">
+                    <img style="height: 20px;" src="/assets/images/log-short.svg"><br>
+
+                    Short Log</button>
+                <button mat-button id="add-man-hole" (click)="addManHole()">
+                    <img src="/assets/images/man-hole.svg"><br>Man Hole</button>
+                <button id="add-tramp" mat-button (click)="addTrampoline()">
+                    <img src="/assets/images/trampoline.svg"><br>Trampoline</button>
+            </div>
+
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title> Collectables </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="grid">
+                <button id="add-coin" mat-button (click)="addCoin()">
+
+                    <img src="/assets/images/single-coin.png"><br>
+                    Coin</button>
+                <button id="add-saw" mat-button (click)="addSaw()">
+                    <img src="/assets/images/saw.svg"><br>
+                    Saw</button>
+                <button id="add-saw" mat-button (click)="addScrewdriver()">
+                    <img src="/assets/images/screwdriver.svg"><br>
+                    Screwdriver</button>
+                <button id="add-saw" mat-button (click)="addWrench()">
+                    <img src="/assets/images/wrench.svg"><br>
+                    Wrench</button>
+                <button id="add-saw" mat-button (click)="addHammer()">
+                    <img src="/assets/images/hammer.svg"><br>
+                    Hammer</button>
+                <button id="add-saw" mat-button (click)="addDrill()">
+                    <img src="/assets/images/drill.svg"><br>Drill</button>
+            </div>
+
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title> Other </mat-panel-title>
+            </mat-expansion-panel-header>
+            <button mat-button id="print-debug" (click)="printDebug()">Print Debug</button>
+
+        </mat-expansion-panel>
+
+    </mat-accordion>
+    <button mat-button mat-raised-button style="margin-top: 20px;" color="primary" id="serialize"
+        (click)="save()">Save</button>
+
     <!-- <button id="debug-rect-btn">Show Rect</button> -->
-  </div>
+</div>

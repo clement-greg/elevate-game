@@ -16,11 +16,14 @@ import { GameSprite } from '../../models/game-sprite';
 import { Trampoline } from '../../models/trampoline';
 import { SpikeBrick } from '../../models/spike-brick';
 import { Cannon } from '../../models/cannon';
+import { CommonModule } from '@angular/common';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-tool-bar',
   standalone: true,
-  imports: [],
+  imports: [CommonModule, MatExpansionModule, MatButtonModule],
   templateUrl: './tool-bar.component.html',
   styleUrl: './tool-bar.component.scss'
 })
@@ -98,7 +101,7 @@ export class ToolBarComponent {
   }
 
   addTrampoline() {
-    const tramp = new Trampoline(this.game.engine, 0 , 0);
+    const tramp = new Trampoline(this.game.engine, 0, 0);
     this.createSprite(tramp);
   }
 
@@ -109,7 +112,7 @@ export class ToolBarComponent {
 
   addSolidBlock() {
     const sprite = new SolidBlock(this.game.engine, 0, 0);
-    this.createSprite(sprite); 
+    this.createSprite(sprite);
   }
 
   addSpikeBrick() {
@@ -210,7 +213,7 @@ export class ToolBarComponent {
     sprite.domObject.addEventListener('dblclick', e => {
 
       let root: HTMLElement = e.srcElement;
-      while(root && !root.classList.contains('sprite')) {
+      while (root && !root.classList.contains('sprite')) {
         root = root.parentElement;
       }
 

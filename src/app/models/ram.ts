@@ -1,4 +1,5 @@
 declare var Matter: any;
+import { ToolBarComponent } from "../components/tool-bar/tool-bar.component";
 import { MoveableObject } from "./moveable-object";
 var Engine = Matter.Engine,
     MatterWorld = Matter.World,
@@ -6,12 +7,15 @@ var Engine = Matter.Engine,
     Body = Matter.Body,
     Composite = Matter.Composite;
 
+
+
 export class Ram extends MoveableObject {
     moveDirection;
     initialX;
     initialY;
     moveDistance = 300;
     moveSpeed = 5;
+    lottieId = ToolBarComponent.newid();
     stationaryWait = .5;
     newlyCreated = false;
     frame = 0;
@@ -19,15 +23,18 @@ export class Ram extends MoveableObject {
     delayCount = 0;
 
     constructor(engine, x, y) {
-        super(engine, x, y,  95.43, 95.43, true);
-        const brickDiv = document.createElement('div');
-        brickDiv.className = 'ram';
-        this.domObject = brickDiv;
+        super(engine, x, y, 95.43, 95.43, true);
+        const ramDiv = document.createElement('div');
+        ramDiv.className = 'ram';
+        this.domObject = ramDiv;
         this.body.label = 'Ram';
         this.body.friction = 0;
         Body.setMass(this.body, 100000);
         this.initialX = x;
         this.initialY = y;
+        ramDiv.innerHTML = `<lottie-player  autoplay="true" loop  id="${this.lottieId}" background="transparent" src="https://lottie.host/5fa4b884-5c3e-4f04-b90c-38d8b1475ff1/Ki2NB41wG4.json"></lottie-player>`
+
+        //
     }
 
     override advance() {
@@ -46,24 +53,25 @@ export class Ram extends MoveableObject {
         }
 
         if (this.moveDirection === 'Left') {
-            //this.x = this.x - this.moveSpeed;
             if (this.x < this.initialX - this.moveDistance) {
-                //this.x = this.initialX - this.moveDistance;
                 this.moveDirection = 'Stationary';
+                (document.getElementById(this.lottieId) as any)?.pause();
                 this.speedX = 0;
                 setTimeout(() => {
                     this.moveDirection = 'Right';
+                    (document.getElementById(this.lottieId) as any)?.play();
                     this.speedX = 2;
                     this.domObject.classList.remove('invert');
                 }, this.stationaryWait * 1000);
             }
         } else {
-            //this.x = this.x + this.moveSpeed;
             if (this.x > this.initialX + this.moveDistance) {
                 this.moveDirection = 'Stationary';
+                (document.getElementById(this.lottieId) as any)?.pause();
                 setTimeout(() => {
                     this.moveDirection = 'Left';
                     this.speedX = -2;
+                    (document.getElementById(this.lottieId) as any)?.play();
                     this.domObject.classList.add('invert');
                 }, this.stationaryWait * 1000);
             } else {
