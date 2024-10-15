@@ -302,6 +302,16 @@ html, body {
     background-size: cover;
 }
 
+.i-beam {
+    display: inline-block;
+    width: 576px;
+    height: 74px;
+    background-image: url('/assets/images/i-beam.svg');
+    position: absolute;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 .log-short {
     display: inline-block;
     width: 216px;

@@ -23,6 +23,7 @@ import { Trampoline } from './trampoline';
 import { SpikeBrick } from './spike-brick';
 import { Cannon } from './cannon';
 import { CannonBall } from './cannon-ball';
+import { IBeam } from './i-beam';
 
 var Engine = Matter.Engine,
     MatterWorld = Matter.World,
@@ -57,7 +58,7 @@ export class Game {
     static initialLeft = 400;
     showCloseBarrier = false;
     cannons: Cannon[] = [];
-  editorOpen: boolean;
+    editorOpen: boolean;
 
 
     static get applianceShopAreaRight() {
@@ -77,7 +78,10 @@ export class Game {
         }
         this.engine = Engine.create();
 
-        Matter.Runner.run(this.engine);
+        //Matter.Runner.run(this.engine);
+        window.requestAnimationFrame(() => {
+            this.run();
+        })
         this.engine.gravity.y = Game.gravity;
 
         this.player2 = new Player2(this.engine, 80, 0, 71, 96);
@@ -138,6 +142,12 @@ export class Game {
         }
     }
 
+    run() {
+        Engine.update(this.engine, 1000 / 50);
+        this.advance();
+        requestAnimationFrame(() => this.run());
+    }
+
     processKeyUp(key: KeyboardEvent) {
         if (key.key == 'ArrowRight') {
             this.player2.arrowRight = false;
@@ -171,7 +181,7 @@ export class Game {
                 Matter.Body.applyForce(this.player2.body, { x: this.player2.body.position.x, y: this.player2.body.position.y }, { x: 0, y: -.3 });
             }
         }
-        if(key.key === 's' || key.key === 'S') {
+        if (key.key === 's' || key.key === 'S') {
             PubSub.getInstance().publish('show-shop');
         }
         if (key.key === 'w' || key.key === 'W') {
@@ -333,6 +343,14 @@ export class Game {
                 newSprite.originalX = sprite.originalX;
                 newSprite.originalY = sprite.originalY;
                 this.addSprite(newSprite);
+            } else if (sprite.objectType === 'i-beam' || sprite.objectType === 'IBeam') {
+                const newSprite = new IBeam(this.engine, sprite.originalX, sprite.originalY);
+                newSprite.x = sprite.originalX;
+                newSprite.y = sprite.originalY;
+                newSprite.id = sprite.id ?? ToolBarComponent.newid();
+                newSprite.originalX = sprite.originalX;
+                newSprite.originalY = sprite.originalY;
+                this.addSprite(newSprite);
             } else if (sprite.objectType === 'ManHole') {
                 const newSprite = new ManHole(this.engine, sprite.originalX, sprite.originalY);
                 newSprite.x = sprite.originalX;
@@ -399,7 +417,7 @@ export class Game {
 
     private colletableLabels = ['saw', 'wrench', 'hammer', 'screwdriver', 'drill', 'coin'];
     private enemyLabels = ['spike-ball', 'man-hole'];
-    private impactObjectsLabels = ['trampoline', 'cannon-ball', 'spike-brick', 'cannon', 'Ram', 'Brick', 'brick-top', 'mystery-top', 'Ice', 'Mystery', 'log-short', 'log', 'solid-block'];
+    private impactObjectsLabels = ['trampoline', 'cannon-ball', 'spike-brick', 'cannon', 'Ram', 'Brick', 'i-beam', 'brick-top', 'mystery-top', 'Ice', 'Mystery', 'log-short', 'log', 'solid-block'];
 
     playCollectTool() {
         const audio: HTMLAudioElement = document.getElementById('collect-tool-sound') as HTMLAudioElement;
@@ -576,6 +594,7 @@ export class Game {
                     case 'brick-top':
                     case 'Brick':
                     case 'log-short':
+                    case 'i-beam':
                     case 'log':
                     case 'Ice':
                     case 'cannon':
@@ -597,7 +616,6 @@ export class Game {
                         this.loseLife();
                         break;
                     case 'cannon-ball':
-                        console.log('got hit');
                         const cannonBall = this.gameSprites.find(i => (i.body === collision.bodyA || i.body === collision.bodyB) && i !== this.player2);
                         this.removeSprite(cannonBall);
                         this.loseLife();

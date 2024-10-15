@@ -19,6 +19,7 @@ import { Cannon } from '../../models/cannon';
 import { CommonModule } from '@angular/common';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatButtonModule } from '@angular/material/button';
+import { IBeam } from '../../models/i-beam';
 
 @Component({
   selector: 'app-tool-bar',
@@ -68,6 +69,11 @@ export class ToolBarComponent implements OnDestroy {
   addWrench() {
     const tool = new Wrench(this.game.engine, 0, 0);
     this.createSprite(tool);
+  }
+
+  addIBeam() {
+    const sprite  = new IBeam(this.game.engine, 0, 0);
+    this.createSprite(sprite);
   }
 
   addHammer() {
