@@ -30,4 +30,11 @@ export class LottiePlayerComponent implements AfterViewInit {
     pause() {
       (document.getElementById(this.id) as any).pause();
     }
+
+    seek(position: number) {
+      (document.getElementById(this.id) as any).seek(position);
+    }
+    play() {
+      (document.getElementById(this.id) as any).play();
+    }
 }

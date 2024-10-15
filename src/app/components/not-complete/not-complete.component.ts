@@ -1,11 +1,12 @@
 import { Component, ViewChild } from '@angular/core';
 import { ToolBarComponent } from '../tool-bar/tool-bar.component';
 import { LottiePlayerComponent } from '../lottie-player/lottie-player.component';
+import { PressAComponent } from '../press-a/press-a.component';
 
 @Component({
   selector: 'app-not-complete',
   standalone: true,
-  imports: [LottiePlayerComponent],
+  imports: [LottiePlayerComponent, PressAComponent],
   templateUrl: './not-complete.component.html',
   styleUrl: './not-complete.component.scss'
 })

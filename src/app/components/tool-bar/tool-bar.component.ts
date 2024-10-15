@@ -1,4 +1,4 @@
-import { Component, NgZone } from '@angular/core';
+import { Component, NgZone, OnDestroy } from '@angular/core';
 import { GameProviderService } from '../../services/game-provider.service';
 import { Game } from '../../models/game';
 import { Brick, SolidBlock } from '../../models/brick';
@@ -27,7 +27,7 @@ import { MatButtonModule } from '@angular/material/button';
   templateUrl: './tool-bar.component.html',
   styleUrl: './tool-bar.component.scss'
 })
-export class ToolBarComponent {
+export class ToolBarComponent implements OnDestroy {
 
   game: Game;
   constructor(private gameProvider: GameProviderService,
@@ -40,6 +40,10 @@ export class ToolBarComponent {
         this.addDoubleClickHandler(sprite, this.game);
       }
     }
+    Game.getInstance().editorOpen = true;
+  }
+  ngOnDestroy(): void {
+    Game.getInstance().editorOpen = false;
   }
 
   addBrick() {

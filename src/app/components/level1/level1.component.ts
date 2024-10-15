@@ -33,6 +33,13 @@ export class Level1Component implements AfterViewInit {
       this.questBeginRef.close();
     });
 
+    PubSub.getInstance().subscribe('game-lost',()=> {
+      dialog.closeAll();
+    });
+    PubSub.getInstance().subscribe('level-complete',()=> {
+      dialog.closeAll();
+    });
+
     PubSub.getInstance().subscribe('show-shop', () => {
       Game.getInstance().dialogOpen = true;
       const ref = dialog.open(ShopComponent);

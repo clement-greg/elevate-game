@@ -1,11 +1,32 @@
-<div style="height: 100%;width: 100%;background-color: #fff;">
-    <app-lottie-player height="600px" [intermission]="3000" src="https://lottie.host/818c4d94-c21e-4530-a2e9-2c3da02a4f13/QsiBY10OOL.json">
 
-    </app-lottie-player>
 
-    <div style="text-align: center;">
-        <h1>Ooooohh!!! Sorry.</h1>
+<div style="height: 100%;width: 100%;background-color: #fff;position: relative;">
 
-        <p>Didn't quite make it in time. Next time use the Elevate App.  It makes getting service a breeze.</p>
+    <div style="display: flex;flex-direction: column;height: 100%;">
+        <div style="flex: 1;">
+            
+        </div>
+        <div style="flex: none;">
+            <app-lottie-player height="500px" [intermission]="3000" src="https://lottie.host/818c4d94-c21e-4530-a2e9-2c3da02a4f13/QsiBY10OOL.json">
+
+            </app-lottie-player>
+        
+            <div style="text-align: center;">
+                <h1>Ooooohh!!! Sorry.</h1>
+        
+                <p>Didn't quite make it in time. Next time use the Elevate App.  It makes getting service a breeze.</p>
+
+                <div style="margin-top: 40px;">
+                    <img src="/assets/images/arcade-button.svg" style="height: 75px;">
+                    <app-press-a wording="[Press A To Go Again]"></app-press-a>
+                </div>
+            </div>
+        </div>
+        <div style="flex: 1;">
+
+        </div>
     </div>
+
+
+    <img src="/assets/images/app.png" class="app" style="position: absolute;bottom: 0;">
 </div>

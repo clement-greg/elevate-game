@@ -9,7 +9,7 @@ export class Cannon extends GameSprite {
 
     lottieId = ToolBarComponent.newid();
     lastFire: Date = new Date();
-    timeBetweenFire = 6000;
+    timeBetweenFire = 3000;
 
     constructor(engine, x, y) {
         super(engine, x, y, 200, 95);

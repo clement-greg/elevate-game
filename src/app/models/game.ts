@@ -50,13 +50,14 @@ export class Game {
     dialogOpen: boolean;
     gameStartTime: Date;
     gameTotalSeconds = 240;
-    //gameTotalSeconds = 5;
+    //gameTotalSeconds = 15;
     remaining: string;
     static homeLeft = 16000;
     static homeLeftEnd = this.homeLeft + 300;
     static initialLeft = 400;
     showCloseBarrier = false;
     cannons: Cannon[] = [];
+  editorOpen: boolean;
 
 
     static get applianceShopAreaRight() {
@@ -170,11 +171,15 @@ export class Game {
                 Matter.Body.applyForce(this.player2.body, { x: this.player2.body.position.x, y: this.player2.body.position.y }, { x: 0, y: -.3 });
             }
         }
+        if(key.key === 's' || key.key === 'S') {
+            PubSub.getInstance().publish('show-shop');
+        }
         if (key.key === 'w' || key.key === 'W') {
-            PubSub.getInstance().publish('level-complete');
+            this.doWin();
         }
         if (key.key === 'l' || key.key === 'L') {
-            PubSub.getInstance().publish('game-lost');
+            //PubSub.getInstance().publish('game-lost');
+            this.doLost();
         }
         if (key.key === 'D' || key.key === 'd') {
             if (this.fridgeContraint) {
@@ -182,6 +187,13 @@ export class Game {
                 delete this.fridgeContraint;
             }
         }
+    }
+
+    doWin() {
+        PubSub.getInstance().publish('level-complete');
+        const audio: HTMLAudioElement = document.getElementById('game-over-won-sound') as HTMLAudioElement;
+        audio.currentTime = 0;
+        audio.play();
     }
 
     purchaseFridge(number = 1 | 2 | 3) {
@@ -442,7 +454,8 @@ export class Game {
 
 
         if (left > Game.homeLeft && left < Game.homeLeftEnd && this.gameHUD.hasAllTools && this.fridgeContraint) {
-            PubSub.getInstance().publish('level-complete');
+            //PubSub.getInstance().publish('level-complete');
+            this.doWin();
             this.gameHUD = new GameHUD(this.zone);
         }
 
@@ -480,7 +493,7 @@ export class Game {
                     break;
                 case 'hammer':
                     this.gameHUD.collectHammer();
-                    //this.playCollectTool();
+                    this.playCollectTool();
                     break;
                 case 'saw':
                     this.gameHUD.collectSaw();
@@ -752,12 +765,19 @@ export class Game {
         clearInterval(this.internval);
     }
 
+    doLost() {
+        PubSub.getInstance().publish('game-lost');
+        const lostAudio: HTMLAudioElement = document.getElementById('game-over-lost-sound') as HTMLAudioElement;
+        lostAudio.currentTime = 0;
+        lostAudio.play();
+    }
+
     doGameLoop() {
         const now = new Date();
         let remainingSeconds = this.gameTotalSeconds - (now.getTime() - this.gameStartTime.getTime()) / 1000;
-        if (remainingSeconds < 0) {
+        if (remainingSeconds < 0 && !this.editorOpen) {
             remainingSeconds = 0;
-            PubSub.getInstance().publish('game-lost');
+            this.doLost();
         }
         const minutes = Math.floor(remainingSeconds / 60);
         const seconds = Math.floor(remainingSeconds % 60);
@@ -766,6 +786,7 @@ export class Game {
 
         });
         if (this.gameHUD) {
+            this.gameHUD.timeRunningOut = remainingSeconds < 11;
             this.gameHUD.setTimeRemaining(this.remaining);
             this.advance();
             for (const sprite of this.gameSprites) {
@@ -800,6 +821,7 @@ export class GameHUD {
     hasHammer = false;
     hasScrewdriver = false;
     timeRemaining: string;
+    timeRunningOut = false;
 
     startTimer() {
         this.timerStarted = true;

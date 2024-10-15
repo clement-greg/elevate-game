@@ -1,8 +1,4 @@
 <div class="conversation-container">
-    <!-- <img src="/assets/images/construction-worker.svg" style="position: absolute;
-    height: 400px;
-    bottom: -146px;
-    left: -60px;"> -->
 
 
     <div style="position: absolute;height: 400px;bottom: -87px; left: -116px;">
@@ -10,7 +6,15 @@
             src="https://lottie.host/2fd741d9-4216-442a-80d5-4df511b9adf5/ru2C5RbDEq.json"></app-lottie-player>
     </div>
 
-    <div style="margin-left: 210px;" class="speech-bubble" [id]="id">
+    <div style="display: flex; flex-direction: column;height: 100%;">
+        <div style="flex: 1;">
+            <div style="margin-left: 210px;" class="speech-bubble" [id]="id">
 
+            </div>
+        </div>
+        <div style="flex: none;text-align: right;">
+            <app-press-a></app-press-a>
+        </div>
     </div>
+
 </div>

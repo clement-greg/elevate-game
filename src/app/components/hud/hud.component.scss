@@ -34,3 +34,22 @@
     border-bottom: 1px solid #fff;
     margin-bottom: 20px;
 }
+
+@keyframes runningOut {
+    from {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+.running-out {
+    animation: runningOut 1s ease;
+    animation-iteration-count: infinite;
+    color: red !important;
+}

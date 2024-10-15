@@ -2,8 +2,18 @@
 
     <div style="display: grid;grid-template-columns: auto 1fr;">
 
-        <div>
-            <img src="/assets/images/shop-keeper.svg" style="height: 200px;margin-top: 30px;">
+        <div style="width: 300px;">
+            <div style="position: absolute ;margin-left: 50px;">
+                <app-lottie-player #player
+                    src="https://lottie.host/2fd741d9-4216-442a-80d5-4df511b9adf5/ru2C5RbDEq.json"
+                    height="250px"></app-lottie-player>
+            </div>
+
+            <div style="position: absolute;margin-top: 120px;">
+
+                <img src="/assets/images/shop-counter.svg" style="height: 200px;">
+            </div>
+
         </div>
         <div style="padding-top: 40px; padding-right: 30px;">
             <div class="speech-bubble" style="min-height: 192px;" id="speech">
@@ -25,8 +35,8 @@
             </div>
         </div>
     </div>
-    <svg id="Layer_1" class="selector-arrow" [style.transform]="selectorPosition" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-        viewBox="0 0 83.44 43.15">
+    <svg id="Layer_1" class="selector-arrow" [style.transform]="selectorPosition" xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 83.44 43.15">
         <defs>
             <linearGradient id="linear-gradient" x1=".5" y1="21.57" x2="82.94" y2="21.57"
                 gradientUnits="userSpaceOnUse">
@@ -43,4 +53,8 @@
         <polygon class="cls-2-arrow" points="46.37 11.15 76.37 36.15 64.72 36.15 46.37 11.15" />
         <polygon class="cls-1-arrow" points="3.37 36.15 37.29 4.09 2.37 35.15 3.37 36.15" />
     </svg>
+
+    <div style="text-align: right;margin-top: 40px;" *ngIf="!purchased">
+        <app-press-a wording="[Press A To Purchase]"></app-press-a>
+    </div>
 </div>

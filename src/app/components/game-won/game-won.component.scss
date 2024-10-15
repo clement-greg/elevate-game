@@ -1,0 +1,17 @@
+
+@keyframes rotate-in {
+    from {
+        transform: rotate(70deg);
+    }
+    to {
+        transform: rotate(0deg);
+    }
+}
+
+.app {
+    transform: rotate(70deg);
+    transform-origin: 0% 100%;
+    animation: rotate-in .5s ease;
+    animation-fill-mode: forwards;
+    animation-delay: 2s;
+}

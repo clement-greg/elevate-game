@@ -1,13 +1,15 @@
 import { CommonModule } from '@angular/common';
-import { Component, HostListener, inject } from '@angular/core';
+import { Component, HostListener, inject, ViewChild } from '@angular/core';
 import { PriceTagComponent } from '../price-tag/price-tag.component';
 import { Game } from '../../models/game';
 import { MatDialogRef } from '@angular/material/dialog';
+import { PressAComponent } from '../press-a/press-a.component';
+import { LottiePlayerComponent } from '../lottie-player/lottie-player.component';
 
 @Component({
   selector: 'app-shop',
   standalone: true,
-  imports: [CommonModule, PriceTagComponent],
+  imports: [CommonModule, PriceTagComponent, PressAComponent, LottiePlayerComponent],
   templateUrl: './shop.component.html',
   styleUrl: './shop.component.scss'
 })
@@ -15,11 +17,12 @@ export class ShopComponent {
 
   readonly dialogRef = inject(MatDialogRef<ShopComponent>);
   selectedItem: any;
+  @ViewChild('player') player: LottiePlayerComponent;
 
   items: Item[] = [
     {
       src: '/assets/images/refrigerator1.svg',
-      price: 30,
+      price: 600,
       title: 'Whirlpool'
     },
     {
@@ -91,20 +94,28 @@ export class ShopComponent {
     }
     document.getElementById('speech').innerText = '';
     this.wordIndex = 0;
+    this.player.seek(0);
+    this.player.play();
     if (this.selectedItem.price > Game.getInstance().gameHUD.money) {
+      const alert: HTMLAudioElement = document.getElementById('alert-sound') as HTMLAudioElement;
+      alert.currentTime = 0;
+      alert.play();
       this.message = `Oh sorry, you don't have enough money to buy that refrigerator.  
 That one costs ${this.selectedItem.price} but you only have ${Game.getInstance().gameHUD.money}
       `
       this.doWords();
       return;
     }
+    const audio: HTMLAudioElement = document.getElementById('collect-tool-sound') as HTMLAudioElement;
+    audio.currentTime = 0;
+    audio.play();
     this.purchased = true;
     let index = this.items.indexOf(this.selectedItem) + 1;
     Game.getInstance().purchaseFridge(index);
     this.message = `Thanks for your purchase.  Come again soon.`;
     this.doWords();
     Game.getInstance().gameHUD.coinCount = Game.getInstance().gameHUD.coinCount -  (this.selectedItem.price / 10);
-    setTimeout(() => this.dialogRef.close(), 4000);
+    setTimeout(() => this.dialogRef.close(), 2000);
   }
 
   get selectorPosition() {
@@ -125,6 +136,8 @@ That one costs ${this.selectedItem.price} but you only have ${Game.getInstance()
       const msg = this.message.substring(0, this.wordIndex);
       div.innerText = msg;
       setTimeout(() => this.doWords(), 30);
+    } else {
+      this.player.pause();
     }
 
   }

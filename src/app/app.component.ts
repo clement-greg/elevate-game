@@ -36,7 +36,7 @@ export class AppComponent {
       this.gameWonTimeout =  setTimeout(() => {
         this.showGameWon = false;
         this.hideTitleScreen = false;
-      }, 20000);
+      }, 30000);
     });
 
     PubSub.getInstance().subscribe('game-lost', () => {
@@ -55,6 +55,7 @@ export class AppComponent {
   handleKeyDown(event: KeyboardEvent) {
     if (event.key === ' ' && !this.startGame) {
       this.showGameWon = false;
+      this.showGameLost = false;
       Game.deleteInstance();
       this.setupHandlers();
       this.startGame = true;
