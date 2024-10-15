@@ -66,4 +66,5 @@ jobs:
         with:
           app-name: 'elevate-game'
           package: ./dist/elevate-game/browser
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_E18F7AFEDF9141F892E7A3E60EB1A748 }}
           
