@@ -65,6 +65,5 @@ jobs:
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'elevate-game'
-          slot-name: 'Production'
           package: ./dist/elevate-game/browser
           
