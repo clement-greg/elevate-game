@@ -20,6 +20,7 @@ import { CommonModule } from '@angular/common';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatButtonModule } from '@angular/material/button';
 import { IBeam } from '../../models/i-beam';
+import { JetPackMysteryBlock } from '../../models/jet-pack-mystery-block';
 
 @Component({
   selector: 'app-tool-bar',
@@ -73,6 +74,11 @@ export class ToolBarComponent implements OnDestroy {
 
   addIBeam() {
     const sprite  = new IBeam(this.game.engine, 0, 0);
+    this.createSprite(sprite);
+  }
+
+  addJetPackMystery() {
+    const sprite = new JetPackMysteryBlock(this.game.engine, 0, 0);
     this.createSprite(sprite);
   }
 

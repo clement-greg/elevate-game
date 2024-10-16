@@ -69,6 +69,17 @@ html, body {
     z-index: 1;
 }
 
+.player.has-jet-pack::after {
+    content: " ";
+    background-image: url(/assets/images/jet-pack-side.svg);
+    height: 70px;
+    position: absolute;
+    margin-top: 6px;
+    margin-left: 13px;
+    width: 75px;
+    background-repeat: no-repeat;
+}
+
 #hud {
     position: fixed;
     right: 200px;
@@ -271,6 +282,17 @@ html, body {
         height: 30px;
         width: 30px;
     }
+}
+
+.jet-pack {
+    display: inline-block;
+    width: 72px;
+    height: 72px;
+    background-image: url(/assets/images/jet-pack.svg);
+    position: absolute;
+    background-repeat: no-repeat;
+    background-size: cover;
+    animation: coin-animation 1s ease;
 }
 
 .man-hole {

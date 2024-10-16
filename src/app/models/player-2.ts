@@ -41,7 +41,7 @@ export class Player2 extends GameSprite {
 
 
     jump() {
-        if(this.isGrounded && !Game.getInstance().dialogOpen) {
+        if((this.isGrounded ||  Game.getInstance().gameHUD.isJetPackMode ) && !Game.getInstance().dialogOpen) {
             Matter.Body.setVelocity(this.body, { x: this.body.velocity.x, y: 0 });
             let upForce = -0.32;
             Matter.Body.applyForce(this.body, { x: this.body.position.x, y: this.body.position.y }, { x: 0, y: upForce });
@@ -61,7 +61,8 @@ export class Player2 extends GameSprite {
         }
         this.isMoving = (this.arrowRight || this.arrowLeft) && this.isGrounded;
 
-        const isGrounded = Math.abs(this.body.velocity.y) < 0.1;
+        let isGrounded = Math.abs(this.body.velocity.y) < 0.1;
+  
         if (this.arrowRight && this.body.velocity.x < 3) {
             let force = isGrounded ? 0.02 : 0.01;
             Matter.Body.applyForce(this.body, { x: this.body.position.x, y: this.body.position.y }, { x: force, y: 0 });

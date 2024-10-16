@@ -24,6 +24,7 @@ import { SpikeBrick } from './spike-brick';
 import { Cannon } from './cannon';
 import { CannonBall } from './cannon-ball';
 import { IBeam } from './i-beam';
+import { JetPackMysteryBlock } from './jet-pack-mystery-block';
 
 var Engine = Matter.Engine,
     MatterWorld = Matter.World,
@@ -126,6 +127,16 @@ export class Game {
         this.pubSub.subscribe('remove-game-sprite', data => {
             this.removeSprite(data);
         });
+        
+        this.pubSub.subscribe('jet-pack-change',()=> {
+            const hasJetPack = this.gameHUD.isJetPackMode;
+            const domObject: HTMLElement = this.player2.domObject;
+            if(hasJetPack) {
+                domObject.classList.add('has-jet-pack');
+            } else {
+                domObject.classList.remove('has-jet-pack');
+            }
+        });
     }
 
 
@@ -143,7 +154,7 @@ export class Game {
     }
 
     run() {
-        Engine.update(this.engine, 1000 / 50);
+        Engine.update(this.engine, 1000 / 60);
         this.advance();
         requestAnimationFrame(() => this.run());
     }
@@ -299,6 +310,15 @@ export class Game {
                 newSprite.originalX = sprite.originalX;
                 newSprite.originalY = sprite.originalY;
                 this.addSprite(newSprite);
+            } else if (sprite.objectType === 'jet-pack-mystery-block') {
+                const newSprite = new JetPackMysteryBlock(this.engine, sprite.originalX, sprite.originalY);
+                newSprite.x = sprite.originalX;
+                newSprite.y = sprite.originalY;
+                newSprite.id = sprite.id ?? ToolBarComponent.newid();
+                newSprite.originalX = sprite.originalX;
+                newSprite.originalY = sprite.originalY;
+                this.addSprite(newSprite);
+
             } else if (sprite.objectType === 'SpikeBall') {
                 const newSprite = new SpikeBall(this.engine, sprite.originalX, sprite.originalY);
                 newSprite.x = sprite.originalX;
@@ -417,7 +437,7 @@ export class Game {
 
     private colletableLabels = ['saw', 'wrench', 'hammer', 'screwdriver', 'drill', 'coin'];
     private enemyLabels = ['spike-ball', 'man-hole'];
-    private impactObjectsLabels = ['trampoline', 'cannon-ball', 'spike-brick', 'cannon', 'Ram', 'Brick', 'i-beam', 'brick-top', 'mystery-top', 'Ice', 'Mystery', 'log-short', 'log', 'solid-block'];
+    private impactObjectsLabels = ['trampoline', 'cannon-ball', 'spike-brick', 'cannon', 'Ram', 'Brick', 'i-beam', 'brick-top', 'mystery-top', 'jet-pack-mystery-block', 'Ice', 'Mystery', 'log-short', 'log', 'solid-block'];
 
     playCollectTool() {
         const audio: HTMLAudioElement = document.getElementById('collect-tool-sound') as HTMLAudioElement;
@@ -594,6 +614,7 @@ export class Game {
                     case 'brick-top':
                     case 'Brick':
                     case 'log-short':
+                    case 'jet-pack-mystery-block':
                     case 'i-beam':
                     case 'log':
                     case 'Ice':
@@ -633,6 +654,7 @@ export class Game {
                         otherSprite.breakIt();
                         this.removeSprite(otherSprite);
                         break;
+                    case 'jet-pack-mystery-block':
                     case 'Mystery':
                     case 'mystery-top':
                         if (!otherSprite.empty) {
@@ -697,6 +719,8 @@ export class Game {
         const el: HTMLAudioElement = document.getElementById('die-sound') as HTMLAudioElement;
         el.currentTime = 0;
         el.play();
+        this.gameHUD.isJetPackMode = false;
+        PubSub.getInstance().publish('jet-pack-change');
 
         setTimeout(() => {
             if (this.player2.x < 0) {
@@ -817,6 +841,7 @@ export class Game {
 }
 
 export class GameHUD {
+    isJetPackMode: any;
 
     constructor(private zone: NgZone) {
 
