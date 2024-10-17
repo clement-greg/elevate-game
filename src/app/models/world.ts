@@ -1,5 +1,5 @@
 export class World {
-    gravity = .5;
+    gravity = 1;
     width = 400000;
     scrollPosition = 0;
     height = 900;

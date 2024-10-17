@@ -4,18 +4,23 @@
 
     --game-height: 900px;
 }
+
 * {
     font-family: 'Open Sans', sans-serif;
     font-weight: 300;
 }
 
-html, body {
+html,
+body {
     margin: 0;
     overflow: hidden !important;
     background-color: #000;
 }
 
-#game-div.reset, #bg-buildings.reset, #bg-plants.reset, #bg-sky.reset {
+#game-div.reset,
+#bg-buildings.reset,
+#bg-plants.reset,
+#bg-sky.reset {
     transition: transform 1s ease;
 }
 
@@ -26,6 +31,7 @@ html, body {
     background-image: url(/assets/images/bg-sidewalk.png);
     background-repeat: repeat-x;
     background-position-y: bottom;
+    // transition: transform .1s;
 }
 
 
@@ -49,10 +55,16 @@ html, body {
 #game-container {
     /* //transform: scale(.9); */
     /* transform: scale(.9); */
-    transform-origin: 50% 0%; 
+    transform-origin: 50% 0%;
     overflow: hidden;
 
 }
+
+// document.getElementById('game-div').style.transform = 'translateX(-' + offset + 'px)';
+// document.getElementById('bottom-filler').style.transform = 'translateX(-' + offset + 'px)';
+// document.getElementById('bg-buildings').style.transform = 'translateX(-' + (offset * .1) + 'px)';
+// document.getElementById('bg-plants').style.transform = 'translateX(-' + (offset * .5) + 'px)';
+// document.getElementById('bg-sky').style.transform = 'translateX(-' + (offset * .01) + 'px)';
 
 .player {
     display: inline-block;
@@ -162,6 +174,7 @@ html, body {
     background-size: cover;
     position: absolute;
 }
+
 .wrench {
     display: inline-block;
     width: 72px;
@@ -170,6 +183,7 @@ html, body {
     background-size: cover;
     position: absolute;
 }
+
 .hammer {
     display: inline-block;
     width: 72px;
@@ -178,6 +192,7 @@ html, body {
     background-size: cover;
     position: absolute;
 }
+
 .drill {
     display: inline-block;
     width: 72px;
@@ -261,6 +276,7 @@ html, body {
         opacity: 1;
         transform: translateY(70px);
     }
+
     to {
         /* opacity: .5; */
         transform: translateY(-70px);
@@ -275,6 +291,7 @@ html, body {
     position: absolute;
     background-repeat: no-repeat;
     background-size: cover;
+
     /* transform: translateY(-70px); */
     /* opacity: .5; */
     &.small {
@@ -306,7 +323,7 @@ html, body {
 }
 
 .cdk-overlay-pane.mat-mdc-dialog-panel {
-     max-width: unset !important;
+    max-width: unset !important;
 }
 
 .coin:not(.static) {
@@ -358,17 +375,20 @@ html, body {
     0% {
         transform: translateY(0);
     }
+
     50% {
 
         transform: translateY(-15px);
     }
+
     100% {
 
         transform: translateY(0);
     }
 }
 
-.mystery-block.bounce, .brick.bounce {
+.mystery-block.bounce,
+.brick.bounce {
     animation: mystery-block-bounce .5s ease-out;
 }
 
@@ -378,6 +398,7 @@ html, body {
     height: var(--game-height);
     position: absolute;
     background-position-y: bottom;
+    // transition: left .2s;
 }
 
 #bg-buildings {
@@ -386,6 +407,7 @@ html, body {
     height: var(--game-height);
     position: absolute;
     background-position-y: bottom;
+    //transition: left .2s;
 }
 
 #bg-plants {
@@ -394,6 +416,7 @@ html, body {
     height: var(--game-height);
     position: absolute;
     background-position-y: bottom;
+    // transition: left .2s;
 }
 
 #foreground {
@@ -463,8 +486,16 @@ html, body {
     z-index: 1;
     border: 2px dashed orange;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 .speech-bubble {
     position: relative;
@@ -479,16 +510,16 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .speech-bubble:after {
-	content: '';
-	position: absolute;
-	left: 0;
-	top: 50%;
-	width: 0;
-	height: 0;
-	border: 20px solid transparent;
-	border-right-color: rgba(62, 134, 200, 1);
-	border-left: 0;
-	border-bottom: 0;
-	margin-top: -10px;
-	margin-left: -20px;
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 0;
+    height: 0;
+    border: 20px solid transparent;
+    border-right-color: rgba(62, 134, 200, 1);
+    border-left: 0;
+    border-bottom: 0;
+    margin-top: -10px;
+    margin-left: -20px;
 }

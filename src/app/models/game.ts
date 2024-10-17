@@ -127,11 +127,11 @@ export class Game {
         this.pubSub.subscribe('remove-game-sprite', data => {
             this.removeSprite(data);
         });
-        
-        this.pubSub.subscribe('jet-pack-change',()=> {
+
+        this.pubSub.subscribe('jet-pack-change', () => {
             const hasJetPack = this.gameHUD.isJetPackMode;
             const domObject: HTMLElement = this.player2.domObject;
-            if(hasJetPack) {
+            if (hasJetPack) {
                 domObject.classList.add('has-jet-pack');
             } else {
                 domObject.classList.remove('has-jet-pack');
@@ -596,6 +596,19 @@ export class Game {
                             killSound.play();
                             Matter.Body.applyForce(this.player2.body, { x: this.player2.body.position.x, y: this.player2.body.position.y }, { x: 0, y: -0.2 });
                             this.removeSprite(ram);
+                            let forcex = -2.5;
+                            //let forcex = 0;
+                            for (let i = 0; i < 5; i++) {
+                                const coin = new Coin(this.engine, ram.x, ram.y, 'static');
+                                this.addSprite(coin);
+                                coin.body.isStatic = false;
+                                Matter.Body.setStatic(coin.body, false);
+                                Matter.Body.setVelocity(coin.body, {x: forcex, y: -5.3});
+                                //Matter.Body.setMass(coin.body, 1);
+                                //Matter.Body.applyForce(coin.body, { x: coin.body.x, y: coin.body.y }, { x: forcex, y: -0.3 });
+                                console.log(coin.body);
+                                forcex += .05; 
+                            }
                         }
                         break;
                     case 'cannon-ball':
@@ -657,7 +670,7 @@ export class Game {
                     case 'jet-pack-mystery-block':
                     case 'Mystery':
                     case 'mystery-top':
-                        if (!otherSprite.empty) {
+                        if (otherSprite && !otherSprite.empty && otherSprite.emptyIt) {
                             otherSprite.emptyIt();
                             this.gameHUD.incrementCoinCount();
                         }
@@ -701,11 +714,11 @@ export class Game {
         document.getElementById('bg-plants').classList.add('reset');
         document.getElementById('bg-sky').classList.add('reset');
 
-        document.getElementById('game-div').style.transform = 'translateX(0px)';
-        document.getElementById('bg-buildings').style.transform = 'translateX(0px)';
-        document.getElementById('bg-plants').style.transform = 'translateX(0px)';
-        document.getElementById('bg-sky').style.transform = 'translateX(0px)';
-        document.getElementById('bottom-filler').style.transform = 'translateX(0px)';
+        document.getElementById('game-div').style.left = '0px';
+        document.getElementById('bg-buildings').style.left = '0px';
+        document.getElementById('bg-plants').style.left = '0px';
+        document.getElementById('bg-sky').style.left = '0px';
+        document.getElementById('bottom-filler').style.left = '0px';
 
         setTimeout(() => {
             document.getElementById('game-div').classList.remove('reset');
@@ -741,6 +754,13 @@ export class Game {
         }
     }
 
+
+    lastPlantsCenter = new Date();
+    lastBuildingsCenter = new Date();
+    lastSkyCenter = new Date();
+    lastPlantsLeft: number;
+    lastBuildingsLeft: number = 0;
+
     centerPlayer() {
         const windowWidth = window.innerWidth;
         const worldWidth = this.world.width;
@@ -748,14 +768,47 @@ export class Game {
 
         if (playerLeft > windowWidth / 2 && playerLeft < (worldWidth - (windowWidth / 2))) {
 
+            const lastPlantsDiff = new Date().getTime() - this.lastPlantsCenter.getTime();
+            const lastBuildingsDiff = new Date().getTime() - this.lastBuildingsCenter.getTime();
+            const lastSkyDiff = new Date().getTime() - this.lastSkyCenter.getTime();
+
             const x = windowWidth - playerLeft;
             const offset = windowWidth / 2 - x;
-            document.getElementById('game-div').style.transform = 'translateX(-' + offset + 'px)';
-            document.getElementById('bottom-filler').style.transform = 'translateX(-' + offset + 'px)';
-            document.getElementById('bg-buildings').style.transform = 'translateX(-' + (offset * .1) + 'px)';
-            document.getElementById('bg-plants').style.transform = 'translateX(-' + (offset * .5) + 'px)';
-            document.getElementById('bg-sky').style.transform = 'translateX(-' + (offset * .01) + 'px)';
+            //document.getElementById('game-div').style.transform = 'translateX(-' + offset + 'px)';
+            document.getElementById('game-div').style.left = -offset + 'px';
+
+            //document.getElementById('bg-plants').style.left = -(offset * .5) + 'px'
+            // document.getElementById('bg-sky').style.left = -(offset * .01) + 'px';
+
+            if (lastPlantsDiff > 30) {
+                //document.getElementById('bg-plants').style.left = -(offset * .5) + 'px';
+                this.lastPlantsCenter = new Date();
+
+            }
+            const plantsLeft = -(offset * .5);
+            if (this.lastPlantsLeft != Math.floor(plantsLeft)) {
+                document.getElementById('bg-plants').style.left = plantsLeft + 'px';
+                this.lastPlantsLeft = Math.floor(plantsLeft);
+            }
+
+            const buildingsLeft = -offset * .1;
+            if (Math.abs(this.lastBuildingsLeft - Math.floor(buildingsLeft)) > 2) {
+                document.getElementById('bg-buildings').style.left = buildingsLeft + 'px';
+                this.lastBuildingsLeft = Math.floor(buildingsLeft);
+            }
+
+            if (lastBuildingsDiff > 200) {
+                //document.getElementById('bg-buildings').style.left = -(offset * .1) + 'px';
+
+                this.lastBuildingsCenter = new Date();
+            }
+            if (lastSkyDiff > 200) {
+
+                document.getElementById('bg-sky').style.left = -(offset * .01) + 'px';
+                this.lastSkyCenter = new Date();
+            }
             this.world.scrollPosition = offset;
+            //}
         }
     }
 

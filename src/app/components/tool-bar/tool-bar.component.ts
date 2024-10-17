@@ -202,7 +202,7 @@ export class ToolBarComponent implements OnDestroy {
     new DragHelper(this.game).dragElement(sprite);
 
     const gameDiv = document.getElementById('game-div');
-    const transform = gameDiv.style.transform;
+    const transform = gameDiv.style.left;
     this.game.addSprite(sprite);
 
     if (transform) {
