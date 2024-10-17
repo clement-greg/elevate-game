@@ -1,5 +1,6 @@
 declare var Matter: any;
 import { ToolBarComponent } from "../components/tool-bar/tool-bar.component";
+import { Config } from "./config";
 import { MoveableObject } from "./moveable-object";
 var Engine = Matter.Engine,
     MatterWorld = Matter.World,
@@ -60,7 +61,7 @@ export class Ram extends MoveableObject {
                 setTimeout(() => {
                     this.moveDirection = 'Right';
                     (document.getElementById(this.lottieId) as any)?.play();
-                    this.speedX = 2;
+                    this.speedX = Config.getInstance().ramSpeed;
                     this.domObject.classList.remove('invert');
                 }, this.stationaryWait * 1000);
             }
@@ -70,12 +71,12 @@ export class Ram extends MoveableObject {
                 (document.getElementById(this.lottieId) as any)?.pause();
                 setTimeout(() => {
                     this.moveDirection = 'Left';
-                    this.speedX = -2;
+                    this.speedX = -Config.getInstance().ramSpeed;
                     (document.getElementById(this.lottieId) as any)?.play();
                     this.domObject.classList.add('invert');
                 }, this.stationaryWait * 1000);
             } else {
-                this.speedX = 2;
+                this.speedX = Config.getInstance().ramSpeed;
             }
         }
         super.advance();

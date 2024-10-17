@@ -39,6 +39,11 @@ export class Level1Component implements AfterViewInit {
     PubSub.getInstance().subscribe('level-complete',()=> {
       dialog.closeAll();
     });
+    PubSub.getInstance().subscribe('close-all-diagrams',()=> {
+      Game.getInstance().dialogOpen = false;
+      dialog.closeAll();
+
+    });
 
     PubSub.getInstance().subscribe('show-shop', () => {
       Game.getInstance().dialogOpen = true;
@@ -103,5 +108,13 @@ export class Level1Component implements AfterViewInit {
   @HostListener('window:keyup', ['$event'])
   handleKeyUp(event: KeyboardEvent) {
     Game.getInstance().processKeyUp(event);
+  }
+
+  get shopEntranceVisible() {
+    return Game.getInstance().shopEntranceAvailable;
+  }
+
+  get shopEntranceAvailableSignLeft() {
+    return (Game.applianceShopLeft + 25) + 'px';
   }
 }

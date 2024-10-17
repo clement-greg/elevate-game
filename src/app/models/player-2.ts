@@ -1,6 +1,7 @@
 declare var Matter: any;
 
 import { ToolBarComponent } from '../components/tool-bar/tool-bar.component';
+import { Config } from './config';
 import { Game } from './game';
 import { GameSprite } from './game-sprite';
 import { PubSub } from './pub-sub';
@@ -49,7 +50,7 @@ export class Player2 extends GameSprite {
     jump() {
         if((this.isGrounded ||  Game.getInstance().gameHUD.isJetPackMode ) && !Game.getInstance().dialogOpen) {
             Matter.Body.setVelocity(this.body, { x: this.body.velocity.x, y: 0 });
-            let upForce = -0.32;
+            let upForce = Config.getInstance().playerJumpForce;
             Matter.Body.applyForce(this.body, { x: this.body.position.x, y: this.body.position.y }, { x: 0, y: upForce });
             this.isGrounded = false;
             delete this.groundSprite;
@@ -86,15 +87,15 @@ export class Player2 extends GameSprite {
 
         let isGrounded = Math.abs(this.body.velocity.y) < 0.1;
   
-        if (this.arrowRight && this.body.velocity.x < 3) {
-            let force = isGrounded ? 0.02 : 0.01;
+        if (this.arrowRight && this.body.velocity.x < Config.getInstance().playerMaxXVelocity) {
+            let force = isGrounded ? Config.getInstance().playerMoveForceGrounded : Config.getInstance().playerMoveForceNotGrounded;
             Matter.Body.applyForce(this.body, { x: this.body.position.x, y: this.body.position.y }, { x: force, y: 0 });
             this.domObject.style.transform = 'scaleX(1)';
             this.applyingLeft = false;
             this.applyingRight = true;
         }
-        if (this.arrowLeft && this.body.velocity.x > -3) {
-            let force = isGrounded ? -0.02 : -0.01;
+        if (this.arrowLeft && this.body.velocity.x > -Config.getInstance().playerMaxXVelocity) {
+            let force = isGrounded ? -Config.getInstance().playerMoveForceGrounded : -Config.getInstance().playerMoveForceNotGrounded;
             Matter.Body.applyForce(this.body, { x: this.body.position.x, y: this.body.position.y }, { x: force, y: 0 });
             this.domObject.style.transform = 'scaleX(-1)';
             this.applyingRight = false;

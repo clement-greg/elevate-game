@@ -26,6 +26,7 @@
 .dialog-container {
     height: 600px;width: 850px;
     padding: 30px;
+    position: relative;
 }
 
 .selector-arrow {
@@ -68,9 +69,26 @@
         transform: scale(1.1);
     }
 }
-div.selected {
+div.selected:not(.purchased) {
     animation-name: selectedimg;
     animation-duration: 1s;
     animation-iteration-count: infinite;
     animation-direction: alternate;
+}
+
+@keyframes out {
+    from {
+        scale: 1;
+    }
+    10% {
+        scale: 1.2;
+    }
+    100% {
+        scale: 0;
+    }
+}
+
+div.purchased {
+    animation: out 1s ease;
+    animation-fill-mode: forwards;
 }

@@ -15,8 +15,8 @@
             </div>
 
         </div>
-        <div style="padding-top: 40px; padding-right: 30px;">
-            <div class="speech-bubble" style="min-height: 192px;" id="speech">
+        <div style="padding-top: 40px; padding-right: 30px;min-height: 285px;">
+            <div class="speech-bubble" *ngIf="wordBubbleVisible" id="speech">
 
             </div>
         </div>
@@ -27,7 +27,7 @@
         <!-- <div><img src=""></div>
         <div><img src="/assets/images/refrigerator2.svg" ></div>
         <div><img src="/assets/images/refrigerator3.svg" ></div> -->
-        <div *ngFor="let item of items" [class.selected]="item === selectedItem">
+        <div *ngFor="let item of items" [class.selected]="item === selectedItem" [class.purchased]="purchased">
             <img [src]="item.src">
             <h2 style="margin-bottom: 0;">{{item.title}}</h2>
             <div class="price-container">
@@ -35,7 +35,7 @@
             </div>
         </div>
     </div>
-    <svg id="Layer_1" class="selector-arrow" [style.transform]="selectorPosition" xmlns="http://www.w3.org/2000/svg"
+    <svg id="Layer_1" class="selector-arrow" *ngIf="!purchased" [style.transform]="selectorPosition" xmlns="http://www.w3.org/2000/svg"
         xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 83.44 43.15">
         <defs>
             <linearGradient id="linear-gradient" x1=".5" y1="21.57" x2="82.94" y2="21.57"
@@ -56,5 +56,12 @@
 
     <div style="text-align: right;margin-top: 40px;" *ngIf="!purchased">
         <app-press-a wording="[Press A To Purchase]"></app-press-a>
+    </div>
+
+    <div *ngIf="purchased" style="position: absolute;bottom: 0;">
+        <app-lottie-player src="https://lottie.host/63ef23c2-1162-4d37-be9f-56626c87841e/vt2aeD94Vy.json" width="100%"
+            [loop]="false" [speed]="2">
+
+        </app-lottie-player>
     </div>
 </div>

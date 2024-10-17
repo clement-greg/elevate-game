@@ -61,8 +61,6 @@ export class Cannon extends GameSprite {
 
         }
 
-        const left = (this.parent.style.transform);
-        // console.log(left);
         const rect = this.domObject.getBoundingClientRect();
         return (
             rect.top >= 0 &&

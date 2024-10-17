@@ -1,0 +1,84 @@
+<div style="height: 560px;padding: 30px;width: 500px;">
+
+    <div style="display: flex;flex-direction: column;height: 100%;">
+        <div style="flex: 1;">
+            <h3>Game Config</h3>
+
+            <mat-tab-group>
+                <mat-tab label="World">
+                    <div class="two-column">
+        
+                        <mat-form-field appearance="outline">
+                            <mat-label>Frames / Second</mat-label>
+                            <input type="number" matInput [(ngModel)]="config.framesPerSecond">
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Gravity</mat-label>
+                            <input type="number" matInput [(ngModel)]="config.gravity">
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Trampoline Y Force</mat-label>
+                            <input type="number" matInput [(ngModel)]="config.trampolineYForce">
+                        </mat-form-field>
+        
+                        <mat-form-field appearance="outline">
+                            <mat-label>Game Time (Seconds)</mat-label>
+                            <input type="number" matInput [(ngModel)]="config.gameSeconds">
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Show Game Won Time (ms)</mat-label>
+                            <input type="number" matInput [(ngModel)]="config.showGameWinTime">
+                        </mat-form-field>
+        
+                        <mat-form-field appearance="outline">
+                            <mat-label>Show Game Lost Time (ms)</mat-label>
+                            <input type="number" matInput [(ngModel)]="config.showGameLostTime">
+                        </mat-form-field>
+        
+                        <mat-checkbox [(ngModel)]="config.scrollBackground">Scroll Background</mat-checkbox>
+        
+                    </div>
+                </mat-tab>
+                <mat-tab label="Player">
+                    <div class="two-column">
+        
+                        <mat-form-field appearance="outline">
+                            <mat-label>Player Jump Force</mat-label>
+                            <input type="number" matInput [(ngModel)]="config.playerJumpForce">
+                        </mat-form-field>
+        
+                        <mat-form-field appearance="outline">
+                            <mat-label>Player Force Grounded</mat-label>
+                            <input type="number" matInput [(ngModel)]="config.playerMoveForceGrounded">
+                        </mat-form-field>
+        
+                        <mat-form-field appearance="outline">
+                            <mat-label>Player Force Not Grounded</mat-label>
+                            <input type="number" matInput [(ngModel)]="config.playerMoveForceNotGrounded">
+                        </mat-form-field>
+        
+                        <mat-form-field appearance="outline">
+                            <mat-label>Player Max Velocity</mat-label>
+                            <input type="number" matInput [(ngModel)]="config.playerMaxXVelocity">
+                        </mat-form-field>
+                    </div>
+                </mat-tab>
+                <mat-tab label="Enemies">
+                    <div class="two-column">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Ram Speed</mat-label>
+                            <input type="number" matInput [(ngModel)]="config.ramSpeed">
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Cannon Ball Speed</mat-label>
+                            <input type="number" matInput [(ngModel)]="config.cannonBallSpeed">
+                        </mat-form-field>
+                    </div>
+                </mat-tab>
+            </mat-tab-group>
+        </div>
+        <div style="flex: none;">
+            <button mat-button mat-raised-button color="primary" (click)="save()">Save</button>
+        </div>
+    </div>
+</div>

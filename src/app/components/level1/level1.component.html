@@ -28,9 +28,6 @@
         <img src="/assets/images/home.svg" [style.left]="homeLeft"
             style="height: 400px;position: absolute;bottom: 162px;">
 
-        <!-- <img src="/assets/images/eli.svg" id="construction-worker"
-        style="height: 135px;position: absolute;bottom: 64px;" [style.left]="initialLeft"> -->
-
         <div id="construction-worker" style="position: absolute;bottom: 64px;height: 135px;" [style.left]="initialLeft">
             <app-lottie-player src="https://lottie.host/a3b45688-2a32-46c4-8d10-07056718099d/QQfrmarepT.json"
                 height="135px" [intermission]="3000">
@@ -44,6 +41,11 @@
         <div [style.left]="lastGuyLeft" style="position: absolute;bottom: 64px;height: 135px">
             <app-lottie-player src="https://lottie.host/33b46be8-bf4a-4b82-9277-a1c8c699dae4/fO1pefdcze.json"
                 height="135px" [intermission]="5000"></app-lottie-player>
+        </div>
+
+        <div *ngIf="shopEntranceVisible" [style.left]="shopEntranceAvailableSignLeft" style="position: absolute; top: 100px;">
+
+            <app-lottie-player src="https://lottie.host/47543bb4-b0a3-4bef-9e26-fa824720d4f4/0c6OcFneVE.json" height="300px"></app-lottie-player>
         </div>
 
 

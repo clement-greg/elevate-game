@@ -21,6 +21,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatButtonModule } from '@angular/material/button';
 import { IBeam } from '../../models/i-beam';
 import { JetPackMysteryBlock } from '../../models/jet-pack-mystery-block';
+import { CeilingSpike } from '../../models/ceiling-spike';
 
 @Component({
   selector: 'app-tool-bar',
@@ -133,6 +134,11 @@ export class ToolBarComponent implements OnDestroy {
 
   addSpikeBrick() {
     const sprite = new SpikeBrick(this.game.engine, 0, 0);
+    this.createSprite(sprite);
+  }
+
+  addCeilingSpike() {
+    const sprite = new CeilingSpike(this.game.engine, 0 ,0);
     this.createSprite(sprite);
   }
 

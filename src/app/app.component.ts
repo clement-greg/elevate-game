@@ -6,6 +6,9 @@ import { GameWonComponent } from './components/game-won/game-won.component';
 import { PubSub } from './models/pub-sub';
 import { Game } from './models/game';
 import { GameLostComponent } from './components/game-lost/game-lost.component';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfigComponent } from './components/config/config.component';
+import { Config } from './models/config';
 
 @Component({
   selector: 'app-root',
@@ -22,7 +25,9 @@ export class AppComponent {
   gameWonTimeout;
   showGameLost;
 
-  constructor(private zone: NgZone) {
+  constructor(private zone: NgZone,
+    private dialog: MatDialog
+  ) {
 
 
   }
@@ -36,7 +41,7 @@ export class AppComponent {
       this.gameWonTimeout =  setTimeout(() => {
         this.showGameWon = false;
         this.hideTitleScreen = false;
-      }, 30000);
+      }, Config.getInstance().showGameWinTime);
     });
 
     PubSub.getInstance().subscribe('game-lost', () => {
@@ -47,7 +52,7 @@ export class AppComponent {
       this.gameWonTimeout =  setTimeout(() => {
         this.showGameLost = false;
         this.hideTitleScreen = false;
-      }, 20000);
+      }, Config.getInstance().showGameLostTime);
     });
   }
 
@@ -61,6 +66,9 @@ export class AppComponent {
       this.startGame = true;
       clearTimeout(this.gameWonTimeout);
       setTimeout(() => this.hideTitleScreen = true, 1000);
+    }
+    if((event.key === 'c' || event.key === 'C') && !this.startGame) {
+      this.dialog.open(ConfigComponent);
     }
 
   }

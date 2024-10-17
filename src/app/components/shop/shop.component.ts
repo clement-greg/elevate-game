@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, CurrencyPipe } from '@angular/common';
 import { Component, HostListener, inject, ViewChild } from '@angular/core';
 import { PriceTagComponent } from '../price-tag/price-tag.component';
 import { Game } from '../../models/game';
@@ -18,6 +18,7 @@ export class ShopComponent {
   readonly dialogRef = inject(MatDialogRef<ShopComponent>);
   selectedItem: any;
   @ViewChild('player') player: LottiePlayerComponent;
+  wordBubbleVisible = true;
 
   items: Item[] = [
     {
@@ -57,7 +58,8 @@ export class ShopComponent {
     let index = this.items.indexOf(this.selectedItem);
     index++;
     if (index >= this.items.length) {
-      index = 0;
+      //index = 0;
+      index = this.items.length - 1;
     }
     this.selectedItem = this.items[index];
   }
@@ -66,7 +68,8 @@ export class ShopComponent {
     let index = this.items.indexOf(this.selectedItem);
     index--;
     if (index < 0) {
-      index = this.items.length - 1;
+      //index = this.items.length - 1;
+      index = 0;
     }
     this.selectedItem = this.items[index];
   }
@@ -74,6 +77,9 @@ export class ShopComponent {
   get selectedIndex() {
     return this.items.indexOf(this.selectedItem);
   }
+
+  
+  primaryButtonKeys = [' ', 'a', 'A'];
 
   @HostListener('window:keydown', ['$event'])
   handleKeyDown(event: KeyboardEvent) {
@@ -83,7 +89,7 @@ export class ShopComponent {
     if (event.key === 'ArrowRight' && !this.purchased) {
       this.nextItem();
     }
-    if (event.key === ' ') {
+    if (this.primaryButtonKeys.indexOf(event.key) > -1) {
       this.purchase();
     }
   }
@@ -97,13 +103,21 @@ export class ShopComponent {
     this.player.seek(0);
     this.player.play();
     if (this.selectedItem.price > Game.getInstance().gameHUD.money) {
+      const currencyPipe = new CurrencyPipe('en-US');
       const alert: HTMLAudioElement = document.getElementById('alert-sound') as HTMLAudioElement;
       alert.currentTime = 0;
       alert.play();
-      this.message = `Oh sorry, you don't have enough money to buy that refrigerator.  
-That one costs ${this.selectedItem.price} but you only have ${Game.getInstance().gameHUD.money}
-      `
-      this.doWords();
+      this.wordBubbleVisible = false;
+      setTimeout(()=> {
+        this.wordBubbleVisible = true;
+        setTimeout(()=> {
+          this.message = `Oh sorry, you don't have enough money to buy that refrigerator.  
+          That one costs ${currencyPipe.transform( this.selectedItem.price)} but you only have ${currencyPipe.transform( Game.getInstance().gameHUD.money)}
+                `
+                this.doWords();
+        })
+      }, 500);
+
       return;
     }
     const audio: HTMLAudioElement = document.getElementById('collect-tool-sound') as HTMLAudioElement;
@@ -112,10 +126,17 @@ That one costs ${this.selectedItem.price} but you only have ${Game.getInstance()
     this.purchased = true;
     let index = this.items.indexOf(this.selectedItem) + 1;
     Game.getInstance().purchaseFridge(index);
-    this.message = `Thanks for your purchase.  Come again soon.`;
-    this.doWords();
-    Game.getInstance().gameHUD.coinCount = Game.getInstance().gameHUD.coinCount -  (this.selectedItem.price / 10);
-    setTimeout(() => this.dialogRef.close(), 2000);
+    this.wordBubbleVisible = false;
+    setTimeout(()=> {
+      this.wordBubbleVisible = true;
+      setTimeout(()=> {
+        this.message = `Thanks for your purchase.  Come again soon.`;
+        this.doWords();
+        Game.getInstance().gameHUD.coinCount = Game.getInstance().gameHUD.coinCount -  (this.selectedItem.price / 10);
+        setTimeout(() => this.dialogRef.close(), 2000);
+      });
+    }, 500);
+
   }
 
   get selectorPosition() {

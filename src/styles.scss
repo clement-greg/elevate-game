@@ -139,7 +139,19 @@ font-style: normal !important;
     background-size: initial;
     position: absolute;
 }
+.ceiling-spike {
+    display: inline-block;
+    width: 72px;
+    height: 72px;
+    background-image: url(/assets/images/ceiling-spike.svg);
+    background-size: initial;
+    position: absolute;
+    background-repeat: no-repeat;
 
+}
+.mat-mdc-tab-body-content {
+    overflow: hidden !important;
+}
 .ice {
     display: inline-block;
     width: 72px;

@@ -1,5 +1,7 @@
+import { Config } from "./config";
+
 export class World {
-    gravity = 1;
+    gravity = Config.getInstance().gravity;
     width = 400000;
     scrollPosition = 0;
     height = 900;

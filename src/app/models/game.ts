@@ -25,6 +25,8 @@ import { Cannon } from './cannon';
 import { CannonBall } from './cannon-ball';
 import { IBeam } from './i-beam';
 import { JetPackMysteryBlock } from './jet-pack-mystery-block';
+import { Config } from './config';
+import { CeilingSpike } from './ceiling-spike';
 
 var Engine = Matter.Engine,
     MatterWorld = Matter.World,
@@ -51,7 +53,7 @@ export class Game {
     static applianceShopLeft = 8000;
     dialogOpen: boolean;
     gameStartTime: Date;
-    gameTotalSeconds = 240;
+    //gameTotalSeconds = 240;
     //gameTotalSeconds = 15;
     remaining: string;
     static homeLeft = 16000;
@@ -101,6 +103,9 @@ export class Game {
         ground.body.label = 'Ground'
         this.ground = ground;
 
+        const ceiling = new Ground(this.engine, 0, -50, this.world.width, 20);
+
+
         const left = new Ground(this.engine, 0, 0, 2, 10000);
         left.body.friction = 0;
 
@@ -139,6 +144,9 @@ export class Game {
         });
     }
 
+    primaryButtonKeys = [' ', 'a', 'A'];
+    secondaryButtonKeys = ['ArrowUp', 'b', 'B'];
+
 
     processKeyDownEvent(key: KeyboardEvent) {
         if (key.key == 'ArrowRight') {
@@ -148,16 +156,20 @@ export class Game {
         if (key.key === 'ArrowLeft') {
             this.player2.arrowLeft = true;
         }
-        if (key.key === ' ') {
+        if (this.primaryButtonKeys.indexOf(key.key) > -1) {
             this.player2.jump();
         }
     }
 
     run() {
-        Engine.update(this.engine, 1000 / 60);
+        Engine.update(this.engine, 1000 / Config.getInstance().framesPerSecond);
         this.advance();
-        requestAnimationFrame(() => this.run());
+        if (this.running) {
+            requestAnimationFrame(() => this.run());
+        }
     }
+
+    shopEntranceAvailable = false;
 
     processKeyUp(key: KeyboardEvent) {
         if (key.key == 'ArrowRight') {
@@ -167,7 +179,7 @@ export class Game {
         if (key.key === 'ArrowLeft') {
             this.player2.arrowLeft = false;
         }
-        if (key.key === ' ' && this.infoBarier) {
+        if (this.primaryButtonKeys.indexOf(key.key) > -1 && this.infoBarier) {
             if (this.showQuestBegin) {
                 PubSub.getInstance().publish('close-begin-quest');
                 this.removeSprite(this.infoBarier);
@@ -177,15 +189,17 @@ export class Game {
                 this.gameHUD.startTimer();
             }
         }
-        if (key.key === ' ' && this.showCloseBarrier) {
+        if (this.primaryButtonKeys.indexOf(key.key) > -1 && this.showCloseBarrier) {
             Matter.Body.applyForce(this.player2.body, { x: this.player2.body.position.x, y: this.player2.body.position.y }, { x: -1, y: 0 });
             setTimeout(() => PubSub.getInstance().publish('close-info-barrier'), 100);
             this.showCloseBarrier = false;
         }
-        if (key.key === 'ArrowUp') {
+        if (this.secondaryButtonKeys.indexOf(key.key) > -1 && !this.dialogOpen) {
             if (this.playerLeft >= Game.applianceShopLeft && this.playerLeft <= Game.applianceShopAreaRight) {
                 PubSub.getInstance().publish('show-shop');
             }
+        } else if(this.secondaryButtonKeys.indexOf(key.key) > -1 && this.dialogOpen) {
+            PubSub.getInstance().publish('close-all-diagrams');
         }
         if (key.key === 't' || key.key === 'T') {
             if (this.playerTop > 0) {
@@ -193,6 +207,9 @@ export class Game {
             }
         }
         if (key.key === 's' || key.key === 'S') {
+            for (let i = 0; i < 60; i++) {
+                this.gameHUD.incrementCoinCount();
+            }
             PubSub.getInstance().publish('show-shop');
         }
         if (key.key === 'w' || key.key === 'W') {
@@ -249,181 +266,85 @@ export class Game {
 
     originalSprites: GameSprite[];
 
+    initializeSprite(template: GameSprite, instance: GameSprite) {
+        instance.x = template.originalX;
+        instance.y = template.originalY;
+        instance.id = template.id ?? ToolBarComponent.newid();
+        instance.originalX = template.originalX;
+        instance.originalY = template.originalY;
+        this.addSprite(instance);
+    }
+
     setupGame(json) {
         const sprites = JSON.parse(json);
         this.originalSprites = sprites;
-        this.originalSprites = this.originalSprites.filter(i=>i.objectType !== 'Player2');
+        this.originalSprites = this.originalSprites.filter(i => i.objectType !== 'Player2');
 
         for (const sprite of sprites) {
             if (sprite.objectType === 'Brick') {
                 const newSprite = new Brick(this.engine, sprite.originalX, sprite.originalY);
-                newSprite.x = sprite.originalX;
-                newSprite.y = sprite.originalY;
-                newSprite.id = sprite.id ?? ToolBarComponent.newid();
-                newSprite.originalX = sprite.originalX;
-                newSprite.originalY = sprite.originalY;
-                this.addSprite(newSprite);
+                this.initializeSprite(sprite, newSprite);
             } else if (sprite.objectType === 'Saw') {
                 const newSprite = new Saw(this.engine, sprite.originalX, sprite.originalY);
-                newSprite.x = sprite.originalX;
-                newSprite.y = sprite.originalY;
-                newSprite.id = sprite.id ?? ToolBarComponent.newid();
-                newSprite.originalX = sprite.originalX;
-                newSprite.originalY = sprite.originalY;
-                this.addSprite(newSprite);
+                this.initializeSprite(sprite, newSprite);
             } else if (sprite.objectType === 'Screwdriver') {
                 const newSprite = new Screwdriver(this.engine, sprite.originalX, sprite.originalY);
-                newSprite.x = sprite.originalX;
-                newSprite.y = sprite.originalY;
-                newSprite.id = sprite.id ?? ToolBarComponent.newid();
-                newSprite.originalX = sprite.originalX;
-                newSprite.originalY = sprite.originalY;
-                this.addSprite(newSprite);
+                this.initializeSprite(sprite, newSprite);
             } else if (sprite.objectType === 'Wrench') {
                 const newSprite = new Wrench(this.engine, sprite.originalX, sprite.originalY);
-                newSprite.x = sprite.originalX;
-                newSprite.y = sprite.originalY;
-                newSprite.id = sprite.id ?? ToolBarComponent.newid();
-                newSprite.originalX = sprite.originalX;
-                newSprite.originalY = sprite.originalY;
-                this.addSprite(newSprite);
+                this.initializeSprite(sprite, newSprite);
             } else if (sprite.objectType === 'Hammer') {
                 const newSprite = new Hammer(this.engine, sprite.originalX, sprite.originalY);
-                newSprite.x = sprite.originalX;
-                newSprite.y = sprite.originalY;
-                newSprite.id = sprite.id ?? ToolBarComponent.newid();
-                newSprite.originalX = sprite.originalX;
-                newSprite.originalY = sprite.originalY;
-                this.addSprite(newSprite);
+                this.initializeSprite(sprite, newSprite);
             } else if (sprite.objectType === 'Drill') {
                 const newSprite = new Drill(this.engine, sprite.originalX, sprite.originalY);
-                newSprite.x = sprite.originalX;
-                newSprite.y = sprite.originalY;
-                newSprite.id = sprite.id ?? ToolBarComponent.newid();
-                newSprite.originalX = sprite.originalX;
-                newSprite.originalY = sprite.originalY;
-                this.addSprite(newSprite);
+                this.initializeSprite(sprite, newSprite);
             } else if (sprite.objectType === 'MysteryBlock') {
                 const newSprite = new MysteryBlock(this.engine, sprite.originalX, sprite.originalY);
-                newSprite.x = sprite.originalX;
-                newSprite.y = sprite.originalY;
-                newSprite.id = sprite.id ?? ToolBarComponent.newid();
-                newSprite.originalX = sprite.originalX;
-                newSprite.originalY = sprite.originalY;
-                this.addSprite(newSprite);
+                this.initializeSprite(sprite, newSprite);
             } else if (sprite.objectType === 'jet-pack-mystery-block') {
                 const newSprite = new JetPackMysteryBlock(this.engine, sprite.originalX, sprite.originalY);
-                newSprite.x = sprite.originalX;
-                newSprite.y = sprite.originalY;
-                newSprite.id = sprite.id ?? ToolBarComponent.newid();
-                newSprite.originalX = sprite.originalX;
-                newSprite.originalY = sprite.originalY;
-                this.addSprite(newSprite);
-
+                this.initializeSprite(sprite, newSprite);
+            } else if (sprite.objectType === 'ceiling-spike') {
+                const newSprite = new CeilingSpike(this.engine, sprite.originalX, sprite.originalY);
+                this.initializeSprite(sprite, newSprite);
             } else if (sprite.objectType === 'SpikeBall') {
                 const newSprite = new SpikeBall(this.engine, sprite.originalX, sprite.originalY);
-                newSprite.x = sprite.originalX;
-                newSprite.y = sprite.originalY;
-                newSprite.moveSpeed = newSprite.moveSpeed;
-                newSprite.moveDistance = newSprite.moveDistance;
-                newSprite.id = sprite.id ?? ToolBarComponent.newid();
-                newSprite.originalX = sprite.originalX;
-                newSprite.originalY = sprite.originalY;
-                this.addSprite(newSprite);
+                this.initializeSprite(sprite, newSprite);
             } else if (sprite.objectType === 'Ram') {
                 const newSprite = new Ram(this.engine, sprite.originalX, sprite.originalY);
-                newSprite.x = sprite.originalX;
-                newSprite.y = sprite.originalY;
-                newSprite.originalX = sprite.originalX;
-                newSprite.originalY = sprite.originalY;
-                newSprite.moveSpeed = newSprite.moveSpeed;
-                newSprite.moveDistance = newSprite.moveDistance;
-                newSprite.id = sprite.id ?? ToolBarComponent.newid();
-                this.addSprite(newSprite);
+                this.initializeSprite(sprite, newSprite);
             } else if (sprite.objectType === 'Coin') {
                 const newSprite = new Coin(this.engine, sprite.originalX, sprite.originalY, 'static');
-                newSprite.x = sprite.originalX;
-                newSprite.y = sprite.originalY;
-                newSprite.id = sprite.id ?? ToolBarComponent.newid();
-                newSprite.originalX = sprite.originalX;
-                newSprite.originalY = sprite.originalY;
-                this.addSprite(newSprite);
+                this.initializeSprite(sprite, newSprite);
             } else if (sprite.objectType === 'Log') {
                 const newSprite = new Log(this.engine, sprite.originalX, sprite.originalY);
-                newSprite.x = sprite.originalX;
-                newSprite.y = sprite.originalY;
-                newSprite.id = sprite.id ?? ToolBarComponent.newid();
-                newSprite.originalX = sprite.originalX;
-                newSprite.originalY = sprite.originalY;
-                this.addSprite(newSprite);
+                this.initializeSprite(sprite, newSprite);
             } else if (sprite.objectType === 'ShortLog') {
                 const newSprite = new ShortLog(this.engine, sprite.originalX, sprite.originalY);
-                newSprite.x = sprite.originalX;
-                newSprite.y = sprite.originalY;
-                newSprite.id = sprite.id ?? ToolBarComponent.newid();
-                newSprite.originalX = sprite.originalX;
-                newSprite.originalY = sprite.originalY;
-                this.addSprite(newSprite);
+                this.initializeSprite(sprite, newSprite);
             } else if (sprite.objectType === 'i-beam' || sprite.objectType === 'IBeam') {
                 const newSprite = new IBeam(this.engine, sprite.originalX, sprite.originalY);
-                newSprite.x = sprite.originalX;
-                newSprite.y = sprite.originalY;
-                newSprite.id = sprite.id ?? ToolBarComponent.newid();
-                newSprite.originalX = sprite.originalX;
-                newSprite.originalY = sprite.originalY;
-                this.addSprite(newSprite);
+                this.initializeSprite(sprite, newSprite);
             } else if (sprite.objectType === 'ManHole') {
                 const newSprite = new ManHole(this.engine, sprite.originalX, sprite.originalY);
-                newSprite.x = sprite.originalX;
-                newSprite.y = sprite.originalY;
-                newSprite.id = sprite.id ?? ToolBarComponent.newid();
-                newSprite.originalX = sprite.originalX;
-                newSprite.originalY = sprite.originalY;
-                this.addSprite(newSprite);
+                this.initializeSprite(sprite, newSprite);
             } else if (sprite.objectType === 'Ice') {
                 const newSprite = new Ice(this.engine, sprite.originalX, sprite.originalY);
-                newSprite.x = sprite.originalX;
-                newSprite.y = sprite.originalY;
-                newSprite.id = sprite.id ?? ToolBarComponent.newid();
-                newSprite.originalX = sprite.originalX;
-                newSprite.originalY = sprite.originalY;
-                this.addSprite(newSprite);
+                this.initializeSprite(sprite, newSprite);
             } else if (sprite.objectType === 'trampoline') {
                 const newSprite = new Trampoline(this.engine, sprite.originalX, sprite.originalY);
-                newSprite.x = sprite.originalX;
-                newSprite.y = sprite.originalY;
-                newSprite.id = sprite.id ?? ToolBarComponent.newid();
-                newSprite.originalX = sprite.originalX;
-                newSprite.originalY = sprite.originalY;
-                this.addSprite(newSprite);
+                this.initializeSprite(sprite, newSprite);
             } else if (sprite.objectType === 'cannon') {
                 const newSprite = new Cannon(this.engine, sprite.originalX, sprite.originalY);
-                newSprite.x = sprite.originalX;
-                newSprite.y = sprite.originalY;
-                newSprite.id = sprite.id ?? ToolBarComponent.newid();
-                newSprite.originalX = sprite.originalX;
-                newSprite.originalY = sprite.originalY;
+                this.initializeSprite(sprite, newSprite);
                 this.cannons.push(newSprite);
-                this.addSprite(newSprite);
-
             } else if (sprite.objectType === 'spike-brick') {
                 const newSprite = new SpikeBrick(this.engine, sprite.originalX, sprite.originalY);
-                newSprite.x = sprite.originalX;
-                newSprite.y = sprite.originalY;
-                newSprite.originalX = sprite.originalX;
-                newSprite.originalY = sprite.originalY;
-                newSprite.id = sprite.id ?? ToolBarComponent.newid();
-                this.addSprite(newSprite);
-            }
-
-            else if (sprite.objectType === 'solid-block' || sprite.objectType === 'SolidBlock') {
+                this.initializeSprite(sprite, newSprite);;
+            } else if (sprite.objectType === 'solid-block' || sprite.objectType === 'SolidBlock') {
                 const newSprite = new SolidBlock(this.engine, sprite.originalX, sprite.originalY);
-                newSprite.x = sprite.originalX;
-                newSprite.y = sprite.originalY;
-                newSprite.originalX = sprite.originalX;
-                newSprite.originalY = sprite.originalY;
-                newSprite.id = sprite.id ?? ToolBarComponent.newid();
-                this.addSprite(newSprite);
+                this.initializeSprite(sprite, newSprite);
             }
         }
     }
@@ -438,7 +359,7 @@ export class Game {
 
     private colletableLabels = ['saw', 'wrench', 'hammer', 'screwdriver', 'drill', 'coin'];
     private enemyLabels = ['spike-ball', 'man-hole'];
-    private impactObjectsLabels = ['trampoline', 'cannon-ball', 'spike-brick', 'cannon', 'Ram', 'Brick', 'i-beam', 'brick-top', 'mystery-top', 'jet-pack-mystery-block', 'Ice', 'Mystery', 'log-short', 'log', 'solid-block'];
+    private impactObjectsLabels = ['trampoline', 'cannon-ball', 'spike-brick', 'ceiling-spike', 'cannon', 'Ram', 'Brick', 'i-beam', 'brick-top', 'mystery-top', 'jet-pack-mystery-block', 'Ice', 'Mystery', 'log-short', 'log', 'solid-block'];
 
     playCollectTool() {
         const audio: HTMLAudioElement = document.getElementById('collect-tool-sound') as HTMLAudioElement;
@@ -447,6 +368,7 @@ export class Game {
     }
 
     bounceCount = 0;
+    lastBounce = new Date();
     advance() {
         if (this.showQuestBegin) {
             return;
@@ -465,6 +387,8 @@ export class Game {
         if (this.playerTop > 1000) {
             this.loseLife();
         }
+
+        this.shopEntranceAvailable = this.playerLeft >= Game.applianceShopLeft && this.playerLeft <= Game.applianceShopAreaRight;
 
         for (const cannon of this.cannons) {
 
@@ -564,25 +488,20 @@ export class Game {
                 forceY = -0.6;
             }
             const label = collision.bodyA.label === 'Player' ? collision.bodyB.label : collision.bodyA.label;
-            // switch(label) {
-            //     case 'cannon-ball':
-            //         console.log('got hit');
-            //         const cannonBall = this.gameSprites.find(i => (i.body === collision.bodyA || i.body === collision.bodyB) && i !== this.player2);
-            //         this.removeSprite(cannonBall);
-            //         this.loseLife();
-            //         break;
-            // }
+
             if (collision.penetration.y < 0) {
                 switch (label) {
                     case 'trampoline':
-                        Matter.Body.applyForce(this.player2.body, { x: this.player2.body.position.x, y: this.player2.body.position.y }, { x: 0, y: -0.3 });
+                        if (new Date().getTime() - this.lastBounce.getTime() > 500) {
+                            Matter.Body.applyForce(this.player2.body, { x: this.player2.body.position.x, y: this.player2.body.position.y }, { x: 0, y: Config.getInstance().trampolineYForce });
 
-                        const trampSound: HTMLAudioElement = document.getElementById('bounce-sound') as HTMLAudioElement;
-                        trampSound.currentTime = 0;
-                        trampSound.play();
-                        const sprite = this.gameSprites.find(i => (i.body === collision.bodyA || i.body === collision.bodyB) && i !== this.player2);
-                        if (sprite) {
-                            sprite.play();
+                            const trampSound: HTMLAudioElement = document.getElementById('bounce-sound') as HTMLAudioElement;
+                            trampSound.currentTime = 0;
+                            trampSound.play();
+                            const sprite = this.gameSprites.find(i => (i.body === collision.bodyA || i.body === collision.bodyB) && i !== this.player2);
+                            if (sprite) {
+                                sprite.play();
+                            }
                         }
                         break;
                     case 'spike-brick':
@@ -598,17 +517,14 @@ export class Game {
                             Matter.Body.applyForce(this.player2.body, { x: this.player2.body.position.x, y: this.player2.body.position.y }, { x: 0, y: -0.2 });
                             this.removeSprite(ram);
                             let forcex = -2.5;
-                            //let forcex = 0;
+
                             for (let i = 0; i < 5; i++) {
                                 const coin = new Coin(this.engine, ram.x, ram.y, 'static');
                                 this.addSprite(coin);
                                 coin.body.isStatic = false;
                                 Matter.Body.setStatic(coin.body, false);
-                                Matter.Body.setVelocity(coin.body, {x: forcex, y: -5.3});
-                                //Matter.Body.setMass(coin.body, 1);
-                                //Matter.Body.applyForce(coin.body, { x: coin.body.x, y: coin.body.y }, { x: forcex, y: -0.3 });
-                                console.log(coin.body);
-                                forcex += .05; 
+                                Matter.Body.setVelocity(coin.body, { x: forcex, y: -5.3 });
+                                forcex += .05;
                             }
                         }
                         break;
@@ -673,8 +589,13 @@ export class Game {
                     case 'mystery-top':
                         if (otherSprite && !otherSprite.empty && otherSprite.emptyIt) {
                             otherSprite.emptyIt();
-                            this.gameHUD.incrementCoinCount();
+                            if (label !== 'jet-pack-mystery-block') {
+                                this.gameHUD.incrementCoinCount();
+                            }
                         }
+                        break;
+                    case 'ceiling-spike':
+                        this.loseLife();
                         break;
                 }
             }
@@ -776,24 +697,20 @@ export class Game {
             const x = windowWidth - playerLeft;
             const offset = windowWidth / 2 - x;
             //document.getElementById('game-div').style.transform = 'translateX(-' + offset + 'px)';
+            if (!document.getElementById('game-div')) {
+                return;
+            }
             document.getElementById('game-div').style.left = -offset + 'px';
 
-            //document.getElementById('bg-plants').style.left = -(offset * .5) + 'px'
-            // document.getElementById('bg-sky').style.left = -(offset * .01) + 'px';
-
-            if (lastPlantsDiff > 30) {
-                //document.getElementById('bg-plants').style.left = -(offset * .5) + 'px';
-                this.lastPlantsCenter = new Date();
-
-            }
+        
             const plantsLeft = -(offset * .5);
-            if (this.lastPlantsLeft != Math.floor(plantsLeft)) {
+            if (this.lastPlantsLeft != Math.floor(plantsLeft) && Config.getInstance().scrollBackground) {
                 document.getElementById('bg-plants').style.left = plantsLeft + 'px';
                 this.lastPlantsLeft = Math.floor(plantsLeft);
             }
 
             const buildingsLeft = -offset * .1;
-            if (Math.abs(this.lastBuildingsLeft - Math.floor(buildingsLeft)) > 2) {
+            if (Math.abs(this.lastBuildingsLeft - Math.floor(buildingsLeft)) > 2 && Config.getInstance().scrollBackground) {
                 document.getElementById('bg-buildings').style.left = buildingsLeft + 'px';
                 this.lastBuildingsLeft = Math.floor(buildingsLeft);
             }
@@ -803,7 +720,7 @@ export class Game {
 
                 this.lastBuildingsCenter = new Date();
             }
-            if (lastSkyDiff > 200) {
+            if (lastSkyDiff > 200 && Config.getInstance().scrollBackground) {
 
                 document.getElementById('bg-sky').style.left = -(offset * .01) + 'px';
                 this.lastSkyCenter = new Date();
@@ -839,13 +756,17 @@ export class Game {
     }
 
     removeSprite(sprite) {
+        // Not sure why this is happening sometimes, not reproduceable
+        if (!sprite) {
+            return;
+        }
         if (sprite.body) {
             Matter.Composite.remove(this.engine.world, sprite.body)
         }
         if (sprite.frictionTop) {
             Matter.Composite.remove(this.engine.world, sprite.frictionTop)
         }
-        if (sprite.domObject) {
+        if (sprite.domObject?.parentNode) {
             sprite.domObject.parentNode.removeChild(sprite.domObject);
 
         }
@@ -857,7 +778,9 @@ export class Game {
         this.internval = setInterval(() => this.doGameLoop(), 10);
     }
 
+    running = true;
     stop() {
+        this.running = false;
         clearInterval(this.internval);
     }
 
@@ -870,7 +793,7 @@ export class Game {
 
     doGameLoop() {
         const now = new Date();
-        let remainingSeconds = this.gameTotalSeconds - (now.getTime() - this.gameStartTime.getTime()) / 1000;
+        let remainingSeconds = Config.getInstance().gameSeconds - (now.getTime() - this.gameStartTime.getTime()) / 1000;
         if (remainingSeconds < 0 && !this.editorOpen) {
             remainingSeconds = 0;
             this.doLost();
@@ -884,7 +807,6 @@ export class Game {
         if (this.gameHUD) {
             this.gameHUD.timeRunningOut = remainingSeconds < 11;
             this.gameHUD.setTimeRemaining(this.remaining);
-            this.advance();
             for (const sprite of this.gameSprites) {
                 sprite.advance();
             }
