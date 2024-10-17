@@ -25,7 +25,7 @@ export class CannonBall extends MoveableObject {
 
     override advance(): void {
         // console.log('advancing');
-        this.x -= 4;
+        this.x -= 8;
         Matter.Body.setPosition(this.body, { x: this.x, y: this.y });
         super.advance();
     }
