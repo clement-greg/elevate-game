@@ -86,10 +86,10 @@ body {
     background-image: url(/assets/images/jet-pack-side.svg);
     height: 70px;
     position: absolute;
-    margin-top: 6px;
-    margin-left: 13px;
     width: 75px;
     background-repeat: no-repeat;
+    margin-top: -89px;
+    margin-left: 8px;
 }
 
 #hud {
@@ -97,6 +97,21 @@ body {
     right: 200px;
     top: 10px;
 }
+
+.mighty-slab-1 {
+    font-family: "mighty-slab", serif !important;
+font-weight: 400 !important;
+font-style: normal;
+color: #8631af;
+}
+
+.mighty-slab-4 {
+    font-family: "mighty-slab", serif !important;
+font-weight: 700 !important;
+font-style: normal !important;
+}
+
+
 
 .brick {
     display: inline-block;

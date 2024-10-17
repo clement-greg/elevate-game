@@ -1,24 +1,30 @@
-<div style="height: 100%;width: 100%;background-color: #fff;position: relative;">
+<div style="height: 100%;width: 100%;background-color: #fff;position: relative;background: linear-gradient(43deg, rgba(236, 215, 246, 1) 0%, rgba(251, 246, 254, 1) 100%);">
 
     <div style="display: flex;flex-direction: column;height: 100%;">
         <div style="flex: 1;">
-            
+
         </div>
         <div style="flex: none;">
-            <app-lottie-player height="400px" src="https://lottie.host/33b46be8-bf4a-4b82-9277-a1c8c699dae4/fO1pefdcze.json">
+            <app-lottie-player height="400px"
+                src="https://lottie.host/33b46be8-bf4a-4b82-9277-a1c8c699dae4/fO1pefdcze.json">
 
             </app-lottie-player>
-        
-            <div style="text-align: center;">
-                <h1>You did it!</h1>
-        
-                <p>Great job on getting the refrigerator fixed!!!<br> <br>But seriously, next time just use the Elevate App. It makes
-                    getting repairs a breeze.</p>
 
-                    
-                <div style="margin-top: 40px;">
-                    <img src="/assets/images/arcade-button.svg" style="height: 75px;">
-                    <app-press-a wording="[Press A To Go Again]"></app-press-a>
+            <div style="text-align: center;">
+                <h1 class="mighty-slab-1">You did it!</h1>
+
+                <div style="height: 100px;">
+                    <p class="next-text" *ngIf="showNextText">But seriously, next time just use the Elevate App. <br>It
+                        makes
+                        getting repairs a breeze.</p>
+                </div>
+
+
+                <div style="height: 165px;">
+                    <div  class="next-text" *ngIf="showPressA">
+                        <img src="/assets/images/arcade-button.svg" style="height: 75px;">
+                        <app-press-a wording="[Press A To Go Again]"></app-press-a>
+                    </div>
                 </div>
             </div>
         </div>

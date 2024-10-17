@@ -29,9 +29,9 @@ export class IBeam extends GameSprite {
 
         this.initialX = x;
         this.initialY = y;
-        this.body.friction = 1;
+        this.body.friction = 0;
         Matter.Body.setMass(this.body, 100000);
-        const frictionBody = Matter.Bodies.rectangle(x + 4, y - 360, this.width - 16, 2);
+        const frictionBody = Matter.Bodies.rectangle(x + 4, y - 40, this.width - 16, 2);
         Matter.Composite.add(engine.world, frictionBody);
         frictionBody.isStatic = true;
         frictionBody.friction = 1;
@@ -39,16 +39,16 @@ export class IBeam extends GameSprite {
         this.frictionTop = frictionBody;
     }
 
-    override advance() {
-        const x = this.body.position.x;
-        if (x >= this.initialX + this.moveDistance) {
-            this.sign = -1;
-        } else if (x <= this.initialX) {
-            this.sign = 1;
-        }
-        const newX = this.body.position.x + this.moveSpeed * this.sign;
-        Matter.Body.setPosition(this.body, { x: newX, y: this.initialY });
-        Matter.Body.setPosition(this.frictionTop, { x: newX + 4, y: this.initialY });
-        super.advance();
-    }
+    //override advance() {
+        // const x = this.body.position.x;
+        // if (x >= this.initialX + this.moveDistance) {
+        //     this.sign = -1;
+        // } else if (x <= this.initialX) {
+        //     this.sign = 1;
+        // }
+        // const newX = this.body.position.x + this.moveSpeed * this.sign;
+        // Matter.Body.setPosition(this.body, { x: newX, y: this.initialY });
+        // Matter.Body.setPosition(this.frictionTop, { x: newX + 4, y: this.initialY });
+        // super.advance();
+    //}
 }

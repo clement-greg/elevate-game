@@ -1,5 +1,6 @@
 declare var Matter: any;
 
+import { ToolBarComponent } from '../components/tool-bar/tool-bar.component';
 import { Game } from './game';
 import { GameSprite } from './game-sprite';
 import { PubSub } from './pub-sub';
@@ -15,6 +16,7 @@ export class Player2 extends GameSprite {
     pubsub;
     isGrounded = false;
     subscriptionEvents:any;
+    lottieId = ToolBarComponent.newid();
 
 
     constructor(engine, x, y, width, height) {
@@ -28,6 +30,9 @@ export class Player2 extends GameSprite {
         this.pubsub = PubSub.getInstance();
         this.body.staticFriction = 20;
 
+        //
+        playerDiv.innerHTML = `<lottie-player  style="transform: translateY(80px) translateX(-21px) scale(2); "  id="${this.lottieId}" background="transparent" src="https://lottie.host/ce873636-1d89-4e51-b903-4e458339ea12/Hdnd2ezUkH.json"></lottie-player>`
+
         this.subscriptionEvents =  this.pubsub.subscribe('keydown', key => {
             if (key.code === 'Space' && this.isGrounded && !Game.getInstance().dialogOpen) {
                 Matter.Body.setVelocity(this.body, { x: this.body.velocity.x, y: 0 });
@@ -35,6 +40,7 @@ export class Player2 extends GameSprite {
                 Matter.Body.applyForce(this.body, { x: this.body.position.x, y: this.body.position.y }, { x: 0, y: upForce });
                 this.isGrounded = false;
                 delete this.groundSprite;
+
             }
         });
     }
@@ -47,6 +53,23 @@ export class Player2 extends GameSprite {
             Matter.Body.applyForce(this.body, { x: this.body.position.x, y: this.body.position.y }, { x: 0, y: upForce });
             this.isGrounded = false;
             delete this.groundSprite;
+            if(Game.getInstance().gameHUD.isJetPackMode) {
+                const audio: HTMLAudioElement = document.getElementById('thrust-sound') as HTMLAudioElement;
+                audio.volume = .3;
+                audio.currentTime = 0;
+                audio.play();
+
+                const player = (document.getElementById(this.lottieId) as any);
+                if (player) {
+                    player.seek(0);
+                    player.play();
+                }
+            } else {
+                const audio: HTMLAudioElement = document.getElementById('jump-sound') as HTMLAudioElement;
+                audio.volume = .3;
+                audio.currentTime = 0;
+                audio.play();
+            }
         }
     }
 

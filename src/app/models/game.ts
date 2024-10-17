@@ -252,6 +252,7 @@ export class Game {
     setupGame(json) {
         const sprites = JSON.parse(json);
         this.originalSprites = sprites;
+        this.originalSprites = this.originalSprites.filter(i=>i.objectType !== 'Player2');
 
         for (const sprite of sprites) {
             if (sprite.objectType === 'Brick') {
@@ -574,7 +575,7 @@ export class Game {
             if (collision.penetration.y < 0) {
                 switch (label) {
                     case 'trampoline':
-                        Matter.Body.applyForce(this.player2.body, { x: this.player2.body.position.x, y: this.player2.body.position.y }, { x: 0, y: forceY });
+                        Matter.Body.applyForce(this.player2.body, { x: this.player2.body.position.x, y: this.player2.body.position.y }, { x: 0, y: -0.3 });
 
                         const trampSound: HTMLAudioElement = document.getElementById('bounce-sound') as HTMLAudioElement;
                         trampSound.currentTime = 0;
