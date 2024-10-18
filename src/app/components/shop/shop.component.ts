@@ -133,7 +133,7 @@ export class ShopComponent {
         this.message = `Thanks for your purchase.  Come again soon.`;
         this.doWords();
         Game.getInstance().gameHUD.coinCount = Game.getInstance().gameHUD.coinCount -  (this.selectedItem.price / 10);
-        setTimeout(() => this.dialogRef.close(), 2000);
+        setTimeout(() => this.dialogRef.close(), 2500);
       });
     }, 500);
 

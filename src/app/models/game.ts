@@ -27,6 +27,7 @@ import { IBeam } from './i-beam';
 import { JetPackMysteryBlock } from './jet-pack-mystery-block';
 import { Config } from './config';
 import { CeilingSpike } from './ceiling-spike';
+import { Dynamite } from './ahs';
 
 var Engine = Matter.Engine,
     MatterWorld = Matter.World,
@@ -62,6 +63,7 @@ export class Game {
     showCloseBarrier = false;
     cannons: Cannon[] = [];
     editorOpen: boolean;
+    static lastStars: number;
 
 
     static get applianceShopAreaRight() {
@@ -150,10 +152,12 @@ export class Game {
 
     processKeyDownEvent(key: KeyboardEvent) {
         if (key.key == 'ArrowRight') {
+            this.player2.accelerating = true;
             this.player2.arrowRight = true;
         }
 
         if (key.key === 'ArrowLeft') {
+            this.player2.accelerating = true;
             this.player2.arrowLeft = true;
         }
         if (this.primaryButtonKeys.indexOf(key.key) > -1) {
@@ -173,10 +177,12 @@ export class Game {
 
     processKeyUp(key: KeyboardEvent) {
         if (key.key == 'ArrowRight') {
+            this.player2.accelerating = false;
             this.player2.arrowRight = false;
         }
 
         if (key.key === 'ArrowLeft') {
+            this.player2.accelerating = false;
             this.player2.arrowLeft = false;
         }
         if (this.primaryButtonKeys.indexOf(key.key) > -1 && this.infoBarier) {
@@ -198,7 +204,7 @@ export class Game {
             if (this.playerLeft >= Game.applianceShopLeft && this.playerLeft <= Game.applianceShopAreaRight) {
                 PubSub.getInstance().publish('show-shop');
             }
-        } else if(this.secondaryButtonKeys.indexOf(key.key) > -1 && this.dialogOpen) {
+        } else if (this.secondaryButtonKeys.indexOf(key.key) > -1 && this.dialogOpen) {
             PubSub.getInstance().publish('close-all-diagrams');
         }
         if (key.key === 't' || key.key === 'T') {
@@ -207,7 +213,7 @@ export class Game {
             }
         }
         if (key.key === 's' || key.key === 'S') {
-            for (let i = 0; i < 60; i++) {
+            for (let i = 0; i < 220; i++) {
                 this.gameHUD.incrementCoinCount();
             }
             PubSub.getInstance().publish('show-shop');
@@ -249,6 +255,7 @@ export class Game {
         Matter.Body.setMass(this.fridge.body, .1);
         this.addSprite(this.fridge);
         this.createFridgeConstraint();
+        Game.lastStars = number;
     }
 
     private createFridgeConstraint() {
@@ -345,6 +352,22 @@ export class Game {
             } else if (sprite.objectType === 'solid-block' || sprite.objectType === 'SolidBlock') {
                 const newSprite = new SolidBlock(this.engine, sprite.originalX, sprite.originalY);
                 this.initializeSprite(sprite, newSprite);
+            } else if (sprite.objectType === 'dynamite') {
+                const newSprite = new Dynamite(this.engine, sprite.originalX, sprite.originalY);
+                this.initializeSprite(sprite, newSprite);
+            }
+        }
+
+        this.removeDuplicatePlayer();
+    }
+
+    removeDuplicatePlayer() {
+        // This shouldn't be needed, but its producing a second player after playing again
+        const playerDivs = document.querySelectorAll('.player');
+        for(let i = 0;i<playerDivs.length;i++) {
+            if(playerDivs[i] !== this.player2.domObject) {
+                playerDivs[i].parentNode.removeChild(playerDivs[i]);
+                break;
             }
         }
     }
@@ -359,7 +382,7 @@ export class Game {
 
     private colletableLabels = ['saw', 'wrench', 'hammer', 'screwdriver', 'drill', 'coin'];
     private enemyLabels = ['spike-ball', 'man-hole'];
-    private impactObjectsLabels = ['trampoline', 'cannon-ball', 'spike-brick', 'ceiling-spike', 'cannon', 'Ram', 'Brick', 'i-beam', 'brick-top', 'mystery-top', 'jet-pack-mystery-block', 'Ice', 'Mystery', 'log-short', 'log', 'solid-block'];
+    private impactObjectsLabels = ['trampoline', 'cannon-ball', 'spike-brick', 'dynamite', 'ceiling-spike', 'cannon', 'Ram', 'Brick', 'i-beam', 'brick-top', 'mystery-top', 'jet-pack-mystery-block', 'Ice', 'Mystery', 'log-short', 'log', 'solid-block'];
 
     playCollectTool() {
         const audio: HTMLAudioElement = document.getElementById('collect-tool-sound') as HTMLAudioElement;
@@ -488,6 +511,46 @@ export class Game {
                 forceY = -0.6;
             }
             const label = collision.bodyA.label === 'Player' ? collision.bodyB.label : collision.bodyA.label;
+            //const label = collision.bodyA.label === 'Player' ? collision.bodyB.label : collision.bodyA.label;
+
+            switch (label) {
+                case 'dynamite':
+
+                    const dynamite: Dynamite = this.gameSprites.find(i => (i.body === collision.bodyA || i.body === collision.bodyB) && i !== this.player2);
+                    if (dynamite) {
+                        const warningAudio: HTMLAudioElement = document.getElementById('warning-sound') as HTMLAudioElement;
+                        warningAudio.currentTime = 0;
+                        warningAudio.play();
+                        if (dynamite.play()) {
+
+                            setTimeout(()=> {
+                                const audio: HTMLAudioElement = document.getElementById('explosion-sound') as HTMLAudioElement;
+                                audio.currentTime = 0;
+                                audio.play();
+                                warningAudio.pause();
+                            }, 1000);
+                            setTimeout(() => {
+                                const diffX = this.playerLeft - dynamite.x;
+                                const diffY = this.playerTop - dynamite.y;
+                                if (diffX < 600 && diffX > -700) {
+                                    if (diffY < 600 && diffY > -600) {
+                                        this.loseLife();
+                                    }
+                                }
+                                for (let i = 0; i < 5; i++) {
+                                    const coin = new Coin(this.engine, dynamite.x, dynamite.y, 'static');
+                                    this.addSprite(coin);
+                                    coin.body.isStatic = false;
+                                    Matter.Body.setStatic(coin.body, false);
+                                    Matter.Body.setVelocity(coin.body, { x: 0.05, y: -5.3 });
+                                    //forcex += .05;
+                                }
+                                this.removeSprite(dynamite);
+                            }, 2000);
+                        }
+                    }
+                    break;
+            }
 
             if (collision.penetration.y < 0) {
                 switch (label) {
@@ -561,7 +624,6 @@ export class Game {
 
             } else if (Math.abs(collision.penetration.x) > 0) {
 
-                const label = collision.bodyA.label === 'Player' ? collision.bodyB.label : collision.bodyA.label;
                 switch (label) {
                     case 'Ram':
                         this.loseLife();
@@ -656,6 +718,7 @@ export class Game {
         el.play();
         this.gameHUD.isJetPackMode = false;
         PubSub.getInstance().publish('jet-pack-change');
+        this.player2.die();
 
         setTimeout(() => {
             if (this.player2.x < 0) {
@@ -702,7 +765,7 @@ export class Game {
             }
             document.getElementById('game-div').style.left = -offset + 'px';
 
-        
+
             const plantsLeft = -(offset * .5);
             if (this.lastPlantsLeft != Math.floor(plantsLeft) && Config.getInstance().scrollBackground) {
                 document.getElementById('bg-plants').style.left = plantsLeft + 'px';

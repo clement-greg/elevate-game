@@ -24,6 +24,7 @@ export class AppComponent {
   showGameWon = false;
   gameWonTimeout;
   showGameLost;
+  canRestart = true;
 
   constructor(private zone: NgZone,
     private dialog: MatDialog
@@ -36,29 +37,33 @@ export class AppComponent {
     PubSub.getInstance().subscribe('level-complete', () => {
       this.startGame = false;
       this.showGameWon = true;
+      this.canRestart = false;
 
       Game.deleteInstance();
-      this.gameWonTimeout =  setTimeout(() => {
+      this.gameWonTimeout = setTimeout(() => {
         this.showGameWon = false;
         this.hideTitleScreen = false;
       }, Config.getInstance().showGameWinTime);
+      setTimeout(() => this.canRestart = true, 4000);
     });
 
     PubSub.getInstance().subscribe('game-lost', () => {
       this.startGame = false;
       this.showGameLost = true;
+      this.canRestart = false;
 
       Game.deleteInstance();
-      this.gameWonTimeout =  setTimeout(() => {
+      this.gameWonTimeout = setTimeout(() => {
         this.showGameLost = false;
         this.hideTitleScreen = false;
       }, Config.getInstance().showGameLostTime);
+      setTimeout(() => this.canRestart = true, 4000);
     });
   }
 
   @HostListener('window:keydown', ['$event'])
   handleKeyDown(event: KeyboardEvent) {
-    if (event.key === ' ' && !this.startGame) {
+    if (event.key === ' ' && !this.startGame && this.canRestart) {
       this.showGameWon = false;
       this.showGameLost = false;
       Game.deleteInstance();
@@ -67,7 +72,7 @@ export class AppComponent {
       clearTimeout(this.gameWonTimeout);
       setTimeout(() => this.hideTitleScreen = true, 1000);
     }
-    if((event.key === 'c' || event.key === 'C') && !this.startGame) {
+    if ((event.key === 'c' || event.key === 'C') && !this.startGame) {
       this.dialog.open(ConfigComponent);
     }
 

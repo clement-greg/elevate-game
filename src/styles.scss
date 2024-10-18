@@ -161,6 +161,10 @@ font-style: normal !important;
     position: absolute;
 }
 
+.mat-mdc-dialog-surface {
+    background: linear-gradient(43deg, rgba(236, 215, 246, 1) 0%, rgba(251, 246, 254, 1) 100%);
+}
+
 .saw {
     display: inline-block;
     width: 72px;
@@ -328,6 +332,25 @@ font-style: normal !important;
     }
 }
 
+.dynamite {
+    display: inline-block;
+    width: 72px;
+    height: 72px;
+    position: absolute;
+
+}
+
+@keyframes jetpack-grow{
+    from {
+        opacity: 1;
+        transform: translateY(70px);
+    }
+
+    to {
+        /* opacity: .5; */
+        transform: translateY(-70px) scale(2);
+    }
+}
 .jet-pack {
     display: inline-block;
     width: 72px;
@@ -336,7 +359,8 @@ font-style: normal !important;
     position: absolute;
     background-repeat: no-repeat;
     background-size: cover;
-    animation: coin-animation 1s ease;
+    animation: jetpack-grow 1s ease;
+
 }
 
 .man-hole {

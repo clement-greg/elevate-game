@@ -1,8 +1,11 @@
 <div style="height: 100%;width: 100%;background-color: #fff;position: relative;background: linear-gradient(43deg, rgba(236, 215, 246, 1) 0%, rgba(251, 246, 254, 1) 100%);">
 
     <div style="display: flex;flex-direction: column;height: 100%;">
-        <div style="flex: 1;">
+        <div style="flex: 1;text-align: center;padding-top: 60px;">
 
+            <app-lottie-player height="125px" *ngIf="stars === 1" src="https://lottie.host/9b6a4d28-7caf-4f2c-98c0-7a836cf39a9d/ri0Ok8VCqq.json" [loop]="false"></app-lottie-player>
+            <app-lottie-player height="125px" *ngIf="stars === 2" src="https://lottie.host/9b727f56-a1c6-4c00-a6fb-1b850bd90af8/LZfcYXhJSd.json" [loop]="false"></app-lottie-player>
+            <app-lottie-player height="125px" *ngIf="stars === 3" src="https://lottie.host/a9e8d28b-1fc1-49a2-8e43-17995a085d15/DAKlERQkjr.json" [loop]="false"></app-lottie-player>
         </div>
         <div style="flex: none;">
             <app-lottie-player height="400px"
