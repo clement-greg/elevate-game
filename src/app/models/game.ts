@@ -200,7 +200,7 @@ export class Game {
             setTimeout(() => PubSub.getInstance().publish('close-info-barrier'), 100);
             this.showCloseBarrier = false;
         }
-        if (this.secondaryButtonKeys.indexOf(key.key) > -1 && !this.dialogOpen) {
+        if (this.secondaryButtonKeys.indexOf(key.key) > -1 && !this.dialogOpen && !this.fridge) {
             if (this.playerLeft >= Game.applianceShopLeft && this.playerLeft <= Game.applianceShopAreaRight) {
                 PubSub.getInstance().publish('show-shop');
             }
@@ -252,7 +252,9 @@ export class Game {
                 this.fridge = new Fridge3(this.engine, this.playerLeft - 30, this.playerTop - 72);
                 break;
         }
-        Matter.Body.setMass(this.fridge.body, .1);
+        Matter.Body.setMass(this.fridge.body, .000000000000000001);
+        //Matter.Body.set(this.fridge.body, 'isSensor', true);
+        
         this.addSprite(this.fridge);
         this.createFridgeConstraint();
         Game.lastStars = number;
@@ -364,8 +366,8 @@ export class Game {
     removeDuplicatePlayer() {
         // This shouldn't be needed, but its producing a second player after playing again
         const playerDivs = document.querySelectorAll('.player');
-        for(let i = 0;i<playerDivs.length;i++) {
-            if(playerDivs[i] !== this.player2.domObject) {
+        for (let i = 0; i < playerDivs.length; i++) {
+            if (playerDivs[i] !== this.player2.domObject) {
                 playerDivs[i].parentNode.removeChild(playerDivs[i]);
                 break;
             }
@@ -411,7 +413,7 @@ export class Game {
             this.loseLife();
         }
 
-        this.shopEntranceAvailable = this.playerLeft >= Game.applianceShopLeft && this.playerLeft <= Game.applianceShopAreaRight;
+        this.shopEntranceAvailable = this.playerLeft >= Game.applianceShopLeft && this.playerLeft <= Game.applianceShopAreaRight && !this.fridge;
 
         for (const cannon of this.cannons) {
 
@@ -523,7 +525,7 @@ export class Game {
                         warningAudio.play();
                         if (dynamite.play()) {
 
-                            setTimeout(()=> {
+                            setTimeout(() => {
                                 const audio: HTMLAudioElement = document.getElementById('explosion-sound') as HTMLAudioElement;
                                 audio.currentTime = 0;
                                 audio.play();
