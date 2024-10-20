@@ -39,7 +39,7 @@ export class Game {
     static gameInstance;
     world;
     internval;
-    static gravity = 1;
+    //static gravity = 1;
     player2: Player2;
     ground;
 
@@ -96,7 +96,7 @@ export class Game {
         //     this.run();
         // })
         setInterval(() => this.run(), 1000 / 60);
-        this.engine.gravity.y = Game.gravity;
+        this.engine.gravity.y = Config.getInstance().gravity;;
 
         this.player2 = new Player2(this.engine, 80, 0, 71, 96);
         this.addSprite(this.player2);
