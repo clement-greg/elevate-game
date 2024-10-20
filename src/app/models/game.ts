@@ -75,28 +75,21 @@ export class Game {
     }
     completionBarrier: any;
 
+    advanceInterval;
+
     initialize(zone: NgZone) {
+        if(!zone) {
+            return;
+        }
 
         if (!document.getElementById('game-div')) {
             setTimeout(() => this.initialize(zone), 100);
             return;
         }
         this.engine = Engine.create();
-
-        // const runner = Matter.Runner.run(this.engine);
-        // console.log(runner.fps);
-        // runner.delta = runner.delta / (runner.fps / 60);
-        // runner.deltaMin = runner.delta / (runner.fps / 60);
-        // runner.deltaMax = runner.delta / (runner.fps / 60);
-        // runner.isFixed = true;
-        // //runner.fps = 60;
-
-        //console.log(runner);
-        // window.requestAnimationFrame(() => {
-        //     this.run();
-        // })
-        setInterval(() => this.run(), 1000 / 60);
-        this.engine.gravity.y = Config.getInstance().gravity;;
+        clearInterval(this.advanceInterval);
+        this.advanceInterval = setInterval(() => this.run(), 1000 / Config.getInstance().framesPerSecond);
+        this.engine.gravity.y = Config.getInstance().gravity;
 
         this.player2 = new Player2(this.engine, 80, 0, 71, 96);
         this.addSprite(this.player2);
@@ -115,6 +108,7 @@ export class Game {
         this.ground = ground;
 
         const ceiling = new Ground(this.engine, 0, -50, this.world.width, 20);
+        ceiling.body.friction = 0;
 
 
         const left = new Ground(this.engine, 0, 0, 2, 10000);
@@ -253,6 +247,7 @@ export class Game {
         const audio: HTMLAudioElement = document.getElementById('game-over-won-sound') as HTMLAudioElement;
         audio.currentTime = 0;
         audio.play();
+        this.stop();
     }
 
     purchaseFridge(number = 1 | 2 | 3) {
@@ -423,6 +418,7 @@ export class Game {
                 sprite.speedY += this.world.gravity;
             }
         }
+        this.checkTime();
         for (const sprite of this.gameSprites) {
             sprite.advance();
         }
@@ -814,6 +810,7 @@ export class Game {
     }
 
     static getInstance(zone: NgZone = null): Game {
+
         if (!Game.gameInstance) {
             Game.gameInstance = new Game(zone);
         }
@@ -858,13 +855,15 @@ export class Game {
 
     start() {
         this.gameStartTime = new Date();
-        this.internval = setInterval(() => this.doGameLoop(), 10);
+        // this.internval = setInterval(() => this.doGameLoop(), 10);
     }
 
     running = true;
     stop() {
+
         this.running = false;
         clearInterval(this.internval);
+        clearInterval(this.advanceInterval);
     }
 
     doLost() {
@@ -872,9 +871,10 @@ export class Game {
         const lostAudio: HTMLAudioElement = document.getElementById('game-over-lost-sound') as HTMLAudioElement;
         lostAudio.currentTime = 0;
         lostAudio.play();
+        this.stop();
     }
 
-    doGameLoop() {
+    checkTime() {
         const now = new Date();
         let remainingSeconds = Config.getInstance().gameSeconds - (now.getTime() - this.gameStartTime.getTime()) / 1000;
         if (remainingSeconds < 0 && !this.editorOpen) {
@@ -890,9 +890,6 @@ export class Game {
         if (this.gameHUD) {
             this.gameHUD.timeRunningOut = remainingSeconds < 11;
             this.gameHUD.setTimeRemaining(this.remaining);
-            // for (const sprite of this.gameSprites) {
-            //     sprite.advance();
-            // }
         }
 
 
