@@ -16,6 +16,22 @@
     animation-delay: 3s;
 }
 
+@keyframes jimmy-in {
+    to {
+        bottom: -98px;
+    }
+}
+
+.jimmy {
+    bottom: -600px;
+    height: 600px;
+    animation: jimmy-in 1s ease;
+    animation-delay: 1s;
+    position: absolute;
+    right: 100px;
+    animation-fill-mode: forwards;
+}
+
 @keyframes fade-in-up {
     from {
         transform: translateY(500px);

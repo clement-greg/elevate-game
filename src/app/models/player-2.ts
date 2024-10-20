@@ -85,7 +85,14 @@ export class Player2 extends GameSprite {
     arrowRight = false;
     arrowLeft = false;
     lastAcceleration: number;
+    frameCount = 13;
+
     override advance() {
+        if(Math.abs(this.body.velocity.x)  > 0.01) {
+            this.domObject.classList.remove('standing');
+        } else {
+            this.domObject.classList.add('standing');
+        }
         if (Game.getInstance().dialogOpen) {
             return;
         }
@@ -115,14 +122,17 @@ export class Player2 extends GameSprite {
             this.applyingLeft = true;
         }
         if (this.isMoving) {
+            //this.domObject.classList.remove('standing');
             this.frameDelay += 1;
-            if (this.frameDelay === 6) {
+            if (this.frameDelay === 10) {
                 this.runFrame += 1;
-                if (this.runFrame >= 12) {
+                if (this.runFrame >= this.frameCount) {
                     this.runFrame = 0;
                 }
                 this.frameDelay = 0;
             }
+        } else {
+            //this.domObject.classList.add('standing');
         }
 
         if (this.groundSprite?.objectType === 'Log') {
@@ -143,6 +153,8 @@ export class Player2 extends GameSprite {
             Matter.Body.setPosition(this.body, { x: this.body.position.x, y: this.groundSprite.body.position.y - this.groundSprite.height });
             this.isGrounded = true;
         }
-        this.domObject.style.backgroundPositionX = (this.runFrame * -this.width) + 'px';
+        this.domObject.style.backgroundPositionX = (this.runFrame * -72) + 'px';
+
+
     }
 }

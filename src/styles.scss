@@ -73,12 +73,19 @@ body {
     height: calc(1px * var(--grant-sprite-height)); */
     width: 71px;
     height: 96px;
-    background-image: url(/assets/images/spritesheet_grant_small.png);
+    // background-image: url(/assets/images/spritesheet_grant_small.png);
+    background-image: url(/assets/images/jimmy-sprite.png);
     background-repeat: no-repeat;
     left: 0px;
     top: 0px;
-    background-position-y: -29px;
+    //background-position-y: -29px;
+    background-position-y: 0;
     z-index: 1;
+}
+
+.player.standing {
+    background-position-x: 0 !important;
+    background-position-y: -147px !important;
 }
 
 .player.has-jet-pack::after {
