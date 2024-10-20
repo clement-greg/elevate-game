@@ -83,7 +83,12 @@ export class Game {
         }
         this.engine = Engine.create();
 
-        //Matter.Runner.run(this.engine);
+        console.log(this.engine.world.step);
+        const runner = Matter.Runner.run(this.engine);
+        runner.delta = 1000 / 240;
+        runner.deltaMin = 1000 / 240;
+        runner.deltaMax = 1000 / 240;
+        console.log(runner);
         window.requestAnimationFrame(() => {
             this.run();
         })
@@ -165,8 +170,13 @@ export class Game {
         }
     }
 
+
+
+
+
     run() {
-        Engine.update(this.engine, 1000 / Config.getInstance().framesPerSecond);
+
+        //Engine.update(this.engine, 1000 / Config.getInstance().framesPerSecond);
         this.advance();
         if (this.running) {
             requestAnimationFrame(() => this.run());
@@ -254,7 +264,7 @@ export class Game {
         }
         Matter.Body.setMass(this.fridge.body, .000000000000000001);
         //Matter.Body.set(this.fridge.body, 'isSensor', true);
-        
+
         this.addSprite(this.fridge);
         this.createFridgeConstraint();
         Game.lastStars = number;
