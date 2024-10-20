@@ -17,7 +17,9 @@ export class BeginQuestComponent {
   
   My tools are scattered all over the place.
   
-  But, if you can collect all my tools and buy a new refrigerator from the appliance store, I can get that fixed for you.`;
+  But, if you can collect all my tools and buy a new refrigerator from the appliance store, I can get that fixed for you.
+  
+  Better hurry, you're foods going to spoil soon.`;
   id = ToolBarComponent.newid();
 
   @ViewChild('lottiePlayer') lottiePlayer :LottiePlayerComponent;

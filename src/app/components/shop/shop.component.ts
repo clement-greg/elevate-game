@@ -45,7 +45,7 @@ export class ShopComponent {
   
   Find the refrigerator you want and then check out.  
   
-  Any refrigerator will do, but remember: The nicer the appliance the happier the customer.`;
+  Any refrigerator will do, but remember: The nicer the refrigerator the happier you'll be.`;
   purchased = false;
 
   constructor() {

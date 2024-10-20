@@ -99,14 +99,14 @@ export class Player2 extends GameSprite {
         this.isMoving = (this.arrowRight || this.arrowLeft) && this.isGrounded;
 
         let isGrounded = Math.abs(this.body.velocity.y) < 0.1;
-        if(!this.accelerating) {
-            this.lastAcceleration = 0.005;
-        } else {
-            this.lastAcceleration += 0.0005;
-        }
-        if(this.lastAcceleration > (isGrounded ? Config.getInstance().playerMoveForceGrounded : Config.getInstance().playerMoveForceNotGrounded)) {
+        // if(!this.accelerating) {
+        //     this.lastAcceleration = 0.005;
+        // } else {
+        //     this.lastAcceleration += 0.0005;
+        // }
+        //if(this.lastAcceleration > (isGrounded ? Config.getInstance().playerMoveForceGrounded : Config.getInstance().playerMoveForceNotGrounded)) {
             this.lastAcceleration = isGrounded ? Config.getInstance().playerMoveForceGrounded : Config.getInstance().playerMoveForceNotGrounded;
-        } 
+        //} 
   
         if (this.arrowRight && this.body.velocity.x < Config.getInstance().playerMaxXVelocity) {
 
