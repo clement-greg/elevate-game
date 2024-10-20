@@ -83,15 +83,19 @@ export class Game {
         }
         this.engine = Engine.create();
 
-        console.log(this.engine.world.step);
-        const runner = Matter.Runner.run(this.engine);
-        runner.delta = 1000 / 240;
-        runner.deltaMin = 1000 / 240;
-        runner.deltaMax = 1000 / 240;
-        console.log(runner);
-        window.requestAnimationFrame(() => {
-            this.run();
-        })
+        // const runner = Matter.Runner.run(this.engine);
+        // console.log(runner.fps);
+        // runner.delta = runner.delta / (runner.fps / 60);
+        // runner.deltaMin = runner.delta / (runner.fps / 60);
+        // runner.deltaMax = runner.delta / (runner.fps / 60);
+        // runner.isFixed = true;
+        // //runner.fps = 60;
+
+        //console.log(runner);
+        // window.requestAnimationFrame(() => {
+        //     this.run();
+        // })
+        setInterval(() => this.run(), 1000 / 60);
         this.engine.gravity.y = Game.gravity;
 
         this.player2 = new Player2(this.engine, 80, 0, 71, 96);
@@ -176,11 +180,12 @@ export class Game {
 
     run() {
 
+        Engine.update(this.engine);
         //Engine.update(this.engine, 1000 / Config.getInstance().framesPerSecond);
         this.advance();
-        if (this.running) {
-            requestAnimationFrame(() => this.run());
-        }
+        // if (this.running) {
+        //     requestAnimationFrame(() => this.run());
+        // }
     }
 
     shopEntranceAvailable = false;
@@ -417,6 +422,9 @@ export class Game {
                 }
                 sprite.speedY += this.world.gravity;
             }
+        }
+        for (const sprite of this.gameSprites) {
+            sprite.advance();
         }
 
         if (this.playerTop > 1000) {
@@ -882,9 +890,9 @@ export class Game {
         if (this.gameHUD) {
             this.gameHUD.timeRunningOut = remainingSeconds < 11;
             this.gameHUD.setTimeRemaining(this.remaining);
-            for (const sprite of this.gameSprites) {
-                sprite.advance();
-            }
+            // for (const sprite of this.gameSprites) {
+            //     sprite.advance();
+            // }
         }
 
 
