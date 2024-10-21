@@ -18,6 +18,7 @@ export class Config {
     ramSpeed: number;
     cannonBallSpeed: number;
     scrollBackground: boolean;
+    showBilboardVideos: boolean;
 
     private static instance: Config;
     static getInstance() {

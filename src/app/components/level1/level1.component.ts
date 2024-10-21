@@ -10,6 +10,7 @@ import { PubSub } from '../../models/pub-sub';
 import { Game } from '../../models/game';
 import { ShopComponent } from '../shop/shop.component';
 import { NotCompleteComponent } from '../not-complete/not-complete.component';
+import { Config } from '../../models/config';
 
 @Component({
   selector: 'app-level1',
@@ -77,6 +78,10 @@ export class Level1Component implements AfterViewInit {
 
   get homeLeft() {
     return Game.homeLeft + 'px';
+  }
+
+  get showBilboardVideos() {
+    return Config.getInstance().showBilboardVideos;
   }
 
 
