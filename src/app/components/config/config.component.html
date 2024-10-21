@@ -1,4 +1,4 @@
-<div style="height: 560px;padding: 30px;width: 500px;">
+<div style="height: 600px;padding: 30px;width: 500px;">
 
     <div style="display: flex;flex-direction: column;height: 100%;">
         <div style="flex: 1;">
@@ -37,6 +37,13 @@
         
                         <mat-checkbox [(ngModel)]="config.scrollBackground">Scroll Background</mat-checkbox>
                         <mat-checkbox [(ngModel)]="config.showBilboardVideos">Show Billboard Videos</mat-checkbox>
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>Level</mat-label>
+                            <mat-select [(ngModel)]="config.level">
+                                <mat-option *ngFor="let level of levels" [value]="level">{{level}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
 
         
                     </div>

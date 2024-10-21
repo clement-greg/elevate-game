@@ -125,7 +125,7 @@ export class Game {
         this.completionBarrier.body.friction = 0;
         this.gameSprites.push(this.completionBarrier);
 
-        HTTP.getData('./assets/levels/level1.json').then(json => {
+        HTTP.getData(`./assets/levels/${Config.getInstance().level}.json`).then(json => {
             this.setupGame(json);
         });
 

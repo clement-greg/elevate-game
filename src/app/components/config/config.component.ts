@@ -10,11 +10,12 @@ import { Config } from '../../models/config';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import {MatSelectModule} from '@angular/material/select';
 
 @Component({
   selector: 'app-config',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatIconModule, FormsModule, MatFormFieldModule, MatInputModule, MatProgressSpinnerModule, MatTabsModule, MatCheckboxModule],
+  imports: [CommonModule, MatButtonModule, MatIconModule, FormsModule, MatFormFieldModule, MatInputModule, MatProgressSpinnerModule, MatTabsModule, MatCheckboxModule, MatSelectModule],
   templateUrl: './config.component.html',
   styleUrl: './config.component.scss'
 })
@@ -22,6 +23,11 @@ export class ConfigComponent {
 
   config = JSON.parse(JSON.stringify(Config.getInstance()));
   readonly dialogRef = inject(MatDialogRef<ConfigComponent>);
+  levels = [
+    'level1',
+    'level2',
+    'level3'
+  ]
 
   save() {
 

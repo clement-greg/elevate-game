@@ -19,6 +19,7 @@ export class Config {
     cannonBallSpeed: number;
     scrollBackground: boolean;
     showBilboardVideos: boolean;
+    level: string;
 
     private static instance: Config;
     static getInstance() {
@@ -45,6 +46,7 @@ export class Config {
                 i.showGameWinTime = 30000;
                 i.scrollBackground = true;
                 i.showBilboardVideos = true;
+                i.level = 'level1';
 
                 Config.instance = i;
             }
