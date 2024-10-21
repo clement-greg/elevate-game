@@ -32,18 +32,19 @@ export class Config {
             if (!Config.instance) {
                 const i = new Config();
                 i.framesPerSecond = 60;
-                i.gravity = 1;
-                i.playerJumpForce = -0.32;
-                i.playerMoveForceGrounded = 0.02;
+                i.gravity = 1.5;
+                i.playerJumpForce = -0.4;
+                i.playerMoveForceGrounded = 0.1;
                 i.playerMoveForceNotGrounded = 0.01;
-                i.playerMaxXVelocity = 3;
-                i.trampolineYForce = -0.3 ;
-                i.ramSpeed = 2;
+                i.playerMaxXVelocity = 7;
+                i.trampolineYForce = -0.7 ;
+                i.ramSpeed = 5;
                 i.cannonBallSpeed = 20;
-                i.gameSeconds = 240;
+                i.gameSeconds = 241;
                 i.showGameLostTime = 30000;
                 i.showGameWinTime = 30000;
                 i.scrollBackground = true;
+                i.showBilboardVideos = true;
 
                 Config.instance = i;
             }
