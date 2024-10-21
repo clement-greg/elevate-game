@@ -69,8 +69,6 @@ body {
 .player {
     display: inline-block;
     position: absolute;
-    /* width: calc(1px *var(--grant-sprite-width));
-    height: calc(1px * var(--grant-sprite-height)); */
     width: 71px;
     height: 96px;
     // background-image: url(/assets/images/spritesheet_grant_small.png);
@@ -81,6 +79,15 @@ body {
     //background-position-y: -29px;
     background-position-y: 0;
     z-index: 1;
+}
+
+.player-dying {
+    display: inline-block;
+    position: absolute;
+    // width: 71px;
+    height: 128px;
+    z-index: 1;
+    
 }
 
 .player.standing {

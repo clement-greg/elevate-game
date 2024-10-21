@@ -37,7 +37,7 @@ export class World {
         //document.getElementById('game-container').style.transform = `scale(${this.getScalePercentage()})`;
     }
 
-    static getInstance() {
+    static getInstance() : World {
         if (!World.instance) {
             World.instance = new World();
             World.instance.initialize();

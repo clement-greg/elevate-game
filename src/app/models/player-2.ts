@@ -16,9 +16,10 @@ export class Player2 extends GameSprite {
     moveSprite = false;
     pubsub;
     isGrounded = false;
-    subscriptionEvents:any;
+    subscriptionEvents: any;
     lottieId = ToolBarComponent.newid();
     accelerating = false;
+    dead: boolean;
 
 
     constructor(engine, x, y, width, height) {
@@ -35,7 +36,7 @@ export class Player2 extends GameSprite {
         //
         playerDiv.innerHTML = `<lottie-player  style="transform: translateY(80px) translateX(-21px) scale(2); "  id="${this.lottieId}" background="transparent" src="https://lottie.host/ce873636-1d89-4e51-b903-4e458339ea12/Hdnd2ezUkH.json"></lottie-player>`
 
-        this.subscriptionEvents =  this.pubsub.subscribe('keydown', key => {
+        this.subscriptionEvents = this.pubsub.subscribe('keydown', key => {
             if (key.code === 'Space' && this.isGrounded && !Game.getInstance().dialogOpen) {
                 Matter.Body.setVelocity(this.body, { x: this.body.velocity.x, y: 0 });
                 let upForce = -0.32;
@@ -49,13 +50,13 @@ export class Player2 extends GameSprite {
 
 
     jump() {
-        if((this.isGrounded ||  Game.getInstance().gameHUD.isJetPackMode ) && !Game.getInstance().dialogOpen) {
+        if ((this.isGrounded || Game.getInstance().gameHUD.isJetPackMode) && !Game.getInstance().dialogOpen) {
             Matter.Body.setVelocity(this.body, { x: this.body.velocity.x, y: 0 });
             let upForce = Config.getInstance().playerJumpForce;
             Matter.Body.applyForce(this.body, { x: this.body.position.x, y: this.body.position.y }, { x: 0, y: upForce });
             this.isGrounded = false;
             delete this.groundSprite;
-            if(Game.getInstance().gameHUD.isJetPackMode) {
+            if (Game.getInstance().gameHUD.isJetPackMode) {
                 const audio: HTMLAudioElement = document.getElementById('thrust-sound') as HTMLAudioElement;
                 audio.volume = .3;
                 audio.currentTime = 0;
@@ -87,13 +88,19 @@ export class Player2 extends GameSprite {
     lastAcceleration: number;
     frameCount = 13;
 
+    stopMomentum() {
+        if (this.isGrounded) {
+            Matter.Body.setVelocity(this.body, { x: 0, y: 0 });
+        }
+    }
+
     override advance() {
-        if(Math.abs(this.body.velocity.x)  > 0.01) {
+        if (Math.abs(this.body.velocity.x) > 0.01) {
             this.domObject.classList.remove('standing');
         } else {
             this.domObject.classList.add('standing');
         }
-        if (Game.getInstance().dialogOpen) {
+        if (Game.getInstance().dialogOpen || this.dead) {
             return;
         }
         this.isMoving = (this.arrowRight || this.arrowLeft) && this.isGrounded;
@@ -105,9 +112,9 @@ export class Player2 extends GameSprite {
         //     this.lastAcceleration += 0.0005;
         // }
         //if(this.lastAcceleration > (isGrounded ? Config.getInstance().playerMoveForceGrounded : Config.getInstance().playerMoveForceNotGrounded)) {
-            this.lastAcceleration = isGrounded ? Config.getInstance().playerMoveForceGrounded : Config.getInstance().playerMoveForceNotGrounded;
+        this.lastAcceleration = isGrounded ? Config.getInstance().playerMoveForceGrounded : Config.getInstance().playerMoveForceNotGrounded;
         //} 
-  
+
         if (this.arrowRight && this.body.velocity.x < Config.getInstance().playerMaxXVelocity) {
 
             Matter.Body.applyForce(this.body, { x: this.body.position.x, y: this.body.position.y }, { x: this.lastAcceleration, y: 0 });

@@ -16,7 +16,7 @@ export class Dynamite extends GameSprite {
         this.body.label = 'dynamite';
         //this.id = ToolBarComponent.newid();
         this.objectType = 'dynamite';
-        div.innerHTML = `<div style="position: absolute; width: 400px; height: 400px; margin-top: -147px;margin-left: -166px"><lottie-player speed="3" id="${this.lottieId}" background="transparent" src="https://lottie.host/738cd3df-d2aa-4870-93aa-9f77afea25b7/hElPz5c5rN.json"></lottie-player></div>`
+        div.innerHTML = `<div style="position: absolute; width: 400px; height: 400px; margin-top: -147px;margin-left: -166px"><lottie-player speed="2" id="${this.lottieId}" background="transparent" src="https://lottie.host/738cd3df-d2aa-4870-93aa-9f77afea25b7/hElPz5c5rN.json"></lottie-player></div>`
     }
 
     play() {

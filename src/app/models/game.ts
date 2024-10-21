@@ -78,7 +78,7 @@ export class Game {
     advanceInterval;
 
     initialize(zone: NgZone) {
-        if(!zone) {
+        if (!zone) {
             return;
         }
 
@@ -109,6 +109,8 @@ export class Game {
 
         const ceiling = new Ground(this.engine, 0, -50, this.world.width, 20);
         ceiling.body.friction = 0;
+
+        setInterval(() => console.log(this.ground.body.friction), 1000)
 
 
         const left = new Ground(this.engine, 0, 0, 2, 10000);
@@ -174,7 +176,7 @@ export class Game {
 
     run() {
 
-        Engine.update(this.engine);
+        Engine.update(this.engine, 1000 / Config.getInstance().framesPerSecond);
         //Engine.update(this.engine, 1000 / Config.getInstance().framesPerSecond);
         this.advance();
         // if (this.running) {
@@ -188,11 +190,13 @@ export class Game {
         if (key.key == 'ArrowRight') {
             this.player2.accelerating = false;
             this.player2.arrowRight = false;
+            this.player2.stopMomentum();
         }
 
         if (key.key === 'ArrowLeft') {
             this.player2.accelerating = false;
             this.player2.arrowLeft = false;
+            this.player2.stopMomentum();
         }
         if (this.primaryButtonKeys.indexOf(key.key) > -1 && this.infoBarier) {
             if (this.showQuestBegin) {
@@ -534,17 +538,18 @@ export class Game {
 
                     const dynamite: Dynamite = this.gameSprites.find(i => (i.body === collision.bodyA || i.body === collision.bodyB) && i !== this.player2);
                     if (dynamite) {
-                        const warningAudio: HTMLAudioElement = document.getElementById('warning-sound') as HTMLAudioElement;
-                        warningAudio.currentTime = 0;
-                        warningAudio.play();
+
                         if (dynamite.play()) {
+                            const warningAudio: HTMLAudioElement = document.getElementById('warning-sound') as HTMLAudioElement;
+                            warningAudio.currentTime = 0;
+                            warningAudio.play();
 
                             setTimeout(() => {
+                                warningAudio.pause();
                                 const audio: HTMLAudioElement = document.getElementById('explosion-sound') as HTMLAudioElement;
                                 audio.currentTime = 0;
                                 audio.play();
-                                warningAudio.pause();
-                            }, 1000);
+                            }, 1800);
                             setTimeout(() => {
                                 const diffX = this.playerLeft - dynamite.x;
                                 const diffY = this.playerTop - dynamite.y;
@@ -562,7 +567,7 @@ export class Game {
                                     //forcex += .05;
                                 }
                                 this.removeSprite(dynamite);
-                            }, 2000);
+                            }, 2500);
                         }
                     }
                     break;
@@ -590,7 +595,7 @@ export class Game {
                         const ram = this.gameSprites.find(i => (i.body === collision.bodyA || i.body === collision.bodyB) && i !== this.player2);
                         if (ram) {
 
-                            const killSound: HTMLAudioElement = document.getElementById('kill-enemy-sound') as HTMLAudioElement;
+                            const killSound: HTMLAudioElement = document.getElementById('goat-sound') as HTMLAudioElement;
                             killSound.currentTime = 0;
                             killSound.play();
                             Matter.Body.applyForce(this.player2.body, { x: this.player2.body.position.x, y: this.player2.body.position.y }, { x: 0, y: -0.2 });
@@ -635,6 +640,12 @@ export class Game {
                             || i.frictionBody === collision.bodyA
                             || i.frictionBody === collision.bodyB
                             || i.body === collision.bodyB) && i !== this.player2);
+                        if (label != 'Ice') {
+                            if (!this.player2.accelerating) {
+                                this.player2.stopMomentum();
+                                console.log('stopping momentum');
+                            }
+                        }
                         break;
                 }
 
@@ -703,32 +714,14 @@ export class Game {
     }
 
     loseLife() {
+
+        // TODO: Play death scene 
+        this.player2.domObject.style.visibility = 'hidden';
         this.player2.x = 0;
-        this.player2.y = 0;
+        this.player2.dead = true;
+        this.player2.y = World.getInstance().height;
         Matter.Body.setPosition(this.player2.body, { x: 0, y: 0 });
         Matter.Body.setVelocity(this.player2.body, { x: 0, y: 0 });
-
-        document.getElementById('game-div').classList.add('reset');
-        document.getElementById('bottom-filler').classList.add('reset');
-        document.getElementById('bg-buildings').classList.add('reset');
-        document.getElementById('bg-plants').classList.add('reset');
-        document.getElementById('bg-sky').classList.add('reset');
-
-        document.getElementById('game-div').style.left = '0px';
-        document.getElementById('bg-buildings').style.left = '0px';
-        document.getElementById('bg-plants').style.left = '0px';
-        document.getElementById('bg-sky').style.left = '0px';
-        document.getElementById('bottom-filler').style.left = '0px';
-
-        setTimeout(() => {
-            document.getElementById('game-div').classList.remove('reset');
-            document.getElementById('bg-buildings').classList.remove('reset');
-            document.getElementById('bg-plants').classList.remove('reset');
-            document.getElementById('bg-sky').classList.remove('reset');
-            document.getElementById('bottom-filler').classList.add('reset');
-
-        }, 2000);
-
         const el: HTMLAudioElement = document.getElementById('die-sound') as HTMLAudioElement;
         el.currentTime = 0;
         el.play();
@@ -736,14 +729,61 @@ export class Game {
         PubSub.getInstance().publish('jet-pack-change');
         this.player2.die();
 
+        const playerDying = document.createElement('div');
+        playerDying.className = 'player-dying';
+        playerDying.innerHTML = `<lottie-player style="transform: translateY(-50px)" autoplay="true" background="transparent" src="https://lottie.host/c71ebcd7-f1bc-47ba-9bdf-ebbf755f6f5a/crc0oSYsEC.json"></lottie-player>`;
+        playerDying.style.left = (this.playerLeft - 16) + 'px';
+        playerDying.style.top = (this.playerTop + 43) + 'px';
+        document.getElementById('game-div').appendChild(playerDying);
+
         setTimeout(() => {
+            this.player2.domObject.style.visibility = 'visible';
+            this.player2.domObject.style.left = "0px";
+            this.player2.domObject.style.bottom = `${World.getInstance().height}px`;
+            this.player2.x = 0;
+            this.player2.y = World.getInstance().height;
+            Matter.Body.setPosition(this.player2.body, { x: 0, y: 50 });
+            Matter.Body.setVelocity(this.player2.body, { x: 0, y: 0 });
             if (this.player2.x < 0) {
                 this.player2.x = 0;
-                this.player2.y = 50;
                 Matter.Body.setPosition(this.player2.body, { x: 0, y: 50 });
                 Matter.Body.setVelocity(this.player2.body, { x: 0, y: 0 });
             }
-        }, 1000);
+        }, 2500);
+        setTimeout(() => {
+            this.player2.dead = false;
+        }, 3000)
+        setTimeout(() => {
+            playerDying.parentNode.removeChild(playerDying);
+            document.getElementById('game-div').classList.add('reset');
+            document.getElementById('bottom-filler').classList.add('reset');
+            document.getElementById('bg-buildings').classList.add('reset');
+            document.getElementById('bg-plants').classList.add('reset');
+            document.getElementById('bg-sky').classList.add('reset');
+
+            document.getElementById('game-div').style.left = '0px';
+            document.getElementById('bg-buildings').style.left = '0px';
+            document.getElementById('bg-plants').style.left = '0px';
+            document.getElementById('bg-sky').style.left = '0px';
+            document.getElementById('bottom-filler').style.left = '0px';
+
+            setTimeout(() => {
+                document.getElementById('game-div').classList.remove('reset');
+                document.getElementById('bg-buildings').classList.remove('reset');
+                document.getElementById('bg-plants').classList.remove('reset');
+                document.getElementById('bg-sky').classList.remove('reset');
+                document.getElementById('bottom-filler').classList.add('reset');
+
+            }, 2000);
+
+        }, 3000);
+
+
+
+
+
+
+
     }
 
     addSprite(sprite) {
@@ -848,6 +888,7 @@ export class Game {
         }
         if (sprite.domObject?.parentNode) {
             sprite.domObject.parentNode.removeChild(sprite.domObject);
+            console.error('no domObject or parent')
 
         }
         this.gameSprites.splice(this.gameSprites.indexOf(sprite), 1);
