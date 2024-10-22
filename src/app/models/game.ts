@@ -110,8 +110,6 @@ export class Game {
         const ceiling = new Ground(this.engine, 0, -50, this.world.width, 20);
         ceiling.body.friction = 0;
 
-        setInterval(() => console.log(this.ground.body.friction), 1000)
-
 
         const left = new Ground(this.engine, 0, 0, 2, 10000);
         left.body.friction = 0;
@@ -220,21 +218,21 @@ export class Game {
         } else if (this.secondaryButtonKeys.indexOf(key.key) > -1 && this.dialogOpen) {
             PubSub.getInstance().publish('close-all-diagrams');
         }
-        if (key.key === 't' || key.key === 'T') {
+        if ((key.key === 't' || key.key === 'T') && Config.getInstance().allowDebug ) {
             if (this.playerTop > 0) {
                 Matter.Body.applyForce(this.player2.body, { x: this.player2.body.position.x, y: this.player2.body.position.y }, { x: 0, y: -.3 });
             }
         }
-        if (key.key === 's' || key.key === 'S') {
+        if ((key.key === 's' || key.key === 'S') && Config.getInstance().allowDebug) {
             for (let i = 0; i < 220; i++) {
                 this.gameHUD.incrementCoinCount();
             }
             PubSub.getInstance().publish('show-shop');
         }
-        if (key.key === 'w' || key.key === 'W') {
+        if ((key.key === 'w' || key.key === 'W') && Config.getInstance().allowDebug) {
             this.doWin();
         }
-        if (key.key === 'l' || key.key === 'L') {
+        if ((key.key === 'l' || key.key === 'L') && Config.getInstance().allowDebug) {
             //PubSub.getInstance().publish('game-lost');
             this.doLost();
         }
@@ -558,12 +556,16 @@ export class Game {
                                         this.loseLife();
                                     }
                                 }
+                       
+                                let multiplier = 1;
                                 for (let i = 0; i < 5; i++) {
-                                    const coin = new Coin(this.engine, dynamite.x, dynamite.y, 'static');
+                                    const coin = new Coin(this.engine, dynamite.x, dynamite.y, 'static', false);
+                                    
                                     this.addSprite(coin);
                                     coin.body.isStatic = false;
                                     Matter.Body.setStatic(coin.body, false);
-                                    Matter.Body.setVelocity(coin.body, { x: 0.05, y: -5.3 });
+                                    Matter.Body.setVelocity(coin.body, { x: 0.1 * multiplier, y: -5.3 });
+                                    multiplier *= -1;
                                     //forcex += .05;
                                 }
                                 this.removeSprite(dynamite);
@@ -603,7 +605,7 @@ export class Game {
                             let forcex = -2.5;
 
                             for (let i = 0; i < 5; i++) {
-                                const coin = new Coin(this.engine, ram.x, ram.y, 'static');
+                                const coin = new Coin(this.engine, ram.x, ram.y, 'static', false);
                                 this.addSprite(coin);
                                 coin.body.isStatic = false;
                                 Matter.Body.setStatic(coin.body, false);
@@ -643,7 +645,6 @@ export class Game {
                         if (label != 'Ice') {
                             if (!this.player2.accelerating) {
                                 this.player2.stopMomentum();
-                                console.log('stopping momentum');
                             }
                         }
                         break;

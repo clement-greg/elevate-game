@@ -1,10 +1,11 @@
 import { CommonModule, CurrencyPipe } from '@angular/common';
-import { Component, HostListener, inject, ViewChild } from '@angular/core';
+import { Component, HostListener, inject, OnDestroy, ViewChild } from '@angular/core';
 import { PriceTagComponent } from '../price-tag/price-tag.component';
 import { Game } from '../../models/game';
 import { MatDialogRef } from '@angular/material/dialog';
 import { PressAComponent } from '../press-a/press-a.component';
 import { LottiePlayerComponent } from '../lottie-player/lottie-player.component';
+import { ToolBarComponent } from '../tool-bar/tool-bar.component';
 
 @Component({
   selector: 'app-shop',
@@ -13,12 +14,13 @@ import { LottiePlayerComponent } from '../lottie-player/lottie-player.component'
   templateUrl: './shop.component.html',
   styleUrl: './shop.component.scss'
 })
-export class ShopComponent {
+export class ShopComponent implements OnDestroy {
 
   readonly dialogRef = inject(MatDialogRef<ShopComponent>);
   selectedItem: any;
   @ViewChild('player') player: LottiePlayerComponent;
   wordBubbleVisible = true;
+  id = ToolBarComponent.newid();
 
   items: Item[] = [
     {
@@ -54,6 +56,10 @@ export class ShopComponent {
 
   }
 
+  ngOnDestroy(): void {
+    clearTimeout(this.wordsTimeout);
+  }
+
   nextItem() {
     let index = this.items.indexOf(this.selectedItem);
     index++;
@@ -78,7 +84,7 @@ export class ShopComponent {
     return this.items.indexOf(this.selectedItem);
   }
 
-  
+
   primaryButtonKeys = [' ', 'a', 'A'];
 
   @HostListener('window:keydown', ['$event'])
@@ -89,16 +95,17 @@ export class ShopComponent {
     if (event.key === 'ArrowRight' && !this.purchased) {
       this.nextItem();
     }
+
     if (this.primaryButtonKeys.indexOf(event.key) > -1) {
       this.purchase();
     }
   }
 
   purchase() {
-    if(this.purchased) {
+    if (this.purchased) {
       return;
     }
-    document.getElementById('speech').innerText = '';
+    document.getElementById(this.id).innerText = '';
     this.wordIndex = 0;
     this.player.seek(0);
     this.player.play();
@@ -108,13 +115,13 @@ export class ShopComponent {
       alert.currentTime = 0;
       alert.play();
       this.wordBubbleVisible = false;
-      setTimeout(()=> {
+      setTimeout(() => {
         this.wordBubbleVisible = true;
-        setTimeout(()=> {
+        setTimeout(() => {
           this.message = `Oh sorry, you don't have enough money to buy that refrigerator.  
-          That one costs ${currencyPipe.transform( this.selectedItem.price)} but you only have ${currencyPipe.transform( Game.getInstance().gameHUD.money)}
+          That one costs ${currencyPipe.transform(this.selectedItem.price)} but you only have ${currencyPipe.transform(Game.getInstance().gameHUD.money)}
                 `
-                this.doWords();
+          this.doWords();
         })
       }, 500);
 
@@ -127,12 +134,12 @@ export class ShopComponent {
     let index = this.items.indexOf(this.selectedItem) + 1;
     Game.getInstance().purchaseFridge(index);
     this.wordBubbleVisible = false;
-    setTimeout(()=> {
+    setTimeout(() => {
       this.wordBubbleVisible = true;
-      setTimeout(()=> {
+      setTimeout(() => {
         this.message = `Thanks for your purchase.  Come again soon.`;
         this.doWords();
-        Game.getInstance().gameHUD.coinCount = Game.getInstance().gameHUD.coinCount -  (this.selectedItem.price / 10);
+        Game.getInstance().gameHUD.coinCount = Game.getInstance().gameHUD.coinCount - (this.selectedItem.price / 10);
         setTimeout(() => this.dialogRef.close(), 2500);
       });
     }, 500);
@@ -144,19 +151,21 @@ export class ShopComponent {
   }
 
   wordIndex = 0;
+  wordsTimeout: any;
+
   doWords() {
-    if (!document.getElementById('speech')) {
-      setTimeout(() => this.doWords(), 100);
+    if (!document.getElementById(this.id)) {
+      this.wordsTimeout =  setTimeout(() => this.doWords(), 100);
       return;
     }
 
-    const div = document.getElementById('speech');
+    const div = document.getElementById(this.id);
 
     if (this.wordIndex < this.message.length) {
       this.wordIndex++;
       const msg = this.message.substring(0, this.wordIndex);
       div.innerText = msg;
-      setTimeout(() => this.doWords(), 30);
+      this.wordsTimeout =  setTimeout(() => this.doWords(), 30);
     } else {
       this.player.pause();
     }

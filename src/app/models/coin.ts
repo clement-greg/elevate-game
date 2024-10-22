@@ -7,7 +7,7 @@ export class Coin extends MoveableObject {
     slower = 2;
     slowerFactor = 7;
 
-    constructor(engine = null, x = null, y = null, extraClass = null) {
+    constructor(engine = null, x = null, y = null, extraClass = null, isSensor = true) {
         super(engine, x, y, 72, 72);
         if (this.body) {
             this.body.isStatic = true;
@@ -27,6 +27,8 @@ export class Coin extends MoveableObject {
         this.domObject = brickDiv;
         if (this.body) {
             Matter.Body.setMass(this.body, 0.00000001);
+
+            Matter.Body.set(this.body, 'isSensor', isSensor);
         }
     }
 

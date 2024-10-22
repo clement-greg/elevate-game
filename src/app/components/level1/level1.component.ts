@@ -27,20 +27,20 @@ export class Level1Component implements AfterViewInit {
     PubSub.getInstance().subscribe('quest-begin', () => {
       this.questBeginRef = dialog.open(BeginQuestComponent, { disableClose: true });
       Game.getInstance().dialogOpen = true;
-      this.questBeginRef.afterClosed().subscribe(() => { Game.getInstance().dialogOpen = false;  });
+      this.questBeginRef.afterClosed().subscribe(() => { Game.getInstance().dialogOpen = false; });
     });
 
     PubSub.getInstance().subscribe('close-begin-quest', () => {
       this.questBeginRef.close();
     });
 
-    PubSub.getInstance().subscribe('game-lost',()=> {
+    PubSub.getInstance().subscribe('game-lost', () => {
       dialog.closeAll();
     });
-    PubSub.getInstance().subscribe('level-complete',()=> {
+    PubSub.getInstance().subscribe('level-complete', () => {
       dialog.closeAll();
     });
-    PubSub.getInstance().subscribe('close-all-diagrams',()=> {
+    PubSub.getInstance().subscribe('close-all-diagrams', () => {
       Game.getInstance().dialogOpen = false;
       dialog.closeAll();
 
@@ -49,14 +49,14 @@ export class Level1Component implements AfterViewInit {
     PubSub.getInstance().subscribe('show-shop', () => {
       Game.getInstance().dialogOpen = true;
       const ref = dialog.open(ShopComponent);
-      ref.afterClosed().subscribe(() => { Game.getInstance().dialogOpen = false;  });
+      ref.afterClosed().subscribe(() => { Game.getInstance().dialogOpen = false; });
     });
 
     PubSub.getInstance().subscribe('hit-completion-barrier', () => {
       if (!Game.getInstance().dialogOpen) {
         Game.getInstance().dialogOpen = true;
         this.notCompletedRef = dialog.open(NotCompleteComponent);
-        this.notCompletedRef.afterClosed().subscribe(() => { Game.getInstance().dialogOpen = false;  });
+        this.notCompletedRef.afterClosed().subscribe(() => { Game.getInstance().dialogOpen = false; });
       }
     });
 
@@ -103,7 +103,7 @@ export class Level1Component implements AfterViewInit {
 
   @HostListener('window:keydown', ['$event'])
   handleKeyDown(event: KeyboardEvent) {
-    if (event.key === 'e' || event.key === 'E') {
+    if ((event.key === 'e' || event.key === 'E') && Config.getInstance().allowDebug) {
       this.showToolbar = !this.showToolbar;
     }
 

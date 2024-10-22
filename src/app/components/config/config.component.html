@@ -1,4 +1,4 @@
-<div style="height: 600px;padding: 30px;width: 500px;">
+<div style="" class="config-container">
 
     <div style="display: flex;flex-direction: column;height: 100%;">
         <div style="flex: 1;">
@@ -6,7 +6,7 @@
 
             <mat-tab-group>
                 <mat-tab label="World">
-                    <div class="two-column">
+                    <div class="three-column">
         
                         <mat-form-field appearance="outline">
                             <mat-label>Frames / Second</mat-label>
@@ -34,16 +34,22 @@
                             <mat-label>Show Game Lost Time (ms)</mat-label>
                             <input type="number" matInput [(ngModel)]="config.showGameLostTime">
                         </mat-form-field>
-        
-                        <mat-checkbox [(ngModel)]="config.scrollBackground">Scroll Background</mat-checkbox>
-                        <mat-checkbox [(ngModel)]="config.showBilboardVideos">Show Billboard Videos</mat-checkbox>
-
                         <mat-form-field appearance="outline">
                             <mat-label>Level</mat-label>
                             <mat-select [(ngModel)]="config.level">
                                 <mat-option *ngFor="let level of levels" [value]="level">{{level}}</mat-option>
                             </mat-select>
                         </mat-form-field>
+                        <div></div>
+                        <div></div>
+        
+                        <mat-checkbox [(ngModel)]="config.scrollBackground">Scroll Background</mat-checkbox>
+                        <mat-checkbox [(ngModel)]="config.showBilboardVideos">Show Billboard Videos</mat-checkbox>
+                        <mat-checkbox [(ngModel)]="config.allowDebug">Allow Debug</mat-checkbox>
+
+
+
+
 
         
                     </div>
@@ -82,6 +88,21 @@
                             <mat-label>Cannon Ball Speed</mat-label>
                             <input type="number" matInput [(ngModel)]="config.cannonBallSpeed">
                         </mat-form-field>
+                    </div>
+                </mat-tab>
+
+                <mat-tab label="Config Sheet">
+                    <div>
+                        <span class="key">E</span> Edit Level
+                    </div>
+                    <div>
+                        <span class="key">T</span> Show the Appliance Shop
+                    </div>
+                    <div>
+                        <span class="key">W</span> Win the Game
+                    </div>
+                    <div>
+                        <span class="key">L</span> Lose the Game
                     </div>
                 </mat-tab>
             </mat-tab-group>

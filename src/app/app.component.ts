@@ -61,9 +61,11 @@ export class AppComponent {
     });
   }
 
+  primaryButtons = [' ', 'a', 'A'];
+
   @HostListener('window:keydown', ['$event'])
   handleKeyDown(event: KeyboardEvent) {
-    if (event.key === ' ' && !this.startGame && this.canRestart) {
+    if (this.primaryButtons.indexOf(event.key) > -1 && !this.startGame && this.canRestart) {
       this.showGameWon = false;
       this.showGameLost = false;
       Game.deleteInstance();

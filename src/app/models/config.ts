@@ -20,6 +20,7 @@ export class Config {
     scrollBackground: boolean;
     showBilboardVideos: boolean;
     level: string;
+    allowDebug: boolean;
 
     private static instance: Config;
     static getInstance() {
