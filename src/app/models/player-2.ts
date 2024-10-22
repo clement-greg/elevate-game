@@ -90,7 +90,9 @@ export class Player2 extends GameSprite {
 
     stopMomentum() {
         if (this.isGrounded) {
-            Matter.Body.setVelocity(this.body, { x: 0, y: 0 });
+            if (!this.groundSprite || this.groundSprite.objectType !== 'Ice') {
+                Matter.Body.setVelocity(this.body, { x: 0, y: 0 });
+            }
         }
     }
 
