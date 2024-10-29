@@ -1,11 +1,11 @@
 <div class="dialog-container">
 
-    <div style="display: grid;grid-template-columns: auto 1fr;">
+    <div style="display: grid;grid-template-columns: auto 1fr;min-height: 425px;">
 
         <div style="width: 300px;">
             <div style="position: absolute ;margin-left: 50px;">
                 <app-lottie-player #player
-                    src="https://lottie.host/2fd741d9-4216-442a-80d5-4df511b9adf5/ru2C5RbDEq.json"
+                    src="https://lottie.host/b343802b-437a-40f7-8be8-cdc0d1af9edf/7oBpRZ9g76.json"
                     height="250px"></app-lottie-player>
             </div>
 
@@ -24,9 +24,7 @@
 
 
     <div class="choices">
-        <!-- <div><img src=""></div>
-        <div><img src="/assets/images/refrigerator2.svg" ></div>
-        <div><img src="/assets/images/refrigerator3.svg" ></div> -->
+
         <div *ngFor="let item of items" [class.selected]="item === selectedItem" [class.purchased]="purchased">
             <img [src]="item.src">
             <h2 style="margin-bottom: 0;">{{item.title}}</h2>

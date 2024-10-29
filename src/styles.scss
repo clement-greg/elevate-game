@@ -208,7 +208,7 @@ font-style: normal !important;
     width: 40px;
     height: 40px;
     position: absolute;
-    background-image: url(/assets/images/cannon-ball.svg);
+    background-image: url(/assets/images/hs-cannon-ball.svg);
 }
 
 .screwdriver {
@@ -283,13 +283,14 @@ font-style: normal !important;
 
 .spike-ball {
     display: inline-block;
-    width: 162px;
+    width: 150px;
     height: 150px;
-    background-image: url(/assets/images/spike-ball.png);
+    background-image: url(/assets/images/spike-ball-or.svg);
     /* background-size: contain; */
     position: absolute;
     background-repeat: no-repeat;
-    background-position-x: -16px;
+    // background-position-x: -16px;
+    transform: rotate(0deg);
 }
 
 .ram {

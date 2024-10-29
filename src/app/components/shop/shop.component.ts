@@ -42,12 +42,13 @@ export class ShopComponent implements OnDestroy {
 
 
   ];
-  private message = `Hi Jimmy
-  Welcome to Elevate Appliances.  We just got some great new refrigerators in stock.
-  
-  Find the refrigerator you want and then check out.  
-  
-  Any refrigerator will do, but remember: The nicer the refrigerator the happier you'll be.`;
+  private message = `Hey Jimmy!
+
+Welcome to Elevate Appliances! 🎉 We've just rolled in some fabulous new refrigerators, and they're looking for a new home. 🏠
+
+Wander through our collection, pick your favorite, and head to checkout. Any fridge will do, but here’s a tip: the fancier the fridge, the bigger the smiles. 😊✨
+
+Happy fridge hunting! 🚀`;
   purchased = false;
 
   constructor() {

@@ -26,7 +26,8 @@ export class ConfigComponent {
   levels = [
     'level1',
     'level2',
-    'level3'
+    'level3',
+    'level4'
   ]
 
   save() {

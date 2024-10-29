@@ -299,7 +299,7 @@ export class Game {
     setupGame(json) {
         const sprites = JSON.parse(json);
         this.originalSprites = sprites;
-        this.originalSprites = this.originalSprites.filter(i => i.objectType !== 'Player2');
+        this.originalSprites = this.originalSprites.filter(i => i.objectType !== 'Player2' && i.objectType != 'cannon-ball');
 
         for (const sprite of sprites) {
             if (sprite.objectType === 'Brick') {

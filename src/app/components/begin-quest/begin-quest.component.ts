@@ -12,14 +12,11 @@ import { PressAComponent } from '../press-a/press-a.component';
 })
 export class BeginQuestComponent {
 
-  private message = `Jimmy!!!
-  Bad news!  Your refrigerator is broken and I can't fix it.  
-  
-  My tools are scattered all over the place.
-  
-  But, if you can collect all my tools and buy a new refrigerator from the appliance store, I can get that fixed for you.
-  
-  Better hurry, you're foods going to spoil soon.`;
+  private message = `Uh-oh, Jimmy! 🛠️🚨
+
+Guess what? Your fridge has decided to take an early retirement, and my toolkit is doing a fantastic job of hiding from me! If you can gather my runaway tools and snag a brand-new fridge from the store, I’ll be right there to work my magic.
+
+But hurry—those snacks won’t stay fresh forever! 🍏🍦🚀`;
   id = ToolBarComponent.newid();
 
   @ViewChild('lottiePlayer') lottiePlayer :LottiePlayerComponent;
