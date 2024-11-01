@@ -9,6 +9,7 @@ export class CannonBall extends MoveableObject {
     lottieId = ToolBarComponent.newid();
     lastFire: Date = new Date();
     timeBetweenFire = 6000;
+    timeout: any;
 
     constructor(engine, x, y) {
         super(engine, x, y, 40, 40);

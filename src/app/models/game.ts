@@ -218,7 +218,7 @@ export class Game {
         } else if (this.secondaryButtonKeys.indexOf(key.key) > -1 && this.dialogOpen) {
             PubSub.getInstance().publish('close-all-diagrams');
         }
-        if ((key.key === 't' || key.key === 'T') && Config.getInstance().allowDebug ) {
+        if ((key.key === 't' || key.key === 'T') && Config.getInstance().allowDebug) {
             if (this.playerTop > 0) {
                 Matter.Body.applyForce(this.player2.body, { x: this.player2.body.position.x, y: this.player2.body.position.y }, { x: 0, y: -.3 });
             }
@@ -439,7 +439,7 @@ export class Game {
                     const cannonBall = new CannonBall(this.engine, cannon.x - 100, cannon.y - 20);
                     this.addSprite(cannonBall);
 
-                    setTimeout(() => {
+                    cannonBall.timeout = setTimeout(() => {
                         this.removeSprite(cannonBall);
                     }, 4000);
                 }, 600);
@@ -556,11 +556,11 @@ export class Game {
                                         this.loseLife();
                                     }
                                 }
-                       
+
                                 let multiplier = 1;
                                 for (let i = 0; i < 5; i++) {
                                     const coin = new Coin(this.engine, dynamite.x, dynamite.y, 'static', false);
-                                    
+
                                     this.addSprite(coin);
                                     coin.body.isStatic = false;
                                     Matter.Body.setStatic(coin.body, false);
@@ -658,6 +658,7 @@ export class Game {
                         break;
                     case 'cannon-ball':
                         const cannonBall = this.gameSprites.find(i => (i.body === collision.bodyA || i.body === collision.bodyB) && i !== this.player2);
+                        console.log({ cannonBall })
                         this.removeSprite(cannonBall);
                         this.loseLife();
                         break;
@@ -671,7 +672,7 @@ export class Game {
                     case 'brick-top':
                     case 'Brick':
                         //otherSprite.bounceIt();
-                        otherSprite.breakIt();
+                        otherSprite?.breakIt();
                         this.removeSprite(otherSprite);
                         break;
                     case 'jet-pack-mystery-block':
@@ -879,7 +880,11 @@ export class Game {
     removeSprite(sprite) {
         // Not sure why this is happening sometimes, not reproduceable
         if (!sprite) {
+            console.error('NO SPRITE')
             return;
+        }
+        if ((sprite as any).timeout) {
+            clearTimeout((sprite as any).timeout);
         }
         if (sprite.body) {
             Matter.Composite.remove(this.engine.world, sprite.body)
@@ -887,12 +892,10 @@ export class Game {
         if (sprite.frictionTop) {
             Matter.Composite.remove(this.engine.world, sprite.frictionTop)
         }
+        this.gameSprites.splice(this.gameSprites.indexOf(sprite), 1);
         if (sprite.domObject?.parentNode) {
             sprite.domObject.parentNode.removeChild(sprite.domObject);
-            console.error('no domObject or parent')
-
         }
-        this.gameSprites.splice(this.gameSprites.indexOf(sprite), 1);
     }
 
     start() {
