@@ -682,6 +682,8 @@ export class Game {
                             otherSprite.emptyIt();
                             if (label !== 'jet-pack-mystery-block') {
                                 this.gameHUD.incrementCoinCount();
+                            } else if (label === 'jet-pack-mystery-block') {
+                                this.playCollectTool();
                             }
                         }
                         break;
