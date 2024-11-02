@@ -1,8 +1,8 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnDestroy, ViewChild } from '@angular/core';
 import { ToolBarComponent } from '../tool-bar/tool-bar.component';
 import { LottiePlayerComponent } from '../lottie-player/lottie-player.component';
 import { PressAComponent } from '../press-a/press-a.component';
-import { playSound } from '../../utilities/sound-utils';
+import { pauseSound, playSound } from '../../utilities/sound-utils';
 
 @Component({
   selector: 'app-begin-quest',
@@ -11,7 +11,7 @@ import { playSound } from '../../utilities/sound-utils';
   templateUrl: './begin-quest.component.html',
   styleUrl: './begin-quest.component.scss'
 })
-export class BeginQuestComponent {
+export class BeginQuestComponent implements OnDestroy {
 
   statements = [
     `Uh-oh, Jimmy! 🛠️🚨
@@ -37,6 +37,10 @@ But hurry—those snacks won’t stay fresh forever! 🍏🍦🚀`,
   constructor() {
     this.doWords();
   }
+  ngOnDestroy(): void {
+    
+    pauseSound('synth-voice');
+  }
   get message() {
     return this.statements[this.statementNumber];
   }
@@ -56,7 +60,7 @@ But hurry—those snacks won’t stay fresh forever! 🍏🍦🚀`,
       this.wordIndex++;
       const msg = this.message.substring(0, this.wordIndex);
       div.innerText = msg;
-      if (new Date().getTime() - this.lastVoice.getTime() > 1500) {
+      if (new Date().getTime() - this.lastVoice.getTime() > 11000) {
         playSound('synth-voice');
         this.lastVoice = new Date();
       }
@@ -78,6 +82,7 @@ But hurry—those snacks won’t stay fresh forever! 🍏🍦🚀`,
         }, 500);
       } else {
         this.lottiePlayer.pause();
+        pauseSound('synth-voice');
       }
     }
 

@@ -6,7 +6,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { PressAComponent } from '../press-a/press-a.component';
 import { LottiePlayerComponent } from '../lottie-player/lottie-player.component';
 import { ToolBarComponent } from '../tool-bar/tool-bar.component';
-import { playSound } from '../../utilities/sound-utils';
+import { pauseSound, playSound } from '../../utilities/sound-utils';
 
 @Component({
   selector: 'app-shop',
@@ -63,7 +63,8 @@ Happy fridge hunting! 🚀`;
 
 
   ngOnDestroy(): void {
-    clearTimeout(this.wordsTimeout);
+    clearTimeout(this.wordsTimeout);  
+    pauseSound('synth-voice');
   }
 
   nextItem() {
@@ -168,16 +169,19 @@ Happy fridge hunting! 🚀`;
       const msg = this.message.substring(0, this.wordIndex);
       div.innerText = msg;
       this.wordsTimeout = setTimeout(() => this.doWords(), 30);
-      if (new Date().getTime() - this.lastVoice.getTime() > 1500) {
+      if (new Date().getTime() - this.lastVoice.getTime() > 11000) {
 
         playSound('synth-voice');
         this.lastVoice = new Date();
       }
     } else {
       this.player.pause();
+      pauseSound('synth-voice');
     }
 
   }
+
+
 
 }
 
