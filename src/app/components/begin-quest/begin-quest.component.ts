@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { ToolBarComponent } from '../tool-bar/tool-bar.component';
 import { LottiePlayerComponent } from '../lottie-player/lottie-player.component';
 import { PressAComponent } from '../press-a/press-a.component';
+import { playSound } from '../../utilities/sound-utils';
 
 @Component({
   selector: 'app-begin-quest',
@@ -43,12 +44,6 @@ But hurry—those snacks won’t stay fresh forever! 🍏🍦🚀`,
   wordIndex = 0;
   lastVoice = new Date(2020, 1, 1);
 
-  playSynthVoic() {
-    const audioElement: HTMLAudioElement = document.getElementById('synth-voice') as HTMLAudioElement;
-    audioElement.currentTime = 0;
-    audioElement.play();
-  }
-
   doWords() {
     if (!document.getElementById(this.id)) {
       setTimeout(() => this.doWords(), 100);
@@ -62,7 +57,7 @@ But hurry—those snacks won’t stay fresh forever! 🍏🍦🚀`,
       const msg = this.message.substring(0, this.wordIndex);
       div.innerText = msg;
       if (new Date().getTime() - this.lastVoice.getTime() > 1500) {
-        this.playSynthVoic();
+        playSound('synth-voice');
         this.lastVoice = new Date();
       }
       setTimeout(() => this.doWords(), 30);

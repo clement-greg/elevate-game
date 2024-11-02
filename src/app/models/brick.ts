@@ -1,3 +1,4 @@
+import { playSound } from "../utilities/sound-utils";
 import { GameSprite } from "./game-sprite";
 declare var Matter: any;
 
@@ -46,14 +47,8 @@ export class Brick extends GameSprite {
         document.getElementById('game-div').appendChild(player);
 
         setTimeout(() => player.parentNode.removeChild(player), 200);
-
-        const audio:HTMLAudioElement = document.getElementById('break-brick-sound') as HTMLAudioElement;
-        audio.currentTime = 0;
-        audio.play();
-
-
-        //         <lottie-player [id]="id" *ngIf="show" [style.height]="height" [src]="src" [loop]="loop ? 'loop': ''" [intermission]="intermission" [autoplay]="autoPlay ? 'autoplay' : ''" background="transparent" [speed]="speed">
-        // </lottie-player>
+        
+        playSound('break-brick-sound');
 
     }
 }

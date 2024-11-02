@@ -1,6 +1,7 @@
 declare var Matter: any;
 
 import { ToolBarComponent } from '../components/tool-bar/tool-bar.component';
+import { playSound } from '../utilities/sound-utils';
 import { Config } from './config';
 import { Game } from './game';
 import { GameSprite } from './game-sprite';
@@ -57,10 +58,7 @@ export class Player2 extends GameSprite {
             this.isGrounded = false;
             delete this.groundSprite;
             if (Game.getInstance().gameHUD.isJetPackMode) {
-                const audio: HTMLAudioElement = document.getElementById('thrust-sound') as HTMLAudioElement;
-                audio.volume = .3;
-                audio.currentTime = 0;
-                audio.play();
+                playSound('thrust-sound', .3);
 
                 const player = (document.getElementById(this.lottieId) as any);
                 if (player) {
@@ -68,10 +66,7 @@ export class Player2 extends GameSprite {
                     player.play();
                 }
             } else {
-                const audio: HTMLAudioElement = document.getElementById('jump-sound') as HTMLAudioElement;
-                audio.volume = .3;
-                audio.currentTime = 0;
-                audio.play();
+                playSound('jump-sound', .3);
             }
         }
     }

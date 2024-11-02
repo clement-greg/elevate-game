@@ -6,6 +6,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { PressAComponent } from '../press-a/press-a.component';
 import { LottiePlayerComponent } from '../lottie-player/lottie-player.component';
 import { ToolBarComponent } from '../tool-bar/tool-bar.component';
+import { playSound } from '../../utilities/sound-utils';
 
 @Component({
   selector: 'app-shop',
@@ -56,6 +57,10 @@ Happy fridge hunting! 🚀`;
     this.selectedItem = this.items[0];
 
   }
+
+  lastVoice = new Date(2020, 1, 1);
+
+
 
   ngOnDestroy(): void {
     clearTimeout(this.wordsTimeout);
@@ -112,9 +117,7 @@ Happy fridge hunting! 🚀`;
     this.player.play();
     if (this.selectedItem.price > Game.getInstance().gameHUD.money) {
       const currencyPipe = new CurrencyPipe('en-US');
-      const alert: HTMLAudioElement = document.getElementById('alert-sound') as HTMLAudioElement;
-      alert.currentTime = 0;
-      alert.play();
+      playSound('alert-sound');
       this.wordBubbleVisible = false;
       setTimeout(() => {
         this.wordBubbleVisible = true;
@@ -128,9 +131,7 @@ Happy fridge hunting! 🚀`;
 
       return;
     }
-    const audio: HTMLAudioElement = document.getElementById('collect-tool-sound') as HTMLAudioElement;
-    audio.currentTime = 0;
-    audio.play();
+    playSound('collect-tool-sound');
     this.purchased = true;
     let index = this.items.indexOf(this.selectedItem) + 1;
     Game.getInstance().purchaseFridge(index);
@@ -156,7 +157,7 @@ Happy fridge hunting! 🚀`;
 
   doWords() {
     if (!document.getElementById(this.id)) {
-      this.wordsTimeout =  setTimeout(() => this.doWords(), 100);
+      this.wordsTimeout = setTimeout(() => this.doWords(), 100);
       return;
     }
 
@@ -166,7 +167,12 @@ Happy fridge hunting! 🚀`;
       this.wordIndex++;
       const msg = this.message.substring(0, this.wordIndex);
       div.innerText = msg;
-      this.wordsTimeout =  setTimeout(() => this.doWords(), 30);
+      this.wordsTimeout = setTimeout(() => this.doWords(), 30);
+      if (new Date().getTime() - this.lastVoice.getTime() > 1500) {
+
+        playSound('synth-voice');
+        this.lastVoice = new Date();
+      }
     } else {
       this.player.pause();
     }

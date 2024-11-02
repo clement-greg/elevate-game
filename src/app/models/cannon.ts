@@ -3,6 +3,7 @@
 
 declare var Matter: any;
 import { ToolBarComponent } from "../components/tool-bar/tool-bar.component";
+import { playSound } from "../utilities/sound-utils";
 import { GameSprite } from "./game-sprite";
 
 export class Cannon extends GameSprite {
@@ -42,10 +43,7 @@ export class Cannon extends GameSprite {
             player.play();
             this.lastFire = new Date();
             setTimeout(() => {
-                const audio: HTMLAudioElement = document.getElementById('cannon-sound') as HTMLAudioElement;
-                audio.currentTime = 0;
-                audio.play();
-
+                playSound('cannon-sound');
             }, 500);
             return true;
         }

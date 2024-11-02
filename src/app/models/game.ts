@@ -28,6 +28,7 @@ import { JetPackMysteryBlock } from './jet-pack-mystery-block';
 import { Config } from './config';
 import { CeilingSpike } from './ceiling-spike';
 import { Dynamite } from './ahs';
+import { pauseSound, playSound } from '../utilities/sound-utils';
 
 var Engine = Matter.Engine,
     MatterWorld = Matter.World,
@@ -246,9 +247,7 @@ export class Game {
 
     doWin() {
         PubSub.getInstance().publish('level-complete');
-        const audio: HTMLAudioElement = document.getElementById('game-over-won-sound') as HTMLAudioElement;
-        audio.currentTime = 0;
-        audio.play();
+        playSound('game-over-won-sound');
         this.stop();
     }
 
@@ -399,9 +398,7 @@ export class Game {
     private impactObjectsLabels = ['trampoline', 'cannon-ball', 'spike-brick', 'dynamite', 'ceiling-spike', 'cannon', 'Ram', 'Brick', 'i-beam', 'brick-top', 'mystery-top', 'jet-pack-mystery-block', 'Ice', 'Mystery', 'log-short', 'log', 'solid-block'];
 
     playCollectTool() {
-        const audio: HTMLAudioElement = document.getElementById('collect-tool-sound') as HTMLAudioElement;
-        audio.currentTime = 0;
-        audio.play();
+        playSound('collect-tool-sound');
     }
 
     bounceCount = 0;
@@ -538,15 +535,12 @@ export class Game {
                     if (dynamite) {
 
                         if (dynamite.play()) {
-                            const warningAudio: HTMLAudioElement = document.getElementById('warning-sound') as HTMLAudioElement;
-                            warningAudio.currentTime = 0;
-                            warningAudio.play();
+
+                            playSound('warning-sound');
 
                             setTimeout(() => {
-                                warningAudio.pause();
-                                const audio: HTMLAudioElement = document.getElementById('explosion-sound') as HTMLAudioElement;
-                                audio.currentTime = 0;
-                                audio.play();
+                                pauseSound('warning-sound');
+                                playSound('explosion-sound');
                             }, 1800);
                             setTimeout(() => {
                                 const diffX = this.playerLeft - dynamite.x;
@@ -581,9 +575,7 @@ export class Game {
                         if (new Date().getTime() - this.lastBounce.getTime() > 500) {
                             Matter.Body.applyForce(this.player2.body, { x: this.player2.body.position.x, y: this.player2.body.position.y }, { x: 0, y: Config.getInstance().trampolineYForce });
 
-                            const trampSound: HTMLAudioElement = document.getElementById('bounce-sound') as HTMLAudioElement;
-                            trampSound.currentTime = 0;
-                            trampSound.play();
+                            playSound('bounce-sound');
                             const sprite = this.gameSprites.find(i => (i.body === collision.bodyA || i.body === collision.bodyB) && i !== this.player2);
                             if (sprite) {
                                 sprite.play();
@@ -596,10 +588,7 @@ export class Game {
                     case 'Ram':
                         const ram = this.gameSprites.find(i => (i.body === collision.bodyA || i.body === collision.bodyB) && i !== this.player2);
                         if (ram) {
-
-                            const killSound: HTMLAudioElement = document.getElementById('goat-sound') as HTMLAudioElement;
-                            killSound.currentTime = 0;
-                            killSound.play();
+                            playSound('goat-sound');
                             Matter.Body.applyForce(this.player2.body, { x: this.player2.body.position.x, y: this.player2.body.position.y }, { x: 0, y: -0.2 });
                             this.removeSprite(ram);
                             let forcex = -2.5;
@@ -617,10 +606,7 @@ export class Game {
                     case 'cannon-ball':
                         const cannonBall = this.gameSprites.find(i => (i.body === collision.bodyA || i.body === collision.bodyB) && i !== this.player2);
                         if (cannonBall) {
-
-                            const killSound: HTMLAudioElement = document.getElementById('kill-enemy-sound') as HTMLAudioElement;
-                            killSound.currentTime = 0;
-                            killSound.play();
+                            playSound('kill-enemy-sound');
                             Matter.Body.applyForce(this.player2.body, { x: this.player2.body.position.x, y: this.player2.body.position.y }, { x: 0, y: -0.6 });
                             this.removeSprite(cannonBall);
                         }
@@ -726,9 +712,7 @@ export class Game {
         this.player2.y = World.getInstance().height;
         Matter.Body.setPosition(this.player2.body, { x: 0, y: 0 });
         Matter.Body.setVelocity(this.player2.body, { x: 0, y: 0 });
-        const el: HTMLAudioElement = document.getElementById('die-sound') as HTMLAudioElement;
-        el.currentTime = 0;
-        el.play();
+        playSound('die-sound');
         this.gameHUD.isJetPackMode = false;
         PubSub.getInstance().publish('jet-pack-change');
         this.player2.die();
@@ -915,9 +899,7 @@ export class Game {
 
     doLost() {
         PubSub.getInstance().publish('game-lost');
-        const lostAudio: HTMLAudioElement = document.getElementById('game-over-lost-sound') as HTMLAudioElement;
-        lostAudio.currentTime = 0;
-        lostAudio.play();
+        playSound('game-over-lost-sound');
         this.stop();
     }
 
@@ -987,9 +969,7 @@ export class GameHUD {
     }
 
     incrementCoinCount() {
-        const audio: HTMLAudioElement = document.getElementById('chime') as HTMLAudioElement;
-        audio.currentTime = 0;
-        audio.play();
+        playSound('chime');
         this.coinCount++;
     }
 
