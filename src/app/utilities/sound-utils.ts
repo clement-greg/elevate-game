@@ -4,11 +4,11 @@ export function playSound(id: string, volume: number = null) {
     if(volume) {
         audio.volume = volume;
     }
-    audio.play();
+    audio?.play();
 }
 
 export function pauseSound(id:string) {
     
     const audio: HTMLAudioElement = document.getElementById(id) as HTMLAudioElement;
-    audio.pause();
+    audio?.pause();
 }

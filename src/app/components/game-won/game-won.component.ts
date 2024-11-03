@@ -3,6 +3,7 @@ import { LottiePlayerComponent } from '../lottie-player/lottie-player.component'
 import { PressAComponent } from '../press-a/press-a.component';
 import { CommonModule } from '@angular/common';
 import { Game } from '../../models/game';
+import { pauseSound } from '../../utilities/sound-utils';
 
 @Component({
   selector: 'app-game-won',
@@ -18,6 +19,7 @@ export class GameWonComponent {
   constructor() {
     setTimeout(() => this.showNextText = true, 1500);
     setTimeout(() => this.showPressA = true, 4500);
+    pauseSound('warning-sound-game-end');
   }
 
   get stars() {

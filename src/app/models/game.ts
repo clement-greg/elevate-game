@@ -107,6 +107,7 @@ export class Game {
         ground.y = this.world.height - ground.height;
         ground.body.label = 'Ground'
         this.ground = ground;
+        this.warningStarted = false;
 
         const ceiling = new Ground(this.engine, 0, -50, this.world.width, 20);
         ceiling.body.friction = 0;
@@ -919,10 +920,12 @@ export class Game {
         this.stop();
     }
 
+    warningStarted = false;
+
     checkTime() {
         const now = new Date();
         let remainingSeconds = Config.getInstance().gameSeconds - (now.getTime() - this.gameStartTime.getTime()) / 1000;
-        if (remainingSeconds < 0 && !this.editorOpen) {
+        if (remainingSeconds < 0 && !this.editorOpen && this.gameHUD.timerStarted) {
             remainingSeconds = 0;
             this.doLost();
         }
@@ -935,6 +938,10 @@ export class Game {
         if (this.gameHUD) {
             this.gameHUD.timeRunningOut = remainingSeconds < 11;
             this.gameHUD.setTimeRemaining(this.remaining);
+            if(!this.warningStarted && this.gameHUD.timeRunningOut && this.gameHUD.timerStarted) {
+                playSound('warning-sound-game-end');
+                this.warningStarted = true;
+            }
         }
 
 
