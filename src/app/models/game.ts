@@ -149,6 +149,7 @@ export class Game {
                 domObject.classList.remove('has-jet-pack');
             }
         });
+        playSound('bg-music');
     }
 
     primaryButtonKeys = [' ', 'a', 'A'];
