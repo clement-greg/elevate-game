@@ -50,6 +50,9 @@ export class Ram extends MoveableObject {
             this.frame = 0;
         }
         if (this.moveDirection === 'Stationary' || this.newlyCreated) {
+            if (!this.newlyCreated) {
+                super.advance();
+            }
             return;
         }
 

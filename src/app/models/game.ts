@@ -589,7 +589,23 @@ export class Game {
                         const ram = this.gameSprites.find(i => (i.body === collision.bodyA || i.body === collision.bodyB) && i !== this.player2);
                         if (ram) {
                             playSound('goat-sound');
-                            Matter.Body.applyForce(this.player2.body, { x: this.player2.body.position.x, y: this.player2.body.position.y }, { x: 0, y: -0.2 });
+                            const ramDead = document.createElement('lottie-player');
+
+                            (ramDead as any).src = 'https://lottie.host/187ff4ec-50a4-4a0e-94ab-14ca38c87bdb/rFeMypKyaw.json';
+                            ramDead.style.position = 'absolute';
+                            ramDead.style.left = `${ram.x - 125}px`;
+                            ramDead.style.top = `${ram.y - 125}px`;
+                            ramDead.style.height = '200px';
+                            ramDead.style.width = '200px';
+                            ramDead.setAttribute('autoplay', '1');
+                            //(ramDead as any).play();
+
+                            document.getElementById('game-div').appendChild(ramDead);
+
+                            setTimeout(() => {
+                                ramDead.parentNode.removeChild(ramDead);
+                            }, 1000);
+                            Matter.Body.applyForce(this.player2.body, { x: this.player2.body.position.x, y: this.player2.body.position.y }, { x: 0, y: -0.4 });
                             this.removeSprite(ram);
                             let forcex = -2.5;
 
