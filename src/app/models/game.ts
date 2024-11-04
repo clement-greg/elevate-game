@@ -627,6 +627,9 @@ export class Game {
                             playSound('kill-enemy-sound');
                             Matter.Body.applyForce(this.player2.body, { x: this.player2.body.position.x, y: this.player2.body.position.y }, { x: 0, y: -0.6 });
                             this.removeSprite(cannonBall);
+                            for (let i = 0; i < 6; i++) {
+                                this.gameHUD.incrementCoinCount();
+                            }
                         }
                         break;
                     case 'Mystery':
@@ -939,7 +942,7 @@ export class Game {
         if (this.gameHUD) {
             this.gameHUD.timeRunningOut = remainingSeconds < 11;
             this.gameHUD.setTimeRemaining(this.remaining);
-            if(!this.warningStarted && this.gameHUD.timeRunningOut && this.gameHUD.timerStarted) {
+            if (!this.warningStarted && this.gameHUD.timeRunningOut && this.gameHUD.timerStarted) {
                 playSound('warning-sound-game-end');
                 this.warningStarted = true;
             }
