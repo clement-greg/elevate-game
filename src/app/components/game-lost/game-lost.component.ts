@@ -20,10 +20,10 @@ export class GameLostComponent implements OnDestroy {
     setTimeout(() => this.showPressA = true, 3500);
     setTimeout(() => this.jimmy.play(), 2000);
     pauseSound('warning-sound-game-end');
-    playSound('bg-music-primary', .2);
+    playSound('bg-music-lost', .2);
   }
   ngOnDestroy(): void {
-    pauseSound('bg-music-primary');
+    pauseSound('bg-music-lost');
   }
 
 }
