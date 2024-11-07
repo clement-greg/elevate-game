@@ -7,6 +7,7 @@ import { PressAComponent } from '../press-a/press-a.component';
 import { LottiePlayerComponent } from '../lottie-player/lottie-player.component';
 import { ToolBarComponent } from '../tool-bar/tool-bar.component';
 import { pauseSound, playSound } from '../../utilities/sound-utils';
+import { JoystickState } from '../../models/joystick-state';
 
 @Component({
   selector: 'app-shop',
@@ -52,10 +53,15 @@ Wander through our collection, pick your favorite, and head to checkout. Any fri
 Happy fridge hunting! 🚀`;
   purchased = false;
 
+  joystickState = new JoystickState(0);
+
   constructor() {
     this.doWords();
     this.selectedItem = this.items[0];
 
+    this.joystickState.onButtonPress = this.joystickButtonPress.bind(this);
+    this.joystickState.onLeftJoyStick = this.prevItem.bind(this);
+    this.joystickState.onRightJoyStick = this.nextItem.bind(this);
   }
 
   lastVoice = new Date(2020, 1, 1);
@@ -63,8 +69,15 @@ Happy fridge hunting! 🚀`;
 
 
   ngOnDestroy(): void {
-    clearTimeout(this.wordsTimeout);  
+    delete this.joystickState;
+    clearTimeout(this.wordsTimeout);
     pauseSound('synth-voice');
+  }
+
+  joystickButtonPress(button: number) {
+    if (button === 0) {
+      this.purchase();
+    }
   }
 
   nextItem() {

@@ -1,19 +1,19 @@
-
-
-<div style="height: 100%;width: 100%;background-color: #fff;position: relative;background: linear-gradient(43deg, rgba(236, 215, 246, 1) 0%, rgba(251, 246, 254, 1) 100%);">
+<div
+    style="height: 100%;width: 100%;background-color: #fff;position: relative;background: linear-gradient(43deg, rgba(236, 215, 246, 1) 0%, rgba(251, 246, 254, 1) 100%);">
 
     <div style="display: flex;flex-direction: column;height: 100%;">
         <div style="flex: 1;">
-            
+
         </div>
         <div style="flex: none;">
-            <app-lottie-player height="400px" [intermission]="3000" src="https://lottie.host/818c4d94-c21e-4530-a2e9-2c3da02a4f13/QsiBY10OOL.json">
+            <app-lottie-player height="400px" [intermission]="3000"
+                src="https://lottie.host/818c4d94-c21e-4530-a2e9-2c3da02a4f13/QsiBY10OOL.json">
 
             </app-lottie-player>
-        
+
             <div style="text-align: center;">
                 <h1 class="mighty-slab-1">Ooooohh!!! <br>Sorry.</h1>
-        
+
 
                 <div style="height: 100px;">
                     <p class="next-text" *ngIf="showNextText">But seriously, next time just use the Elevate App. <br>It
@@ -23,7 +23,7 @@
 
 
                 <div style="height: 165px;">
-                    <div  class="next-text" *ngIf="showPressA">
+                    <div class="next-text" *ngIf="showPressA">
                         <img src="/assets/images/arcade-button.svg" style="height: 75px;">
                         <app-press-a wording="[Press A To Go Again]"></app-press-a>
                     </div>
@@ -37,6 +37,11 @@
 
 
     <img src="/assets/images/app.png" class="app" style="position: absolute;bottom: 0;">
+    <!-- <div class="app-video">
+        <video src="/assets/video/app-demo.mp4" width="100%"  [autoplay]="'autoplay'"></video>
+    </div> -->
 
-    <app-lottie-player [autoPlay]="false" #jimmy [loop]="false" src="https://lottie.host/c71ebcd7-f1bc-47ba-9bdf-ebbf755f6f5a/crc0oSYsEC.json" id="jimmy-dead"></app-lottie-player>
+    <app-lottie-player [autoPlay]="false" #jimmy [loop]="false"
+        src="https://lottie.host/c71ebcd7-f1bc-47ba-9bdf-ebbf755f6f5a/crc0oSYsEC.json"
+        id="jimmy-dead"></app-lottie-player>
 </div>

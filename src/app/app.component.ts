@@ -9,6 +9,7 @@ import { GameLostComponent } from './components/game-lost/game-lost.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfigComponent } from './components/config/config.component';
 import { Config } from './models/config';
+import { JoystickState } from './models/joystick-state';
 
 @Component({
   selector: 'app-root',
@@ -25,15 +26,36 @@ export class AppComponent {
   gameWonTimeout;
   showGameLost;
   canRestart = true;
+  joystickState = new JoystickState(0);
 
   constructor(private zone: NgZone,
     private dialog: MatDialog
   ) {
 
+    this.setupJoystick();
 
   }
 
+  setupJoystick() {
+    this.joystickState.onButtonPress = this.joystickButtonPress.bind(this);
+  }
+
+  joystickButtonPress(btn: number) {
+
+    switch(btn) {
+      case 0:
+        this.doGameStart();
+        break;
+    }
+  }
+
   setupHandlers() {
+
+    // this.joystickState.onButtonPress = (b) => {
+    //   console.log(b);
+    // }
+
+
     PubSub.getInstance().subscribe('level-complete', () => {
       this.startGame = false;
       this.showGameWon = true;
@@ -66,6 +88,16 @@ export class AppComponent {
   @HostListener('window:keydown', ['$event'])
   handleKeyDown(event: KeyboardEvent) {
     if (this.primaryButtons.indexOf(event.key) > -1 && !this.startGame && this.canRestart) {
+      this.doGameStart();
+    }
+    if ((event.key === 'c' || event.key === 'C') && !this.startGame) {
+      this.dialog.open(ConfigComponent);
+    }
+
+  }
+
+  doGameStart() {
+    if(!this.startGame && this.canRestart) {
       this.showGameWon = false;
       this.showGameLost = false;
       Game.deleteInstance();
@@ -74,10 +106,6 @@ export class AppComponent {
       clearTimeout(this.gameWonTimeout);
       setTimeout(() => this.hideTitleScreen = true, 1000);
     }
-    if ((event.key === 'c' || event.key === 'C') && !this.startGame) {
-      this.dialog.open(ConfigComponent);
-    }
-
   }
 
 }

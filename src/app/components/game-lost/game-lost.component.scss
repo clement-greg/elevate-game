@@ -16,6 +16,20 @@
     animation-delay: 2s;
 }
 
+.app-video {
+    transform: rotate(70deg);
+    transform-origin: 0% 100%;
+    animation: rotate-in 0.5s ease;
+    animation-fill-mode: forwards;
+    animation-delay: 2s;
+    position: absolute;
+    bottom: 124px;
+    width: 151px;
+    left: 181px;
+    height: 314px;
+    overflow: hidden;
+}
+
 @keyframes fade-in-up {
     from {
         transform: translateY(500px);

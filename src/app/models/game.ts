@@ -29,6 +29,7 @@ import { Config } from './config';
 import { CeilingSpike } from './ceiling-spike';
 import { Dynamite } from './ahs';
 import { pauseSound, playSound } from '../utilities/sound-utils';
+import { JoystickState } from './joystick-state';
 
 var Engine = Matter.Engine,
     MatterWorld = Matter.World,
@@ -65,6 +66,7 @@ export class Game {
     cannons: Cannon[] = [];
     editorOpen: boolean;
     static lastStars: number;
+    joystickState = new JoystickState(0);
 
 
     static get applianceShopAreaRight() {
@@ -73,6 +75,7 @@ export class Game {
 
     constructor(private zone: NgZone) {
         this.initialize(zone);
+        this.joystickState.onButtonPress = this.joystickButtonPress.bind(this);
     }
     completionBarrier: any;
 
@@ -87,6 +90,8 @@ export class Game {
             setTimeout(() => this.initialize(zone), 100);
             return;
         }
+
+
         this.engine = Engine.create();
         clearInterval(this.advanceInterval);
         this.advanceInterval = setInterval(() => this.run(), 1000 / Config.getInstance().framesPerSecond);
@@ -156,15 +161,19 @@ export class Game {
     secondaryButtonKeys = ['ArrowUp', 'b', 'B'];
 
 
+    isMovingRight = false;
+    isMovingLeft = false;
     processKeyDownEvent(key: KeyboardEvent) {
         if (key.key == 'ArrowRight') {
             this.player2.accelerating = true;
             this.player2.arrowRight = true;
+            this.isMovingRight = true;
         }
 
         if (key.key === 'ArrowLeft') {
             this.player2.accelerating = true;
             this.player2.arrowLeft = true;
+            this.isMovingLeft = true;
         }
         if (this.primaryButtonKeys.indexOf(key.key) > -1) {
             this.player2.jump();
@@ -186,20 +195,32 @@ export class Game {
     }
 
     shopEntranceAvailable = false;
+    isJoystickLeft = false;
+    isJoystickRight = false;
 
-    processKeyUp(key: KeyboardEvent) {
-        if (key.key == 'ArrowRight') {
-            this.player2.accelerating = false;
-            this.player2.arrowRight = false;
-            this.player2.stopMomentum();
+    joystickButtonPress(btn: number) {
+        switch (btn) {
+            case 0:
+                this.doPrimaryKey();
+                break;
+            case 1:
+                this.doSecondaryKey();
+                break;
         }
+    }
 
-        if (key.key === 'ArrowLeft') {
-            this.player2.accelerating = false;
-            this.player2.arrowLeft = false;
-            this.player2.stopMomentum();
+    doSecondaryKey() {
+        if (!this.dialogOpen && !this.fridge) {
+            if (this.playerLeft >= Game.applianceShopLeft && this.playerLeft <= Game.applianceShopAreaRight) {
+                PubSub.getInstance().publish('show-shop');
+            }
+        } else if (this.dialogOpen) {
+            PubSub.getInstance().publish('close-all-diagrams');
         }
-        if (this.primaryButtonKeys.indexOf(key.key) > -1 && this.infoBarier) {
+    }
+
+    doPrimaryKey() {
+        if (this.infoBarier) {
             if (this.showQuestBegin) {
                 PubSub.getInstance().publish('close-begin-quest');
                 this.removeSprite(this.infoBarier);
@@ -208,18 +229,54 @@ export class Game {
                 this.gameStartTime = new Date();
                 this.gameHUD.startTimer();
             }
-        }
-        if (this.primaryButtonKeys.indexOf(key.key) > -1 && this.showCloseBarrier) {
+        } else if (this.showCloseBarrier) {
             Matter.Body.applyForce(this.player2.body, { x: this.player2.body.position.x, y: this.player2.body.position.y }, { x: -1, y: 0 });
             setTimeout(() => PubSub.getInstance().publish('close-info-barrier'), 100);
             this.showCloseBarrier = false;
+        } else {
+            this.player2.jump();
         }
-        if (this.secondaryButtonKeys.indexOf(key.key) > -1 && !this.dialogOpen && !this.fridge) {
-            if (this.playerLeft >= Game.applianceShopLeft && this.playerLeft <= Game.applianceShopAreaRight) {
-                PubSub.getInstance().publish('show-shop');
-            }
-        } else if (this.secondaryButtonKeys.indexOf(key.key) > -1 && this.dialogOpen) {
-            PubSub.getInstance().publish('close-all-diagrams');
+    }
+
+    processKeyUp(key: KeyboardEvent) {
+        if (key.key == 'ArrowRight') {
+            this.player2.accelerating = false;
+            this.player2.arrowRight = false;
+            this.player2.stopMomentum();
+            this.isMovingRight = false;
+        }
+
+        if (key.key === 'ArrowLeft') {
+            this.player2.accelerating = false;
+            this.player2.arrowLeft = false;
+            this.player2.stopMomentum();
+            this.isMovingLeft = false;
+        }
+        if (this.primaryButtonKeys.indexOf(key.key) > -1 && this.infoBarier) {
+            // if (this.showQuestBegin) {
+            //     PubSub.getInstance().publish('close-begin-quest');
+            //     this.removeSprite(this.infoBarier);
+            //     delete this.infoBarier;
+            //     this.showQuestBegin = false;
+            //     this.gameStartTime = new Date();
+            //     this.gameHUD.startTimer();
+            // }
+            this.doPrimaryKey();
+        }
+        // if (this.primaryButtonKeys.indexOf(key.key) > -1 && this.showCloseBarrier) {
+        //     Matter.Body.applyForce(this.player2.body, { x: this.player2.body.position.x, y: this.player2.body.position.y }, { x: -1, y: 0 });
+        //     setTimeout(() => PubSub.getInstance().publish('close-info-barrier'), 100);
+        //     this.showCloseBarrier = false;
+        // }
+        // if (this.secondaryButtonKeys.indexOf(key.key) > -1 && !this.dialogOpen && !this.fridge) {
+        //     if (this.playerLeft >= Game.applianceShopLeft && this.playerLeft <= Game.applianceShopAreaRight) {
+        //         PubSub.getInstance().publish('show-shop');
+        //     }
+        // } else if (this.secondaryButtonKeys.indexOf(key.key) > -1 && this.dialogOpen) {
+        //     PubSub.getInstance().publish('close-all-diagrams');
+        // }
+        if (this.secondaryButtonKeys.indexOf(key.key) > -1) {
+            this.doSecondaryKey();
         }
         if ((key.key === 't' || key.key === 'T') && Config.getInstance().allowDebug) {
             if (this.playerTop > 0) {
@@ -408,6 +465,30 @@ export class Game {
     advance() {
         if (this.showQuestBegin) {
             return;
+        }
+
+        if (this.isJoystickLeft && !this.joystickState.left) {
+
+            this.isJoystickLeft = false;
+            this.player2.accelerating = false;
+            this.player2.arrowLeft = false;
+            this.player2.stopMomentum();
+        }
+        if (this.isJoystickRight && !this.joystickState.right) {
+            this.player2.accelerating = false;
+            this.player2.arrowRight = false;
+            this.player2.stopMomentum();
+            this.isJoystickRight = false;
+        }
+        if (this.joystickState.left) {
+            this.player2.accelerating = true;
+            this.player2.arrowLeft = true;
+            this.isJoystickLeft = true;
+        }
+        if (this.joystickState.right) {
+            this.player2.accelerating = true;
+            this.player2.arrowRight = true;
+            this.isJoystickRight = true;
         }
 
         this.player2.advance();
@@ -789,11 +870,28 @@ export class Game {
 
 
 
+        const gamepad = navigator.getGamepads()[0];
+        if (gamepad) {
+            if (gamepad.vibrationActuator) {
+                // Vibrate the gamepad
+                gamepad.vibrationActuator.playEffect("dual-rumble", {
+                    startDelay: 0,
+                    duration: 750, // Vibration duration in milliseconds
+                    weakMagnitude: 0.5, // Weak motor intensity (0.0 to 1.0)
+                    strongMagnitude: 1, // Strong motor intensity (0.0 to 1.0)
+                }).then(() => {
+                    console.log("Vibration complete");
+                }).catch((err) => {
+                    console.error("Vibration failed", err);
+                });
+            }
+        }
 
 
 
 
     }
+
 
     addSprite(sprite) {
         this.gameSprites.push(sprite);
@@ -916,6 +1014,7 @@ export class Game {
         this.running = false;
         clearInterval(this.internval);
         clearInterval(this.advanceInterval);
+        delete this.joystickState;
     }
 
     doLost() {
