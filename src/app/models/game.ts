@@ -81,6 +81,10 @@ export class Game {
 
     advanceInterval;
 
+    static hasInstance() {
+        return this.gameInstance !== null && this.gameInstance != undefined;
+    }
+
     initialize(zone: NgZone) {
         if (!zone) {
             return;
@@ -234,7 +238,7 @@ export class Game {
             setTimeout(() => PubSub.getInstance().publish('close-info-barrier'), 100);
             this.showCloseBarrier = false;
         } else {
-            this.player2.jump();
+            this.player2?.jump();
         }
     }
 
@@ -445,11 +449,11 @@ export class Game {
     }
 
     get playerLeft() {
-        return parseFloat(this.player2.domObject.style.left.replace('px', ''));
+        return parseFloat(this.player2.domObject?.style.left.replace('px', ''));
     }
 
     get playerTop() {
-        return parseFloat(this.player2.domObject.style.top.replace('px', ''));
+        return parseFloat(this.player2.domObject?.style.top.replace('px', ''));
     }
 
     private colletableLabels = ['saw', 'wrench', 'hammer', 'screwdriver', 'drill', 'coin'];
@@ -897,8 +901,10 @@ export class Game {
         this.gameSprites.push(sprite);
         if (sprite.domObject) {
             const div = document.getElementById('game-div');
-            div.appendChild(sprite.domObject);
-            sprite.domObject.classList.add('sprite');
+            if (div) {
+                div.appendChild(sprite.domObject);
+                sprite.domObject.classList.add('sprite');
+            }
         }
     }
 
@@ -1021,6 +1027,7 @@ export class Game {
         PubSub.getInstance().publish('game-lost');
         playSound('game-over-lost-sound');
         this.stop();
+
     }
 
     warningStarted = false;

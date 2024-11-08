@@ -46,6 +46,15 @@ export class AppComponent {
       case 0:
         this.doGameStart();
         break;
+        case 9:
+          if(Game.hasInstance) {
+            this.startGame = false;
+            this.hideTitleScreen = false;
+            this.showGameLost = false;
+            this.showGameWon = false;
+            Game.deleteInstance();
+          }
+            break;
     }
   }
 

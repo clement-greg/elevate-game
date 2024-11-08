@@ -1,14 +1,17 @@
 export function playSound(id: string, volume: number = null) {
     const audio: HTMLAudioElement = document.getElementById(id) as HTMLAudioElement;
+    if (!audio) {
+        return;
+    }
     audio.currentTime = 0;
-    if(volume) {
+    if (volume) {
         audio.volume = volume;
     }
     audio?.play();
 }
 
-export function pauseSound(id:string) {
-    
+export function pauseSound(id: string) {
+
     const audio: HTMLAudioElement = document.getElementById(id) as HTMLAudioElement;
     audio?.pause();
 }

@@ -51,13 +51,13 @@ export class Player2 extends GameSprite {
 
 
     jump() {
-        if ((this.isGrounded || Game.getInstance().gameHUD.isJetPackMode) && !Game.getInstance().dialogOpen) {
+        if ((this.isGrounded || Game.getInstance().gameHUD?.isJetPackMode) && !Game.getInstance().dialogOpen) {
             Matter.Body.setVelocity(this.body, { x: this.body.velocity.x, y: 0 });
             let upForce = Config.getInstance().playerJumpForce;
             Matter.Body.applyForce(this.body, { x: this.body.position.x, y: this.body.position.y }, { x: 0, y: upForce });
             this.isGrounded = false;
             delete this.groundSprite;
-            if (Game.getInstance().gameHUD.isJetPackMode) {
+            if (Game.getInstance().gameHUD?.isJetPackMode) {
                 playSound('thrust-sound', .3);
 
                 const player = (document.getElementById(this.lottieId) as any);

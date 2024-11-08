@@ -14,6 +14,7 @@ import { pauseSound, playSound } from '../../utilities/sound-utils';
 export class GameLostComponent implements OnDestroy {
   showNextText = false;
   showPressA = false;
+  pulseCount = 0;
   @ViewChild('jimmy') jimmy: LottiePlayerComponent;
   constructor() {
     setTimeout(() => this.showNextText = true, 1500);
@@ -21,9 +22,34 @@ export class GameLostComponent implements OnDestroy {
     setTimeout(() => this.jimmy.play(), 2000);
     pauseSound('warning-sound-game-end');
     playSound('bg-music-lost', .2);
+    this.pulse();
   }
   ngOnDestroy(): void {
     pauseSound('bg-music-lost');
+  }
+
+  pulse() {
+    const gamepad = navigator.getGamepads()[0];
+    if (gamepad) {
+      if (gamepad.vibrationActuator) {
+        // Vibrate the gamepad
+        gamepad.vibrationActuator.playEffect("dual-rumble", {
+          startDelay: 0,
+          duration: 750, // Vibration duration in milliseconds
+          weakMagnitude: 0.5, // Weak motor intensity (0.0 to 1.0)
+          strongMagnitude: 1, // Strong motor intensity (0.0 to 1.0)
+        }).then(() => {
+          console.log("Vibration complete");
+        }).catch((err) => {
+          console.error("Vibration failed", err);
+        });
+      }
+    }
+
+    if (this.pulseCount < 2) {
+      this.pulseCount++;
+      setTimeout(() => this.pulse(), 1500);
+    }
   }
 
 }
