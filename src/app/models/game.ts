@@ -219,7 +219,17 @@ export class Game {
                 PubSub.getInstance().publish('show-shop');
             }
         } else if (this.dialogOpen) {
-            PubSub.getInstance().publish('close-all-diagrams');
+            // PubSub.getInstance().publish('close-all-diagrams');
+            // this.dialogOpen = false;
+            // this.showQuestBegin = false;
+            // this.removeSprite(this.infoBarier);
+            // delete this.infoBarier;
+            if (this.infoBarier && this.showQuestBegin) {
+                this.doPrimaryKey();
+            } else {
+                PubSub.getInstance().publish('close-all-diagrams');
+                this.dialogOpen = false;
+            }
         }
     }
 
@@ -327,7 +337,6 @@ export class Game {
                 break;
         }
         Matter.Body.setMass(this.fridge.body, .000000000000000001);
-        //Matter.Body.set(this.fridge.body, 'isSensor', true);
 
         this.addSprite(this.fridge);
         this.createFridgeConstraint();
@@ -1094,7 +1103,7 @@ export class GameHUD {
 
 
     get money() {
-        return this._coinCount * 10;
+        return this._coinCount * 20;
     }
 
     setTimeRemaining(value: string) {

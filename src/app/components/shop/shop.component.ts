@@ -27,18 +27,18 @@ export class ShopComponent implements OnDestroy {
   items: Item[] = [
     {
       src: '/assets/images/refrigerator1.svg',
-      price: 600,
+      price: 1200,
       title: 'Whirlpool'
     },
     {
       src: '/assets/images/refrigerator2.svg',
-      price: 850,
+      price: 1700,
       title: 'LG'
     },
 
     {
       src: '/assets/images/refrigerator3.svg',
-      price: 1200,
+      price: 3000,
       title: 'Thermador'
     },
 
@@ -155,7 +155,7 @@ Happy fridge hunting! 🚀`;
       setTimeout(() => {
         this.message = `Thanks for your purchase.  Come again soon.`;
         this.doWords();
-        Game.getInstance().gameHUD.coinCount = Game.getInstance().gameHUD.coinCount - (this.selectedItem.price / 10);
+        Game.getInstance().gameHUD.coinCount = Game.getInstance().gameHUD.coinCount - (this.selectedItem.price / 20);
         setTimeout(() => this.dialogRef.close(), 2500);
       });
     }, 500);

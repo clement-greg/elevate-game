@@ -42,19 +42,20 @@ export class AppComponent {
 
   joystickButtonPress(btn: number) {
 
-    switch(btn) {
+    switch (btn) {
       case 0:
         this.doGameStart();
         break;
-        case 9:
-          if(Game.hasInstance) {
-            this.startGame = false;
-            this.hideTitleScreen = false;
-            this.showGameLost = false;
-            this.showGameWon = false;
-            Game.deleteInstance();
-          }
-            break;
+      case 9:
+        if (Game.hasInstance) {
+          this.startGame = false;
+          this.hideTitleScreen = false;
+          this.showGameLost = false;
+          this.showGameWon = false;
+          Game.deleteInstance();
+          this.dialog.closeAll();
+        }
+        break;
     }
   }
 
@@ -106,7 +107,7 @@ export class AppComponent {
   }
 
   doGameStart() {
-    if(!this.startGame && this.canRestart) {
+    if (!this.startGame && this.canRestart) {
       this.showGameWon = false;
       this.showGameLost = false;
       Game.deleteInstance();
