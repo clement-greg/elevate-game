@@ -19,16 +19,8 @@ export class BeginQuestComponent implements OnDestroy {
 Guess what? Your fridge has decided to take an early retirement, and my toolkit is doing a fantastic job of hiding from me! If you can gather my runaway tools and snag a brand-new fridge from the store, I’ll be right there to work my magic.
 
 But hurry—those snacks won’t stay fresh forever! 🍏🍦🚀`,
-    `Oh, and look out for the old school warranty guys. They'll stick you with painful out of pocket costs😡😡😡😡😡`
-  ]
-
-  //   private message = `Uh-oh, Jimmy! 🛠️🚨
-
-  // Guess what? Your fridge has decided to take an early retirement, and my toolkit is doing a fantastic job of hiding from me! If you can gather my runaway tools and snag a brand-new fridge from the store, I’ll be right there to work my magic.
-
-  // But hurry—those snacks won’t stay fresh forever! 🍏🍦🚀
-
-  // Oh, and look out for the old school warranty guys. They'll stick you with painful out of pocket costs😡😡😡😡😡`;
+    `Oh, and look out for the old school warranty guys. Working with them will only bring you pain😡😡😡😡😡`
+  ];
   id = ToolBarComponent.newid();
   statementNumber = 0;
 
@@ -85,6 +77,5 @@ But hurry—those snacks won’t stay fresh forever! 🍏🍦🚀`,
         pauseSound('synth-voice');
       }
     }
-
   }
 }
