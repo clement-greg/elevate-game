@@ -32,7 +32,7 @@ export class ShopComponent implements OnDestroy {
     },
     {
       src: '/assets/images/refrigerator2.svg',
-      price: 1700,
+      price: 2000,
       title: 'LG'
     },
 
