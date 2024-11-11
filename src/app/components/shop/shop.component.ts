@@ -86,6 +86,9 @@ Happy fridge hunting! 🚀`;
     if (index >= this.items.length) {
       //index = 0;
       index = this.items.length - 1;
+      playSound('alert-sound', .1);
+    } else {
+      playSound('menu-move', .5);
     }
     this.selectedItem = this.items[index];
   }
@@ -96,6 +99,9 @@ Happy fridge hunting! 🚀`;
     if (index < 0) {
       //index = this.items.length - 1;
       index = 0;
+      playSound('alert-sound', .1);
+    } else {
+      playSound('menu-move', .5);
     }
     this.selectedItem = this.items[index];
   }
