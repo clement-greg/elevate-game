@@ -341,7 +341,6 @@ class DragHelper {
       this.elmnt.style.top = (unitsY + this.elmnt.offsetTop - (this.elmnt.clientHeight / 2)) + 'px';
       const y = parseInt(this.elmnt.style.top);
       this.sprite.y = y + (this.sprite.height / 2);
-      // this.sprite.y = (unitsY + this.elmnt.offsetTop) - this.elmnt.clientHeight + (this.elmnt.clientHeight / 2);
 
     }
     if (unitsX != 0) {
@@ -357,7 +356,6 @@ class DragHelper {
 
 
   closeDragElement = () => {
-    // stop moving when mouse button is released:
     document.onmouseup = null;
     document.onmousemove = null;
   }

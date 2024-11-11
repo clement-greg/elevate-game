@@ -30,10 +30,6 @@ export class SpikeBall extends MoveableObject {
     override advance() {
 
         if (this.delayCount === 1) {
-            // this.domObject.style.backgroundPositionX = `-${this.frame * 211 + 16}px`;
-            //    const transform = this.domObject.style.transform;
-            //    const rotate = parseFloat(transform);
-            //    console.log({transform, rotate})
             if (this.moveDirection === 'Left') {
                 this.rotate = this.rotate - 5;
             } 

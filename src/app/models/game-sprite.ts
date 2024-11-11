@@ -51,8 +51,6 @@ export class GameSprite {
                         let y = ellipseFlatness * ellipseSize * Math.sin(i);
                         ellipseVerticesArray.push({ x: x, y: y });
                     }
-
-                    // add one ellipse
                     this.body = Bodies.fromVertices(x, y + 20, ellipseVerticesArray, 5);
                 }
             }

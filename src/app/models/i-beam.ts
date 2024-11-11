@@ -38,17 +38,4 @@ export class IBeam extends GameSprite {
         frictionBody.label = 'i-beam';
         this.frictionTop = frictionBody;
     }
-
-    //override advance() {
-        // const x = this.body.position.x;
-        // if (x >= this.initialX + this.moveDistance) {
-        //     this.sign = -1;
-        // } else if (x <= this.initialX) {
-        //     this.sign = 1;
-        // }
-        // const newX = this.body.position.x + this.moveSpeed * this.sign;
-        // Matter.Body.setPosition(this.body, { x: newX, y: this.initialY });
-        // Matter.Body.setPosition(this.frictionTop, { x: newX + 4, y: this.initialY });
-        // super.advance();
-    //}
 }

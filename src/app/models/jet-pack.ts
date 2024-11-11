@@ -2,10 +2,6 @@ import { MoveableObject } from "./moveable-object";
 declare var Matter: any;
 
 export class JetPack extends MoveableObject {
-    // frames = 13;
-    // runFrame = 0;
-    // slower = 2;
-    // slowerFactor = 7;
 
     constructor(engine = null, x = null, y = null, extraClass = null) {
         super(engine, x, y, 72, 72);

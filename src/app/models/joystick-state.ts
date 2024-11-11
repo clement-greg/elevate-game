@@ -12,16 +12,6 @@ export class JoystickState {
     onButtonPress: (index: number) => void;
     private pressedButtons: number[] = [];
 
-
-    // private static _instance: JoystickState;
-    // static getInstance(index: number) {
-    //     if (!this._instance) {
-    //         this._instance = new JoystickState(index);
-    //     }
-
-    //     return this._instance;
-    // }
-
     constructor(public index: number) {
         this.gameLoop();
     }

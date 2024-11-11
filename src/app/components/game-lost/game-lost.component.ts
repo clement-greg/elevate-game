@@ -32,17 +32,12 @@ export class GameLostComponent implements OnDestroy {
     const gamepad = navigator.getGamepads()[0];
     if (gamepad) {
       if (gamepad.vibrationActuator) {
-        // Vibrate the gamepad
         gamepad.vibrationActuator.playEffect("dual-rumble", {
           startDelay: 0,
-          duration: 750, // Vibration duration in milliseconds
-          weakMagnitude: 0.5, // Weak motor intensity (0.0 to 1.0)
-          strongMagnitude: 1, // Strong motor intensity (0.0 to 1.0)
-        }).then(() => {
-          console.log("Vibration complete");
-        }).catch((err) => {
-          console.error("Vibration failed", err);
-        });
+          duration: 750, 
+          weakMagnitude: 0.5, 
+          strongMagnitude: 1, 
+        }).then(() => { }).catch((err) => { });
       }
     }
 

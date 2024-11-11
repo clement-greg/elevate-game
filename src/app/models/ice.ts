@@ -17,13 +17,6 @@ export class Ice extends GameSprite {
         this.body.isStatic = true;
         this.body.friction = 0;
         this.body.label = 'Ice';
-
-        // const frictionBody = Bodies.rectangle(x + 4, y - 36, this.width - 16, 2);
-        // Composite.add(engine.world, frictionBody);
-        // frictionBody.isStatic = true;
-        // frictionBody.friction = 1;
-        // this.body.label = 'brick-top';
-        // this.frictionTop = frictionBody;
     }
 
     bounceIt() {

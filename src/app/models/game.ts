@@ -41,7 +41,7 @@ export class Game {
     static gameInstance;
     world;
     internval;
-    //static gravity = 1;
+
     player2: Player2;
     ground;
 
@@ -56,8 +56,6 @@ export class Game {
     static applianceShopLeft = 8000;
     dialogOpen: boolean;
     gameStartTime: Date;
-    //gameTotalSeconds = 240;
-    //gameTotalSeconds = 15;
     remaining: string;
     static homeLeft = 16000;
     static homeLeftEnd = this.homeLeft + 300;
@@ -189,13 +187,8 @@ export class Game {
 
 
     run() {
-
         Engine.update(this.engine, 1000 / Config.getInstance().framesPerSecond);
-        //Engine.update(this.engine, 1000 / Config.getInstance().framesPerSecond);
         this.advance();
-        // if (this.running) {
-        //     requestAnimationFrame(() => this.run());
-        // }
     }
 
     shopEntranceAvailable = false;
@@ -219,11 +212,6 @@ export class Game {
                 PubSub.getInstance().publish('show-shop');
             }
         } else if (this.dialogOpen) {
-            // PubSub.getInstance().publish('close-all-diagrams');
-            // this.dialogOpen = false;
-            // this.showQuestBegin = false;
-            // this.removeSprite(this.infoBarier);
-            // delete this.infoBarier;
             if (this.infoBarier && this.showQuestBegin) {
                 this.doPrimaryKey();
             } else {
@@ -626,7 +614,6 @@ export class Game {
                 forceY = -0.6;
             }
             const label = collision.bodyA.label === 'Player' ? collision.bodyB.label : collision.bodyA.label;
-            //const label = collision.bodyA.label === 'Player' ? collision.bodyB.label : collision.bodyA.label;
 
             switch (label) {
                 case 'dynamite':
@@ -660,7 +647,6 @@ export class Game {
                                     Matter.Body.setStatic(coin.body, false);
                                     Matter.Body.setVelocity(coin.body, { x: 0.1 * multiplier, y: -5.3 });
                                     multiplier *= -1;
-                                    //forcex += .05;
                                 }
                                 this.removeSprite(dynamite);
                             }, 2500);
@@ -698,7 +684,6 @@ export class Game {
                             ramDead.style.height = '200px';
                             ramDead.style.width = '200px';
                             ramDead.setAttribute('autoplay', '1');
-                            //(ramDead as any).play();
 
                             document.getElementById('game-div').appendChild(ramDead);
 
@@ -776,7 +761,6 @@ export class Game {
                 switch (label) {
                     case 'brick-top':
                     case 'Brick':
-                        //otherSprite.bounceIt();
                         otherSprite?.breakIt();
                         this.removeSprite(otherSprite);
                         break;
@@ -823,8 +807,6 @@ export class Game {
     }
 
     loseLife() {
-
-        // TODO: Play death scene 
         const leftPosition = 150;
         this.player2.domObject.style.visibility = 'hidden';
         this.player2.x = leftPosition;
@@ -891,23 +873,14 @@ export class Game {
         const gamepad = navigator.getGamepads()[0];
         if (gamepad) {
             if (gamepad.vibrationActuator) {
-                // Vibrate the gamepad
                 gamepad.vibrationActuator.playEffect("dual-rumble", {
                     startDelay: 0,
-                    duration: 750, // Vibration duration in milliseconds
-                    weakMagnitude: 0.5, // Weak motor intensity (0.0 to 1.0)
-                    strongMagnitude: 1, // Strong motor intensity (0.0 to 1.0)
-                }).then(() => {
-                    console.log("Vibration complete");
-                }).catch((err) => {
-                    console.error("Vibration failed", err);
-                });
+                    duration: 750, 
+                    weakMagnitude: 0.5, 
+                    strongMagnitude: 1, 
+                }).then(() => { }).catch((err) => { });
             }
         }
-
-
-
-
     }
 
 
@@ -942,7 +915,7 @@ export class Game {
 
             const x = windowWidth - playerLeft;
             const offset = windowWidth / 2 - x;
-            //document.getElementById('game-div').style.transform = 'translateX(-' + offset + 'px)';
+            
             if (!document.getElementById('game-div')) {
                 return;
             }
@@ -962,7 +935,6 @@ export class Game {
             }
 
             if (lastBuildingsDiff > 200) {
-                //document.getElementById('bg-buildings').style.left = -(offset * .1) + 'px';
 
                 this.lastBuildingsCenter = new Date();
             }
@@ -972,7 +944,7 @@ export class Game {
                 this.lastSkyCenter = new Date();
             }
             this.world.scrollPosition = offset;
-            //}
+
         }
     }
 
@@ -989,10 +961,6 @@ export class Game {
         PubSub.deleteInstance();
         World.deleteInstance();
         if (Game.gameInstance) {
-            // if(Game.getInstance().player2) {
-            //     Game.getInstance().player2.subscriptionEvents.unsubscribe();
-
-            // }
             Game.gameInstance.stop();
         }
         delete Game.gameInstance;
@@ -1025,7 +993,6 @@ export class Game {
 
     start() {
         this.gameStartTime = new Date();
-        // this.internval = setInterval(() => this.doGameLoop(), 10);
     }
 
     running = true;

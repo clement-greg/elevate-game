@@ -61,12 +61,6 @@ export class AppComponent {
   }
 
   setupHandlers() {
-
-    // this.joystickState.onButtonPress = (b) => {
-    //   console.log(b);
-    // }
-
-
     PubSub.getInstance().subscribe('level-complete', () => {
       this.startGame = false;
       this.showGameWon = true;
