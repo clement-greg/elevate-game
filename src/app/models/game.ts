@@ -267,28 +267,10 @@ export class Game {
             this.isMovingLeft = false;
         }
         if (this.primaryButtonKeys.indexOf(key.key) > -1 && this.infoBarier) {
-            // if (this.showQuestBegin) {
-            //     PubSub.getInstance().publish('close-begin-quest');
-            //     this.removeSprite(this.infoBarier);
-            //     delete this.infoBarier;
-            //     this.showQuestBegin = false;
-            //     this.gameStartTime = new Date();
-            //     this.gameHUD.startTimer();
-            // }
+
             this.doPrimaryKey();
         }
-        // if (this.primaryButtonKeys.indexOf(key.key) > -1 && this.showCloseBarrier) {
-        //     Matter.Body.applyForce(this.player2.body, { x: this.player2.body.position.x, y: this.player2.body.position.y }, { x: -1, y: 0 });
-        //     setTimeout(() => PubSub.getInstance().publish('close-info-barrier'), 100);
-        //     this.showCloseBarrier = false;
-        // }
-        // if (this.secondaryButtonKeys.indexOf(key.key) > -1 && !this.dialogOpen && !this.fridge) {
-        //     if (this.playerLeft >= Game.applianceShopLeft && this.playerLeft <= Game.applianceShopAreaRight) {
-        //         PubSub.getInstance().publish('show-shop');
-        //     }
-        // } else if (this.secondaryButtonKeys.indexOf(key.key) > -1 && this.dialogOpen) {
-        //     PubSub.getInstance().publish('close-all-diagrams');
-        // }
+
         if (this.secondaryButtonKeys.indexOf(key.key) > -1) {
             this.doSecondaryKey();
         }
@@ -307,7 +289,6 @@ export class Game {
             this.doWin();
         }
         if ((key.key === 'l' || key.key === 'L') && Config.getInstance().allowDebug) {
-            //PubSub.getInstance().publish('game-lost');
             this.doLost();
         }
         if (key.key === 'D' || key.key === 'd') {
@@ -341,6 +322,10 @@ export class Game {
         this.addSprite(this.fridge);
         this.createFridgeConstraint();
         Game.lastStars = number;
+        setTimeout(() => {
+
+            this.playDiscoTimeIfNeeded();
+        }, 2000);
     }
 
     private createFridgeConstraint() {
@@ -471,6 +456,26 @@ export class Game {
 
     playCollectTool() {
         playSound('collect-tool-sound');
+        this.playDiscoTimeIfNeeded();
+    }
+
+    showDiscoTime = false;
+    playDiscoTimeIfNeeded() {
+        if (this.gameHUD.hasAllTools && this.fridgeContraint) {
+            this.forceDiscoTime();
+        }
+    }
+
+    forceDiscoTime() {
+        setTimeout(() => {
+            playSound('disco-time');
+            this.zone.run(() => {
+                this.showDiscoTime = true;
+            });
+            setTimeout(() => {
+                this.zone.run(() => this.showDiscoTime = false);
+            }, 2000);
+        }, 1000);
     }
 
     bounceCount = 0;
@@ -551,7 +556,6 @@ export class Game {
 
 
         if (left > Game.homeLeft && left < Game.homeLeftEnd && this.gameHUD.hasAllTools && this.fridgeContraint) {
-            //PubSub.getInstance().publish('level-complete');
             this.doWin();
             this.gameHUD = new GameHUD(this.zone);
         }
@@ -821,11 +825,12 @@ export class Game {
     loseLife() {
 
         // TODO: Play death scene 
+        const leftPosition = 150;
         this.player2.domObject.style.visibility = 'hidden';
-        this.player2.x = 0;
+        this.player2.x = leftPosition;
         this.player2.dead = true;
         this.player2.y = World.getInstance().height;
-        Matter.Body.setPosition(this.player2.body, { x: 0, y: 0 });
+        Matter.Body.setPosition(this.player2.body, { x: this.player2.x, y: 0 });
         Matter.Body.setVelocity(this.player2.body, { x: 0, y: 0 });
         playSound('die-sound');
         this.gameHUD.isJetPackMode = false;
@@ -843,13 +848,13 @@ export class Game {
             this.player2.domObject.style.visibility = 'visible';
             this.player2.domObject.style.left = "0px";
             this.player2.domObject.style.bottom = `${World.getInstance().height}px`;
-            this.player2.x = 0;
+            this.player2.x = leftPosition;
             this.player2.y = World.getInstance().height;
-            Matter.Body.setPosition(this.player2.body, { x: 0, y: 50 });
+            Matter.Body.setPosition(this.player2.body, { x: leftPosition, y: 50 });
             Matter.Body.setVelocity(this.player2.body, { x: 0, y: 0 });
             if (this.player2.x < 0) {
-                this.player2.x = 0;
-                Matter.Body.setPosition(this.player2.body, { x: 0, y: 50 });
+                this.player2.x = leftPosition;
+                Matter.Body.setPosition(this.player2.body, { x: leftPosition, y: 50 });
                 Matter.Body.setVelocity(this.player2.body, { x: 0, y: 0 });
             }
         }, 2500);

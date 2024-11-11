@@ -14,6 +14,93 @@ video.bill-board {
     }
 }
 
+@keyframes disco-time-h1 {
+    10% {
+        opacity: 0;
+        color: green;
+    }
+    15% {
+        opacity: 1;
+        color: orange;
+    }
+    25% {
+        opacity: 1;
+    }
+    30% {
+        opacity: 1;
+        color: blue;
+    }
+    35% {
+        opacity: 1;
+    }
+    40% {
+        opacity: 1;
+        color: red;
+    }
+    45% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 1;
+        color: yellow;
+    }
+    55% {
+        opacity: 1;
+    }
+    60% {
+        opacity: 1;
+        color: brown;
+    }
+    65% {
+        opacity: 1;
+    }
+    70% {
+        opacity: 0;
+        color: purple;
+    }
+    75% {
+        opacity: 1;
+    }
+    80% {
+        opacity: 1;
+        color: pink;
+    }
+    85% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+        color: gold;
+    }
+    95% {
+        opacity: 1;
+    }
+    1000% {
+        opacity: 1;
+        color: steelblue;
+    }
+}
+
+.disco-time {
+    position: fixed;
+    z-index: 100;
+    left: calc(50% - 200px);
+    text-align: center;
+    background-color: rgba(0, 0, 0, .2);
+    padding: 20px;
+    border-radius: 20px;
+    min-width: 400px;
+    top: calc(50% - 330px);
+    h1 {
+        animation: _ngcontent-ng-c3693412922_disco-time-h1 1s ease;
+        animation-iteration-count: infinite;
+        letter-spacing: 40px;
+        text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+        line-height: 88px;
+    }
+}
+
+
 #bottom-filler {
     background-image: url(/assets/images/grass-bg.svg);
     background-position-x: left;

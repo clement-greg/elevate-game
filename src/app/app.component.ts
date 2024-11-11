@@ -56,6 +56,7 @@ export class AppComponent {
           this.dialog.closeAll();
         }
         break;
+        
     }
   }
 

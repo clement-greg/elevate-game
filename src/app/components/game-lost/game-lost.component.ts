@@ -46,7 +46,7 @@ export class GameLostComponent implements OnDestroy {
       }
     }
 
-    if (this.pulseCount < 2) {
+    if (this.pulseCount < 3) {
       this.pulseCount++;
       setTimeout(() => this.pulse(), 1500);
     }

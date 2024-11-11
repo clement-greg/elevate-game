@@ -46,6 +46,8 @@ export class Level1Component implements AfterViewInit {
 
     });
 
+
+
     PubSub.getInstance().subscribe('show-shop', () => {
       Game.getInstance().dialogOpen = true;
       const ref = dialog.open(ShopComponent);
@@ -71,6 +73,10 @@ export class Level1Component implements AfterViewInit {
   title = 'elevate-game';
 
   showToolbar = false;
+
+  get showDiscoTime() {
+    return Game.getInstance().showDiscoTime;
+  }
 
   get applianceShopLeft() {
     return Game.applianceShopLeft + 'px';
@@ -105,6 +111,9 @@ export class Level1Component implements AfterViewInit {
   handleKeyDown(event: KeyboardEvent) {
     if ((event.key === 'e' || event.key === 'E') && Config.getInstance().allowDebug) {
       this.showToolbar = !this.showToolbar;
+    }
+    if((event.key === 'd' || event.key === 'D') && Config.getInstance().allowDebug ) {
+      Game.getInstance().forceDiscoTime();
     }
 
     Game.getInstance().processKeyDownEvent(event);

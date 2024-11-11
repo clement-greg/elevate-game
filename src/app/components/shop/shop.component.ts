@@ -69,6 +69,10 @@ Happy fridge hunting! 🚀`;
 
 
   ngOnDestroy(): void {
+    delete this.joystickState.onButtonPress;
+    delete this.joystickState.onLeftJoyStick;
+    delete this.joystickState.onRightJoyStick;
+
     delete this.joystickState;
     clearTimeout(this.wordsTimeout);
     pauseSound('synth-voice');
@@ -84,9 +88,8 @@ Happy fridge hunting! 🚀`;
     let index = this.items.indexOf(this.selectedItem);
     index++;
     if (index >= this.items.length) {
-      //index = 0;
       index = this.items.length - 1;
-      playSound('alert-sound', .1);
+      playSound('alert-sound', .3);
     } else {
       playSound('menu-move', .5);
     }
@@ -97,9 +100,8 @@ Happy fridge hunting! 🚀`;
     let index = this.items.indexOf(this.selectedItem);
     index--;
     if (index < 0) {
-      //index = this.items.length - 1;
       index = 0;
-      playSound('alert-sound', .1);
+      playSound('alert-sound', .3);
     } else {
       playSound('menu-move', .5);
     }
