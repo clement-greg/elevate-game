@@ -34,7 +34,6 @@ export class Brick extends GameSprite {
     }
 
     breakIt() {
-        //
         const player: any = document.createElement('lottie-player');
         player.style.height = '200px';
         player.style.width = '200px';
