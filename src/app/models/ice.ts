@@ -13,6 +13,7 @@ export class Ice extends GameSprite {
         const brickDiv = document.createElement('div');
         brickDiv.className = 'ice';
         this.domObject = brickDiv;
+        this.objectType = 'Ice';
 
         this.body.isStatic = true;
         this.body.friction = 0;
