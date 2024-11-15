@@ -28,7 +28,7 @@ export class Log extends GameSprite {
         this.initialY = y;
         this.body.friction = 0;
         Matter.Body.setMass(this.body, 100000);
-        const frictionBody = Matter.Bodies.rectangle(x + 4, y - 36, this.width - 16, 2);
+        const frictionBody = Matter.Bodies.rectangle(x + 4, y - 37, this.width - 16, 2);
         Matter.Composite.add(engine.world, frictionBody);
         frictionBody.isStatic = true;
         frictionBody.friction = 1;

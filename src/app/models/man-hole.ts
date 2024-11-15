@@ -1,17 +1,6 @@
 import { GameSprite } from "./game-sprite";
 
 export class ManHole extends GameSprite {
-    moveDirection;
-    initialX;
-    initialY;
-    moveDistance = 200;
-    moveSpeed = 2;
-    stationaryWait = 2;
-    newlyCreated = false;
-    frame = 0;
-    frameCount = 4;
-    delayCount = 0;
-    sign;
 
     constructor(engine, x, y) {
         super(engine, x, y, 288, 144, false, { mode: 'ellipse', dontUpdatePosition: true });
@@ -25,10 +14,5 @@ export class ManHole extends GameSprite {
         this.body.label = 'man-hole';
         this.domObject.style.left = `${this.x - this.width / 2}px`;
         this.domObject.style.top = `${this.y - this.height / 2}px`;
-
-    }
-
-    override advance() {
-
     }
 }

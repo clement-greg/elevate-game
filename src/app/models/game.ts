@@ -182,10 +182,6 @@ export class Game {
         }
     }
 
-
-
-
-
     run() {
         Engine.update(this.engine, 1000 / Config.getInstance().framesPerSecond);
         this.advance();
@@ -244,14 +240,14 @@ export class Game {
         if (key.key == 'ArrowRight') {
             this.player2.accelerating = false;
             this.player2.arrowRight = false;
-            this.player2.stopMomentum();
+            //this.player2.stopMomentum();
             this.isMovingRight = false;
         }
 
         if (key.key === 'ArrowLeft') {
             this.player2.accelerating = false;
             this.player2.arrowLeft = false;
-            this.player2.stopMomentum();
+            //this.player2.stopMomentum();
             this.isMovingLeft = false;
         }
         if (this.primaryButtonKeys.indexOf(key.key) > -1 && this.infoBarier) {
@@ -628,7 +624,7 @@ export class Game {
                             setTimeout(() => {
                                 pauseSound('warning-sound');
                                 playSound('explosion-sound');
-                            }, 1800);
+                            }, 2000);
                             setTimeout(() => {
                                 const diffX = this.playerLeft - dynamite.x;
                                 const diffY = this.playerTop - dynamite.y;
@@ -649,7 +645,7 @@ export class Game {
                                     multiplier *= -1;
                                 }
                                 this.removeSprite(dynamite);
-                            }, 2500);
+                            }, 2000);
                         }
                     }
                     break;

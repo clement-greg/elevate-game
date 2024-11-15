@@ -119,7 +119,6 @@ export class Player2 extends GameSprite {
             this.applyingLeft = true;
         }
         if (this.isMoving) {
-            //this.domObject.classList.remove('standing');
             this.frameDelay += 1;
             if (this.frameDelay === 10) {
                 this.runFrame += 1;
@@ -128,10 +127,7 @@ export class Player2 extends GameSprite {
                 }
                 this.frameDelay = 0;
             }
-        } else {
-            //this.domObject.classList.add('standing');
-        }
-
+        } 
         if (this.groundSprite?.objectType === 'Log') {
             if (!this.stickyX) {
                 this.stickyX = this.body.position.x - this.groundSprite?.body.position.x;
@@ -151,7 +147,5 @@ export class Player2 extends GameSprite {
             this.isGrounded = true;
         }
         this.domObject.style.backgroundPositionX = (this.runFrame * -72) + 'px';
-
-
     }
 }

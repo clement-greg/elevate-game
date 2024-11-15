@@ -20,7 +20,7 @@ export class Brick extends GameSprite {
         this.body.friction = 0;
         this.body.label = 'Brick';
 
-        const frictionBody = Bodies.rectangle(x - 1, y - 42, 74, 2);
+        const frictionBody = Bodies.rectangle(x - 1, y - 37, 74, 2);
         Composite.add(engine.world, frictionBody, {friction: 1, restitution: 0, inertia: 0});
         frictionBody.isStatic = true;
         frictionBody.friction = 1;
@@ -66,7 +66,7 @@ export class SolidBlock extends GameSprite {
         this.body.friction = 0;
         this.body.label = 'solid-block';
 
-        const frictionBody = Bodies.rectangle(x + 4, y - 42, this.width - 16, 2);
+        const frictionBody = Bodies.rectangle(x + 4, y - 37, this.width - 16, 2);
         Composite.add(engine.world, frictionBody, {friction: 1, restitution: 0, inertia: 0});
         frictionBody.isStatic = true;
         frictionBody.friction = 1;
