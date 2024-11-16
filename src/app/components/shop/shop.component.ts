@@ -199,15 +199,11 @@ Happy fridge hunting! 🚀`;
       this.player.pause();
       pauseSound('synth-voice');
     }
-
   }
-
-
-
 }
 
 class Item {
-  src: string;//'/assets/images/refrigerator1.svg',
+  src: string;
   price: number;
   title: string;
 }

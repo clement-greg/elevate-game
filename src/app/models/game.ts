@@ -744,7 +744,6 @@ export class Game {
                         break;
                     case 'cannon-ball':
                         const cannonBall = this.gameSprites.find(i => (i.body === collision.bodyA || i.body === collision.bodyB) && i !== this.player2);
-                        console.log({ cannonBall })
                         this.removeSprite(cannonBall);
                         this.loseLife();
                         break;

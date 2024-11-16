@@ -86,9 +86,6 @@ export class Player2 extends GameSprite {
     stopMomentum() {
         if (this.isGrounded) {
             if (!this.groundSprite || this.groundSprite.objectType !== 'Ice') {
-                if (this.groundSprite) {
-                    console.log(this.groundSprite.objectType);
-                }
                 Matter.Body.setVelocity(this.body, { x: 0, y: 0 });
             }
         }
