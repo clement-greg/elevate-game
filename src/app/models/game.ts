@@ -513,18 +513,20 @@ export class Game {
 
         this.shopEntranceAvailable = this.playerLeft >= Game.applianceShopLeft && this.playerLeft <= Game.applianceShopAreaRight && !this.fridge;
 
-        for (const cannon of this.cannons) {
+        if (this.questShown) {
+            for (const cannon of this.cannons) {
 
-            if (cannon.fire()) {
-                setTimeout(() => {
+                if (cannon.fire()) {
+                    setTimeout(() => {
 
-                    const cannonBall = new CannonBall(this.engine, cannon.x - 100, cannon.y - 20);
-                    this.addSprite(cannonBall);
+                        const cannonBall = new CannonBall(this.engine, cannon.x - 100, cannon.y - 20);
+                        this.addSprite(cannonBall);
 
-                    cannonBall.timeout = setTimeout(() => {
-                        this.removeSprite(cannonBall);
-                    }, 4000);
-                }, 600);
+                        cannonBall.timeout = setTimeout(() => {
+                            this.removeSprite(cannonBall);
+                        }, 4000);
+                    }, 600);
+                }
             }
         }
 
@@ -870,9 +872,9 @@ export class Game {
             if (gamepad.vibrationActuator) {
                 gamepad.vibrationActuator.playEffect("dual-rumble", {
                     startDelay: 0,
-                    duration: 750, 
-                    weakMagnitude: 0.5, 
-                    strongMagnitude: 1, 
+                    duration: 750,
+                    weakMagnitude: 0.5,
+                    strongMagnitude: 1,
                 }).then(() => { }).catch((err) => { });
             }
         }
@@ -910,7 +912,7 @@ export class Game {
 
             const x = windowWidth - playerLeft;
             const offset = windowWidth / 2 - x;
-            
+
             if (!document.getElementById('game-div')) {
                 return;
             }
