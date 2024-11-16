@@ -22,6 +22,7 @@ export class Log extends GameSprite {
         this.domObject = brickDiv;
 
         this.body.isStatic = true;
+        this.objectType = 'Log';
         this.body.label = 'log';
 
         this.initialX = x;

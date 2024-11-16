@@ -32,7 +32,7 @@ export class ShortLog extends GameSprite {
         frictionBody.friction = 1;
         frictionBody.label = 'log-short';
         this.frictionTop = frictionBody;
-
+        this.objectType = 'ShortLog';
     }
 
     override advance() {
