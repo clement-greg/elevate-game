@@ -65,6 +65,7 @@ export class Game {
     editorOpen: boolean;
     static lastStars: number;
     joystickState = new JoystickState(0);
+    gameTimeout:any;
 
 
     static get applianceShopAreaRight() {

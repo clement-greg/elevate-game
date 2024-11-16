@@ -48,16 +48,20 @@ export class AppComponent {
         break;
       case 9:
         if (Game.hasInstance) {
-          this.startGame = false;
-          this.hideTitleScreen = false;
-          this.showGameLost = false;
-          this.showGameWon = false;
-          Game.deleteInstance();
-          this.dialog.closeAll();
+          this.backToHomeScreen();
         }
         break;
         
     }
+  }
+
+  backToHomeScreen() {
+    this.startGame = false;
+    this.hideTitleScreen = false;
+    this.showGameLost = false;
+    this.showGameWon = false;
+    Game.deleteInstance();
+    this.dialog.closeAll();
   }
 
   setupHandlers() {
@@ -72,6 +76,11 @@ export class AppComponent {
         this.hideTitleScreen = false;
       }, Config.getInstance().showGameWinTime);
       setTimeout(() => this.canRestart = true, 4000);
+    });
+
+
+    PubSub.getInstance().subscribe('close-begin-quest',()=> {
+      clearTimeout(this.gameTimeout);
     });
 
     PubSub.getInstance().subscribe('game-lost', () => {
@@ -101,8 +110,10 @@ export class AppComponent {
 
   }
 
+  gameTimeout: any;
   doGameStart() {
     if (!this.startGame && this.canRestart) {
+      clearTimeout(this.gameTimeout);
       this.showGameWon = false;
       this.showGameLost = false;
       Game.deleteInstance();
@@ -110,6 +121,7 @@ export class AppComponent {
       this.startGame = true;
       clearTimeout(this.gameWonTimeout);
       setTimeout(() => this.hideTitleScreen = true, 1000);
+      this.gameTimeout = setTimeout(()=> this.backToHomeScreen(), 300000);
     }
   }
 
