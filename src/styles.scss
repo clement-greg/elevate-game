@@ -451,6 +451,16 @@ font-style: normal !important;
     background-position-y: bottom;
 }
 
+#bg-sky.vegas {
+    background-image: url(/assets/images/bg-sky-vegas.png);
+
+}
+
+#bg-sky.az {
+    background-image: url(/assets/images/bg-sky-az.png);
+
+}
+
 #bg-buildings {
     background-image: url(/assets/images/bg-buildings-2.png);
     background-repeat: repeat-x;
@@ -459,12 +469,32 @@ font-style: normal !important;
     background-position-y: bottom;
 }
 
+#bg-buildings.vegas {
+    background-image: url(/assets/images/bg-buildings-vegas.png);
+}
+
+#bg-buildings.az {
+    background-image: url(/assets/images/bg-buildings-az.png);
+}
+
+
+
 #bg-plants {
     background-image: url(/assets/images/bg-plants.png);
     background-repeat: repeat-x;
     height: var(--game-height);
     position: absolute;
     background-position-y: bottom;
+}
+
+#bg-plants.vegas {
+    background-image: url(/assets/images/bg-plants-vegas.png);
+
+}
+
+#bg-plants.az {
+    background-image: url(/assets/images/bg-plants-az.png);
+
 }
 
 #foreground {

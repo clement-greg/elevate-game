@@ -1,8 +1,8 @@
 <div id="game-container">
-    <div id="bottom-filler">
+    <div id="bottom-filler" [class.vegas]="isVegas" [class.az]="isAz">
     </div>
-    <div id="bg-sky"></div>
-    <div id="bg-buildings">
+    <div id="bg-sky" [class.vegas]="isVegas" [class.az]="isAz"></div>
+    <div id="bg-buildings" [class.vegas]="isVegas" [class.az]="isAz">
         <img src="/assets/images/bill-board.png" style="    height: 400px;
         position: absolute;
         bottom: 200px;
@@ -17,7 +17,7 @@
             src="https://elevateh.blob.core.windows.net/cdn/video/pool-and-pest.mp4"></video>
 
     </div>
-    <div id="bg-plants">
+    <div id="bg-plants" [class.vegas]="isVegas" [class.az]="isAz">
 
     </div>
 

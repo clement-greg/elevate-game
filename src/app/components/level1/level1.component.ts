@@ -22,6 +22,9 @@ import { Config } from '../../models/config';
 export class Level1Component implements AfterViewInit {
   questBeginRef: MatDialogRef<BeginQuestComponent>;
   notCompletedRef: MatDialogRef<NotCompleteComponent>;
+  isVegas = false;
+  isAz = false;
+
   constructor(private zone: NgZone, dialog: MatDialog) {
 
     PubSub.getInstance().subscribe('quest-begin', () => {
@@ -65,6 +68,15 @@ export class Level1Component implements AfterViewInit {
     PubSub.getInstance().subscribe('close-info-barrier', () => {
       this.notCompletedRef.close();
     });
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const location = urlParams.get('location');
+if(location === 'NV') {
+  this.isVegas = true;
+}
+if(location === 'AZ') {
+  this.isAz = true;
+}
   }
   ngAfterViewInit(): void {
 
