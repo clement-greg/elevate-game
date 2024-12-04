@@ -2,6 +2,7 @@ import { Component, HostListener, inject } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { JoystickState } from '../../models/joystick-state';
 import { PressAComponent } from '../press-a/press-a.component';
+import { playSound } from '../../utilities/sound-utils';
 
 @Component({
   selector: 'app-location-chooser',
@@ -27,7 +28,6 @@ export class LocationChooserComponent {
   }
 
   joystickButtonPress(btn: number) {
-
     switch (btn) {
       case 0:
         this.select();
@@ -35,27 +35,34 @@ export class LocationChooserComponent {
       case 1:
         this.dialogRef.close();
         break;
-
     }
   }
 
   joystickLeftPress() {
+    console.log('leftPress');
     if (this.location === 'NV') {
       this.location = 'UT';
+      playSound('menu-move', .5);
     } else if (this.location === 'UT') {
       this.location = 'AZ';
+      playSound('menu-move', .5);
+    } else {
+      playSound('alert-sound', .3);
     }
   }
 
   joystickRightPress() {
+    console.log('rightPress');
     if (this.location === 'AZ') {
       this.location = 'UT';
+      playSound('menu-move', .5);
     } else if (this.location === 'UT') {
       this.location = 'NV';
+      playSound('menu-move', .5);
+    } else {
+      playSound('alert-sound', .3);
     }
   }
-
-
 
   get selectedIndex(): number {
     if (this.location === 'AZ') {
@@ -78,12 +85,13 @@ export class LocationChooserComponent {
     if (event.key === 'ArrowRight') {
       this.joystickRightPress();
     }
+    if (event.key === 'b' || event.key === 'B') {
+      this.dialogRef.close();
+    }
     if (event.key === ' ') {
       this.select();
     }
   }
-
-
 
   select() {
     this.dialogRef.close(this.location);

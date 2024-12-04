@@ -1,14 +1,10 @@
-<div style="" class="scroller" [class.scrolled]="startGame" [class.game-won-scrolled]="showGameWon || showGameLost">
+<div class="scroller" [class.scrolled]="startGame" [class.game-won-scrolled]="showGameWon || showGameLost">
   <div style="height: 100vh;width: 100vw;">
 
     <app-title-screen *ngIf="!hideTitleScreen"></app-title-screen>
   </div>
   <div style="height: 100vh;width: 100vw;">
-
     <app-level1 [location]="location" *ngIf="startGame"></app-level1>
-    <!-- <div *ngIf="!startGame" style="background-color: orange;width: 100%;height: 100%;">
-
-    </div> -->
   </div>
   <div style="height: 100vh;width: 100vw">
     
@@ -19,3 +15,6 @@
 
 <audio src="/assets/sounds/game-over-lost.aac" id="game-over-lost-sound"></audio>
 <audio src="/assets/sounds/game-over-won.aac" id="game-over-won-sound"></audio>
+<audio src="/assets/sounds/menu-move.aac"   id="menu-move"></audio>
+<audio src="/assets/sounds/warning.aac" [volume]=".25" id="warning-sound"></audio>
+<audio src="/assets/sounds/alert.aac" id="alert-sound"></audio>
