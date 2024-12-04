@@ -1,0 +1,93 @@
+.outer-container {
+    height: 500px;
+    width: 900px;
+    padding-top: 60px;
+    overflow: hidden;
+    background: linear-gradient(360deg, rgb(3, 121, 3) 0%, rgb(80, 212, 137) 100%);
+}
+
+h1 {
+    color: #fff;
+    text-align: center;
+    text-shadow: rgb(255, 255, 40) 0px 0px 24px;
+}
+
+.location-container {
+    display: table;
+    margin: 0 auto;
+    transition: .75s ease-in-out;
+    white-space: nowrap;
+    transform: translateX(-19px);
+
+    li {
+        list-style: none;
+        display: inline-block;
+        padding: 30px;
+        text-align: center;
+        transition: .75s ease-in-out;
+        position: relative;
+        font-size: 28px;
+        color: #fff;
+
+        img {
+            height: 200px;
+            margin-bottom: 30px;
+        }
+
+        &.very-right {
+            transform: scale(.3) perspective(200px) rotateY(-10deg) translateX(350px) !important;
+            z-index: 1;
+        }
+
+        &.right {
+            transform: scale(.8) perspective(200px) rotateY(-10deg) !important;
+            z-index: 2;
+        }
+
+        &.selected {
+            background-color: rgb(3, 121, 3);
+            transform: scale(1) !important;
+            border-radius: 6px;
+            box-shadow: 0px 0px 74px 0px rgb(255 255 40);
+            background: linear-gradient(360deg, rgba(3, 121, 3, 1) 0%, rgba(80, 212, 137, 1) 100%);
+        }
+
+        &.left {
+            transform: scale(.8) perspective(200px) rotateY(10deg) !important;
+            z-index: 2;
+        }
+
+        &.very-left {
+            transform: scale(.3) perspective(200px) rotateY(10deg) translateX(-350px) !important;
+            z-index: -1;
+        }
+        &.center {
+            z-index: 10;
+        }
+    }
+}
+
+// .three-selected {
+//     transform: translateX(-30px);
+// }
+
+// .four-selected {
+//     transform: translateX(-390px);
+// }
+
+// .five-selected {
+//     transform: translateX(-740px);
+// }
+
+// .two-selected {
+//     transform: translateX(340px);
+// }
+
+.three-selected {
+    transform: translateX(-280px);
+}
+
+.one-selected {
+    transform: translateX(239px);
+    ;
+}

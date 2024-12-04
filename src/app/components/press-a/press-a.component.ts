@@ -10,5 +10,6 @@ import { Component, Input } from '@angular/core';
 })
 export class PressAComponent {
   @Input() wording = '[Press A To Continue]';
+  @Input() color = 'blue';
 
 }

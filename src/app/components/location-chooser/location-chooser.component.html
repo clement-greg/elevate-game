@@ -1,0 +1,25 @@
+<div  class="outer-container">
+    <h1>Pick Your Location</h1>
+    <ul class="location-container" [class.one-selected]="selectedIndex === 0" [class.two-selected]="selectedIndex === 1"
+        [class.three-selected]="selectedIndex ==2">
+        <li [class.selected]="selectedIndex === 0" [class.right]="selectedIndex === 1" [class.center]="selectedIndex === 0" (click)="location = 'AZ'"
+            [class.very-right]="selectedIndex === 2">
+            <img src="/assets/images/az-thumb.png"><br>
+            Arizona
+        </li>
+        <li [class.selected]="selectedIndex === 1" [class.center]="selectedIndex === 1" [class.right]="selectedIndex === 2" (click)="location = 'UT'"
+            [class.left]="selectedIndex === 0">
+            <img src="/assets/images/ut-thumb.png"><br>
+            Utah
+        </li>
+        <li [class.selected]="selectedIndex === 2" [class.center]="selectedIndex === 2" [class.left]="selectedIndex === 1" (click)="location = 'NV'"
+            [class.very-left]="selectedIndex === 0">
+            <img src="/assets/images/nv-thumb.png"><br>
+            Nevada
+        </li>
+    </ul>
+
+    <div style="text-align: center;margin-top: 30px;">
+        <app-press-a color="#fff"></app-press-a>
+    </div>
+</div>

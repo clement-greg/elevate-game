@@ -10,6 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ConfigComponent } from './components/config/config.component';
 import { Config } from './models/config';
 import { JoystickState } from './models/joystick-state';
+import { LocationChooserComponent } from './components/location-chooser/location-chooser.component';
 
 @Component({
   selector: 'app-root',
@@ -27,6 +28,8 @@ export class AppComponent {
   showGameLost;
   canRestart = true;
   joystickState = new JoystickState(0);
+  location: 'AZ' | 'UT' | 'NV' = 'UT';
+
 
   constructor(private zone: NgZone,
     private dialog: MatDialog
@@ -111,17 +114,32 @@ export class AppComponent {
   }
 
   gameTimeout: any;
+  locationChooserOpen = false;
   doGameStart() {
+
     if (!this.startGame && this.canRestart) {
-      clearTimeout(this.gameTimeout);
-      this.showGameWon = false;
-      this.showGameLost = false;
-      Game.deleteInstance();
-      this.setupHandlers();
-      this.startGame = true;
-      clearTimeout(this.gameWonTimeout);
-      setTimeout(() => this.hideTitleScreen = true, 1000);
-      this.gameTimeout = setTimeout(()=> this.backToHomeScreen(), 300000);
+      if(!this.locationChooserOpen) {
+        const ref = this.dialog.open(LocationChooserComponent);
+        ref.afterClosed().subscribe(result=> {
+          if(result) {
+            this.location = result;
+            clearTimeout(this.gameTimeout);
+            this.showGameWon = false;
+            this.showGameLost = false;
+            Game.deleteInstance();
+            this.setupHandlers();
+            this.startGame = true;
+            clearTimeout(this.gameWonTimeout);
+            setTimeout(() => this.hideTitleScreen = true, 1000);
+            this.gameTimeout = setTimeout(()=> this.backToHomeScreen(), 300000);
+          }
+          this.locationChooserOpen = false;
+
+        });
+        this.locationChooserOpen = true;
+      }
+
+
     }
   }
 

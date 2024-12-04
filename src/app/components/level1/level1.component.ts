@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, HostListener, NgZone } from '@angular/core';
+import { AfterViewInit, Component, HostListener, Input, NgZone } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ToolBarComponent } from '../tool-bar/tool-bar.component';
 import { CommonModule } from '@angular/common';
@@ -22,8 +22,11 @@ import { Config } from '../../models/config';
 export class Level1Component implements AfterViewInit {
   questBeginRef: MatDialogRef<BeginQuestComponent>;
   notCompletedRef: MatDialogRef<NotCompleteComponent>;
-  isVegas = false;
-  isAz = false;
+  // isVegas = false;
+  // isAz = false;
+
+  @Input() location: 'AZ' | 'UT' | 'NV';
+
 
   constructor(private zone: NgZone, dialog: MatDialog) {
 
@@ -71,12 +74,12 @@ export class Level1Component implements AfterViewInit {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const location = urlParams.get('location');
-if(location === 'NV') {
-  this.isVegas = true;
-}
-if(location === 'AZ') {
-  this.isAz = true;
-}
+    if (location === 'NV') {
+      this.location = 'NV';
+    }
+    if (location === 'AZ') {
+      this.location = 'AZ';
+    }
   }
   ngAfterViewInit(): void {
 
@@ -85,6 +88,14 @@ if(location === 'AZ') {
   title = 'elevate-game';
 
   showToolbar = false;
+
+  get isAz() {
+    return this.location === 'AZ';
+  }
+
+  get isVegas() {
+    return this.location === 'NV';
+  }
 
   get showDiscoTime() {
     return Game.getInstance().showDiscoTime;
@@ -124,7 +135,7 @@ if(location === 'AZ') {
     if ((event.key === 'e' || event.key === 'E') && Config.getInstance().allowDebug) {
       this.showToolbar = !this.showToolbar;
     }
-    if((event.key === 'd' || event.key === 'D') && Config.getInstance().allowDebug ) {
+    if ((event.key === 'd' || event.key === 'D') && Config.getInstance().allowDebug) {
       Game.getInstance().forceDiscoTime();
     }
 
