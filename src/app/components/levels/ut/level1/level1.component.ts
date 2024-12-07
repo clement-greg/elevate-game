@@ -1,26 +1,26 @@
-import { Component, HostListener, Input, NgZone } from '@angular/core';
-import { NVGame } from '../../models/levels/nv-game';
-import { Config } from '../../models/config';
-import { PubSub } from '../../models/pub-sub';
-import { BeginQuestComponent } from '../begin-quest/begin-quest.component';
-import { NotCompleteComponent } from '../not-complete/not-complete.component';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { ShopComponent } from '../shop/shop.component';
+import { AfterViewInit, Component, HostListener, Input, NgZone } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { ToolBarComponent } from '../tool-bar/tool-bar.component';
+import { ToolBarComponent } from '../../../tool-bar/tool-bar.component';
 import { CommonModule } from '@angular/common';
-import { HudComponent } from '../hud/hud.component';
-import { LottiePlayerComponent } from '../lottie-player/lottie-player.component';
-import { GameInstanceManager } from '../../models/game-instance';
+import { HudComponent } from '../../../hud/hud.component';
+import { LottiePlayerComponent } from '../../../lottie-player/lottie-player.component';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { PubSub } from '../../../../models/pub-sub';
+import { ShopComponent } from '../shop/shop.component';
+import { NotCompleteComponent } from '../not-complete/not-complete.component';
+import { Config } from '../../../../models/config';
+import { GameInstanceManager } from '../../../../models/game-instance';
+import { Game } from '../../../../models/levels/game';
+import { BeginQuestComponent } from '../begin-quest/begin-quest.component';
 
 @Component({
-  selector: 'app-nv-level',
+  selector: 'app-level1',
   standalone: true,
   imports: [RouterOutlet, ToolBarComponent, CommonModule, HudComponent, LottiePlayerComponent],
-  templateUrl: './nv-level.component.html',
-  styleUrl: './nv-level.component.scss'
+  templateUrl: './level1.component.html',
+  styleUrl: './level1.component.scss'
 })
-export class NvLevelComponent {
+export class Level1Component implements AfterViewInit {
   questBeginRef: MatDialogRef<BeginQuestComponent>;
   notCompletedRef: MatDialogRef<NotCompleteComponent>;
   // isVegas = false;
@@ -103,11 +103,11 @@ export class NvLevelComponent {
   }
 
   get applianceShopLeft() {
-    return NVGame.applianceShopLeft + 'px';
+    return Game.applianceShopLeft + 'px';
   }
 
   get homeLeft() {
-    return NVGame.homeLeft + 'px';
+    return Game.homeLeft + 'px';
   }
 
   get showBilboardVideos() {
@@ -116,11 +116,11 @@ export class NvLevelComponent {
 
 
   get lastGuyLeft() {
-    return (NVGame.homeLeft - 200) + 'px';
+    return (Game.homeLeft - 200) + 'px';
   }
 
   get initialLeft() {
-    return NVGame.initialLeft + 'px';
+    return Game.initialLeft + 'px';
   }
 
   startGame() {
@@ -153,6 +153,6 @@ export class NvLevelComponent {
   }
 
   get shopEntranceAvailableSignLeft() {
-    return (NVGame.applianceShopLeft + 25) + 'px';
+    return (Game.applianceShopLeft + 25) + 'px';
   }
 }

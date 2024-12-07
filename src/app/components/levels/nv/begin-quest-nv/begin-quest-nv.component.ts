@@ -1,20 +1,20 @@
 import { Component, OnDestroy, ViewChild } from '@angular/core';
-import { ToolBarComponent } from '../tool-bar/tool-bar.component';
-import { LottiePlayerComponent } from '../lottie-player/lottie-player.component';
-import { PressAComponent } from '../press-a/press-a.component';
-import { pauseSound, playSound } from '../../utilities/sound-utils';
+import { ToolBarComponent } from '../../../tool-bar/tool-bar.component';
+import { LottiePlayerComponent } from '../../../lottie-player/lottie-player.component';
+import { PressAComponent } from '../../../press-a/press-a.component';
+import { pauseSound, playSound } from '../../../../utilities/sound-utils';
 
 @Component({
-  selector: 'app-begin-quest',
+  selector: 'app-begin-quest-nv',
   standalone: true,
   imports: [LottiePlayerComponent, PressAComponent],
-  templateUrl: './begin-quest.component.html',
-  styleUrl: './begin-quest.component.scss'
+  templateUrl: './begin-quest-nv.component.html',
+  styleUrl: './begin-quest-nv.component.scss'
 })
-export class BeginQuestComponent implements OnDestroy {
+export class BeginQuestNvComponent implements OnDestroy {
 
   statements = [
-    `Uh-oh, Jimmy! 🛠️🚨
+    `Uh-oh, Jimmy!!!!! 🛠️🚨
 
 Guess what? Your fridge has decided to take an early retirement, and my toolkit is doing a fantastic job of hiding from me! If you can gather my runaway tools and snag a brand-new fridge from the store, I’ll be right there to work my magic.
 

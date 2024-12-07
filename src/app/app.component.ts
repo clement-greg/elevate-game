@@ -1,5 +1,5 @@
 import { Component, HostListener, NgZone } from '@angular/core';
-import { Level1Component } from './components/level1/level1.component';
+import { Level1Component } from './components/levels/ut/level1/level1.component';
 import { CommonModule } from '@angular/common';
 import { TitleScreenComponent } from './components/title-screen/title-screen.component';
 import { GameWonComponent } from './components/game-won/game-won.component';
@@ -10,13 +10,14 @@ import { ConfigComponent } from './components/config/config.component';
 import { Config } from './models/config';
 import { JoystickState } from './models/joystick-state';
 import { LocationChooserComponent } from './components/location-chooser/location-chooser.component';
-import { NvLevelComponent } from './components/nv-level/nv-level.component';
+import { NvLevelComponent } from './components/levels/nv/nv-level/nv-level.component';
 import { GameInstanceManager } from './models/game-instance';
+import { AzLevelComponent } from './components/levels/az/az-level/az-level.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [Level1Component, CommonModule, TitleScreenComponent, GameWonComponent, GameLostComponent, NvLevelComponent],
+  imports: [Level1Component, CommonModule, TitleScreenComponent, GameWonComponent, GameLostComponent, NvLevelComponent, AzLevelComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

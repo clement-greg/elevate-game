@@ -1,0 +1,65 @@
+<div class="dialog-container">
+
+    <div style="display: grid;grid-template-columns: auto 1fr;min-height: 425px;">
+
+        <div style="width: 300px;">
+            <div style="position: absolute ;margin-left: 50px;">
+                <app-lottie-player #player
+                    src="https://lottie.host/b343802b-437a-40f7-8be8-cdc0d1af9edf/7oBpRZ9g76.json"
+                    height="250px"></app-lottie-player>
+            </div>
+
+            <div style="position: absolute;margin-top: 120px;">
+
+                <img src="/assets/images/shop-counter.svg" style="height: 200px;">
+            </div>
+
+        </div>
+        <div style="padding-top: 40px; padding-right: 30px;min-height: 285px;">
+            <div class="speech-bubble" *ngIf="wordBubbleVisible" [id]="id">
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="choices">
+
+        <div *ngFor="let item of items" [class.selected]="item === selectedItem" [class.purchased]="purchased">
+            <img [src]="item.src">
+            <h2 style="margin-bottom: 0;">{{item.title}}</h2>
+            <div class="price-container">
+                <app-price-tag [price]="item.price"></app-price-tag>
+            </div>
+        </div>
+    </div>
+    <svg id="Layer_1" class="selector-arrow" *ngIf="!purchased" [style.transform]="selectorPosition" xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 83.44 43.15">
+        <defs>
+            <linearGradient id="linear-gradient" x1=".5" y1="21.57" x2="82.94" y2="21.57"
+                gradientUnits="userSpaceOnUse">
+                <stop offset="0" stop-color="#f7931e" />
+                <stop offset="1" stop-color="#fbb03b" />
+            </linearGradient>
+        </defs>
+        <g>
+            <path class="cls-4-arrow"
+                d="M5.49,42.65c-2.53,0-4.07-1.66-4.66-3.21-.59-1.55-.55-3.81,1.35-5.49L38.41,1.76c.91-.81,2.09-1.26,3.31-1.26s2.4.45,3.31,1.26l36.23,32.18c1.89,1.68,1.94,3.94,1.35,5.49-.59,1.55-2.12,3.21-4.66,3.21H5.49Z" />
+            <path class="cls-3-arrow"
+                d="M41.72,1c1.1,0,2.16.4,2.98,1.13l36.23,32.18c1.7,1.51,1.74,3.55,1.21,4.94-.53,1.4-1.91,2.89-4.19,2.89H5.49c-2.28,0-3.66-1.49-4.19-2.89-.53-1.4-.49-3.43,1.21-4.94L38.74,2.13c.82-.73,1.88-1.13,2.98-1.13M41.72,0c-1.3,0-2.6.46-3.64,1.38L1.85,33.57c-3.77,3.35-1.4,9.58,3.64,9.58h72.45c5.04,0,7.41-6.23,3.64-9.58L45.36,1.38c-1.04-.92-2.34-1.38-3.64-1.38h0Z" />
+        </g>
+        <polygon class="cls-2-arrow" points="46.37 11.15 76.37 36.15 64.72 36.15 46.37 11.15" />
+        <polygon class="cls-1-arrow" points="3.37 36.15 37.29 4.09 2.37 35.15 3.37 36.15" />
+    </svg>
+
+    <div style="text-align: right;margin-top: 40px;" *ngIf="!purchased">
+        <app-press-a wording="[Press A To Purchase]"></app-press-a>
+    </div>
+
+    <div *ngIf="purchased" style="position: absolute;bottom: 0;">
+        <app-lottie-player src="https://lottie.host/63ef23c2-1162-4d37-be9f-56626c87841e/vt2aeD94Vy.json" width="100%"
+            [loop]="false" [speed]="2">
+
+        </app-lottie-player>
+    </div>
+</div>

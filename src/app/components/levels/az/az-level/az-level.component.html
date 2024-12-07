@@ -1,0 +1,85 @@
+<div id="game-container">
+    <div id="bottom-filler" [class.az]="true" >
+    </div>
+    <div id="bg-sky" [class.az]="true" ></div>
+    <div id="bg-buildings" [class.az]="true" >
+        <img src="/assets/images/bill-board.png" style="    height: 400px;
+        position: absolute;
+        bottom: 200px;
+        left: 700px;">
+        <video class="bill-board video1" [autoplay]="'autoplay'" [loop]="'loop'" [muted]="'muted'" *ngIf="showBilboardVideos"
+            src="https://elevateh.blob.core.windows.net/cdn/video/hard-knock-life.mp4"></video>
+        <img src="/assets/images/bill-board-2.png" style="    height: 400px;
+        position: absolute;
+        bottom: 200px;
+        left: 2500px;">
+        <video class="bill-board video2" [autoplay]="'autoplay'" [loop]="'loop'" [muted]="'muted'" *ngIf="showBilboardVideos"
+            src="https://elevateh.blob.core.windows.net/cdn/video/pool-and-pest.mp4"></video>
+
+    </div>
+    <div id="bg-plants" [class.az]="true">
+
+    </div>
+
+    <div id="game-div">
+
+        <img src="/assets/images/appliance-shop.svg" style="height: 400px;position: absolute;bottom: 143px;"
+            [style.left]="applianceShopLeft">
+        <img src="/assets/images/home.svg" [style.left]="homeLeft"
+            style="height: 400px;position: absolute;bottom: 162px;">
+
+        <div id="construction-worker" style="position: absolute;bottom: 64px;height: 135px;" [style.left]="initialLeft">
+            <app-lottie-player src="https://lottie.host/7976638a-04b2-48f1-bdae-2c0c3959e323/qXBfYsDMXx.json"
+                height="135px" [intermission]="3000">
+
+            </app-lottie-player>
+
+
+        </div>
+
+
+        <div [style.left]="lastGuyLeft" style="position: absolute;bottom: 64px;height: 135px">
+            <app-lottie-player src="https://lottie.host/5b2dfe60-5867-4ae0-abaf-4d4c53c2531b/nPabOmMuvc.json"
+                height="135px" [intermission]="5000"></app-lottie-player>
+        </div>
+
+        <div *ngIf="shopEntranceVisible" [style.left]="shopEntranceAvailableSignLeft" style="position: absolute; top: 100px;">
+
+            <app-lottie-player src="https://lottie.host/47543bb4-b0a3-4bef-9e26-fa824720d4f4/0c6OcFneVE.json" height="300px"></app-lottie-player>
+        </div>
+
+
+    </div>
+
+</div>
+
+<app-tool-bar *ngIf="showToolbar"></app-tool-bar>
+
+<div id="snackbar">
+    Here is a snackbar message
+</div>
+<div id="debugger"></div>
+
+<app-hud></app-hud>
+
+<audio src="/assets/sounds/chime.aac" id="chime"></audio>
+<audio src="/assets/sounds/die.aac" id="die-sound"></audio>
+<audio src="/assets/sounds/break-brick.aac" id="break-brick-sound"></audio>
+<audio src="/assets/sounds/kill-enemy.aac" id="kill-enemy-sound"></audio>
+<audio src="/assets/sounds/bounce.aac" id="bounce-sound"></audio>
+<audio src="/assets/sounds/collect-tool.aac" id="collect-tool-sound"></audio>
+<audio src="/assets/sounds/cannon.aac" [volume]=".5" id="cannon-sound"></audio>
+<audio src="/assets/sounds/select.aac" id="select-sound"></audio>
+<audio src="/assets/sounds/thrust.aac" id="thrust-sound"></audio>
+<audio src="/assets/sounds/jump.aac" id="jump-sound"></audio>
+<audio src="/assets/sounds/explosion.aac" id="explosion-sound"></audio>
+<audio src="/assets/sounds/goat.aac" id="goat-sound"></audio>
+<audio src="/assets/sounds/synth-voice-2_01.aac" [volume]=".2" id="synth-voice"></audio>
+<audio src="/assets/sounds/warning-alarm.aac" [volume]=".2" id="warning-sound-game-end"></audio>
+<audio src="/assets/music/bg-music-2.aac" loop [volume]=".1" id="bg-music"></audio>
+<audio src="/assets/sounds/disco-tim.aac" id="disco-time"></audio>
+
+<div class="disco-time" *ngIf="showDiscoTime">
+    <img src="/assets/images/disco-boy.png" style="height: 100px;">
+    <h1>It's<br>Go<br>Time</h1>
+</div>
