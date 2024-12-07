@@ -16,6 +16,14 @@ export class JoystickState {
         this.gameLoop();
     }
 
+    dispose() {
+        delete this.onLeftJoyStick;
+        delete this.onRightJoyStick;
+        delete this.onUpJoyStick;
+        delete this.onDownJoyStick;
+        delete this.onButtonPress;
+    }
+
     get isLeft() {
         return this.left;
     }

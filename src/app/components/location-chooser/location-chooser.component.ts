@@ -1,4 +1,4 @@
-import { Component, HostListener, inject } from '@angular/core';
+import { Component, HostListener, inject, OnDestroy } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { JoystickState } from '../../models/joystick-state';
 import { PressAComponent } from '../press-a/press-a.component';
@@ -11,7 +11,7 @@ import { playSound } from '../../utilities/sound-utils';
   templateUrl: './location-chooser.component.html',
   styleUrl: './location-chooser.component.scss'
 })
-export class LocationChooserComponent {
+export class LocationChooserComponent implements OnDestroy {
   readonly dialogRef = inject(MatDialogRef<LocationChooserComponent>);
 
   location: 'AZ' | 'UT' | 'NV' = 'UT';
@@ -19,6 +19,10 @@ export class LocationChooserComponent {
 
   constructor() {
     this.setupJoystick();
+  }
+  ngOnDestroy(): void {
+    this.joystickState.dispose();
+    delete this.joystickState;
   }
 
   setupJoystick() {
