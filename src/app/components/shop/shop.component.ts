@@ -1,13 +1,13 @@
 import { CommonModule, CurrencyPipe } from '@angular/common';
 import { Component, HostListener, inject, OnDestroy, ViewChild } from '@angular/core';
 import { PriceTagComponent } from '../price-tag/price-tag.component';
-import { Game } from '../../models/game';
 import { MatDialogRef } from '@angular/material/dialog';
 import { PressAComponent } from '../press-a/press-a.component';
 import { LottiePlayerComponent } from '../lottie-player/lottie-player.component';
 import { ToolBarComponent } from '../tool-bar/tool-bar.component';
 import { pauseSound, playSound } from '../../utilities/sound-utils';
 import { JoystickState } from '../../models/joystick-state';
+import { GameInstanceManager } from '../../models/game-instance';
 
 @Component({
   selector: 'app-shop',
@@ -137,7 +137,7 @@ Happy fridge hunting! 🚀`;
     this.wordIndex = 0;
     this.player.seek(0);
     this.player.play();
-    if (this.selectedItem.price > Game.getInstance().gameHUD.money) {
+    if (this.selectedItem.price > GameInstanceManager.getInstance().gameHUD.money) {
       const currencyPipe = new CurrencyPipe('en-US');
       playSound('alert-sound');
       this.wordBubbleVisible = false;
@@ -145,7 +145,7 @@ Happy fridge hunting! 🚀`;
         this.wordBubbleVisible = true;
         setTimeout(() => {
           this.message = `Oh sorry, you don't have enough money to buy that refrigerator.  
-          That one costs ${currencyPipe.transform(this.selectedItem.price)} but you only have ${currencyPipe.transform(Game.getInstance().gameHUD.money)}
+          That one costs ${currencyPipe.transform(this.selectedItem.price)} but you only have ${currencyPipe.transform(GameInstanceManager.getInstance().gameHUD.money)}
                 `
           this.doWords();
         })
@@ -156,14 +156,14 @@ Happy fridge hunting! 🚀`;
     playSound('collect-tool-sound');
     this.purchased = true;
     let index = this.items.indexOf(this.selectedItem) + 1;
-    Game.getInstance().purchaseFridge(index);
+    GameInstanceManager.getInstance().purchaseFridge(index);
     this.wordBubbleVisible = false;
     setTimeout(() => {
       this.wordBubbleVisible = true;
       setTimeout(() => {
         this.message = `Thanks for your purchase.  Come again soon.`;
         this.doWords();
-        Game.getInstance().gameHUD.coinCount = Game.getInstance().gameHUD.coinCount - (this.selectedItem.price / 20);
+        GameInstanceManager.getInstance().gameHUD.coinCount = GameInstanceManager.getInstance().gameHUD.coinCount - (this.selectedItem.price / 20);
         setTimeout(() => this.dialogRef.close(), 2500);
       });
     }, 500);

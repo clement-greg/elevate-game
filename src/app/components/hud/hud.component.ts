@@ -1,6 +1,5 @@
 import { Component, NgZone } from '@angular/core';
 import { GameProviderService } from '../../services/game-provider.service';
-import { Game, GameHUD } from '../../models/game';
 import { HudCoinComponent } from '../hud-coin/hud-coin.component';
 import { CommonModule } from '@angular/common';
 
@@ -13,7 +12,7 @@ import { CommonModule } from '@angular/common';
 })
 export class HudComponent {
 
-  gameHUD: GameHUD;
+  gameHUD: any;
   constructor(private gameProvider: GameProviderService, 
     zone: NgZone
   ) {

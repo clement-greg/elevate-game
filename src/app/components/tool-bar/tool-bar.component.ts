@@ -1,6 +1,5 @@
 import { Component, NgZone, OnDestroy } from '@angular/core';
 import { GameProviderService } from '../../services/game-provider.service';
-import { Game } from '../../models/game';
 import { Brick, SolidBlock } from '../../models/brick';
 import { MysteryBlock } from '../../models/mystery-block';
 import { SpikeBall } from '../../models/spike-ball';
@@ -23,6 +22,10 @@ import { IBeam } from '../../models/i-beam';
 import { JetPackMysteryBlock } from '../../models/jet-pack-mystery-block';
 import { CeilingSpike } from '../../models/ceiling-spike';
 import { Dynamite } from '../../models/ahs';
+import { GameInstanceManager } from '../../models/game-instance';
+import { NVGame } from '../../models/levels/nv-game';
+import { Game } from '../../models/levels/game';
+import { AZGame } from '../../models/levels/az-game';
 
 @Component({
   selector: 'app-tool-bar',
@@ -33,7 +36,7 @@ import { Dynamite } from '../../models/ahs';
 })
 export class ToolBarComponent implements OnDestroy {
 
-  game: Game;
+  game: Game | NVGame | AZGame;
   constructor(private gameProvider: GameProviderService,
     private zone: NgZone
   ) {
@@ -44,10 +47,10 @@ export class ToolBarComponent implements OnDestroy {
         this.addDoubleClickHandler(sprite, this.game);
       }
     }
-    Game.getInstance().editorOpen = true;
+    GameInstanceManager.getInstance().editorOpen = true;
   }
   ngOnDestroy(): void {
-    Game.getInstance().editorOpen = false;
+    GameInstanceManager.getInstance().editorOpen = false;
   }
 
   addBrick() {
@@ -237,7 +240,7 @@ export class ToolBarComponent implements OnDestroy {
     });
   }
 
-  addDoubleClickHandler(sprite, game: Game) {
+  addDoubleClickHandler(sprite, game: Game | NVGame | AZGame) {
     sprite.domObject.addEventListener('dblclick', e => {
 
       let root: HTMLElement = e.srcElement;

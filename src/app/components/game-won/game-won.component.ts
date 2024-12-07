@@ -2,8 +2,9 @@ import { Component, OnDestroy } from '@angular/core';
 import { LottiePlayerComponent } from '../lottie-player/lottie-player.component';
 import { PressAComponent } from '../press-a/press-a.component';
 import { CommonModule } from '@angular/common';
-import { Game } from '../../models/game';
 import { pauseSound, playSound } from '../../utilities/sound-utils';
+import { Game } from '../../models/levels/game';
+import { GameInstanceManager } from '../../models/game-instance';
 
 @Component({
   selector: 'app-game-won',
@@ -27,7 +28,8 @@ export class GameWonComponent implements OnDestroy {
   }
 
   get stars() {
-    return Game.lastStars;
+
+    return GameInstanceManager.lastStars;
   }
 
 }

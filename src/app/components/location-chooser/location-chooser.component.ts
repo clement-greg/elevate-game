@@ -39,7 +39,6 @@ export class LocationChooserComponent {
   }
 
   joystickLeftPress() {
-    console.log('leftPress');
     if (this.location === 'NV') {
       this.location = 'UT';
       playSound('menu-move', .5);
@@ -52,7 +51,6 @@ export class LocationChooserComponent {
   }
 
   joystickRightPress() {
-    console.log('rightPress');
     if (this.location === 'AZ') {
       this.location = 'UT';
       playSound('menu-move', .5);

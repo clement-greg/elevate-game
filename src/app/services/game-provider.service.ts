@@ -1,5 +1,5 @@
 import { Injectable, NgZone } from '@angular/core';
-import { Game } from '../models/game';
+import { GameInstanceManager } from '../models/game-instance';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +9,6 @@ export class GameProviderService {
   constructor(private zone: NgZone) { }
 
   getInstance() {
-    return Game.getInstance(this.zone);
+    return GameInstanceManager.getInstance(this.zone);
   }
 }

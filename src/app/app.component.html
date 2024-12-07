@@ -4,7 +4,8 @@
     <app-title-screen *ngIf="!hideTitleScreen"></app-title-screen>
   </div>
   <div style="height: 100vh;width: 100vw;">
-    <app-level1 [location]="location" *ngIf="startGame"></app-level1>
+    <app-level1 [location]="location" *ngIf="startGame && location !== 'NV'"></app-level1>
+    <app-nv-level [location]="location" *ngIf="startGame && location === 'NV'"></app-nv-level>
   </div>
   <div style="height: 100vh;width: 100vw">
     

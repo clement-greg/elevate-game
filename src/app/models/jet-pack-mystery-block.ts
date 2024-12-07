@@ -1,7 +1,4 @@
-declare var Matter: any;
-
-import { Coin } from "./coin";
-import { Game } from "./game";
+declare var Matter: any;import { GameInstanceManager } from "./game-instance";
 import { GameSprite } from "./game-sprite";
 import { JetPack } from "./jet-pack";
 import { PubSub } from "./pub-sub";
@@ -52,7 +49,7 @@ export class JetPackMysteryBlock extends GameSprite {
         jetPack.domObject.style.left = (this.x - this.width / 2) + 'px';
         jetPack.domObject.style.top = (this.y - 100) + 'px';
         PubSub.getInstance().publish('add-game-sprite', jetPack);
-        Game.getInstance().gameHUD.isJetPackMode = true;
+        GameInstanceManager.getInstance().gameHUD.isJetPackMode = true;
         PubSub.getInstance().publish('jet-pack-change');
 
         setTimeout(() => {

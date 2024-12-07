@@ -1,35 +1,36 @@
 declare var Matter: any;
 
-import { World } from './world';
-import { Ground } from './ground';
-import { Brick, SolidBlock } from './brick';
-import { HTTP } from './http';
-import { MysteryBlock } from './mystery-block';
-import { SpikeBall } from './spike-ball';
-import { PubSub } from './pub-sub';
-import { Ram } from './ram';
-import { Player2 } from './player-2';
-import { Coin } from './coin';
-import { Log } from './log';
-import { ShortLog } from './short-log';
-import { ManHole } from './man-hole';
-import { Ice } from './ice';
+import { World } from '../world';
+import { Ground } from '../ground';
+import { Brick, SolidBlock } from '../brick';
+import { HTTP } from '../http';
+import { MysteryBlock } from '../mystery-block';
+import { SpikeBall } from '../spike-ball';
+import { PubSub } from '../pub-sub';
+import { Ram } from '../ram';
+import { Player2 } from '../player-2';
+import { Coin } from '../coin';
+import { Log } from '../log';
+import { ShortLog } from '../short-log';
+import { ManHole } from '../man-hole';
+import { Ice } from '../ice';
 import { NgZone } from '@angular/core';
-import { Drill, Hammer, Saw, Screwdriver, Wrench } from './saw';
-import { Fridge1, Fridge2, Fridge3 } from './fridge';
-import { GameSprite } from './game-sprite';
-import { ToolBarComponent } from '../components/tool-bar/tool-bar.component';
-import { Trampoline } from './trampoline';
-import { SpikeBrick } from './spike-brick';
-import { Cannon } from './cannon';
-import { CannonBall } from './cannon-ball';
-import { IBeam } from './i-beam';
-import { JetPackMysteryBlock } from './jet-pack-mystery-block';
-import { Config } from './config';
-import { CeilingSpike } from './ceiling-spike';
-import { Dynamite } from './ahs';
-import { pauseSound, playSound } from '../utilities/sound-utils';
-import { JoystickState } from './joystick-state';
+import { Drill, Hammer, Saw, Screwdriver, Wrench } from '../saw';
+import { Fridge1, Fridge2, Fridge3 } from '../fridge';
+import { GameSprite } from '../game-sprite';
+import { ToolBarComponent } from '../../components/tool-bar/tool-bar.component';
+import { Trampoline } from '../trampoline';
+import { SpikeBrick } from '../spike-brick';
+import { Cannon } from '../cannon';
+import { CannonBall } from '../cannon-ball';
+import { IBeam } from '../i-beam';
+import { JetPackMysteryBlock } from '../jet-pack-mystery-block';
+import { Config } from '../config';
+import { CeilingSpike } from '../ceiling-spike';
+import { Dynamite } from '../ahs';
+import { pauseSound, playSound } from '../../utilities/sound-utils';
+import { JoystickState } from '../joystick-state';
+import { GameInstanceManager } from '../game-instance';
 
 var Engine = Matter.Engine,
     MatterWorld = Matter.World,
@@ -37,7 +38,7 @@ var Engine = Matter.Engine,
     Body = Matter.Body;
 
 
-export class Game {
+export class NVGame {
     static gameInstance;
     world;
     internval;
@@ -63,13 +64,12 @@ export class Game {
     showCloseBarrier = false;
     cannons: Cannon[] = [];
     editorOpen: boolean;
-    static lastStars: number;
     joystickState = new JoystickState(0);
     gameTimeout:any;
 
 
     static get applianceShopAreaRight() {
-        return Game.applianceShopLeft + 450;
+        return NVGame.applianceShopLeft + 450;
     }
 
     constructor(private zone: NgZone) {
@@ -80,9 +80,9 @@ export class Game {
 
     advanceInterval;
 
-    static hasInstance() {
-        return this.gameInstance !== null && this.gameInstance != undefined;
-    }
+    // static hasInstance() {
+    //     return this.gameInstance !== null && this.gameInstance != undefined;
+    // }
 
     initialize(zone: NgZone) {
         if (!zone) {
@@ -104,7 +104,6 @@ export class Game {
         this.addSprite(this.player2);
 
         zone.run(() => {
-
             this.gameHUD = new GameHUD(zone);
         });
 
@@ -128,12 +127,12 @@ export class Game {
         this.infoBarier.body.friction = 0;
         this.gameSprites.push(this.infoBarier);
 
-        this.completionBarrier = new Ground(this.engine, Game.homeLeft - 150, 0, 2, 10000);
+        this.completionBarrier = new Ground(this.engine, NVGame.homeLeft - 150, 0, 2, 10000);
         this.completionBarrier.body.label = 'completion-barrier';
         this.completionBarrier.body.friction = 0;
         this.gameSprites.push(this.completionBarrier);
 
-        HTTP.getData(`./assets/levels/${Config.getInstance().level}.json`).then(json => {
+        HTTP.getData(`./assets/levels/nv.json`).then(json => {
             this.setupGame(json);
         });
 
@@ -205,7 +204,7 @@ export class Game {
 
     doSecondaryKey() {
         if (!this.dialogOpen && !this.fridge) {
-            if (this.playerLeft >= Game.applianceShopLeft && this.playerLeft <= Game.applianceShopAreaRight) {
+            if (this.playerLeft >= NVGame.applianceShopLeft && this.playerLeft <= NVGame.applianceShopAreaRight) {
                 PubSub.getInstance().publish('show-shop');
             }
         } else if (this.dialogOpen) {
@@ -306,7 +305,7 @@ export class Game {
 
         this.addSprite(this.fridge);
         this.createFridgeConstraint();
-        Game.lastStars = number;
+        GameInstanceManager.lastStars = number;
         setTimeout(() => {
 
             this.playDiscoTimeIfNeeded();
@@ -512,7 +511,7 @@ export class Game {
             this.loseLife();
         }
 
-        this.shopEntranceAvailable = this.playerLeft >= Game.applianceShopLeft && this.playerLeft <= Game.applianceShopAreaRight && !this.fridge;
+        this.shopEntranceAvailable = this.playerLeft >= NVGame.applianceShopLeft && this.playerLeft <= NVGame.applianceShopAreaRight && !this.fridge;
 
         if (this.questShown) {
             for (const cannon of this.cannons) {
@@ -532,7 +531,7 @@ export class Game {
         }
 
         const left = this.playerLeft;
-        if (left > (Game.initialLeft - 50) && !this.showQuestBegin && !this.questShown && this.playerTop > 0) {
+        if (left > (NVGame.initialLeft - 50) && !this.showQuestBegin && !this.questShown && this.playerTop > 0) {
             this.questShown = true;
             this.zone.run(() => {
                 this.showQuestBegin = true;
@@ -542,7 +541,7 @@ export class Game {
         }
 
 
-        if (left > Game.homeLeft && left < Game.homeLeftEnd && this.gameHUD.hasAllTools && this.fridgeContraint) {
+        if (left > NVGame.homeLeft && left < NVGame.homeLeftEnd && this.gameHUD.hasAllTools && this.fridgeContraint) {
             this.doWin();
             this.gameHUD = new GameHUD(this.zone);
         }
@@ -946,27 +945,27 @@ export class Game {
         }
     }
 
-    static getInstance(zone: NgZone = null): Game {
+    // static getInstance(zone: NgZone = null): NVGame {
 
-        if (!Game.gameInstance) {
-            Game.gameInstance = new Game(zone);
-        }
+    //     if (!NVGame.gameInstance) {
+    //         NVGame.gameInstance = new NVGame(zone);
+    //     }
 
-        return Game.gameInstance;
-    }
+    //     return NVGame.gameInstance;
+    // }
 
-    static deleteInstance() {
-        PubSub.deleteInstance();
-        World.deleteInstance();
-        if (Game.gameInstance) {
-            Game.gameInstance.stop();
-        }
-        delete Game.gameInstance;
-    }
+    // static deleteInstance() {
+    //     PubSub.deleteInstance();
+    //     World.deleteInstance();
+    //     if (NVGame.gameInstance) {
+    //         NVGame.gameInstance.stop();
+    //     }
+    //     delete NVGame.gameInstance;
+    // }
 
-    static clearInstance(zone: NgZone) {
-        Game.gameInstance = new Game(zone);
-    }
+    // static clearInstance(zone: NgZone) {
+    //     NVGame.gameInstance = new NVGame(zone);
+    // }
 
     removeSprite(sprite) {
         // Not sure why this is happening sometimes, not reproduceable

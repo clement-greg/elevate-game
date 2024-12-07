@@ -3,7 +3,7 @@ declare var Matter: any;
 import { ToolBarComponent } from '../components/tool-bar/tool-bar.component';
 import { playSound } from '../utilities/sound-utils';
 import { Config } from './config';
-import { Game } from './game';
+import { GameInstanceManager } from './game-instance';
 import { GameSprite } from './game-sprite';
 import { PubSub } from './pub-sub';
 
@@ -38,7 +38,7 @@ export class Player2 extends GameSprite {
         playerDiv.innerHTML = `<lottie-player  style="transform: translateY(80px) translateX(-21px) scale(2); "  id="${this.lottieId}" background="transparent" src="https://lottie.host/ce873636-1d89-4e51-b903-4e458339ea12/Hdnd2ezUkH.json"></lottie-player>`
 
         this.subscriptionEvents = this.pubsub.subscribe('keydown', key => {
-            if (key.code === 'Space' && this.isGrounded && !Game.getInstance().dialogOpen) {
+            if (key.code === 'Space' && this.isGrounded && !GameInstanceManager.getInstance().dialogOpen) {
                 Matter.Body.setVelocity(this.body, { x: this.body.velocity.x, y: 0 });
                 let upForce = -0.32;
                 Matter.Body.applyForce(this.body, { x: this.body.position.x, y: this.body.position.y }, { x: 0, y: upForce });
@@ -51,13 +51,13 @@ export class Player2 extends GameSprite {
 
 
     jump() {
-        if ((this.isGrounded || Game.getInstance().gameHUD?.isJetPackMode) && !Game.getInstance().dialogOpen) {
+        if ((this.isGrounded || GameInstanceManager.getInstance().gameHUD?.isJetPackMode) && !GameInstanceManager.getInstance().dialogOpen) {
             Matter.Body.setVelocity(this.body, { x: this.body.velocity.x, y: 0 });
             let upForce = Config.getInstance().playerJumpForce;
             Matter.Body.applyForce(this.body, { x: this.body.position.x, y: this.body.position.y }, { x: 0, y: upForce });
             this.isGrounded = false;
             delete this.groundSprite;
-            if (Game.getInstance().gameHUD?.isJetPackMode) {
+            if (GameInstanceManager.getInstance().gameHUD?.isJetPackMode) {
                 playSound('thrust-sound', .3);
 
                 const player = (document.getElementById(this.lottieId) as any);
@@ -97,7 +97,7 @@ export class Player2 extends GameSprite {
         } else {
             this.domObject.classList.add('standing');
         }
-        if (Game.getInstance().dialogOpen || this.dead) {
+        if (GameInstanceManager.getInstance().dialogOpen || this.dead) {
             return;
         }
         this.isMoving = (this.arrowRight || this.arrowLeft) && this.isGrounded;

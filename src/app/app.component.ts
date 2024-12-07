@@ -4,18 +4,19 @@ import { CommonModule } from '@angular/common';
 import { TitleScreenComponent } from './components/title-screen/title-screen.component';
 import { GameWonComponent } from './components/game-won/game-won.component';
 import { PubSub } from './models/pub-sub';
-import { Game } from './models/game';
 import { GameLostComponent } from './components/game-lost/game-lost.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfigComponent } from './components/config/config.component';
 import { Config } from './models/config';
 import { JoystickState } from './models/joystick-state';
 import { LocationChooserComponent } from './components/location-chooser/location-chooser.component';
+import { NvLevelComponent } from './components/nv-level/nv-level.component';
+import { GameInstanceManager } from './models/game-instance';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [Level1Component, CommonModule, TitleScreenComponent, GameWonComponent, GameLostComponent],
+  imports: [Level1Component, CommonModule, TitleScreenComponent, GameWonComponent, GameLostComponent, NvLevelComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -50,7 +51,7 @@ export class AppComponent {
         this.doGameStart();
         break;
       case 9:
-        if (Game.hasInstance) {
+        if (GameInstanceManager.hasInstance) {
           this.backToHomeScreen();
         }
         break;
@@ -63,7 +64,7 @@ export class AppComponent {
     this.hideTitleScreen = false;
     this.showGameLost = false;
     this.showGameWon = false;
-    Game.deleteInstance();
+    GameInstanceManager.deleteInstance();
     this.dialog.closeAll();
   }
 
@@ -73,7 +74,7 @@ export class AppComponent {
       this.showGameWon = true;
       this.canRestart = false;
 
-      Game.deleteInstance();
+      GameInstanceManager.deleteInstance();
       this.gameWonTimeout = setTimeout(() => {
         this.showGameWon = false;
         this.hideTitleScreen = false;
@@ -91,7 +92,7 @@ export class AppComponent {
       this.showGameLost = true;
       this.canRestart = false;
 
-      Game.deleteInstance();
+      GameInstanceManager.deleteInstance();
       this.gameWonTimeout = setTimeout(() => {
         this.showGameLost = false;
         this.hideTitleScreen = false;
@@ -123,10 +124,11 @@ export class AppComponent {
         ref.afterClosed().subscribe(result=> {
           if(result) {
             this.location = result;
+            GameInstanceManager.location = result;
             clearTimeout(this.gameTimeout);
             this.showGameWon = false;
             this.showGameLost = false;
-            Game.deleteInstance();
+            GameInstanceManager.deleteInstance();
             this.setupHandlers();
             this.startGame = true;
             clearTimeout(this.gameWonTimeout);
