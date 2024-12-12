@@ -1,6 +1,6 @@
 import { NgZone } from "@angular/core";
-import { Game } from "./levels/game";
-import { NVGame } from "./levels/nv-game";
+// import { Game } from "./levels/game";
+// import { NVGame } from "./levels/nv-game";
 import { PubSub } from "./pub-sub";
 import { World } from "./world";
 import { AZGame } from "./levels/az-game";
@@ -8,18 +8,20 @@ import { AZGame } from "./levels/az-game";
 export class GameInstanceManager {
 
     static location: 'AZ' | 'UT' | 'NV';
-    static gameInstance: Game | NVGame | AZGame;
+    static gameInstance: AZGame;
 
-    static getInstance(zone: NgZone = null): Game | NVGame | AZGame {
+    static getInstance(zone: NgZone = null): AZGame {
 
 
         if (!GameInstanceManager.gameInstance) {
             if (this.location === 'NV') {
-                GameInstanceManager.gameInstance = new NVGame(zone);
+                // GameInstanceManager.gameInstance = new NVGame(zone);
+                GameInstanceManager.gameInstance = new AZGame(zone, this.location);
             } else if(this.location === 'AZ'){
-                GameInstanceManager.gameInstance = new AZGame(zone);
+                GameInstanceManager.gameInstance = new AZGame(zone, this.location);
             } else {
-                GameInstanceManager.gameInstance = new Game(zone);
+                // GameInstanceManager.gameInstance = new Game(zone);
+                GameInstanceManager.gameInstance = new AZGame(zone, this.location);
             }
         }
 
@@ -36,7 +38,7 @@ export class GameInstanceManager {
     }
 
     static clearInstance(zone: NgZone) {
-        GameInstanceManager.gameInstance = new Game(zone);
+        GameInstanceManager.gameInstance = new AZGame(zone, this.location);
     }
 
     static hasInstance() {

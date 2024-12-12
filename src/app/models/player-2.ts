@@ -1,4 +1,9 @@
 declare var Matter: any;
+var Engine = Matter.Engine,
+    MatterWorld = Matter.World,
+    Bodies = Matter.Bodies,
+    Body = Matter.Body,
+    Composite = Matter.Composite;
 
 import { ToolBarComponent } from '../components/tool-bar/tool-bar.component';
 import { playSound } from '../utilities/sound-utils';
@@ -19,11 +24,15 @@ export class Player2 extends GameSprite {
     isGrounded = false;
     subscriptionEvents: any;
     lottieId = ToolBarComponent.newid();
+    flameThrowerId = ToolBarComponent.newid();
     accelerating = false;
     dead: boolean;
+    flameBody: any;
+    flameBodyWidth = 550;
+    //currentFlameWidth = 10;
 
 
-    constructor(engine, x, y, width, height) {
+    constructor(private engine, x, y, width, height) {
         super(engine, x, y, width, height);
         this.moveSprite = true;
         const playerDiv = document.createElement('div');
@@ -35,7 +44,7 @@ export class Player2 extends GameSprite {
         this.body.staticFriction = 20;
 
         //
-        playerDiv.innerHTML = `<lottie-player  style="transform: translateY(80px) translateX(-21px) scale(2); "  id="${this.lottieId}" background="transparent" src="https://lottie.host/ce873636-1d89-4e51-b903-4e458339ea12/Hdnd2ezUkH.json"></lottie-player>`
+        playerDiv.innerHTML = `<lottie-player class="flame-gun"id="${this.flameThrowerId}" background="transparent" src="https://lottie.host/ab0aa70b-3019-4335-ba89-1d016e62a34d/5UXBaLgqpl.json"></lottie-player><lottie-player  style="transform: translateY(80px) translateX(-21px) scale(2); "  id="${this.lottieId}" background="transparent" src="https://lottie.host/ce873636-1d89-4e51-b903-4e458339ea12/Hdnd2ezUkH.json"></lottie-player>`
 
         this.subscriptionEvents = this.pubsub.subscribe('keydown', key => {
             if (key.code === 'Space' && this.isGrounded && !GameInstanceManager.getInstance().dialogOpen) {
@@ -49,6 +58,67 @@ export class Player2 extends GameSprite {
         });
     }
 
+    flameThrowerSetup = false;
+    flaming = false;
+    flameTimeout: any;
+    runFlameThrower() {
+        clearTimeout(this.flameTimeout);
+        if(this.flaming) {
+            this.flameTimeout = setTimeout(() => this.stopFlameThrower(), 750);
+            return;
+        }
+
+        setTimeout(()=> {
+            if (!this.flameBody) {
+                this.flameBody = Bodies.rectangle(this.body.position.x, this.body.position.y, this.flameBodyWidth, 70);
+                Matter.Body.set(this.flameBody, 'isSensor', true);
+                this.flameBody.label = 'flame-body';
+                Composite.add(this.engine.world, [this.flameBody]);
+            }
+
+        }, 500);
+
+        const player = (document.getElementById(this.flameThrowerId) as any);
+        player.seek(0);
+        player.play();
+        player.direction = 1;
+        player.setDirection(1);
+        if (!this.flameThrowerSetup) {
+            player.addEventListener('complete', () => {
+                if (this.flaming) {
+                    player.seek(6);
+                    player.play();
+                }
+            });
+            this.flameThrowerSetup = true;
+        }
+        this.flaming = true;
+        this.flameTimeout = setTimeout(() => this.stopFlameThrower(), 750);
+
+    }
+
+
+
+    stopFlameThrower() {
+        this.flaming = false;
+        const player = (document.getElementById(this.flameThrowerId) as any);
+        player.stop();
+        player.setDirection(-1);
+        player.seek(6);
+        player.play();
+        if (this.flameBody) {
+            Matter.Composite.remove(this.engine.world, this.flameBody);
+            delete this.flameBody;
+        }
+    }
+
+    toggleFlameThrower() {
+        if (this.flaming) {
+            this.stopFlameThrower();
+        } else {
+            this.runFlameThrower();
+        }
+    }
 
     jump() {
         if ((this.isGrounded || GameInstanceManager.getInstance().gameHUD?.isJetPackMode) && !GameInstanceManager.getInstance().dialogOpen) {
@@ -100,6 +170,7 @@ export class Player2 extends GameSprite {
         if (GameInstanceManager.getInstance().dialogOpen || this.dead) {
             return;
         }
+
         this.isMoving = (this.arrowRight || this.arrowLeft) && this.isGrounded;
 
         let isGrounded = Math.abs(this.body.velocity.y) < 0.1;
@@ -147,5 +218,16 @@ export class Player2 extends GameSprite {
             this.isGrounded = true;
         }
         this.domObject.style.backgroundPositionX = (this.runFrame * -72) + 'px';
+        if (this.flameBody) {
+            let x = this.body.position.x;
+            const flameWidth = Math.abs(this.flameBody.bounds.min.x - this.flameBody.bounds.max.x);
+            if (this.applyingLeft) {
+                x -= (flameWidth / 2);
+            } else {
+                x += flameWidth / 2;
+            }
+
+            Matter.Body.setPosition(this.flameBody, { x: x, y: this.body.position.y + 20 });
+        }
     }
 }

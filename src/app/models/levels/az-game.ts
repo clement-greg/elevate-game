@@ -32,6 +32,7 @@ import { pauseSound, playSound } from '../../utilities/sound-utils';
 import { JoystickState } from '../joystick-state';
 import { GameInstanceManager } from '../game-instance';
 import { FireVent } from '../fire-vent';
+import { FlameThrowerMysteryBlock } from '../flame-thrower-mystery-block';
 
 var Engine = Matter.Engine,
     MatterWorld = Matter.World,
@@ -55,10 +56,14 @@ export class AZGame {
     infoBarier: Ground;
     showQuestBegin = false;
     questShown = false;
+
+    // TODO should be dynamic based on the location
     static applianceShopLeft = 8000;
     dialogOpen: boolean;
     gameStartTime: Date;
     remaining: string;
+
+    // TODO should be dynamic based on the location
     static homeLeft = 16000;
     static homeLeftEnd = this.homeLeft + 300;
     static initialLeft = 400;
@@ -66,25 +71,20 @@ export class AZGame {
     cannons: Cannon[] = [];
     editorOpen: boolean;
     joystickState = new JoystickState(0);
-    gameTimeout:any;
+    gameTimeout: any;
 
 
     static get applianceShopAreaRight() {
         return AZGame.applianceShopLeft + 450;
     }
 
-    constructor(private zone: NgZone) {
-        console.log('******initialize AZ game********');
+    constructor(private zone: NgZone, private location: 'AZ' | 'UT' | 'NV') {
         this.initialize(zone);
         this.joystickState.onButtonPress = this.joystickButtonPress.bind(this);
     }
     completionBarrier: any;
 
     advanceInterval;
-
-    // static hasInstance() {
-    //     return this.gameInstance !== null && this.gameInstance != undefined;
-    // }
 
     initialize(zone: NgZone) {
         if (!zone) {
@@ -106,7 +106,6 @@ export class AZGame {
         this.addSprite(this.player2);
 
         zone.run(() => {
-
             this.gameHUD = new GameHUD(zone);
         });
 
@@ -126,16 +125,28 @@ export class AZGame {
         const left = new Ground(this.engine, 0, 0, 2, 10000);
         left.body.friction = 0;
 
+        // Might need to be dynamic
         this.infoBarier = new Ground(this.engine, 1500, 0, 2, 10000);
         this.infoBarier.body.friction = 0;
         this.gameSprites.push(this.infoBarier);
 
+        // Might need to be dynamic
         this.completionBarrier = new Ground(this.engine, AZGame.homeLeft - 150, 0, 2, 10000);
         this.completionBarrier.body.label = 'completion-barrier';
         this.completionBarrier.body.friction = 0;
         this.gameSprites.push(this.completionBarrier);
 
-        HTTP.getData(`./assets/levels/az.json`).then(json => {
+
+        let level = 'level4.json';
+        switch (this.location) {
+            case 'AZ':
+                level = 'az.json';
+                break;
+            case 'NV':
+                level = 'nv.json';
+                break;
+        }
+        HTTP.getData(`./assets/levels/${level}`).then(json => {
             this.setupGame(json);
         });
 
@@ -159,6 +170,17 @@ export class AZGame {
                 domObject.classList.remove('has-jet-pack');
             }
         });
+        this.pubSub.subscribe('flame-thrower-change', () => {
+            const hasFlameThrower = this.gameHUD.isFlameThrower;
+            const domObject: HTMLElement = this.player2.domObject;
+            if (hasFlameThrower) {
+                domObject.classList.add('has-flame-thrower');
+            } else {
+                domObject.classList.remove('has-flame-thrower');
+            }
+        });
+
+        // Might be dynamic based on location
         playSound('bg-music');
     }
 
@@ -183,6 +205,7 @@ export class AZGame {
         if (this.primaryButtonKeys.indexOf(key.key) > -1) {
             this.player2.jump();
         }
+
     }
 
     run() {
@@ -206,16 +229,18 @@ export class AZGame {
     }
 
     doSecondaryKey() {
-        if (!this.dialogOpen && !this.fridge) {
-            if (this.playerLeft >= AZGame.applianceShopLeft && this.playerLeft <= AZGame.applianceShopAreaRight) {
-                PubSub.getInstance().publish('show-shop');
-            }
+        if (!this.dialogOpen && !this.fridge && this.playerLeft >= AZGame.applianceShopLeft && this.playerLeft <= AZGame.applianceShopAreaRight) {
+            PubSub.getInstance().publish('show-shop');
         } else if (this.dialogOpen) {
             if (this.infoBarier && this.showQuestBegin) {
                 this.doPrimaryKey();
             } else {
                 PubSub.getInstance().publish('close-all-diagrams');
                 this.dialogOpen = false;
+            }
+        } else {
+            if (this.gameHUD.isFlameThrower) {
+                this.player2.runFlameThrower();
             }
         }
     }
@@ -243,18 +268,15 @@ export class AZGame {
         if (key.key == 'ArrowRight') {
             this.player2.accelerating = false;
             this.player2.arrowRight = false;
-            //this.player2.stopMomentum();
             this.isMovingRight = false;
         }
 
         if (key.key === 'ArrowLeft') {
             this.player2.accelerating = false;
             this.player2.arrowLeft = false;
-            //this.player2.stopMomentum();
             this.isMovingLeft = false;
         }
         if (this.primaryButtonKeys.indexOf(key.key) > -1 && this.infoBarier) {
-
             this.doPrimaryKey();
         }
 
@@ -412,8 +434,11 @@ export class AZGame {
             } else if (sprite.objectType === 'dynamite') {
                 const newSprite = new Dynamite(this.engine, sprite.originalX, sprite.originalY);
                 this.initializeSprite(sprite, newSprite);
-            }else if (sprite.objectType === 'fire-vent') {
+            } else if (sprite.objectType === 'fire-vent') {
                 const newSprite = new FireVent(this.engine, sprite.originalX, sprite.originalY);
+                this.initializeSprite(sprite, newSprite);
+            } else if (sprite.objectType === 'flame-thrower-mystery-block') {
+                const newSprite = new FlameThrowerMysteryBlock(this.engine, sprite.originalX, sprite.originalY);
                 this.initializeSprite(sprite, newSprite);
             }
         }
@@ -442,7 +467,8 @@ export class AZGame {
 
     private colletableLabels = ['saw', 'wrench', 'hammer', 'screwdriver', 'drill', 'coin'];
     private enemyLabels = ['spike-ball', 'man-hole'];
-    private impactObjectsLabels = ['trampoline', 'cannon-ball', 'spike-brick', 'dynamite', 'ceiling-spike', 'cannon', 'Ram', 'Brick', 'i-beam', 'brick-top', 'mystery-top', 'jet-pack-mystery-block', 'Ice', 'Mystery', 'log-short', 'log', 'solid-block', 'fire-vent'];
+    private impactObjectsLabels = ['trampoline', 'cannon-ball', 'spike-brick', 'dynamite', 'ceiling-spike', 'cannon', 'Ram', 'Brick', 'i-beam', 'brick-top', 'mystery-top', 'jet-pack-mystery-block', 'Ice', 'Mystery', 'log-short', 'log', 'solid-block', 'fire-vent', 'flame-thrower-mystery-block'];
+    private flameTargetLabels = ['spike-ball', 'Ram', 'dynamite'];
 
     playCollectTool() {
         playSound('collect-tool-sound');
@@ -470,6 +496,40 @@ export class AZGame {
 
     bounceCount = 0;
     lastBounce = new Date();
+
+    killRam(ram, bouncePlayer = true) {
+        playSound('goat-sound');
+        const ramDead = document.createElement('lottie-player');
+
+        (ramDead as any).src = 'https://lottie.host/187ff4ec-50a4-4a0e-94ab-14ca38c87bdb/rFeMypKyaw.json';
+        ramDead.style.position = 'absolute';
+        ramDead.style.left = `${ram.x - 125}px`;
+        ramDead.style.top = `${ram.y - 125}px`;
+        ramDead.style.height = '200px';
+        ramDead.style.width = '200px';
+        ramDead.setAttribute('autoplay', '1');
+
+        document.getElementById('game-div').appendChild(ramDead);
+
+        setTimeout(() => {
+            ramDead.parentNode.removeChild(ramDead);
+        }, 1000);
+        if (bouncePlayer) {
+            Matter.Body.applyForce(this.player2.body, { x: this.player2.body.position.x, y: this.player2.body.position.y }, { x: 0, y: -0.4 });
+        }
+        this.removeSprite(ram);
+        let forcex = -2.5;
+
+        for (let i = 0; i < 5; i++) {
+            const coin = new Coin(this.engine, ram.x, ram.y, 'static', false);
+            this.addSprite(coin);
+            coin.body.isStatic = false;
+            Matter.Body.setStatic(coin.body, false);
+            Matter.Body.setVelocity(coin.body, { x: forcex, y: -5.3 });
+            forcex += .05;
+        }
+    }
+
     advance() {
         if (this.showQuestBegin) {
             return;
@@ -657,11 +717,11 @@ export class AZGame {
                         }
                     }
                     break;
-                    case 'fire-vent':
-                        const fireVent: FireVent = this.gameSprites.find(i => (i.body === collision.bodyA || i.body === collision.bodyB) && i !== this.player2);
-                        if(fireVent.firing) {
-                            this.loseLife();
-                        }
+                case 'fire-vent':
+                    const fireVent: FireVent = this.gameSprites.find(i => (i.body === collision.bodyA || i.body === collision.bodyB) && i !== this.player2);
+                    if (fireVent.firing) {
+                        this.loseLife();
+                    }
                     break;
             }
 
@@ -684,34 +744,7 @@ export class AZGame {
                     case 'Ram':
                         const ram = this.gameSprites.find(i => (i.body === collision.bodyA || i.body === collision.bodyB) && i !== this.player2);
                         if (ram) {
-                            playSound('goat-sound');
-                            const ramDead = document.createElement('lottie-player');
-
-                            (ramDead as any).src = 'https://lottie.host/187ff4ec-50a4-4a0e-94ab-14ca38c87bdb/rFeMypKyaw.json';
-                            ramDead.style.position = 'absolute';
-                            ramDead.style.left = `${ram.x - 125}px`;
-                            ramDead.style.top = `${ram.y - 125}px`;
-                            ramDead.style.height = '200px';
-                            ramDead.style.width = '200px';
-                            ramDead.setAttribute('autoplay', '1');
-
-                            document.getElementById('game-div').appendChild(ramDead);
-
-                            setTimeout(() => {
-                                ramDead.parentNode.removeChild(ramDead);
-                            }, 1000);
-                            Matter.Body.applyForce(this.player2.body, { x: this.player2.body.position.x, y: this.player2.body.position.y }, { x: 0, y: -0.4 });
-                            this.removeSprite(ram);
-                            let forcex = -2.5;
-
-                            for (let i = 0; i < 5; i++) {
-                                const coin = new Coin(this.engine, ram.x, ram.y, 'static', false);
-                                this.addSprite(coin);
-                                coin.body.isStatic = false;
-                                Matter.Body.setStatic(coin.body, false);
-                                Matter.Body.setVelocity(coin.body, { x: forcex, y: -5.3 });
-                                forcex += .05;
-                            }
+                            this.killRam(ram);
                         }
                         break;
                     case 'cannon-ball':
@@ -731,6 +764,7 @@ export class AZGame {
                     case 'Brick':
                     case 'log-short':
                     case 'jet-pack-mystery-block':
+                    case 'flame-thrower-mystery-block':
                     case 'i-beam':
                     case 'log':
                     case 'Ice':
@@ -775,13 +809,19 @@ export class AZGame {
                         break;
                     case 'jet-pack-mystery-block':
                     case 'Mystery':
+                    case 'flame-thrower-mystery-block':
                     case 'mystery-top':
                         if (otherSprite && !otherSprite.empty && otherSprite.emptyIt) {
                             otherSprite.emptyIt();
-                            if (label !== 'jet-pack-mystery-block') {
-                                this.gameHUD.incrementCoinCount();
-                            } else if (label === 'jet-pack-mystery-block') {
+                            if (label === 'jet-pack-mystery-block') {
                                 this.playCollectTool();
+
+                            } else if (label === 'flame-thrower-mystery-block') {
+                                this.playCollectTool();
+
+                            } else {
+                                this.gameHUD.incrementCoinCount();
+
                             }
                         }
                         break;
@@ -813,6 +853,35 @@ export class AZGame {
         if (this.player2.isGrounded) {
             this.bounceCount = 0;
         }
+        const flameCollisions = collisions.filter(i => i.bodyA.label === 'flame-body' || i.bodyB.label === 'flame-body');
+        const flameEnemyCollisions = flameCollisions.filter(i => this.flameTargetLabels.indexOf(i.bodyA.label) > -1 || this.flameTargetLabels.indexOf(i.bodyB.label) > -1);
+        if (flameEnemyCollisions?.length > 0) {
+            for (const collision of flameEnemyCollisions) {
+                const other = collision.bodyA.label === 'flame-body' ? collision.bodyB : collision.bodyA;
+                const label = collision.bodyA.label === 'flame-body' ? collision.bodyB.label : collision.bodyA.label;
+                const otherGameSprite = this.gameSprites.find(i => i.body === other);
+                switch (label) {
+                    case 'Ram':
+                        this.killRam(otherGameSprite, false);
+                        break;
+                    case 'dynamite':
+                        let multiplier = 1;
+                        for (let i = 0; i < 5; i++) {
+                            const coin = new Coin(this.engine, otherGameSprite.x, otherGameSprite.y, 'static', false);
+
+                            this.addSprite(coin);
+                            coin.body.isStatic = false;
+                            Matter.Body.setStatic(coin.body, false);
+                            Matter.Body.setVelocity(coin.body, { x: 0.1 * multiplier, y: -5.3 });
+                            multiplier *= -1;
+                        }
+                        this.removeSprite(otherGameSprite);
+                        break;
+                    default:
+                        this.removeSprite(otherGameSprite);
+                }
+            }
+        }
     }
 
     loseLife() {
@@ -825,7 +894,9 @@ export class AZGame {
         Matter.Body.setVelocity(this.player2.body, { x: 0, y: 0 });
         playSound('die-sound');
         this.gameHUD.isJetPackMode = false;
+        this.gameHUD.isFlameThrower = false;
         PubSub.getInstance().publish('jet-pack-change');
+        PubSub.getInstance().publish('flame-thrower-change');
         this.player2.die();
 
         const playerDying = document.createElement('div');
@@ -1050,6 +1121,7 @@ export class AZGame {
 
 export class GameHUD {
     isJetPackMode: any;
+    isFlameThrower: boolean;
 
     constructor(private zone: NgZone) {
 

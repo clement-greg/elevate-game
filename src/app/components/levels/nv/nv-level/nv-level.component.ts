@@ -1,5 +1,4 @@
 import { Component, HostListener, Input, NgZone } from '@angular/core';
-import { NVGame } from '../../../../models/levels/nv-game';
 import { Config } from '../../../../models/config';
 import { PubSub } from '../../../../models/pub-sub';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
@@ -12,6 +11,7 @@ import { GameInstanceManager } from '../../../../models/game-instance';
 import { BeginQuestNvComponent } from '../begin-quest-nv/begin-quest-nv.component';
 import { NvShopComponent } from '../nv-shop/nv-shop.component';
 import { NvNotCompleteComponent } from '../nv-not-complete/nv-not-complete.component';
+import { AZGame } from '../../../../models/levels/az-game';
 
 @Component({
   selector: 'app-nv-level',
@@ -103,11 +103,11 @@ export class NvLevelComponent {
   }
 
   get applianceShopLeft() {
-    return NVGame.applianceShopLeft + 'px';
+    return AZGame.applianceShopLeft + 'px';
   }
 
   get homeLeft() {
-    return NVGame.homeLeft + 'px';
+    return AZGame.homeLeft + 'px';
   }
 
   get showBilboardVideos() {
@@ -116,11 +116,11 @@ export class NvLevelComponent {
 
 
   get lastGuyLeft() {
-    return (NVGame.homeLeft - 200) + 'px';
+    return (AZGame.homeLeft - 200) + 'px';
   }
 
   get initialLeft() {
-    return NVGame.initialLeft + 'px';
+    return AZGame.initialLeft + 'px';
   }
 
   startGame() {
@@ -153,6 +153,6 @@ export class NvLevelComponent {
   }
 
   get shopEntranceAvailableSignLeft() {
-    return (NVGame.applianceShopLeft + 25) + 'px';
+    return (AZGame.applianceShopLeft + 25) + 'px';
   }
 }

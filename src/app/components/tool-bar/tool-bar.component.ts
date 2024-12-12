@@ -23,10 +23,10 @@ import { JetPackMysteryBlock } from '../../models/jet-pack-mystery-block';
 import { CeilingSpike } from '../../models/ceiling-spike';
 import { Dynamite } from '../../models/ahs';
 import { GameInstanceManager } from '../../models/game-instance';
-import { NVGame } from '../../models/levels/nv-game';
-import { Game } from '../../models/levels/game';
 import { AZGame } from '../../models/levels/az-game';
 import { FireVent } from '../../models/fire-vent';
+import { FlameThrower } from '../../models/flame-thrower';
+import { FlameThrowerMysteryBlock } from '../../models/flame-thrower-mystery-block';
 
 @Component({
   selector: 'app-tool-bar',
@@ -37,7 +37,7 @@ import { FireVent } from '../../models/fire-vent';
 })
 export class ToolBarComponent implements OnDestroy {
 
-  game: Game | NVGame | AZGame;
+  game: AZGame;
   constructor(private gameProvider: GameProviderService,
     private zone: NgZone
   ) {
@@ -79,7 +79,7 @@ export class ToolBarComponent implements OnDestroy {
   }
 
   addIBeam() {
-    const sprite  = new IBeam(this.game.engine, 0, 0);
+    const sprite = new IBeam(this.game.engine, 0, 0);
     this.createSprite(sprite);
   }
 
@@ -153,7 +153,7 @@ export class ToolBarComponent implements OnDestroy {
   }
 
   addCeilingSpike() {
-    const sprite = new CeilingSpike(this.game.engine, 0 ,0);
+    const sprite = new CeilingSpike(this.game.engine, 0, 0);
     this.createSprite(sprite);
   }
 
@@ -170,6 +170,11 @@ export class ToolBarComponent implements OnDestroy {
   addIce() {
     const log = new Ice(this.game.engine, 0, 0);
     this.createSprite(log);
+  }
+
+  addFlameThrowerMystery() {
+    const sprite = new FlameThrowerMysteryBlock (this.game.engine, 0, 0);
+    this.createSprite(sprite);
   }
 
   async save() {
@@ -246,7 +251,7 @@ export class ToolBarComponent implements OnDestroy {
     });
   }
 
-  addDoubleClickHandler(sprite, game: Game | NVGame | AZGame) {
+  addDoubleClickHandler(sprite, game: AZGame) {
     sprite.domObject.addEventListener('dblclick', e => {
 
       let root: HTMLElement = e.srcElement;

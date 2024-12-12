@@ -67,6 +67,16 @@ body {
     top: 0px;
     background-position-y: 0;
     z-index: 1;
+    .flame-gun {
+        display: none;
+        transform: scale(12) translateX(2px); 
+        transform-origin: 0% 50%
+    }
+    &.has-flame-thrower {
+        .flame-gun {
+            display: inline-block;
+        }
+    }
 }
 
 .player-dying {
@@ -91,6 +101,7 @@ body {
     margin-top: -89px;
     margin-left: 8px;
 }
+
 
 #hud {
     position: fixed;
@@ -290,7 +301,7 @@ font-style: normal !important;
     width: 125px;
     height: 125px;
     position: absolute;
-    transform: scaleX(1.5) translateX(-5px);
+    transform: scaleX(1.5) translateX(-10px);
     transform-origin: 50% 50%;
 }
 
@@ -370,6 +381,17 @@ font-style: normal !important;
     background-size: cover;
     animation: jetpack-grow 1s ease;
 
+}
+
+.flame-thrower {
+    display: inline-block;
+    width: 144px;
+    height: 72px;
+    background-image: url(/assets/images/flame-thrower.svg);
+    position: absolute;
+    background-repeat: no-repeat;
+    background-size: cover;
+    animation: jetpack-grow 1s ease;
 }
 
 .man-hole {

@@ -3,7 +3,6 @@ import { LottiePlayerComponent } from '../lottie-player/lottie-player.component'
 import { PressAComponent } from '../press-a/press-a.component';
 import { CommonModule } from '@angular/common';
 import { pauseSound, playSound } from '../../utilities/sound-utils';
-import { Game } from '../../models/levels/game';
 import { GameInstanceManager } from '../../models/game-instance';
 
 @Component({
