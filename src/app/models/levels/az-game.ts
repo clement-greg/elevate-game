@@ -31,6 +31,7 @@ import { Dynamite } from '../ahs';
 import { pauseSound, playSound } from '../../utilities/sound-utils';
 import { JoystickState } from '../joystick-state';
 import { GameInstanceManager } from '../game-instance';
+import { FireVent } from '../fire-vent';
 
 var Engine = Matter.Engine,
     MatterWorld = Matter.World,
@@ -411,6 +412,9 @@ export class AZGame {
             } else if (sprite.objectType === 'dynamite') {
                 const newSprite = new Dynamite(this.engine, sprite.originalX, sprite.originalY);
                 this.initializeSprite(sprite, newSprite);
+            }else if (sprite.objectType === 'fire-vent') {
+                const newSprite = new FireVent(this.engine, sprite.originalX, sprite.originalY);
+                this.initializeSprite(sprite, newSprite);
             }
         }
 
@@ -438,7 +442,7 @@ export class AZGame {
 
     private colletableLabels = ['saw', 'wrench', 'hammer', 'screwdriver', 'drill', 'coin'];
     private enemyLabels = ['spike-ball', 'man-hole'];
-    private impactObjectsLabels = ['trampoline', 'cannon-ball', 'spike-brick', 'dynamite', 'ceiling-spike', 'cannon', 'Ram', 'Brick', 'i-beam', 'brick-top', 'mystery-top', 'jet-pack-mystery-block', 'Ice', 'Mystery', 'log-short', 'log', 'solid-block'];
+    private impactObjectsLabels = ['trampoline', 'cannon-ball', 'spike-brick', 'dynamite', 'ceiling-spike', 'cannon', 'Ram', 'Brick', 'i-beam', 'brick-top', 'mystery-top', 'jet-pack-mystery-block', 'Ice', 'Mystery', 'log-short', 'log', 'solid-block', 'fire-vent'];
 
     playCollectTool() {
         playSound('collect-tool-sound');
@@ -652,6 +656,12 @@ export class AZGame {
                             }, 2000);
                         }
                     }
+                    break;
+                    case 'fire-vent':
+                        const fireVent: FireVent = this.gameSprites.find(i => (i.body === collision.bodyA || i.body === collision.bodyB) && i !== this.player2);
+                        if(fireVent.firing) {
+                            this.loseLife();
+                        }
                     break;
             }
 

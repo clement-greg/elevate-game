@@ -26,6 +26,7 @@ import { GameInstanceManager } from '../../models/game-instance';
 import { NVGame } from '../../models/levels/nv-game';
 import { Game } from '../../models/levels/game';
 import { AZGame } from '../../models/levels/az-game';
+import { FireVent } from '../../models/fire-vent';
 
 @Component({
   selector: 'app-tool-bar',
@@ -143,6 +144,11 @@ export class ToolBarComponent implements OnDestroy {
 
   addDynamite() {
     const sprite = new Dynamite(this.game.engine, 0, 0);
+    this.createSprite(sprite);
+  }
+
+  addFireVent() {
+    const sprite = new FireVent(this.game.engine, 0, 0);
     this.createSprite(sprite);
   }
 

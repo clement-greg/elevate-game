@@ -9,9 +9,9 @@ import { CommonModule } from '@angular/common';
 import { HudComponent } from '../../../hud/hud.component';
 import { LottiePlayerComponent } from '../../../lottie-player/lottie-player.component';
 import { GameInstanceManager } from '../../../../models/game-instance';
-import { BeginQuestNvComponent } from '../../nv/begin-quest-nv/begin-quest-nv.component';
 import { AzShopComponent } from '../az-shop/az-shop.component';
 import { AzNotCompleteComponent } from '../az-not-complete/az-not-complete.component';
+import { BeginQuestAzComponent } from '../begin-quest-av/begin-quest-az.component';
 
 @Component({
   selector: 'app-az-level',
@@ -21,7 +21,7 @@ import { AzNotCompleteComponent } from '../az-not-complete/az-not-complete.compo
   styleUrl: './az-level.component.scss'
 })
 export class AzLevelComponent {
-  questBeginRef: MatDialogRef<BeginQuestNvComponent>;
+  questBeginRef: MatDialogRef<BeginQuestAzComponent>;
   notCompletedRef: MatDialogRef<AzNotCompleteComponent>;
   // isVegas = false;
   // isAz = false;
@@ -32,7 +32,7 @@ export class AzLevelComponent {
   constructor(private zone: NgZone, dialog: MatDialog) {
 
     PubSub.getInstance().subscribe('quest-begin', () => {
-      this.questBeginRef = dialog.open(BeginQuestNvComponent, { disableClose: true });
+      this.questBeginRef = dialog.open(BeginQuestAzComponent, { disableClose: true });
       GameInstanceManager.getInstance().dialogOpen = true;
       this.questBeginRef.afterClosed().subscribe(() => { GameInstanceManager.getInstance().dialogOpen = false; });
     });

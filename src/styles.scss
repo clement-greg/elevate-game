@@ -285,6 +285,15 @@ font-style: normal !important;
     background-repeat: no-repeat;
 }
 
+.fire-vent {
+    display: inline-block;
+    width: 125px;
+    height: 125px;
+    position: absolute;
+    transform: scaleX(1.5) translateX(-5px);
+    transform-origin: 50% 50%;
+}
+
 .ram.invert {
     transform: scaleX(-1);
 }
