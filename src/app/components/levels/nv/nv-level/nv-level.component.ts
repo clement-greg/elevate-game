@@ -11,7 +11,7 @@ import { GameInstanceManager } from '../../../../models/game-instance';
 import { BeginQuestNvComponent } from '../begin-quest-nv/begin-quest-nv.component';
 import { NvShopComponent } from '../nv-shop/nv-shop.component';
 import { NvNotCompleteComponent } from '../nv-not-complete/nv-not-complete.component';
-import { AZGame } from '../../../../models/levels/az-game';
+import { Game } from '../../../../models/game';
 
 @Component({
   selector: 'app-nv-level',
@@ -103,11 +103,11 @@ export class NvLevelComponent {
   }
 
   get applianceShopLeft() {
-    return AZGame.applianceShopLeft + 'px';
+    return Game.applianceShopLeft + 'px';
   }
 
   get homeLeft() {
-    return AZGame.homeLeft + 'px';
+    return Game.homeLeft + 'px';
   }
 
   get showBilboardVideos() {
@@ -116,11 +116,11 @@ export class NvLevelComponent {
 
 
   get lastGuyLeft() {
-    return (AZGame.homeLeft - 200) + 'px';
+    return (Game.homeLeft - 200) + 'px';
   }
 
   get initialLeft() {
-    return AZGame.initialLeft + 'px';
+    return Game.initialLeft + 'px';
   }
 
   startGame() {
@@ -153,6 +153,6 @@ export class NvLevelComponent {
   }
 
   get shopEntranceAvailableSignLeft() {
-    return (AZGame.applianceShopLeft + 25) + 'px';
+    return (Game.applianceShopLeft + 25) + 'px';
   }
 }

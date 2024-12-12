@@ -23,7 +23,7 @@ import { JetPackMysteryBlock } from '../../models/jet-pack-mystery-block';
 import { CeilingSpike } from '../../models/ceiling-spike';
 import { Dynamite } from '../../models/ahs';
 import { GameInstanceManager } from '../../models/game-instance';
-import { AZGame } from '../../models/levels/az-game';
+import { Game } from '../../models/game';
 import { FireVent } from '../../models/fire-vent';
 import { FlameThrower } from '../../models/flame-thrower';
 import { FlameThrowerMysteryBlock } from '../../models/flame-thrower-mystery-block';
@@ -37,7 +37,7 @@ import { FlameThrowerMysteryBlock } from '../../models/flame-thrower-mystery-blo
 })
 export class ToolBarComponent implements OnDestroy {
 
-  game: AZGame;
+  game: Game;
   constructor(private gameProvider: GameProviderService,
     private zone: NgZone
   ) {
@@ -251,7 +251,7 @@ export class ToolBarComponent implements OnDestroy {
     });
   }
 
-  addDoubleClickHandler(sprite, game: AZGame) {
+  addDoubleClickHandler(sprite, game: Game) {
     sprite.domObject.addEventListener('dblclick', e => {
 
       let root: HTMLElement = e.srcElement;

@@ -1,38 +1,38 @@
 declare var Matter: any;
 
-import { World } from '../world';
-import { Ground } from '../ground';
-import { Brick, SolidBlock } from '../brick';
-import { HTTP } from '../http';
-import { MysteryBlock } from '../mystery-block';
-import { SpikeBall } from '../spike-ball';
-import { PubSub } from '../pub-sub';
-import { Ram } from '../ram';
-import { Player2 } from '../player-2';
-import { Coin } from '../coin';
-import { Log } from '../log';
-import { ShortLog } from '../short-log';
-import { ManHole } from '../man-hole';
-import { Ice } from '../ice';
+import { World } from './world';
+import { Ground } from './ground';
+import { Brick, SolidBlock } from './brick';
+import { HTTP } from './http';
+import { MysteryBlock } from './mystery-block';
+import { SpikeBall } from './spike-ball';
+import { PubSub } from './pub-sub';
+import { Ram } from './ram';
+import { Player2 } from './player-2';
+import { Coin } from './coin';
+import { Log } from './log';
+import { ShortLog } from './short-log';
+import { ManHole } from './man-hole';
+import { Ice } from './ice';
 import { NgZone } from '@angular/core';
-import { Drill, Hammer, Saw, Screwdriver, Wrench } from '../saw';
-import { Fridge1, Fridge2, Fridge3 } from '../fridge';
-import { GameSprite } from '../game-sprite';
-import { ToolBarComponent } from '../../components/tool-bar/tool-bar.component';
-import { Trampoline } from '../trampoline';
-import { SpikeBrick } from '../spike-brick';
-import { Cannon } from '../cannon';
-import { CannonBall } from '../cannon-ball';
-import { IBeam } from '../i-beam';
-import { JetPackMysteryBlock } from '../jet-pack-mystery-block';
-import { Config } from '../config';
-import { CeilingSpike } from '../ceiling-spike';
-import { Dynamite } from '../ahs';
-import { pauseSound, playSound } from '../../utilities/sound-utils';
-import { JoystickState } from '../joystick-state';
-import { GameInstanceManager } from '../game-instance';
-import { FireVent } from '../fire-vent';
-import { FlameThrowerMysteryBlock } from '../flame-thrower-mystery-block';
+import { Drill, Hammer, Saw, Screwdriver, Wrench } from './saw';
+import { Fridge1, Fridge2, Fridge3 } from './fridge';
+import { GameSprite } from './game-sprite';
+import { ToolBarComponent } from '../components/tool-bar/tool-bar.component';
+import { Trampoline } from './trampoline';
+import { SpikeBrick } from './spike-brick';
+import { Cannon } from './cannon';
+import { CannonBall } from './cannon-ball';
+import { IBeam } from './i-beam';
+import { JetPackMysteryBlock } from './jet-pack-mystery-block';
+import { Config } from './config';
+import { CeilingSpike } from './ceiling-spike';
+import { Dynamite } from './ahs';
+import { pauseSound, playSound } from '../utilities/sound-utils';
+import { JoystickState } from './joystick-state';
+import { GameInstanceManager } from './game-instance';
+import { FireVent } from './fire-vent';
+import { FlameThrowerMysteryBlock } from './flame-thrower-mystery-block';
 
 var Engine = Matter.Engine,
     MatterWorld = Matter.World,
@@ -40,7 +40,7 @@ var Engine = Matter.Engine,
     Body = Matter.Body;
 
 
-export class AZGame {
+export class Game {
     static gameInstance;
     world;
     internval;
@@ -75,7 +75,7 @@ export class AZGame {
 
 
     static get applianceShopAreaRight() {
-        return AZGame.applianceShopLeft + 450;
+        return Game.applianceShopLeft + 450;
     }
 
     constructor(private zone: NgZone, private location: 'AZ' | 'UT' | 'NV') {
@@ -131,7 +131,7 @@ export class AZGame {
         this.gameSprites.push(this.infoBarier);
 
         // Might need to be dynamic
-        this.completionBarrier = new Ground(this.engine, AZGame.homeLeft - 150, 0, 2, 10000);
+        this.completionBarrier = new Ground(this.engine, Game.homeLeft - 150, 0, 2, 10000);
         this.completionBarrier.body.label = 'completion-barrier';
         this.completionBarrier.body.friction = 0;
         this.gameSprites.push(this.completionBarrier);
@@ -229,7 +229,7 @@ export class AZGame {
     }
 
     doSecondaryKey() {
-        if (!this.dialogOpen && !this.fridge && this.playerLeft >= AZGame.applianceShopLeft && this.playerLeft <= AZGame.applianceShopAreaRight) {
+        if (!this.dialogOpen && !this.fridge && this.playerLeft >= Game.applianceShopLeft && this.playerLeft <= Game.applianceShopAreaRight) {
             PubSub.getInstance().publish('show-shop');
         } else if (this.dialogOpen) {
             if (this.infoBarier && this.showQuestBegin) {
@@ -577,7 +577,7 @@ export class AZGame {
             this.loseLife();
         }
 
-        this.shopEntranceAvailable = this.playerLeft >= AZGame.applianceShopLeft && this.playerLeft <= AZGame.applianceShopAreaRight && !this.fridge;
+        this.shopEntranceAvailable = this.playerLeft >= Game.applianceShopLeft && this.playerLeft <= Game.applianceShopAreaRight && !this.fridge;
 
         if (this.questShown) {
             for (const cannon of this.cannons) {
@@ -597,7 +597,7 @@ export class AZGame {
         }
 
         const left = this.playerLeft;
-        if (left > (AZGame.initialLeft - 50) && !this.showQuestBegin && !this.questShown && this.playerTop > 0) {
+        if (left > (Game.initialLeft - 50) && !this.showQuestBegin && !this.questShown && this.playerTop > 0) {
             this.questShown = true;
             this.zone.run(() => {
                 this.showQuestBegin = true;
@@ -607,7 +607,7 @@ export class AZGame {
         }
 
 
-        if (left > AZGame.homeLeft && left < AZGame.homeLeftEnd && this.gameHUD.hasAllTools && this.fridgeContraint) {
+        if (left > Game.homeLeft && left < Game.homeLeftEnd && this.gameHUD.hasAllTools && this.fridgeContraint) {
             this.doWin();
             this.gameHUD = new GameHUD(this.zone);
         }

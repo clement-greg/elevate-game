@@ -11,7 +11,7 @@ import { NotCompleteComponent } from '../not-complete/not-complete.component';
 import { Config } from '../../../../models/config';
 import { GameInstanceManager } from '../../../../models/game-instance';
 import { BeginQuestComponent } from '../begin-quest/begin-quest.component';
-import { AZGame } from '../../../../models/levels/az-game';
+import { Game } from '../../../../models/game';
 
 @Component({
   selector: 'app-level1',
@@ -103,11 +103,11 @@ export class Level1Component implements AfterViewInit {
   }
 
   get applianceShopLeft() {
-    return AZGame.applianceShopLeft + 'px';
+    return Game.applianceShopLeft + 'px';
   }
 
   get homeLeft() {
-    return AZGame.homeLeft + 'px';
+    return Game.homeLeft + 'px';
   }
 
   get showBilboardVideos() {
@@ -116,11 +116,11 @@ export class Level1Component implements AfterViewInit {
 
 
   get lastGuyLeft() {
-    return (AZGame.homeLeft - 200) + 'px';
+    return (Game.homeLeft - 200) + 'px';
   }
 
   get initialLeft() {
-    return AZGame.initialLeft + 'px';
+    return Game.initialLeft + 'px';
   }
 
   startGame() {
@@ -153,6 +153,6 @@ export class Level1Component implements AfterViewInit {
   }
 
   get shopEntranceAvailableSignLeft() {
-    return (AZGame.applianceShopLeft + 25) + 'px';
+    return (Game.applianceShopLeft + 25) + 'px';
   }
 }

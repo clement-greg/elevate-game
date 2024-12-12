@@ -3,25 +3,25 @@ import { NgZone } from "@angular/core";
 // import { NVGame } from "./levels/nv-game";
 import { PubSub } from "./pub-sub";
 import { World } from "./world";
-import { AZGame } from "./levels/az-game";
+import { Game } from "./game";
 
 export class GameInstanceManager {
 
     static location: 'AZ' | 'UT' | 'NV';
-    static gameInstance: AZGame;
+    static gameInstance: Game;
 
-    static getInstance(zone: NgZone = null): AZGame {
+    static getInstance(zone: NgZone = null): Game {
 
 
         if (!GameInstanceManager.gameInstance) {
             if (this.location === 'NV') {
                 // GameInstanceManager.gameInstance = new NVGame(zone);
-                GameInstanceManager.gameInstance = new AZGame(zone, this.location);
+                GameInstanceManager.gameInstance = new Game(zone, this.location);
             } else if(this.location === 'AZ'){
-                GameInstanceManager.gameInstance = new AZGame(zone, this.location);
+                GameInstanceManager.gameInstance = new Game(zone, this.location);
             } else {
                 // GameInstanceManager.gameInstance = new Game(zone);
-                GameInstanceManager.gameInstance = new AZGame(zone, this.location);
+                GameInstanceManager.gameInstance = new Game(zone, this.location);
             }
         }
 
@@ -38,7 +38,7 @@ export class GameInstanceManager {
     }
 
     static clearInstance(zone: NgZone) {
-        GameInstanceManager.gameInstance = new AZGame(zone, this.location);
+        GameInstanceManager.gameInstance = new Game(zone, this.location);
     }
 
     static hasInstance() {
