@@ -26,31 +26,29 @@ export class NvShopComponent implements OnDestroy {
 
   items: Item[] = [
     {
-      src: '/assets/images/refrigerator1.svg',
+      src: '/assets/images/water-heater-1.svg',
       price: 1200,
-      title: 'Whirlpool'
+      title: 'GE'
     },
     {
-      src: '/assets/images/refrigerator2.svg',
+      src: '/assets/images/water-heater-2.svg',
       price: 2000,
-      title: 'LG'
+      title: 'Rheem'
     },
 
     {
-      src: '/assets/images/refrigerator3.svg',
+      src: '/assets/images/water-heater-3.svg',
       price: 3000,
-      title: 'Thermador'
+      title: 'Kenmore'
     },
 
 
   ];
   private message = `Hey Jimmy!
 
-Welcome to Elevate Appliances! 🎉 We've just rolled in some fabulous new refrigerators, and they're looking for a new home. 🏠
+Welcome to Elevate Depot! 🎉 No need to shower in the cold, we've got a great selection of hot water heaters. 🏠
 
-Wander through our collection, pick your favorite, and head to checkout. Any fridge will do, but here’s a tip: the fancier the fridge, the bigger the smiles. 😊✨
-
-Happy fridge hunting! 🚀`;
+Wander through our collection, pick your favorite, and head to checkout. Any water heater will do, but here’s a tip: the fancier the unit, the bigger the smiles. 😊✨`;
   purchased = false;
 
   joystickState = new JoystickState(0);

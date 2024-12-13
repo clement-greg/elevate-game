@@ -16,9 +16,7 @@ export class BeginQuestNvComponent implements OnDestroy {
   statements = [
     `Uh-oh, Jimmy!!!!! 🛠️🚨
 
-Guess what? Your fridge has decided to take an early retirement, and my toolkit is doing a fantastic job of hiding from me! If you can gather my runaway tools and snag a brand-new fridge from the store, I’ll be right there to work my magic.
-
-But hurry—those snacks won’t stay fresh forever! 🍏🍦🚀`,
+Guess what? It's nothing but cold showers for you, your water heater is officially on strike! My toolkit is doing a fantastic job of hiding from me! If you can gather my runaway tools and snag a brand-new water heater from the store, I’ll be right there to work my magic.`,
     `Oh, and look out for the old school warranty guys. Working with them will only bring you pain😡😡😡😡😡`
   ];
   id = ToolBarComponent.newid();

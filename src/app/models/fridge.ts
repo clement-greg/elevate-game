@@ -86,3 +86,45 @@ export class AC3 extends GameSprite {
         this.body.label = 'ac3';
     } 
 }
+
+export class WaterHeater1 extends GameSprite {
+    constructor(engine, x, y) {
+        super(engine, x, y, 1, 1);
+        const brickDiv = document.createElement('div');
+        brickDiv.className = 'water-heater-1';
+        this.domObject = brickDiv;
+        this.objectType = 'water-heater-1';
+
+        //this.body.isStatic = true;
+        this.body.friction = 1;
+        this.body.label = 'water-heater-1';
+    }
+}
+
+export class WaterHeater2 extends GameSprite {
+    constructor(engine, x, y) {
+        super(engine, x, y, 1, 1);
+        const brickDiv = document.createElement('div');
+        brickDiv.className = 'water-heater-2';
+        this.domObject = brickDiv;
+        this.objectType = 'water-heater-2';
+
+        //this.body.isStatic = true;
+        this.body.friction = 1;
+        this.body.label = 'water-heater-2';
+    } 
+}
+
+export class WaterHeater3 extends GameSprite {
+    constructor(engine, x, y) {
+        super(engine, x, y, 1, 1);
+        const brickDiv = document.createElement('div');
+        brickDiv.className = 'water-heater-3';
+        this.domObject = brickDiv;
+        this.objectType = 'water-heater-1';
+
+        //this.body.isStatic = true;
+        this.body.friction = 1;
+        this.body.label = 'water-heater-1';
+    } 
+}

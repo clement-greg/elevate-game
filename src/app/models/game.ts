@@ -16,7 +16,7 @@ import { ManHole } from './man-hole';
 import { Ice } from './ice';
 import { NgZone } from '@angular/core';
 import { Drill, Hammer, Saw, Screwdriver, Wrench } from './saw';
-import { AC1, AC2, AC3, Fridge1, Fridge2, Fridge3 } from './fridge';
+import { AC1, AC2, AC3, Fridge1, Fridge2, Fridge3, WaterHeater1, WaterHeater2, WaterHeater3 } from './fridge';
 import { GameSprite } from './game-sprite';
 import { ToolBarComponent } from '../components/tool-bar/tool-bar.component';
 import { Trampoline } from './trampoline';
@@ -326,6 +326,19 @@ export class Game {
                         break;
                     case 3:
                         this.fridge = new AC2(this.engine, this.playerLeft - 30, this.playerTop - 72);
+                        break;
+                }
+                break;
+            case 'NV':
+                switch (number) {
+                    case 1:
+                        this.fridge = new WaterHeater1(this.engine, this.playerLeft - 30, this.playerTop - 72);
+                        break;
+                    case 2:
+                        this.fridge = new WaterHeater2(this.engine, this.playerLeft - 30, this.playerTop - 72);
+                        break;
+                    case 3:
+                        this.fridge = new WaterHeater3(this.engine, this.playerLeft - 30, this.playerTop - 72);
                         break;
                 }
                 break;
