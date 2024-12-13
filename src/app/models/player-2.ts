@@ -6,7 +6,7 @@ var Engine = Matter.Engine,
     Composite = Matter.Composite;
 
 import { ToolBarComponent } from '../components/tool-bar/tool-bar.component';
-import { playSound } from '../utilities/sound-utils';
+import { pauseSound, playSound } from '../utilities/sound-utils';
 import { Config } from './config';
 import { GameInstanceManager } from './game-instance';
 import { GameSprite } from './game-sprite';
@@ -65,6 +65,7 @@ export class Player2 extends GameSprite {
         clearTimeout(this.flameTimeout);
         if(this.flaming) {
             this.flameTimeout = setTimeout(() => this.stopFlameThrower(), 750);
+            playSound('flame-thrower', 1);
             return;
         }
 
@@ -74,6 +75,7 @@ export class Player2 extends GameSprite {
                 Matter.Body.set(this.flameBody, 'isSensor', true);
                 this.flameBody.label = 'flame-body';
                 Composite.add(this.engine.world, [this.flameBody]);
+                playSound('flame-thrower', 1);
             }
 
         }, 500);
@@ -100,6 +102,7 @@ export class Player2 extends GameSprite {
 
 
     stopFlameThrower() {
+        pauseSound('flame-thrower');
         this.flaming = false;
         const player = (document.getElementById(this.flameThrowerId) as any);
         player.stop();

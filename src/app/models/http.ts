@@ -34,7 +34,7 @@ export class HTTP {
     }
 
     static replacer(key, value) {
-        if(key === 'body' || key === 'frictionTop' || key === 'groundSprite') {
+        if(key === 'body' || key === 'frictionTop' || key === 'groundSprite' || key === 'parts' || key === 'parent' || key === 'collision') {
             return undefined;
         }
 

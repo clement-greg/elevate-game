@@ -26,31 +26,29 @@ export class AzShopComponent implements OnDestroy {
 
   items: Item[] = [
     {
-      src: '/assets/images/refrigerator1.svg',
+      src: '/assets/images/ac3.svg',
       price: 1200,
-      title: 'Whirlpool'
+      title: 'Goodman'
     },
     {
-      src: '/assets/images/refrigerator2.svg',
+      src: '/assets/images/ac1.svg',
       price: 2000,
-      title: 'LG'
+      title: 'Carrier'
     },
 
     {
-      src: '/assets/images/refrigerator3.svg',
+      src: '/assets/images/ac2.svg',
       price: 3000,
-      title: 'Thermador'
+      title: 'Trane'
     },
 
 
   ];
   private message = `Hey Jimmy!
 
-Welcome to Elevate Appliances! 🎉 We've just rolled in some fabulous new refrigerators, and they're looking for a new home. 🏠
+Welcome to Elevate A/C! 🎉 We've got the goods to keep you cool. 🏠
 
-Wander through our collection, pick your favorite, and head to checkout. Any fridge will do, but here’s a tip: the fancier the fridge, the bigger the smiles. 😊✨
-
-Happy fridge hunting! 🚀`;
+Wander through our collection, pick your favorite, and head to checkout. Any A/C unit will do, but here’s a tip: the fancier the A/C, the bigger the smiles. 😊✨`;
   purchased = false;
 
   joystickState = new JoystickState(0);

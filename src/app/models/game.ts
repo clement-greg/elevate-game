@@ -16,7 +16,7 @@ import { ManHole } from './man-hole';
 import { Ice } from './ice';
 import { NgZone } from '@angular/core';
 import { Drill, Hammer, Saw, Screwdriver, Wrench } from './saw';
-import { Fridge1, Fridge2, Fridge3 } from './fridge';
+import { AC1, AC2, AC3, Fridge1, Fridge2, Fridge3 } from './fridge';
 import { GameSprite } from './game-sprite';
 import { ToolBarComponent } from '../components/tool-bar/tool-bar.component';
 import { Trampoline } from './trampoline';
@@ -315,17 +315,34 @@ export class Game {
     }
 
     purchaseFridge(number = 1 | 2 | 3) {
-        switch (number) {
-            case 1:
-                this.fridge = new Fridge1(this.engine, this.playerLeft - 30, this.playerTop - 72);
+        switch (this.location) {
+            case 'AZ':
+                switch (number) {
+                    case 1:
+                        this.fridge = new AC3(this.engine, this.playerLeft - 30, this.playerTop - 72);
+                        break;
+                    case 2:
+                        this.fridge = new AC1(this.engine, this.playerLeft - 30, this.playerTop - 72);
+                        break;
+                    case 3:
+                        this.fridge = new AC2(this.engine, this.playerLeft - 30, this.playerTop - 72);
+                        break;
+                }
                 break;
-            case 2:
-                this.fridge = new Fridge2(this.engine, this.playerLeft - 30, this.playerTop - 72);
-                break;
-            case 3:
-                this.fridge = new Fridge3(this.engine, this.playerLeft - 30, this.playerTop - 72);
-                break;
+            default:
+                switch (number) {
+                    case 1:
+                        this.fridge = new Fridge1(this.engine, this.playerLeft - 30, this.playerTop - 72);
+                        break;
+                    case 2:
+                        this.fridge = new Fridge2(this.engine, this.playerLeft - 30, this.playerTop - 72);
+                        break;
+                    case 3:
+                        this.fridge = new Fridge3(this.engine, this.playerLeft - 30, this.playerTop - 72);
+                        break;
+                }
         }
+
         Matter.Body.setMass(this.fridge.body, .000000000000000001);
 
         this.addSprite(this.fridge);
@@ -468,7 +485,7 @@ export class Game {
     private colletableLabels = ['saw', 'wrench', 'hammer', 'screwdriver', 'drill', 'coin'];
     private enemyLabels = ['spike-ball', 'man-hole'];
     private impactObjectsLabels = ['trampoline', 'cannon-ball', 'spike-brick', 'dynamite', 'ceiling-spike', 'cannon', 'Ram', 'Brick', 'i-beam', 'brick-top', 'mystery-top', 'jet-pack-mystery-block', 'Ice', 'Mystery', 'log-short', 'log', 'solid-block', 'fire-vent', 'flame-thrower-mystery-block'];
-    private flameTargetLabels = ['spike-ball', 'Ram', 'dynamite'];
+    private flameTargetLabels = ['spike-ball', 'Ram', 'dynamite', 'cannon-ball'];
 
     playCollectTool() {
         playSound('collect-tool-sound');
@@ -865,26 +882,43 @@ export class Game {
                         this.killRam(otherGameSprite, false);
                         break;
                     case 'dynamite':
-                        let multiplier = 1;
-                        for (let i = 0; i < 5; i++) {
-                            const coin = new Coin(this.engine, otherGameSprite.x, otherGameSprite.y, 'static', false);
+                        if (!otherGameSprite.playing) {
+                            let multiplier = 1;
+                            for (let i = 0; i < 5; i++) {
+                                const coin = new Coin(this.engine, otherGameSprite.x, otherGameSprite.y, 'static', false);
 
-                            this.addSprite(coin);
-                            coin.body.isStatic = false;
-                            Matter.Body.setStatic(coin.body, false);
-                            Matter.Body.setVelocity(coin.body, { x: 0.1 * multiplier, y: -5.3 });
-                            multiplier *= -1;
+                                this.addSprite(coin);
+                                coin.body.isStatic = false;
+                                Matter.Body.setStatic(coin.body, false);
+                                Matter.Body.setVelocity(coin.body, { x: 0.1 * multiplier, y: -5.3 });
+                                multiplier *= -1;
+                            }
+                            this.removeSprite(otherGameSprite);
+                            playSound('kill-enemy-sound');
                         }
-                        this.removeSprite(otherGameSprite);
+                        break;
+                    case 'cannon-ball':
+
+                        if (otherGameSprite) {
+                            playSound('kill-enemy-sound');
+                            this.removeSprite(otherGameSprite);
+                            for (let i = 0; i < 6; i++) {
+                                this.gameHUD.incrementCoinCount();
+                            }
+                        }
                         break;
                     default:
                         this.removeSprite(otherGameSprite);
+                        playSound('kill-enemy-sound');
                 }
             }
         }
     }
 
     loseLife() {
+        if (this.editorOpen) {
+            return;
+        }
         const leftPosition = 150;
         this.player2.domObject.style.visibility = 'hidden';
         this.player2.x = leftPosition;
@@ -1081,6 +1115,7 @@ export class Game {
         this.running = false;
         clearInterval(this.internval);
         clearInterval(this.advanceInterval);
+        pauseSound('flame-thrower')
         delete this.joystickState;
     }
 

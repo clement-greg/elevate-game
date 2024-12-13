@@ -15,7 +15,7 @@ import { pauseSound, playSound } from '../../../../utilities/sound-utils';
 export class AzNotCompleteComponent implements OnDestroy {
   private message = `You're not done yet!
   
-  Collect all the tools and then buy a refrigerator.  Once your done with those two things, come back here.`;
+  Collect all the tools and then buy an A/C.  Once your done with those two things, come back here.`;
   id = ToolBarComponent.newid();
 
   @ViewChild('lottiePlayer') lottiePlayer :LottiePlayerComponent;
