@@ -560,6 +560,41 @@ export class Game {
         }
     }
 
+    killSpikeBall(spikeBall, bouncePlayer = true) {
+        playSound('goat-sound');
+        const deadSpikeBall = document.createElement('lottie-player');
+
+        (deadSpikeBall as any).src = 'https://lottie.host/46d6333d-4d6c-4262-b500-e610f0526b15/u9eqjJU5zx.json';
+        deadSpikeBall.style.position = 'absolute';
+        deadSpikeBall.style.left = `${spikeBall.x - 125}px`;
+        deadSpikeBall.style.top = `${spikeBall.y - 125}px`;
+        deadSpikeBall.style.height = '200px';
+        deadSpikeBall.style.width = '200px';
+        deadSpikeBall.setAttribute('autoplay', '1');
+
+        document.getElementById('game-div').appendChild(deadSpikeBall);
+
+        setTimeout(() => {
+            deadSpikeBall.parentNode.removeChild(deadSpikeBall);
+        }, 1000);
+        if (bouncePlayer) {
+            Matter.Body.applyForce(this.player2.body, { x: this.player2.body.position.x, y: this.player2.body.position.y }, { x: 0, y: -0.4 });
+        }
+        this.removeSprite(spikeBall);
+        let forcex = -2.5;
+
+        for (let i = 0; i < 5; i++) {
+            const coin = new Coin(this.engine, spikeBall.x, spikeBall.y, 'static', false);
+            this.addSprite(coin);
+            coin.body.isStatic = false;
+            Matter.Body.setStatic(coin.body, false);
+            Matter.Body.setVelocity(coin.body, { x: forcex, y: -5.3 });
+            forcex += .05;
+        }
+    }
+
+    // 
+
     advance() {
         if (this.showQuestBegin) {
             return;
@@ -909,6 +944,9 @@ export class Game {
                             this.removeSprite(otherGameSprite);
                             playSound('kill-enemy-sound');
                         }
+                        break;
+                    case 'spike-ball':
+                        this.killSpikeBall(otherGameSprite, false);
                         break;
                     case 'cannon-ball':
 
