@@ -9,7 +9,7 @@
 
         <div style="flex: auto;padding-right: 40px;">
             <div class="data-label info-2">Inventory</div>
-            <div style="flex: auto; display: grid;grid-template-columns: 1fr 1fr 1fr;column-gap: 10px;row-gap: 10px;">
+            <div style="flex: auto; display: grid;grid-template-columns: 1fr 1fr 1fr 1fr;column-gap: 10px;row-gap: 10px;">
                 <div class="collectable" [class.has]="gameHUD.hasHammer">
                     <img src="/assets/images/hammer.svg">
                 </div>
@@ -29,6 +29,9 @@
 
                 <div class="collectable" [class.has]="gameHUD.isJetPackMode">
                     <img src="/assets/images/jet-pack.svg">
+                </div>
+                <div class="collectable" [class.has]="gameHUD.isFlameThrower">
+                    <img src="/assets/images/flame-thrower.svg">
                 </div>
             </div>
         </div>

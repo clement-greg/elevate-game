@@ -166,6 +166,9 @@ export class Game {
             const hasJetPack = this.gameHUD.isJetPackMode;
             const domObject: HTMLElement = this.player2.domObject;
             if (hasJetPack) {
+                PubSub.getInstance().publish('eli-popup', {
+                    message: `Jetpack Mode Activated!!! 
+                    `});
                 domObject.classList.add('has-jet-pack');
             } else {
                 domObject.classList.remove('has-jet-pack');
@@ -176,6 +179,8 @@ export class Game {
             const domObject: HTMLElement = this.player2.domObject;
             if (hasFlameThrower) {
                 domObject.classList.add('has-flame-thrower');
+                PubSub.getInstance().publish('eli-popup', {
+                    message: `Flame thrower mode activated!!!`});
             } else {
                 domObject.classList.remove('has-flame-thrower');
             }
