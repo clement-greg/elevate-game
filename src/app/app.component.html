@@ -15,9 +15,15 @@
   </div>
 </div>
 
+<div class="eli-popup" *ngIf="showEliPopup">
+
+  <app-eli-popup [message]="eliPopupMessage" (messageComplete)="showEliPopup = false"></app-eli-popup>
+</div>
+
 <audio src="/assets/sounds/game-over-lost.aac" id="game-over-lost-sound"></audio>
 <audio src="/assets/sounds/game-over-won.aac" id="game-over-won-sound"></audio>
 <audio src="/assets/sounds/menu-move.aac"   id="menu-move"></audio>
 <audio src="/assets/sounds/warning.aac" [volume]=".25" id="warning-sound"></audio>
 <audio src="/assets/sounds/alert.aac" id="alert-sound"></audio>
 <audio src="/assets/sounds/flame-thrower.aac" id="flame-thrower"></audio>
+<audio src="/assets/sounds/die-1.aac" id="die-1"></audio>

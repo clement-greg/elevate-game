@@ -512,6 +512,18 @@ font-style: normal !important;
     background-size: cover;
 }
 
+.riser {
+    display: inline-block;
+    width: 323px;
+    height: 34px;
+    background-image: url('/assets/images/riser.svg');
+    position: absolute;
+    background-repeat: no-repeat;
+    background-size: cover;
+    // transform: translateY(-20px);
+
+}
+
 .mystery-block {
     display: inline-block;
     width: 72.8px;

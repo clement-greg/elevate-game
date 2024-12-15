@@ -33,6 +33,7 @@ import { JoystickState } from './joystick-state';
 import { GameInstanceManager } from './game-instance';
 import { FireVent } from './fire-vent';
 import { FlameThrowerMysteryBlock } from './flame-thrower-mystery-block';
+import { Riser } from './riser';
 
 var Engine = Matter.Engine,
     MatterWorld = Matter.World,
@@ -470,6 +471,9 @@ export class Game {
             } else if (sprite.objectType === 'flame-thrower-mystery-block') {
                 const newSprite = new FlameThrowerMysteryBlock(this.engine, sprite.originalX, sprite.originalY);
                 this.initializeSprite(sprite, newSprite);
+            } else if (sprite.objectType === 'riser') {
+                const newSprite = new Riser(this.engine, sprite.originalX, sprite.originalY);
+                this.initializeSprite(sprite, newSprite);
             }
         }
 
@@ -497,7 +501,7 @@ export class Game {
 
     private colletableLabels = ['saw', 'wrench', 'hammer', 'screwdriver', 'drill', 'coin'];
     private enemyLabels = ['spike-ball', 'man-hole'];
-    private impactObjectsLabels = ['trampoline', 'cannon-ball', 'spike-brick', 'dynamite', 'ceiling-spike', 'cannon', 'Ram', 'Brick', 'i-beam', 'brick-top', 'mystery-top', 'jet-pack-mystery-block', 'Ice', 'Mystery', 'log-short', 'log', 'solid-block', 'fire-vent', 'flame-thrower-mystery-block'];
+    private impactObjectsLabels = ['trampoline', 'riser', 'cannon-ball', 'spike-brick', 'dynamite', 'ceiling-spike', 'cannon', 'Ram', 'Brick', 'i-beam', 'brick-top', 'mystery-top', 'jet-pack-mystery-block', 'Ice', 'Mystery', 'log-short', 'log', 'solid-block', 'fire-vent', 'flame-thrower-mystery-block'];
     private flameTargetLabels = ['spike-ball', 'Ram', 'dynamite', 'cannon-ball'];
 
     playCollectTool() {
@@ -550,6 +554,7 @@ export class Game {
         this.removeSprite(ram);
         let forcex = -2.5;
 
+
         for (let i = 0; i < 5; i++) {
             const coin = new Coin(this.engine, ram.x, ram.y, 'static', false);
             this.addSprite(coin);
@@ -558,10 +563,14 @@ export class Game {
             Matter.Body.setVelocity(coin.body, { x: forcex, y: -5.3 });
             forcex += .05;
         }
+        PubSub.getInstance().publish('eli-popup', {
+            message: `Nice Move!!!
+Don't let those old school warranty guys stick it to you. 
+            `});
     }
 
     killSpikeBall(spikeBall, bouncePlayer = true) {
-        playSound('goat-sound');
+        playSound('die-1');
         const deadSpikeBall = document.createElement('lottie-player');
 
         (deadSpikeBall as any).src = 'https://lottie.host/46d6333d-4d6c-4262-b500-e610f0526b15/u9eqjJU5zx.json';
@@ -591,6 +600,10 @@ export class Game {
             Matter.Body.setVelocity(coin.body, { x: forcex, y: -5.3 });
             forcex += .05;
         }
+        PubSub.getInstance().publish('eli-popup', {
+            message: `Nice Move!!!
+Don't let those old school warranty guys stick it to you. 
+            `});
     }
 
     // 
@@ -682,9 +695,14 @@ export class Game {
 
         const groundCollision = playerCollisions.find(i => i.bodyA.label === 'Ground' || i.bodyB.label === 'Ground');
 
+        //const riserColliesions = collisions.filter(i=>i.bodyA.label === 'riser' || i.bodyB.label === 'riser');
+
+
+
         delete this.player2.groundSprite;
         if (groundCollision && groundCollision.collided) {
             this.player2.isGrounded = true;
+            this.player2.lastGroundedTime = new Date();
         } else {
             this.player2.isGrounded = false;
         }
@@ -757,12 +775,16 @@ export class Game {
                             setTimeout(() => {
                                 pauseSound('warning-sound');
                                 playSound('explosion-sound');
-                            }, 2000);
+                            }, 1800);
                             setTimeout(() => {
                                 const diffX = this.playerLeft - dynamite.x;
                                 const diffY = this.playerTop - dynamite.y;
                                 if (diffX < 600 && diffX > -700) {
                                     if (diffY < 600 && diffY > -600) {
+                                        PubSub.getInstance().publish('eli-popup', {
+                                            message: `They gotcha!!
+Overseas call centers, long hold times, and nasty surprises hiding in the fine print. 
+                                            `});
                                         this.loseLife();
                                     }
                                 }
@@ -821,6 +843,10 @@ export class Game {
                             for (let i = 0; i < 6; i++) {
                                 this.gameHUD.incrementCoinCount();
                             }
+                            PubSub.getInstance().publish('eli-popup', {
+                                message: `Nice Move!!!
+Don't let those old school warranty guys stick it to you. 
+                                `});
                         }
                         break;
                     case 'Mystery':
@@ -834,6 +860,7 @@ export class Game {
                     case 'log':
                     case 'Ice':
                     case 'cannon':
+                    case 'riser':
                     case 'solid-block':
                         this.player2.isGrounded = true;
                         this.player2.groundSprite = this.gameSprites.find(i => (
@@ -841,6 +868,9 @@ export class Game {
                             || i.frictionBody === collision.bodyA
                             || i.frictionBody === collision.bodyB
                             || i.body === collision.bodyB) && i !== this.player2);
+
+                        //console.log('grounding');
+                        this.player2.lastGroundedTime = new Date();
                         if (label != 'Ice') {
                             if (!this.player2.accelerating) {
                                 this.player2.stopMomentum();
@@ -854,11 +884,19 @@ export class Game {
                 switch (label) {
                     case 'Ram':
                         this.loseLife();
+                        PubSub.getInstance().publish('eli-popup', {
+                            message: `Noooooo!!
+                The goat coveres everything, but only up to a certain amount.  The overage could leave you roasting on a spit.
+                            `});
                         break;
                     case 'cannon-ball':
                         const cannonBall = this.gameSprites.find(i => (i.body === collision.bodyA || i.body === collision.bodyB) && i !== this.player2);
                         this.removeSprite(cannonBall);
                         this.loseLife();
+                        PubSub.getInstance().publish('eli-popup', {
+                            message: `Doh!
+You're a target of the old school home warranty guys, and they got you. 
+                            `});
                         break;
 
                 }
@@ -900,6 +938,17 @@ export class Game {
         const enemyCollisions = playerCollisions.filter(i => this.enemyLabels.indexOf(i.bodyA.label) > -1 || this.enemyLabels.indexOf(i.bodyB.label) > -1);
         if (enemyCollisions.length > 0) {
             this.loseLife();
+            for (const collision of enemyCollisions) {
+                const label = collision.bodyA.label === 'Player' ? collision.bodyB.label : collision.bodyA.label;
+                switch (label) {
+                    case 'spike-ball':
+                        this.pubSub.publish('eli-popup', {
+                            message: `Owwww!! Look out for those guys.
+Check the fine print. Unlimited is not unlimited when there are out of pocket costs.
+                            ` });
+                        break;
+                }
+            }
         }
 
         const completionBarrier = playerCollisions.filter(i => i.bodyA.label === 'completion-barrier' || i.bodyB.label === 'completion-barrier');
@@ -943,6 +992,10 @@ export class Game {
                             }
                             this.removeSprite(otherGameSprite);
                             playSound('kill-enemy-sound');
+                            PubSub.getInstance().publish('eli-popup', {
+                                message: `Nice Move!!!
+    Don't let those old school warranty guys stick it to you. 
+                                `});
                         }
                         break;
                     case 'spike-ball':
@@ -961,6 +1014,10 @@ export class Game {
                     default:
                         this.removeSprite(otherGameSprite);
                         playSound('kill-enemy-sound');
+                        PubSub.getInstance().publish('eli-popup', {
+                            message: `Nice Move!!!
+Don't let those old school warranty guys stick it to you. 
+                            `});
                 }
             }
         }
@@ -1113,27 +1170,9 @@ export class Game {
         }
     }
 
-    // static getInstance(zone: NgZone = null): Game {
-
-    //     if (!Game.gameInstance) {
-    //         Game.gameInstance = new Game(zone);
-    //     }
-
-    //     return Game.gameInstance;
-    // }
-
-    // static deleteInstance() {
-    //     PubSub.deleteInstance();
-    //     World.deleteInstance();
-    //     if (Game.gameInstance) {
-    //         Game.gameInstance.stop();
-    //     }
-    //     delete Game.gameInstance;
-    // }
-
-    // static clearInstance(zone: NgZone) {
-    //     Game.gameInstance = new Game(zone);
-    // }
+    showEliPopup(message: string) {
+        this.pubSub.publish('eli-popup', { message });
+    }
 
     removeSprite(sprite) {
         // Not sure why this is happening sometimes, not reproduceable

@@ -10,3 +10,19 @@
 .game-won-scrolled {
     transform: translateY(-200vh);
 }
+
+@keyframes show-eli {
+ from {
+    transform: translateY(-100px);
+ }
+ to {
+    transform: translateY(0);
+ }
+}
+.eli-popup {
+    position: fixed;
+    top: 0;
+    animation: show-eli .25s ease;
+    animation-fill-mode: forwards;
+    transform: translateY(-100px);
+}

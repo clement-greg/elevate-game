@@ -13,11 +13,12 @@ import { LocationChooserComponent } from './components/location-chooser/location
 import { NvLevelComponent } from './components/levels/nv/nv-level/nv-level.component';
 import { GameInstanceManager } from './models/game-instance';
 import { AzLevelComponent } from './components/levels/az/az-level/az-level.component';
+import { EliPopupComponent } from './eli-popup/eli-popup.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [Level1Component, CommonModule, TitleScreenComponent, GameWonComponent, GameLostComponent, NvLevelComponent, AzLevelComponent],
+  imports: [Level1Component, CommonModule, TitleScreenComponent, GameWonComponent, EliPopupComponent, GameLostComponent, NvLevelComponent, AzLevelComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -31,6 +32,9 @@ export class AppComponent {
   canRestart = true;
   joystickState = new JoystickState(0);
   location: 'AZ' | 'UT' | 'NV' = 'UT';
+  showEliPopup = false;
+  eliPopupMessage: string;
+
 
 
   constructor(private zone: NgZone,
@@ -86,6 +90,13 @@ export class AppComponent {
 
     PubSub.getInstance().subscribe('close-begin-quest',()=> {
       clearTimeout(this.gameTimeout);
+    });
+
+    PubSub.getInstance().subscribe('eli-popup', args=> {
+      console.log('*****************************')
+      console.log(args);
+      this.eliPopupMessage = args.message;
+      this.showEliPopup = true;
     });
 
     PubSub.getInstance().subscribe('game-lost', () => {

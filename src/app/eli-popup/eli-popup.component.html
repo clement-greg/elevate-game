@@ -1,0 +1,18 @@
+<div style="display: grid;grid-template-columns: auto 1fr;min-height: 425px;">
+
+    <div style="width: 175px;">
+        <div style="position: absolute ;margin-left: 50px;">
+            <app-lottie-player #player
+                src="https://lottie.host/2fd741d9-4216-442a-80d5-4df511b9adf5/ru2C5RbDEq.json"
+                height="150px"></app-lottie-player>
+        </div>
+
+
+    </div>
+    <div style="padding-top: 5px; padding-right: 30px;min-height: 250px;">
+        <div class="speech-bubble" *ngIf="wordBubbleVisible" [id]="id">
+
+        </div>
+    </div>
+</div>
+

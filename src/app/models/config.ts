@@ -4,8 +4,8 @@ export class Config {
     playerMaxXVelocity: number;
     trampolineYForce: number;
     gameSeconds: number;
-  showGameWinTime: number;
-  showGameLostTime: number;
+    showGameWinTime: number;
+    showGameLostTime: number;
     static setInstance(config: any) {
         Config.instance = config;
         localStorage.setItem('config', JSON.stringify(config));
@@ -39,7 +39,7 @@ export class Config {
                 i.playerMoveForceGrounded = 0.1;
                 i.playerMoveForceNotGrounded = 0.01;
                 i.playerMaxXVelocity = 7;
-                i.trampolineYForce = -0.7 ;
+                i.trampolineYForce = -0.7;
                 i.ramSpeed = 5;
                 i.cannonBallSpeed = 20;
                 i.gameSeconds = 241;

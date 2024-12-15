@@ -27,6 +27,7 @@ import { Game } from '../../models/game';
 import { FireVent } from '../../models/fire-vent';
 import { FlameThrower } from '../../models/flame-thrower';
 import { FlameThrowerMysteryBlock } from '../../models/flame-thrower-mystery-block';
+import { Riser } from '../../models/riser';
 
 @Component({
   selector: 'app-tool-bar',
@@ -170,6 +171,11 @@ export class ToolBarComponent implements OnDestroy {
   addIce() {
     const log = new Ice(this.game.engine, 0, 0);
     this.createSprite(log);
+  }
+
+  addRiser() {
+    const sprite = new Riser(this.game.engine, 0, 0);
+    this.createSprite(sprite);
   }
 
   addFlameThrowerMystery() {

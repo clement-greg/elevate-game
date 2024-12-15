@@ -30,6 +30,7 @@ export class Player2 extends GameSprite {
     flameBody: any;
     flameBodyWidth = 550;
     //currentFlameWidth = 10;
+    lastGroundedTime: Date;
 
 
     constructor(private engine, x, y, width, height) {
@@ -124,7 +125,12 @@ export class Player2 extends GameSprite {
     }
 
     jump() {
-        if ((this.isGrounded || GameInstanceManager.getInstance().gameHUD?.isJetPackMode) && !GameInstanceManager.getInstance().dialogOpen) {
+        let lastGroundedMs = 1000;
+        if(this.lastGroundedTime) {
+            lastGroundedMs = new Date().getTime() - this.lastGroundedTime.getTime();
+        }
+        console.log({lastGroundTime: this.lastGroundedTime, lastGroundedMs})
+        if ((this.isGrounded || GameInstanceManager.getInstance().gameHUD?.isJetPackMode || lastGroundedMs < 500) && !GameInstanceManager.getInstance().dialogOpen) {
             Matter.Body.setVelocity(this.body, { x: this.body.velocity.x, y: 0 });
             let upForce = Config.getInstance().playerJumpForce;
             Matter.Body.applyForce(this.body, { x: this.body.position.x, y: this.body.position.y }, { x: 0, y: upForce });
@@ -219,6 +225,9 @@ export class Player2 extends GameSprite {
         if (this.groundSprite?.objectType === 'ShortLog') {
             Matter.Body.setPosition(this.body, { x: this.body.position.x, y: this.groundSprite.body.position.y - this.groundSprite.height });
             this.isGrounded = true;
+        }
+        if(this.groundSprite?.objectType === 'riser') {
+            // Matter.Body.setPosition(this.body, { x: this.body.position.x, y: this.groundSprite.body.position.y - 150 });
         }
         this.domObject.style.backgroundPositionX = (this.runFrame * -72) + 'px';
         if (this.flameBody) {
