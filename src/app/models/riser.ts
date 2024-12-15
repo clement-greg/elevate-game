@@ -9,6 +9,7 @@ export class Riser extends GameSprite {
     initialY;
     moveDistance = 400;
     moveSpeed = 4;
+    downMoveSpeed = 15;
     stationaryWait = 1000;
     newlyCreated = false;
     frame = 0;
@@ -55,7 +56,7 @@ export class Riser extends GameSprite {
             this.sign = 1;
         }
         const newX = this.body.position.x;
-        const newY = this.body.position.y + this.moveSpeed * this.sign;
+        const newY = this.body.position.y + (this.sign > 0 ? this.downMoveSpeed : this.moveSpeed) * this.sign;
 
         Matter.Body.setPosition(this.body, { x: newX, y: newY });
         //Matter.Body.setPosition(this.frictionTop, { x: newX + 4, y: newY - 38 });
