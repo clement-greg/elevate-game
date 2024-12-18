@@ -34,6 +34,8 @@ import { GameInstanceManager } from './game-instance';
 import { FireVent } from './fire-vent';
 import { FlameThrowerMysteryBlock } from './flame-thrower-mystery-block';
 import { Riser } from './riser';
+import { Eagle } from './eagle';
+import { EagleDropping } from './eagle-dropping';
 
 var Engine = Matter.Engine,
     MatterWorld = Matter.World,
@@ -180,7 +182,8 @@ export class Game {
             if (hasFlameThrower) {
                 domObject.classList.add('has-flame-thrower');
                 PubSub.getInstance().publish('eli-popup', {
-                    message: `Flame thrower mode activated!!!`});
+                    message: `Flame thrower mode activated!!!`
+                });
             } else {
                 domObject.classList.remove('has-flame-thrower');
             }
@@ -479,6 +482,9 @@ export class Game {
             } else if (sprite.objectType === 'riser') {
                 const newSprite = new Riser(this.engine, sprite.originalX, sprite.originalY);
                 this.initializeSprite(sprite, newSprite);
+            } else if (sprite.objectType?.toLowerCase() === 'eagle') {
+                const newSprite = new Eagle(this.engine, sprite.originalX, sprite.originalY);
+                this.initializeSprite(sprite, newSprite);
             }
         }
 
@@ -505,9 +511,9 @@ export class Game {
     }
 
     private colletableLabels = ['saw', 'wrench', 'hammer', 'screwdriver', 'drill', 'coin'];
-    private enemyLabels = ['spike-ball', 'man-hole'];
-    private impactObjectsLabels = ['trampoline', 'riser', 'cannon-ball', 'spike-brick', 'dynamite', 'ceiling-spike', 'cannon', 'Ram', 'Brick', 'i-beam', 'brick-top', 'mystery-top', 'jet-pack-mystery-block', 'Ice', 'Mystery', 'log-short', 'log', 'solid-block', 'fire-vent', 'flame-thrower-mystery-block'];
-    private flameTargetLabels = ['spike-ball', 'Ram', 'dynamite', 'cannon-ball'];
+    private enemyLabels = ['spike-ball', 'man-hole', 'eagle'];
+    private impactObjectsLabels = ['trampoline', 'riser', 'cannon-ball', 'spike-brick', 'dynamite', 'eagle-dropping', 'ceiling-spike', 'cannon', 'Ram', 'Brick', 'i-beam', 'brick-top', 'mystery-top', 'jet-pack-mystery-block', 'Ice', 'Mystery', 'log-short', 'log', 'solid-block', 'fire-vent', 'flame-thrower-mystery-block'];
+    private flameTargetLabels = ['spike-ball', 'Ram', 'dynamite', 'cannon-ball', 'eagle'];
 
     playCollectTool() {
         playSound('collect-tool-sound');
@@ -815,6 +821,11 @@ Overseas call centers, long hold times, and nasty surprises hiding in the fine p
                         this.loseLife();
                     }
                     break;
+                case 'eagle-dropping':
+                    this.loseLife();
+                    const dropping: EagleDropping = this.gameSprites.find(i => (i.body === collision.bodyA || i.body === collision.bodyB) && i !== this.player2);
+                    this.removeSprite(dropping);
+                    break;
             }
 
             if (collision.penetration.y < 0) {
@@ -952,6 +963,8 @@ You're a target of the old school home warranty guys, and they got you.
 Check the fine print. Unlimited is not unlimited when there are out of pocket costs.
                             ` });
                         break;
+                    case 'eagle':
+                        break;
                 }
             }
         }
@@ -1016,6 +1029,15 @@ Check the fine print. Unlimited is not unlimited when there are out of pocket co
                             }
                         }
                         break;
+                    case 'eagle':
+                        if (otherGameSprite) {
+                            playSound('kill-enemy-sound');
+                            this.removeSprite(otherGameSprite);
+                            for (let i = 0; i < 6; i++) {
+                                this.gameHUD.incrementCoinCount();
+                            }
+                        }
+                        break;
                     default:
                         this.removeSprite(otherGameSprite);
                         playSound('kill-enemy-sound');
@@ -1026,10 +1048,17 @@ Don't let those old school warranty guys stick it to you.
                 }
             }
         }
+        const eagles = this.gameSprites.filter(i => i.objectType === 'Eagle');
+
+        for (const eagle of eagles) {
+            if (this.questShown) {
+                eagle.doDropping(this);
+            }
+        }
     }
 
     loseLife() {
-        if (this.editorOpen) {
+        if (this.editorOpen || this.dialogOpen) {
             return;
         }
         const leftPosition = 150;

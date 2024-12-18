@@ -365,6 +365,27 @@ font-style: normal !important;
     background-repeat: no-repeat;
 }
 
+.eagle {
+    display: inline-block;
+    width: 187.5px;
+    height: 100px;
+    position: absolute;
+    background-repeat: no-repeat;
+}
+
+.eagle.invert {
+    transform: scaleX(-1);
+
+}
+
+.eagle-dropping {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    background-repeat: no-repeat;
+}
+
 .fire-vent {
     display: inline-block;
     width: 125px;
