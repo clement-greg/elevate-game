@@ -885,7 +885,6 @@ Don't let those old school warranty guys stick it to you.
                             || i.frictionBody === collision.bodyB
                             || i.body === collision.bodyB) && i !== this.player2);
 
-                        //console.log('grounding');
                         this.player2.lastGroundedTime = new Date();
                         if (label != 'Ice') {
                             if (!this.player2.accelerating) {

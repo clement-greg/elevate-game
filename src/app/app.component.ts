@@ -93,8 +93,6 @@ export class AppComponent {
     });
 
     PubSub.getInstance().subscribe('eli-popup', args=> {
-      console.log('*****************************')
-      console.log(args);
       this.eliPopupMessage = args.message;
       this.showEliPopup = true;
     });

@@ -33,13 +33,11 @@ export class EagleDropping extends MoveableObject {
 
     override advance(): void {
         super.advance();
-        //console.log(this.y);
         const diff = Math.abs(this.y - this.lastY);
         Matter.Body.setVelocity(this.body, { x: this.velocityX, y: 10 });
 
         if (diff < .01 || this.y > World.getInstance().height - 50) {
             this.game.removeSprite(this);
-            //console.log('removing dropping')
         }
         this.lastY = this.y;
     }
