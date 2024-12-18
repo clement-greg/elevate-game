@@ -129,7 +129,6 @@ export class Player2 extends GameSprite {
         if(this.lastGroundedTime) {
             lastGroundedMs = new Date().getTime() - this.lastGroundedTime.getTime();
         }
-        console.log({lastGroundTime: this.lastGroundedTime, lastGroundedMs})
         if ((this.isGrounded || GameInstanceManager.getInstance().gameHUD?.isJetPackMode || lastGroundedMs < 500) && !GameInstanceManager.getInstance().dialogOpen) {
             Matter.Body.setVelocity(this.body, { x: this.body.velocity.x, y: 0 });
             let upForce = Config.getInstance().playerJumpForce;
