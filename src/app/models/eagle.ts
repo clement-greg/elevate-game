@@ -32,6 +32,7 @@ export class Eagle extends MoveableObject {
         this.domObject = eagleDiv;
         this.body.label = 'eagle';
         this.body.isStatic = true;
+        this.objectType = 'Eagle';
         this.body.friction = 0;
         Body.setMass(this.body, 100000);
         this.initialX = x;
@@ -52,7 +53,7 @@ export class Eagle extends MoveableObject {
     }
 
     get isInViewport() {
-        return true;
+        //return true;
         if (!this.parent) {
             this.parent = document.getElementById('game-div');
 
