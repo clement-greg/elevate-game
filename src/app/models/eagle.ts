@@ -52,6 +52,7 @@ export class Eagle extends MoveableObject {
     }
 
     get isInViewport() {
+        return true;
         if (!this.parent) {
             this.parent = document.getElementById('game-div');
 
