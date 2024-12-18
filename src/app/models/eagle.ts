@@ -44,7 +44,6 @@ export class Eagle extends MoveableObject {
         if (this.isInViewport) {
             const elapsed = new Date().getTime() - this.lastDrop.getTime();
             if (elapsed > 2000) {
-                console.log('pooping now')
                 const dropping = new EagleDropping(this, game, this.body.velocity.x);
                 this.lastDrop = new Date();
                 game.addSprite(dropping);

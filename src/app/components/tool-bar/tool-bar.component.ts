@@ -29,6 +29,7 @@ import { FlameThrower } from '../../models/flame-thrower';
 import { FlameThrowerMysteryBlock } from '../../models/flame-thrower-mystery-block';
 import { Riser } from '../../models/riser';
 import { Eagle } from '../../models/eagle';
+import { ChoiceBrick } from '../../models/choice';
 
 @Component({
   selector: 'app-tool-bar',
@@ -115,6 +116,11 @@ export class ToolBarComponent implements OnDestroy {
     this.createSprite(coin);
   }
 
+  addChoiceBrick() {
+    const sprite = new ChoiceBrick(this.game.engine, 0, 0);
+    this.createSprite(sprite);
+  }
+
   printDebug() {
     console.log(this.game);
   }
@@ -185,7 +191,7 @@ export class ToolBarComponent implements OnDestroy {
   }
 
   addFlameThrowerMystery() {
-    const sprite = new FlameThrowerMysteryBlock (this.game.engine, 0, 0);
+    const sprite = new FlameThrowerMysteryBlock(this.game.engine, 0, 0);
     this.createSprite(sprite);
   }
 

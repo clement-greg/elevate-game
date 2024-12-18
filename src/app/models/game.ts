@@ -36,6 +36,7 @@ import { FlameThrowerMysteryBlock } from './flame-thrower-mystery-block';
 import { Riser } from './riser';
 import { Eagle } from './eagle';
 import { EagleDropping } from './eagle-dropping';
+import { ChoiceBrick } from './choice';
 
 var Engine = Matter.Engine,
     MatterWorld = Matter.World,
@@ -485,6 +486,9 @@ export class Game {
             } else if (sprite.objectType?.toLowerCase() === 'eagle') {
                 const newSprite = new Eagle(this.engine, sprite.originalX, sprite.originalY);
                 this.initializeSprite(sprite, newSprite);
+            } else if (sprite.objectType === 'choice-brick') {
+                const newSprite = new ChoiceBrick(this.engine, sprite.originalX, sprite.originalY);
+                this.initializeSprite(sprite, newSprite);
             }
         }
 
@@ -511,7 +515,7 @@ export class Game {
     }
 
     private colletableLabels = ['saw', 'wrench', 'hammer', 'screwdriver', 'drill', 'coin'];
-    private enemyLabels = ['spike-ball', 'man-hole', 'eagle'];
+    private enemyLabels = ['spike-ball', 'man-hole', 'eagle', 'choice-brick'];
     private impactObjectsLabels = ['trampoline', 'riser', 'cannon-ball', 'spike-brick', 'dynamite', 'eagle-dropping', 'ceiling-spike', 'cannon', 'Ram', 'Brick', 'i-beam', 'brick-top', 'mystery-top', 'jet-pack-mystery-block', 'Ice', 'Mystery', 'log-short', 'log', 'solid-block', 'fire-vent', 'flame-thrower-mystery-block'];
     private flameTargetLabels = ['spike-ball', 'Ram', 'dynamite', 'cannon-ball', 'eagle'];
 
