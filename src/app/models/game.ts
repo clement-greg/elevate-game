@@ -534,12 +534,16 @@ export class Game {
     forceDiscoTime() {
         setTimeout(() => {
             playSound('disco-time');
-            this.zone.run(() => {
-                this.showDiscoTime = true;
-            });
-            setTimeout(() => {
-                this.zone.run(() => this.showDiscoTime = false);
-            }, 2000);
+            PubSub.getInstance().publish('eli-popup', {
+                message: `Nice Move!!!
+You got all the tools you need.  Head home FTW! 
+                `});
+            // this.zone.run(() => {
+            //     this.showDiscoTime = true;
+            // });
+            // setTimeout(() => {
+            //     this.zone.run(() => this.showDiscoTime = false);
+            // }, 2000);
         }, 1000);
     }
 
