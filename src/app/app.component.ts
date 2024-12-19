@@ -93,8 +93,12 @@ export class AppComponent {
     });
 
     PubSub.getInstance().subscribe('eli-popup', args=> {
-      this.eliPopupMessage = args.message;
-      this.showEliPopup = true;
+      this.showEliPopup = false;
+      setTimeout(()=> {
+        this.eliPopupMessage = args.message;
+        this.showEliPopup = true;
+      }, 5);
+
     });
 
     PubSub.getInstance().subscribe('game-lost', () => {

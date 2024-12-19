@@ -546,7 +546,7 @@ export class Game {
     bounceCount = 0;
     lastBounce = new Date();
 
-    killRam(ram, bouncePlayer = true) {
+    killRam(ram, bouncePlayer = true, fromFire = false) {
         playSound('goat-sound');
         const ramDead = document.createElement('lottie-player');
 
@@ -578,10 +578,18 @@ export class Game {
             Matter.Body.setVelocity(coin.body, { x: forcex, y: -5.3 });
             forcex += .05;
         }
-        PubSub.getInstance().publish('eli-popup', {
-            message: `Nice Move!!!
-Don't let those old school warranty guys stick it to you. 
-            `});
+        if (fromFire) {
+            PubSub.getInstance().publish('eli-popup', {
+                message: `YUMMMMMMM!!!
+Roasted goat is my favorite. 
+                `});
+        } else {
+            PubSub.getInstance().publish('eli-popup', {
+                message: `Nice Move!!!
+    Don't let those old school warranty guys stick it to you. 
+                `});
+        }
+
     }
 
     killSpikeBall(spikeBall, bouncePlayer = true) {
@@ -976,7 +984,7 @@ Check the fine print. Unlimited is not unlimited when there are out of pocket co
 Their coverage will leave you feeling crushed.
                             ` });
                         break;
-                    break;
+                        break;
                     case 'eagle':
                         break;
                 }
@@ -1008,7 +1016,7 @@ Their coverage will leave you feeling crushed.
                 const otherGameSprite = this.gameSprites.find(i => i.body === other);
                 switch (label) {
                     case 'Ram':
-                        this.killRam(otherGameSprite, false);
+                        this.killRam(otherGameSprite, false, true);
                         break;
                     case 'dynamite':
                         if (!otherGameSprite.playing) {
@@ -1047,9 +1055,20 @@ Their coverage will leave you feeling crushed.
                         if (otherGameSprite) {
                             playSound('kill-enemy-sound');
                             this.removeSprite(otherGameSprite);
-                            for (let i = 0; i < 6; i++) {
-                                this.gameHUD.incrementCoinCount();
+                            let multiplier = 1;
+                            for (let i = 0; i < 5; i++) {
+                                const coin = new Coin(this.engine, otherGameSprite.x, otherGameSprite.y, 'static', false);
+
+                                this.addSprite(coin);
+                                coin.body.isStatic = false;
+                                Matter.Body.setStatic(coin.body, false);
+                                Matter.Body.setVelocity(coin.body, { x: 0.1 * multiplier, y: -5.3 });
+                                multiplier *= -1;
                             }
+                            PubSub.getInstance().publish('eli-popup', {
+                                message: `Way to go!!!
+Roasted bird is almost as good as roasted goat. 
+                                `});
                         }
                         break;
                     default:
