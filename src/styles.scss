@@ -388,10 +388,12 @@ font-style: normal !important;
 
 .choice-brick {
     display: inline;
-    width: 200px;
-    height: 232px;
+    width: 125px;
+    height: 145px;
     position: absolute;
     background-repeat: no-repeat;
+    transform: scale(1.5);
+    transform-origin: 50% 50%;
 }
 
 .fire-vent {

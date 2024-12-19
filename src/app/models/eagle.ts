@@ -1,6 +1,7 @@
 //
 declare var Matter: any;
 import { ToolBarComponent } from "../components/tool-bar/tool-bar.component";
+import { playSound } from "../utilities/sound-utils";
 import { Config } from "./config";
 import { EagleDropping } from "./eagle-dropping";
 import { Game } from "./game";
@@ -47,6 +48,7 @@ export class Eagle extends MoveableObject {
                 const dropping = new EagleDropping(this, game, this.body.velocity.x);
                 this.lastDrop = new Date();
                 game.addSprite(dropping);
+                playSound('dropping');
             }
         }
     }

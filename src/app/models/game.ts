@@ -829,6 +829,10 @@ Overseas call centers, long hold times, and nasty surprises hiding in the fine p
                     this.loseLife();
                     const dropping: EagleDropping = this.gameSprites.find(i => (i.body === collision.bodyA || i.body === collision.bodyB) && i !== this.player2);
                     this.removeSprite(dropping);
+                    PubSub.getInstance().publish('eli-popup', {
+                        message: `Gross!!
+You picked the wrong warranty. 
+                        `});
                     break;
             }
 
@@ -966,6 +970,13 @@ You're a target of the old school home warranty guys, and they got you.
 Check the fine print. Unlimited is not unlimited when there are out of pocket costs.
                             ` });
                         break;
+                    case 'choice-brick':
+                        this.pubSub.publish('eli-popup', {
+                            message: `Yikes!! Wrong CHOICE.
+Their coverage will leave you feeling crushed.
+                            ` });
+                        break;
+                    break;
                     case 'eagle':
                         break;
                 }
