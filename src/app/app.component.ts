@@ -57,6 +57,7 @@ export class AppComponent {
         break;
       case 9:
         if (GameInstanceManager.hasInstance) {
+          this.showEliPopup = false;
           this.backToHomeScreen();
         }
         break;
@@ -78,6 +79,7 @@ export class AppComponent {
       this.startGame = false;
       this.showGameWon = true;
       this.canRestart = false;
+      this.showEliPopup = false;
 
       GameInstanceManager.deleteInstance();
       this.gameWonTimeout = setTimeout(() => {
@@ -105,6 +107,7 @@ export class AppComponent {
       this.startGame = false;
       this.showGameLost = true;
       this.canRestart = false;
+      this.showEliPopup = false;
 
       GameInstanceManager.deleteInstance();
       this.gameWonTimeout = setTimeout(() => {
