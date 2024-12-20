@@ -43,6 +43,7 @@
     font-size: 28px;
     line-height: 40px;
     animation: fade-in-up .5s ease;
+    z-index: 1;
 }
 
 #jimmy-dead {
@@ -51,4 +52,5 @@
     bottom: 150px;
     height: 600px;
     width: 600px;
+    z-index: 0;
 }

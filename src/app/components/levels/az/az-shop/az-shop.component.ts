@@ -44,11 +44,21 @@ export class AzShopComponent implements OnDestroy {
 
 
   ];
-  private message = `Hey Jimmy!
+
+  statements = [
+    `Hey Jimmy!
 
 Welcome to Elevate A/C! 🎉 We've got the goods to keep you cool. 🏠
 
-Wander through our collection, pick your favorite, and head to checkout. Any A/C unit will do, but here’s a tip: the fancier the A/C, the bigger the smiles. 😊✨`;
+Wander through our collection, pick your favorite, and head to checkout. Any A/C unit will do, but here’s a tip: the fancier the A/C, the bigger the smiles. 😊✨`,
+    'R22 and R410a systems are no longer manufactured, so any upgrade in on side of a split system will create incompatibility on the other side.',
+    'That unfortunately means more cost to you!'
+  ];
+  //   private message = `Hey Jimmy!
+
+  // Welcome to Elevate A/C! 🎉 We've got the goods to keep you cool. 🏠
+
+  // Wander through our collection, pick your favorite, and head to checkout. Any A/C unit will do, but here’s a tip: the fancier the A/C, the bigger the smiles. 😊✨`;
   purchased = false;
 
   joystickState = new JoystickState(0);
@@ -112,6 +122,8 @@ Wander through our collection, pick your favorite, and head to checkout. Any A/C
 
 
   primaryButtonKeys = [' ', 'a', 'A'];
+  showA = false;
+  statementNumber = 0;
 
   @HostListener('window:keydown', ['$event'])
   handleKeyDown(event: KeyboardEvent) {
@@ -142,9 +154,10 @@ Wander through our collection, pick your favorite, and head to checkout. Any A/C
       setTimeout(() => {
         this.wordBubbleVisible = true;
         setTimeout(() => {
-          this.message = `Oh sorry, you don't have enough money to buy that refrigerator.  
+          this.statements = [`Oh sorry, you don't have enough money to buy that refrigerator.  
           That one costs ${currencyPipe.transform(this.selectedItem.price)} but you only have ${currencyPipe.transform(GameInstanceManager.getInstance().gameHUD.money)}
-                `
+                `];
+          this.statementNumber = 0;
           this.doWords();
         })
       }, 500);
@@ -159,7 +172,9 @@ Wander through our collection, pick your favorite, and head to checkout. Any A/C
     setTimeout(() => {
       this.wordBubbleVisible = true;
       setTimeout(() => {
-        this.message = `Thanks for your purchase.  Come again soon.`;
+        this.statements = [`Thanks for your purchase.  Come again soon.`];
+        this.statementNumber = 0;
+        //this.message = `Thanks for your purchase.  Come again soon.`;
         this.doWords();
         GameInstanceManager.getInstance().gameHUD.coinCount = GameInstanceManager.getInstance().gameHUD.coinCount - (this.selectedItem.price / 20);
         setTimeout(() => this.dialogRef.close(), 2500);
@@ -174,10 +189,16 @@ Wander through our collection, pick your favorite, and head to checkout. Any A/C
 
   wordIndex = 0;
   wordsTimeout: any;
+  
+
+  get message() {
+    return this.statements[this.statementNumber];
+  }
+
 
   doWords() {
     if (!document.getElementById(this.id)) {
-      this.wordsTimeout = setTimeout(() => this.doWords(), 100);
+      setTimeout(() => this.doWords(), 100);
       return;
     }
 
@@ -187,15 +208,33 @@ Wander through our collection, pick your favorite, and head to checkout. Any A/C
       this.wordIndex++;
       const msg = this.message.substring(0, this.wordIndex);
       div.innerText = msg;
-      this.wordsTimeout = setTimeout(() => this.doWords(), 30);
       if (new Date().getTime() - this.lastVoice.getTime() > 11000) {
-
         playSound('synth-voice');
         this.lastVoice = new Date();
       }
+      setTimeout(() => this.doWords(), 30);
     } else {
-      this.player.pause();
-      pauseSound('synth-voice');
+      if (this.statementNumber < this.statements.length - 1) {
+
+        this.player.pause();
+        pauseSound('synth-voice');
+        setTimeout(() => {
+          playSound('synth-voice');
+          this.lastVoice = new Date(2020, 1, 1);
+          this.player.play();
+          document.getElementById(this.id).innerText = '';
+          this.wordIndex = 0;
+          this.statementNumber++;
+
+          this.doWords();
+
+        }, 1000);
+      } else {
+        this.player.pause();
+        pauseSound('synth-voice');
+        this.showA = true;
+        console.log('here')
+      }
     }
   }
 }

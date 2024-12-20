@@ -1,4 +1,5 @@
 import { ToolBarComponent } from "../components/tool-bar/tool-bar.component";
+import { playSound } from "../utilities/sound-utils";
 import { GameSprite } from "./game-sprite";
 
 export class BuzzSaw extends GameSprite {
@@ -12,7 +13,7 @@ export class BuzzSaw extends GameSprite {
         if (this.body) {
             this.body.isStatic = true;
         }
-        
+
         const div = document.createElement('div');
         div.className = 'buzz-saw';
         this.objectType = 'buzz-saw';
@@ -23,24 +24,46 @@ export class BuzzSaw extends GameSprite {
 
         this.domObject = div;
 
-        setTimeout(()=> {
+        setTimeout(() => {
             this.playLoop();
 
         });
+    }
+
+    parent;
+    get isInViewport() {
+        //return true;
+        if (!this.parent) {
+            this.parent = document.getElementById('game-div');
+
+        }
+
+        const rect = this.domObject.getBoundingClientRect();
+        return (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <= ((window.innerWidth || document.documentElement.clientWidth) + 150)
+        )
     }
 
     playLoop() {
         const player: any = document.getElementById(this.lottieId);
         player.seek(0);
         player.play();
-
-        setTimeout(()=> this.sawSpinning = true, 500);
-        setTimeout(()=> this.sawSpinning = false, 5000);
-        setTimeout(()=> {
-
+        if (this.isInViewport) {
             setTimeout(()=> {
+                playSound('saw', .1);
+            }, 200);
+        }
+
+        setTimeout(() => this.sawSpinning = true, 500);
+        setTimeout(() => this.sawSpinning = false, 5000);
+        setTimeout(() => {
+
+            setTimeout(() => {
                 this.playLoop();
-            }, 1500);
+            }, 2000);
         }, 6000);
     }
 

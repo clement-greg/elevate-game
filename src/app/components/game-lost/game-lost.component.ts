@@ -1,4 +1,4 @@
-import { Component, OnDestroy, ViewChild } from '@angular/core';
+import { Component, Input, OnDestroy, ViewChild } from '@angular/core';
 import { LottiePlayerComponent } from '../lottie-player/lottie-player.component';
 import { PressAComponent } from '../press-a/press-a.component';
 import { CommonModule } from '@angular/common';
@@ -16,6 +16,8 @@ export class GameLostComponent implements OnDestroy {
   showPressA = false;
   pulseCount = 0;
   @ViewChild('jimmy') jimmy: LottiePlayerComponent;
+  @Input() location: 'AZ' | 'UT' | 'NV' = 'UT';
+
   constructor() {
     setTimeout(() => this.showNextText = true, 1500);
     setTimeout(() => this.showPressA = true, 3500);
@@ -34,9 +36,9 @@ export class GameLostComponent implements OnDestroy {
       if (gamepad.vibrationActuator) {
         gamepad.vibrationActuator.playEffect("dual-rumble", {
           startDelay: 0,
-          duration: 750, 
-          weakMagnitude: 0.5, 
-          strongMagnitude: 1, 
+          duration: 750,
+          weakMagnitude: 0.5,
+          strongMagnitude: 1,
         }).then(() => { }).catch((err) => { });
       }
     }

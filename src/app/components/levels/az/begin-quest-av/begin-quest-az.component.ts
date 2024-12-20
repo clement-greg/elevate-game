@@ -3,11 +3,12 @@ import { ToolBarComponent } from '../../../tool-bar/tool-bar.component';
 import { LottiePlayerComponent } from '../../../lottie-player/lottie-player.component';
 import { PressAComponent } from '../../../press-a/press-a.component';
 import { pauseSound, playSound } from '../../../../utilities/sound-utils';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-begin-quest-az',
   standalone: true,
-  imports: [LottiePlayerComponent, PressAComponent],
+  imports: [LottiePlayerComponent, PressAComponent, CommonModule],
   templateUrl: './begin-quest-az.component.html',
   styleUrl: './begin-quest-az.component.scss'
 })
@@ -17,10 +18,12 @@ export class BeginQuestAzComponent implements OnDestroy {
     `Uh-oh, Jimmy! 🛠️🚨
 
 Guess what? Your A/C has decided to take an early retirement, and you're going to be sweating from head to crack. My tools are lost! If you can gather them and snag a brand-new A/C from the store, I’ll be right there to work my magic.`,
-    `Oh, and look out for the old school warranty guys. Working with them will only bring you pain😡😡😡😡😡`
+    `You're going to need a lot of coins, the new A2L incompatabilities are going to end up costing you thousands.`,
+    `Oh, and look out for the old school warranty guys. Sketchy out of pocket costs, contract loopholes and plan limits could end up costing you thousands on a 'Covered' warranty claim😡😡😡😡😡`
   ];
   id = ToolBarComponent.newid();
   statementNumber = 0;
+  showA = false;
 
   @ViewChild('lottiePlayer') lottiePlayer: LottiePlayerComponent;
 
@@ -59,8 +62,9 @@ Guess what? Your A/C has decided to take an early retirement, and you're going t
       if (this.statementNumber < this.statements.length - 1) {
 
         this.lottiePlayer.pause();
-
+        pauseSound('synth-voice');
         setTimeout(() => {
+          playSound('synth-voice');
           this.lastVoice = new Date(2020, 1, 1);
           this.lottiePlayer.play();
           document.getElementById(this.id).innerText = '';
@@ -69,10 +73,12 @@ Guess what? Your A/C has decided to take an early retirement, and you're going t
 
           this.doWords();
 
-        }, 500);
+        }, 1000);
       } else {
         this.lottiePlayer.pause();
         pauseSound('synth-voice');
+        this.showA = true;
+        console.log('here')
       }
     }
   }

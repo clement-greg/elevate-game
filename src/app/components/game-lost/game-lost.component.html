@@ -15,18 +15,26 @@
                 <h1 class="mighty-slab-1">Ooooohh!!! <br>Sorry.</h1>
 
 
-                <div style="height: 100px;">
-                    <p class="next-text" *ngIf="showNextText">But seriously, next time just use the                       <span style="display: inline-block;
+                <div style="height: 100px;" *ngIf="location !== 'AZ'">
+                    <p class="next-text" *ngIf="showNextText">But seriously, next time just use the <span style="display: inline-block;
                         margin-bottom: -20px;
                         vertical-align: bottom;
                         padding-bottom: 17px;">
-                                <img style="height: 25px;" src="/assets/images/elevate-logo.svg">
+                            <img style="height: 25px;" src="/assets/images/elevate-logo.svg">
                         </span> App. <br>It
                         makes
                         getting repairs a breeze.</p>
                 </div>
 
-
+                <div *ngIf="location === 'AZ'">
+                    <p class="next-text" *ngIf="showNextText">You need to get <span style="display: inline-block;
+                        margin-bottom: -20px;
+                        vertical-align: bottom;
+                        padding-bottom: 17px;">
+                            <img style="height: 25px;" src="/assets/images/elevate-logo.svg">
+                        </span>!<br> No limits, no loopholes. <br> Quite simply the best A/C &amp; Heating coverage on
+                        the planet.</p>
+                </div>
                 <div style="height: 165px;">
                     <div class="next-text" *ngIf="showPressA">
                         <img src="/assets/images/arcade-button.svg" style="height: 75px;">

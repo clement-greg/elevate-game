@@ -1006,6 +1006,10 @@ Their coverage will leave you feeling crushed.
 
             if(buzzSaw.sawSpinning) {
                 this.loseLife();
+                this.pubSub.publish('eli-popup', {
+                    message: `Ugghhhh!! 
+Limited coverage is going to leave a mark on your wallet.
+                    ` });
             } else {
                 if (buzzSawCollision.penetration.y < 0) {
                     playSound('kill-enemy-sound');
@@ -1023,6 +1027,7 @@ Their coverage will leave you feeling crushed.
                     Matter.Body.applyForce(this.player2.body, { x: this.player2.body.position.x, y: this.player2.body.position.y }, { x: 0, y: -0.4 });
                     PubSub.getInstance().publish('eli-popup', {
                         message: `Nice Move!!!. 
+Keep it up, and those guys will be instinct.
                         `});
                 }
             }

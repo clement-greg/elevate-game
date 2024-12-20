@@ -34,10 +34,10 @@
 
 @keyframes fade-in-up {
     from {
-        transform: translateY(500px);
+        transform: translateY(600px);
     }
     to {
-        transform: translateY(0px)
+        transform: translateY(0)
     }
 }
 
@@ -45,4 +45,5 @@
     font-size: 28px;
     line-height: 40px;
     animation: fade-in-up .5s ease;
+
 }
