@@ -1,1 +1,1681 @@
-[{"x":8222.891137724891,"y":777.0500004166678,"width":71,"height":96,"isGround":false,"objectType":"Player2","dragMode":false,"log":false,"isNew":false,"originalX":8222.891137724891,"originalY":777.0500004166678,"dontUpdatePosition":false,"runFrame":0,"applyingLeft":false,"applyingRight":true,"frameDelay":2,"moveSprite":true,"isGrounded":true,"subscriptionEvents":{},"lottieId":"8ff9084c-f85a-4d64-80ce-da39ba1aa6d6","flameThrowerId":"4cd2531b-6720-4882-9c94-9fde8ba84de7","accelerating":false,"flameBodyWidth":550,"lastGroundedTime":"2024-12-20T04:15:40.012Z","flameThrowerSetup":false,"flaming":false,"isMoving":false,"arrowRight":false,"arrowLeft":false,"lastAcceleration":0.1,"frameCount":13},{"x":15850,"y":0,"width":2,"height":10000,"isGround":false,"objectType":"Ground","dragMode":false,"log":false,"isNew":false,"dontUpdatePosition":false},{"x":1295.4,"y":610.4,"width":72.8,"height":72.8,"isGround":false,"objectType":"MysteryBlock","dragMode":false,"log":false,"isNew":false,"originalX":1295.4,"originalY":610.4,"dontUpdatePosition":false,"id":"390d62b9-7286-458e-8cdc-10f3195b4410","empty":true},{"x":1150.4,"y":610.4,"width":72.8,"height":72.8,"isGround":false,"objectType":"MysteryBlock","dragMode":false,"log":false,"isNew":false,"originalX":1150.4,"originalY":610.4,"dontUpdatePosition":false,"id":"f4a579ab-b93a-4718-a570-625afaf90acc","empty":false},{"x":1077.4,"y":538.4,"width":72.8,"height":72.8,"isGround":false,"objectType":"MysteryBlock","dragMode":false,"log":false,"isNew":false,"originalX":1077.4,"originalY":538.4,"dontUpdatePosition":false,"id":"77f5b105-e132-4d9a-94c7-bcca60de5dbc","empty":false},{"x":6695.4,"y":683.4,"width":72.8,"height":72.8,"isGround":false,"objectType":"MysteryBlock","dragMode":false,"log":false,"isNew":false,"originalX":6695.4,"originalY":683.4,"dontUpdatePosition":false,"id":"843ab0c2-3bb3-4d15-a73d-3440d6db38a2","empty":false},{"x":6480,"y":214.4,"width":72.8,"height":72.8,"isGround":false,"objectType":"MysteryBlock","dragMode":false,"log":false,"isNew":false,"originalX":6480,"originalY":214.4,"dontUpdatePosition":false,"id":"b60d8c33-eec9-40b6-9b91-aabf7ac598bd","empty":false},{"x":6587.4,"y":214.4,"width":72.8,"height":72.8,"isGround":false,"objectType":"MysteryBlock","dragMode":false,"log":false,"isNew":false,"originalX":6587.4,"originalY":214.4,"dontUpdatePosition":false,"id":"b49f0fc7-1df6-46d7-8dca-2eb098cce1da","empty":false},{"x":6408,"y":214.4,"width":72.8,"height":72.8,"isGround":false,"objectType":"MysteryBlock","dragMode":false,"log":false,"isNew":false,"originalX":6408,"originalY":214.4,"dontUpdatePosition":false,"id":"a56ccada-54c9-4ca4-b4a1-3d32e144d6a9","empty":false},{"x":15119.4,"y":683.4,"width":72.8,"height":72.8,"isGround":false,"objectType":"MysteryBlock","dragMode":false,"log":false,"isNew":false,"originalX":15119.4,"originalY":683.4,"dontUpdatePosition":false,"id":"7c6396cb-8eb7-4883-9411-f8e3668726a9","empty":false},{"x":15191.4,"y":611.4,"width":72.8,"height":72.8,"isGround":false,"objectType":"MysteryBlock","dragMode":false,"log":false,"isNew":false,"originalX":15191.4,"originalY":611.4,"dontUpdatePosition":false,"id":"e8a24bfa-c9e2-4732-9d04-3082fc137887","empty":false},{"x":14829.4,"y":465.4,"width":72.8,"height":72.8,"isGround":false,"objectType":"MysteryBlock","dragMode":false,"log":false,"isNew":false,"originalX":14829.4,"originalY":465.4,"dontUpdatePosition":false,"id":"dcb5dd43-c181-4a1f-b065-a216c76f95ce","empty":false},{"x":14902.4,"y":466.4,"width":72.8,"height":72.8,"isGround":false,"objectType":"MysteryBlock","dragMode":false,"log":false,"isNew":false,"originalX":14902.4,"originalY":466.4,"dontUpdatePosition":false,"id":"7f6d47ee-c36b-44dd-abb2-14ae79432077","empty":false},{"x":10542,"y":821.5,"width":210,"height":75,"isGround":false,"objectType":"trampoline","dragMode":false,"log":false,"isNew":false,"originalX":10542,"originalY":821.5,"dontUpdatePosition":false,"id":"f29e9119-2d00-4456-b061-41174d209040","lottieId":"4ea5f4c7-465d-473a-8327-58739df04963"},{"x":12384,"y":684,"width":72,"height":72,"isGround":false,"objectType":"solid-block","dragMode":false,"log":false,"isNew":false,"originalX":12384,"originalY":684,"dontUpdatePosition":false,"id":"45bda331-43c2-4a80-84cb-15e9e955bbd6"},{"x":12240,"y":828,"width":72,"height":72,"isGround":false,"objectType":"solid-block","dragMode":false,"log":false,"isNew":false,"originalX":12240,"originalY":828,"dontUpdatePosition":false,"id":"7eec7664-2a85-4940-a398-5890ee35611b"},{"x":12168,"y":828,"width":72,"height":72,"isGround":false,"objectType":"solid-block","dragMode":false,"log":false,"isNew":false,"originalX":12168,"originalY":828,"dontUpdatePosition":false,"id":"56b15120-28c7-4481-91d4-70e8a5f72fe5"},{"x":12240,"y":756,"width":72,"height":72,"isGround":false,"objectType":"solid-block","dragMode":false,"log":false,"isNew":false,"originalX":12240,"originalY":756,"dontUpdatePosition":false,"id":"269f7832-658f-48f6-a13a-cb2a854cfa72"},{"x":12312,"y":756,"width":72,"height":72,"isGround":false,"objectType":"solid-block","dragMode":false,"log":false,"isNew":false,"originalX":12312,"originalY":756,"dontUpdatePosition":false,"id":"cb5cf82c-1e36-4d92-9218-55a6b4d25424"},{"x":12312,"y":828,"width":72,"height":72,"isGround":false,"objectType":"solid-block","dragMode":false,"log":false,"isNew":false,"originalX":12312,"originalY":828,"dontUpdatePosition":false,"id":"8070b730-d214-49f9-9df4-0ff70b2bd69a"},{"x":12312,"y":684,"width":72,"height":72,"isGround":false,"objectType":"solid-block","dragMode":false,"log":false,"isNew":false,"originalX":12312,"originalY":684,"dontUpdatePosition":false,"id":"58697737-4a0e-4a99-aa8b-37ec3b47696b"},{"x":10116,"y":576,"width":72,"height":72,"isGround":false,"objectType":"Brick","dragMode":false,"log":false,"isNew":false,"originalX":10116,"originalY":576,"dontUpdatePosition":false,"id":"c410b784-c9c2-41c1-a1b9-45cc886e1aaa"},{"x":10044,"y":576,"width":72,"height":72,"isGround":false,"objectType":"Brick","dragMode":false,"log":false,"isNew":false,"originalX":10044,"originalY":576,"dontUpdatePosition":false,"id":"55c0b410-3a2a-4ffc-a6cc-d8fd92101d03"},{"x":10122.050000000001,"y":491.5500086198321,"width":200,"height":95,"isGround":false,"objectType":"cannon","dragMode":false,"log":false,"isNew":false,"originalX":10122.050000000001,"originalY":491.5500086194249,"dontUpdatePosition":false,"id":"40342b0d-50a5-45dd-824a-11a98bdb7e51","lottieId":"86ea5f97-6e87-4702-a0b5-e157de225c21","lastFire":"2024-12-20T04:15:37.085Z","timeBetweenFire":3000},{"x":2592,"y":226,"width":576,"height":72,"isGround":false,"objectType":"i-beam","dragMode":false,"log":false,"isNew":false,"originalX":2592,"originalY":226,"dontUpdatePosition":false,"id":"5cc41a66-63c6-4af9-92ed-5c2cadf13ed1","initialX":2592,"initialY":226,"moveDistance":600,"moveSpeed":1.5,"stationaryWait":4,"newlyCreated":false,"frame":0,"frameCount":4,"delayCount":0},{"x":10260,"y":504,"width":72,"height":72,"isGround":false,"objectType":"solid-block","dragMode":false,"log":false,"isNew":false,"originalX":10260,"originalY":504,"dontUpdatePosition":false,"id":"3ea7907d-e34d-4a82-a2ef-819d1ed7bf1e"},{"x":2376,"y":36,"width":72,"height":72,"isGround":false,"objectType":"ceiling-spike","dragMode":false,"log":false,"isNew":false,"originalX":2376,"originalY":36,"dontUpdatePosition":false,"id":"11e53d85-2f0b-4e5a-bdc2-abf170a17a2d"},{"x":2448,"y":0,"width":72,"height":72,"isGround":false,"objectType":"ceiling-spike","dragMode":false,"log":false,"isNew":false,"originalX":2448,"originalY":0,"dontUpdatePosition":false,"id":"79e5c95b-f1be-4769-9c24-64db4e444e4d"},{"x":2556,"y":36,"width":72,"height":72,"isGround":false,"objectType":"ceiling-spike","dragMode":false,"log":false,"isNew":false,"originalX":2556,"originalY":36,"dontUpdatePosition":false,"id":"0e6cb59e-5ab6-40bc-bb89-34aaa81ed3ff"},{"x":3888,"y":0,"width":72,"height":72,"isGround":false,"objectType":"ceiling-spike","dragMode":false,"log":false,"isNew":false,"originalX":3888,"originalY":0,"dontUpdatePosition":false,"id":"d6f4bf2b-bee7-4bae-9f1e-a5da8262fd2f"},{"x":3960,"y":0,"width":72,"height":72,"isGround":false,"objectType":"ceiling-spike","dragMode":false,"log":false,"isNew":false,"originalX":3960,"originalY":0,"dontUpdatePosition":false,"id":"99846e31-a220-483c-9f95-c51e94d3a3ee"},{"x":4032,"y":0,"width":72,"height":72,"isGround":false,"objectType":"ceiling-spike","dragMode":false,"log":false,"isNew":false,"originalX":4032,"originalY":0,"dontUpdatePosition":false,"id":"5ae726d9-1504-4d30-95c3-9bfd405f7208"},{"x":6012,"y":36,"width":72,"height":72,"isGround":false,"objectType":"ceiling-spike","dragMode":false,"log":false,"isNew":false,"originalX":6012,"originalY":36,"dontUpdatePosition":false,"id":"27666638-810a-4e9d-b2ce-b71bc254d7d5"},{"x":5940,"y":0,"width":72,"height":72,"isGround":false,"objectType":"ceiling-spike","dragMode":false,"log":false,"isNew":false,"originalX":5940,"originalY":0,"dontUpdatePosition":false,"id":"b07ad126-9b9c-464f-9a67-97e776b8c444"},{"x":5000,"y":0,"width":72,"height":72,"isGround":false,"objectType":"ceiling-spike","dragMode":false,"log":false,"isNew":false,"originalX":5000,"originalY":0,"dontUpdatePosition":false,"id":"fed33843-40a2-4999-a068-e674c5e6528c"},{"x":8172,"y":72,"width":72,"height":72,"isGround":false,"objectType":"ceiling-spike","dragMode":false,"log":false,"isNew":false,"originalX":8172,"originalY":72,"dontUpdatePosition":false,"id":"be54f7d5-ae2d-4f53-8ebc-568ff3a0867d"},{"x":8100,"y":0,"width":72,"height":72,"isGround":false,"objectType":"ceiling-spike","dragMode":false,"log":false,"isNew":false,"originalX":8100,"originalY":0,"dontUpdatePosition":false,"id":"bc98d83e-6b85-48be-bcc4-3c0bcfb95590"},{"x":8244,"y":72,"width":72,"height":72,"isGround":false,"objectType":"ceiling-spike","dragMode":false,"log":false,"isNew":false,"originalX":8244,"originalY":72,"dontUpdatePosition":false,"id":"fab4385e-79c4-49cc-86e0-eb15514c782b"},{"x":8568,"y":72,"width":72,"height":72,"isGround":false,"objectType":"ceiling-spike","dragMode":false,"log":false,"isNew":false,"originalX":8568,"originalY":72,"dontUpdatePosition":false,"id":"803d40fd-57e2-4fb4-a438-79d481016fd7"},{"x":14868,"y":396,"width":72,"height":72,"isGround":false,"objectType":"Drill","dragMode":false,"log":false,"isNew":false,"originalX":14868,"originalY":396,"dontUpdatePosition":false,"id":"155446e3-0b0f-4595-9081-f738efb8da95"},{"x":14995.689542934622,"y":777.3350004166671,"width":95.43,"height":95.43,"isGround":false,"objectType":"Ram","dragMode":false,"log":true,"isNew":false,"originalX":14675.715,"originalY":777.3350004000004,"dontUpdatePosition":false,"id":"30e4faad-8107-44f7-af20-b5a1b0b44c11","speedX":-5,"applyGravity":false,"isGrounded":false,"moveSprite":true,"moveDirection":"Left","initialX":14675.715,"initialY":777.3350004000004,"moveDistance":300,"moveSpeed":5,"lottieId":"93b7ecb1-e2e0-4a22-816d-31198f4cbc77","stationaryWait":0.5,"newlyCreated":false,"frame":2,"frameCount":5,"delayCount":5},{"x":12492,"y":756,"width":72,"height":72,"isGround":false,"objectType":"Hammer","dragMode":false,"log":false,"isNew":false,"originalX":12492,"originalY":756,"dontUpdatePosition":false,"id":"4b293361-50a8-4f83-92bc-bc3c724272dd"},{"x":2988,"y":108,"width":72,"height":72,"isGround":false,"objectType":"Brick","dragMode":false,"log":false,"isNew":false,"originalX":2988,"originalY":108,"dontUpdatePosition":false,"id":"158b588f-f5e6-4cba-9236-eb1d9b3db35a"},{"x":10188,"y":576,"width":72,"height":72,"isGround":false,"objectType":"Brick","dragMode":false,"log":false,"isNew":false,"originalX":10188,"originalY":576,"dontUpdatePosition":false,"id":"cd67d096-e01a-4c8e-b35b-303499acd36d"},{"x":10260,"y":576,"width":72,"height":72,"isGround":false,"objectType":"Brick","dragMode":false,"log":false,"isNew":false,"originalX":10260,"originalY":576,"dontUpdatePosition":false,"id":"5dacb75f-583c-4bc2-ba1e-8fba9dd77369"},{"x":10332,"y":576,"width":72,"height":72,"isGround":false,"objectType":"Brick","dragMode":false,"log":false,"isNew":false,"originalX":10332,"originalY":576,"dontUpdatePosition":false,"id":"24610087-1787-4af1-81cb-5b5df114271c"},{"x":9360,"y":288,"width":72,"height":72,"isGround":false,"objectType":"solid-block","dragMode":false,"log":false,"isNew":false,"originalX":9360,"originalY":288,"dontUpdatePosition":false,"id":"ae1e8bc5-4130-4ffd-b9b8-3bca15a71754"},{"x":10296,"y":180,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":10296,"originalY":180,"dontUpdatePosition":false,"id":"49e6d142-bd6b-4644-aeb9-43982bc0fb9a","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":10044,"y":108,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":10044,"originalY":108,"dontUpdatePosition":false,"id":"8c17f649-77d9-4165-b110-bb937151fa1b","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":9972,"y":108,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":9972,"originalY":108,"dontUpdatePosition":false,"id":"dfd0cb4e-82b6-4b72-8123-023fe6134f97","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":5004,"y":108,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":5004,"originalY":108,"dontUpdatePosition":false,"id":"4ac5dd23-8ce9-4b73-8faa-b20ee235b48c","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":5112,"y":324,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":5112,"originalY":324,"dontUpdatePosition":false,"id":"76b01772-bb70-40aa-b2af-63e0acf5af4f","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":4968,"y":324,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":4968,"originalY":324,"dontUpdatePosition":false,"id":"c6366f02-90bd-450c-96fd-5dbb8f19d554","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":5040,"y":324,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":5040,"originalY":324,"dontUpdatePosition":false,"id":"d1c4062d-5961-4ba5-87c1-1164e48987a0","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":5040,"y":180,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":5040,"originalY":180,"dontUpdatePosition":false,"id":"86a84507-1933-48d0-bf80-a347f1f674ce","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":5004,"y":252,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":5004,"originalY":252,"dontUpdatePosition":false,"id":"a2d4af08-5bbc-4937-bcf3-ad32d53e4293","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":5148,"y":252,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":5148,"originalY":252,"dontUpdatePosition":false,"id":"aa947b26-4211-4389-831c-0f97cdf15402","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":10512,"y":36,"width":72,"height":72,"isGround":false,"objectType":"Wrench","dragMode":false,"log":false,"isNew":false,"originalX":10512,"originalY":36,"dontUpdatePosition":false,"id":"17a71cfc-df24-4257-bc84-1792440d2d42"},{"x":5112,"y":180,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":5112,"originalY":180,"dontUpdatePosition":false,"id":"e7cd616a-5d53-4d03-908f-4f1b322361d7","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":5184,"y":180,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":5184,"originalY":180,"dontUpdatePosition":false,"id":"6dc9a348-1e48-47d4-b056-b1629b11d197","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":5076,"y":108,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":5076,"originalY":108,"dontUpdatePosition":false,"id":"19524788-c70a-4ed9-8990-9fa650de2281","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":4968,"y":180,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":4968,"originalY":180,"dontUpdatePosition":false,"id":"ca778f60-9116-4686-accd-11f8fd513000","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":5076,"y":252,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":5076,"originalY":252,"dontUpdatePosition":false,"id":"adf2b431-d390-4b47-933d-6ba3992cd7a0","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":1367.4,"y":539.4,"width":72.8,"height":72.8,"isGround":false,"objectType":"jet-pack-mystery-block","dragMode":false,"log":false,"isNew":false,"originalX":1367.4,"originalY":539.4,"dontUpdatePosition":false,"id":"d08b7ab7-39f9-4e22-9ef0-cd5ff5d9a33b","empty":true},{"x":1764,"y":540,"width":72,"height":72,"isGround":false,"objectType":"solid-block","dragMode":false,"log":false,"isNew":false,"originalX":1764,"originalY":540,"dontUpdatePosition":false,"id":"4dd618ef-def5-4a85-80d0-a1b5c83f9fdd"},{"x":1836,"y":540,"width":72,"height":72,"isGround":false,"objectType":"solid-block","dragMode":false,"log":false,"isNew":false,"originalX":1836,"originalY":540,"dontUpdatePosition":false,"id":"32aae95c-395d-48dc-b8a0-83bd59971218"},{"x":2106.5,"y":383,"width":323,"height":34,"isGround":false,"objectType":"riser","dragMode":false,"log":false,"isNew":false,"originalX":2106.5,"originalY":303,"dontUpdatePosition":false,"id":"3cb2a432-bc15-4ab8-ad2f-cd51a9ffc328","initialX":2106.5,"initialY":303,"moveDistance":400,"moveSpeed":4,"downMoveSpeed":15,"stationaryWait":1000,"newlyCreated":false,"frame":0,"frameCount":4,"delayCount":0,"sign":-1,"waiting":false},{"x":3323,"y":820.5,"width":100,"height":125,"isGround":false,"objectType":"fire-vent","dragMode":false,"log":false,"isNew":false,"originalX":3323,"originalY":820.5,"dontUpdatePosition":false,"id":"2dcd0071-c637-45c4-8bdb-7be82939ca9a","lottieId":"4fbe1b9b-3d08-4912-8212-bf06384cb46f","timeBetweenFires":5000,"fireTime":5000,"lastFireTime":"2024-12-20T04:15:39.086Z","fireStartTime":"2024-12-20T04:15:04.005Z","firing":true},{"x":3491,"y":820.5,"width":100,"height":125,"isGround":false,"objectType":"fire-vent","dragMode":false,"log":false,"isNew":false,"originalX":3491,"originalY":820.5,"dontUpdatePosition":false,"id":"636a75b8-654c-485e-9d32-36581280eea0","lottieId":"4bf50776-603f-4f0f-914e-0ab56025bb38","timeBetweenFires":5000,"fireTime":5000,"lastFireTime":"2024-12-20T04:15:39.086Z","fireStartTime":"2024-12-20T04:15:04.006Z","firing":true},{"x":3661,"y":822.5,"width":100,"height":125,"isGround":false,"objectType":"fire-vent","dragMode":false,"log":false,"isNew":false,"originalX":3661,"originalY":822.5,"dontUpdatePosition":false,"id":"e1fcf777-49bb-4bc2-819b-039129dded0d","lottieId":"e03eabe7-fd73-4869-b8f3-c8fce6fe2cec","timeBetweenFires":5000,"fireTime":5000,"lastFireTime":"2024-12-20T04:15:39.086Z","fireStartTime":"2024-12-20T04:15:04.006Z","firing":true},{"x":3780,"y":792,"width":72,"height":72,"isGround":false,"objectType":"spike-brick","dragMode":false,"log":false,"isNew":false,"originalX":3780,"originalY":792,"dontUpdatePosition":false,"id":"a68776c9-6184-4db6-995f-bb9325983ea7"},{"x":3852,"y":792,"width":72,"height":72,"isGround":false,"objectType":"spike-brick","dragMode":false,"log":false,"isNew":false,"originalX":3852,"originalY":792,"dontUpdatePosition":false,"id":"eec8507f-b7f7-419b-a19f-fe1e17461b47"},{"x":3924,"y":792,"width":72,"height":72,"isGround":false,"objectType":"spike-brick","dragMode":false,"log":false,"isNew":false,"originalX":3924,"originalY":792,"dontUpdatePosition":false,"id":"85aad797-48ed-4973-9226-6e1aa52741c3"},{"x":3349.5,"y":646,"width":323,"height":34,"isGround":false,"objectType":"riser","dragMode":false,"log":false,"isNew":false,"originalX":3349.5,"originalY":257,"dontUpdatePosition":false,"id":"82e27361-2f71-408d-96ec-71cabffb98e6","initialX":3349.5,"initialY":257,"moveDistance":400,"moveSpeed":4,"downMoveSpeed":15,"stationaryWait":1000,"newlyCreated":false,"frame":0,"frameCount":4,"delayCount":0,"sign":-1,"waiting":false},{"x":3790.5,"y":361,"width":323,"height":34,"isGround":false,"objectType":"riser","dragMode":false,"log":false,"isNew":false,"originalX":3790.5,"originalY":376,"dontUpdatePosition":false,"id":"c8b14e6d-c02e-4efe-ab2e-f7a2204bdc2c","initialX":3790.5,"initialY":376,"moveDistance":400,"moveSpeed":4,"downMoveSpeed":15,"stationaryWait":1000,"newlyCreated":false,"frame":0,"frameCount":4,"delayCount":0,"sign":-1,"waiting":false},{"x":4068,"y":792,"width":72,"height":72,"isGround":false,"objectType":"spike-brick","dragMode":false,"log":false,"isNew":false,"originalX":4068,"originalY":792,"dontUpdatePosition":false,"id":"577d2c50-ba20-4c19-b010-0bb40d4305c5"},{"x":3996,"y":792,"width":72,"height":72,"isGround":false,"objectType":"spike-brick","dragMode":false,"log":false,"isNew":false,"originalX":3996,"originalY":792,"dontUpdatePosition":false,"id":"ead02d2e-ea98-425c-b934-5aa0dce67c6c"},{"x":4140,"y":792,"width":72,"height":72,"isGround":false,"objectType":"spike-brick","dragMode":false,"log":false,"isNew":false,"originalX":4140,"originalY":792,"dontUpdatePosition":false,"id":"63ad21d5-02ca-4376-b579-012139106e10"},{"x":5148,"y":108,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":5148,"originalY":108,"dontUpdatePosition":false,"id":"263e9a90-cb40-4d27-b435-d9027ffeb3a5","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":5076,"y":0,"width":72,"height":72,"isGround":false,"objectType":"ceiling-spike","dragMode":false,"log":false,"isNew":false,"originalX":5076,"originalY":0,"dontUpdatePosition":false,"id":"e40fe986-7a47-4a5a-ab53-b4b2c40c9352"},{"x":5100.5,"y":646,"width":323,"height":34,"isGround":false,"objectType":"riser","dragMode":false,"log":false,"isNew":false,"originalX":5100.5,"originalY":242,"dontUpdatePosition":false,"id":"4f6e4910-5d9d-4be7-9c42-e9e54142dc86","initialX":5100.5,"initialY":242,"moveDistance":400,"moveSpeed":4,"downMoveSpeed":15,"stationaryWait":1000,"newlyCreated":false,"frame":0,"frameCount":4,"delayCount":0,"sign":-1,"waiting":false},{"x":5832,"y":522,"width":576,"height":72,"isGround":false,"objectType":"i-beam","dragMode":false,"log":false,"isNew":false,"originalX":5832,"originalY":522,"dontUpdatePosition":false,"id":"23bb95fc-03e7-4df3-8cb2-9eda61392aed","initialX":5832,"initialY":522,"moveDistance":600,"moveSpeed":1.5,"stationaryWait":4,"newlyCreated":false,"frame":0,"frameCount":4,"delayCount":0},{"x":6336,"y":522,"width":576,"height":72,"isGround":false,"objectType":"i-beam","dragMode":false,"log":false,"isNew":false,"originalX":6336,"originalY":522,"dontUpdatePosition":false,"id":"16a81ec9-73d8-4413-8543-1c4db566913b","initialX":6336,"initialY":522,"moveDistance":600,"moveSpeed":1.5,"stationaryWait":4,"newlyCreated":false,"frame":0,"frameCount":4,"delayCount":0},{"x":6840,"y":522,"width":576,"height":72,"isGround":false,"objectType":"i-beam","dragMode":false,"log":false,"isNew":false,"originalX":6840,"originalY":522,"dontUpdatePosition":false,"id":"f114cc16-af69-465b-a296-a46aa0f40cc4","initialX":6840,"initialY":522,"moveDistance":600,"moveSpeed":1.5,"stationaryWait":4,"newlyCreated":false,"frame":0,"frameCount":4,"delayCount":0},{"x":7410,"y":433.5500015928404,"width":200,"height":95,"isGround":false,"objectType":"cannon","dragMode":false,"log":false,"isNew":false,"originalX":7410,"originalY":433.56186206950554,"dontUpdatePosition":false,"id":"148e2d66-d0bf-4119-a195-f2782f9a3e3f","lottieId":"2a61480a-7ca7-4bc1-8ddb-4f0ecf2c78b1","lastFire":"2024-12-20T04:15:37.085Z","timeBetweenFire":3000},{"x":7344,"y":522,"width":576,"height":72,"isGround":false,"objectType":"i-beam","dragMode":false,"log":false,"isNew":false,"originalX":7344,"originalY":522,"dontUpdatePosition":false,"id":"96230495-d8f9-43a2-95aa-dd825a8caa6a","initialX":7344,"initialY":522,"moveDistance":600,"moveSpeed":1.5,"stationaryWait":4,"newlyCreated":false,"frame":0,"frameCount":4,"delayCount":0},{"x":7560,"y":468,"width":72,"height":72,"isGround":false,"objectType":"solid-block","dragMode":false,"log":false,"isNew":false,"originalX":7560,"originalY":468,"dontUpdatePosition":false,"id":"7d404169-e82d-42d8-95d0-131d19e82a7c"},{"x":6696,"y":288,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":6696,"originalY":288,"dontUpdatePosition":false,"id":"1e86a2d6-f0a6-4c5f-aecf-fd6250f5478b","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":4212,"y":792,"width":72,"height":72,"isGround":false,"objectType":"spike-brick","dragMode":false,"log":false,"isNew":false,"originalX":4212,"originalY":792,"dontUpdatePosition":false,"id":"ff4e79d5-e5aa-49af-a515-d1cefee5786c"},{"x":4284,"y":792,"width":72,"height":72,"isGround":false,"objectType":"spike-brick","dragMode":false,"log":false,"isNew":false,"originalX":4284,"originalY":792,"dontUpdatePosition":false,"id":"20126fdd-b03f-43f3-8edb-ea5baef003cb"},{"x":8963.5,"y":682,"width":323,"height":34,"isGround":false,"objectType":"riser","dragMode":false,"log":false,"isNew":false,"originalX":8963.5,"originalY":212,"dontUpdatePosition":false,"id":"6d357191-4a77-49ce-a0c6-e768ee215151","initialX":8963.5,"initialY":212,"moveDistance":400,"moveSpeed":4,"downMoveSpeed":15,"stationaryWait":1000,"newlyCreated":false,"frame":0,"frameCount":4,"delayCount":0,"sign":-1,"waiting":false},{"x":9864,"y":281,"width":576,"height":72,"isGround":false,"objectType":"i-beam","dragMode":false,"log":false,"isNew":false,"originalX":9864,"originalY":281,"dontUpdatePosition":false,"id":"c1d1e851-f9c4-48b1-be58-aac5fda54305","initialX":9864,"initialY":281,"moveDistance":600,"moveSpeed":1.5,"stationaryWait":4,"newlyCreated":false,"frame":0,"frameCount":4,"delayCount":0},{"x":9288,"y":288,"width":72,"height":72,"isGround":false,"objectType":"solid-block","dragMode":false,"log":false,"isNew":false,"originalX":9288,"originalY":288,"dontUpdatePosition":false,"id":"22a366ca-01fe-4349-aeeb-aed9722cae29"},{"x":9216,"y":288,"width":72,"height":72,"isGround":false,"objectType":"solid-block","dragMode":false,"log":false,"isNew":false,"originalX":9216,"originalY":288,"dontUpdatePosition":false,"id":"f5579762-b810-4edf-a0a3-52f9e98ea13a"},{"x":11121,"y":795.5,"width":100,"height":125,"isGround":false,"objectType":"fire-vent","dragMode":false,"log":false,"isNew":false,"originalX":11121,"originalY":795.5,"dontUpdatePosition":false,"id":"e1f93db3-d528-4be0-86b2-042fe7173f34","lottieId":"6f3c6768-1aee-451e-8773-ef342d317639","timeBetweenFires":5000,"fireTime":5000,"lastFireTime":"2024-12-20T04:15:39.086Z","fireStartTime":"2024-12-20T04:15:04.007Z","firing":true},{"x":11291,"y":795.5,"width":100,"height":125,"isGround":false,"objectType":"fire-vent","dragMode":false,"log":false,"isNew":false,"originalX":11291,"originalY":795.5,"dontUpdatePosition":false,"id":"ea62aa79-0286-4f03-9ce1-db7fb51807f4","lottieId":"1095273f-a1fc-48ec-a5e3-f756480e9cf7","timeBetweenFires":5000,"fireTime":5000,"lastFireTime":"2024-12-20T04:15:39.086Z","fireStartTime":"2024-12-20T04:15:04.007Z","firing":true},{"x":11455,"y":799.5,"width":100,"height":125,"isGround":false,"objectType":"fire-vent","dragMode":false,"log":false,"isNew":false,"originalX":11455,"originalY":799.5,"dontUpdatePosition":false,"id":"fd7d8a28-d434-45bd-833c-a122ca2e17ff","lottieId":"abcd9f21-9fec-4bde-abb2-c44f2f1d01b8","timeBetweenFires":5000,"fireTime":5000,"lastFireTime":"2024-12-20T04:15:39.086Z","fireStartTime":"2024-12-20T04:15:04.007Z","firing":true},{"x":11627,"y":799.5,"width":100,"height":125,"isGround":false,"objectType":"fire-vent","dragMode":false,"log":false,"isNew":false,"originalX":11627,"originalY":799.5,"dontUpdatePosition":false,"id":"e740d5aa-e216-4149-8b15-4cb9513cd17a","lottieId":"95f15c3d-f057-40af-8aee-89db3b0d5455","timeBetweenFires":5000,"fireTime":5000,"lastFireTime":"2024-12-20T04:15:39.086Z","fireStartTime":"2024-12-20T04:15:04.007Z","firing":true},{"x":12384,"y":612,"width":72,"height":72,"isGround":false,"objectType":"solid-block","dragMode":false,"log":false,"isNew":false,"originalX":12384,"originalY":612,"dontUpdatePosition":false,"id":"142d9a47-9aea-46d0-9082-1480b1b2f825"},{"x":12456,"y":540,"width":72,"height":72,"isGround":false,"objectType":"solid-block","dragMode":false,"log":false,"isNew":false,"originalX":12456,"originalY":540,"dontUpdatePosition":false,"id":"7d238565-376b-4191-a104-48ac8ca8928c"},{"x":12456,"y":612,"width":72,"height":72,"isGround":false,"objectType":"solid-block","dragMode":false,"log":false,"isNew":false,"originalX":12456,"originalY":612,"dontUpdatePosition":false,"id":"80311e59-7ed4-4669-a5b0-90fcc7ec5692"},{"x":12528,"y":540,"width":72,"height":72,"isGround":false,"objectType":"solid-block","dragMode":false,"log":false,"isNew":false,"originalX":12528,"originalY":540,"dontUpdatePosition":false,"id":"f653d8a4-473b-496a-b879-22052b89d144"},{"x":12528,"y":612,"width":72,"height":72,"isGround":false,"objectType":"solid-block","dragMode":false,"log":false,"isNew":false,"originalX":12528,"originalY":612,"dontUpdatePosition":false,"id":"7cee9521-52e0-4e04-a7b0-32b4221306d3"},{"x":12528,"y":468,"width":72,"height":72,"isGround":false,"objectType":"solid-block","dragMode":false,"log":false,"isNew":false,"originalX":12528,"originalY":468,"dontUpdatePosition":false,"id":"0cc64dd1-73f6-470a-8e4c-be0e81cb77da"},{"x":12636,"y":828,"width":72,"height":72,"isGround":false,"objectType":"solid-block","dragMode":false,"log":false,"isNew":false,"originalX":12636,"originalY":828,"dontUpdatePosition":false,"id":"b9c21b86-19a4-46db-90fe-0a6711081721"},{"x":12708,"y":828,"width":72,"height":72,"isGround":false,"objectType":"solid-block","dragMode":false,"log":false,"isNew":false,"originalX":12708,"originalY":828,"dontUpdatePosition":false,"id":"8cc16373-2292-40f7-82b4-16a103b98bad"},{"x":12780,"y":828,"width":72,"height":72,"isGround":false,"objectType":"solid-block","dragMode":false,"log":false,"isNew":false,"originalX":12780,"originalY":828,"dontUpdatePosition":false,"id":"3058f028-55bf-4968-b1a7-f937d2bf2ab6"},{"x":12708,"y":756,"width":72,"height":72,"isGround":false,"objectType":"solid-block","dragMode":false,"log":false,"isNew":false,"originalX":12708,"originalY":756,"dontUpdatePosition":false,"id":"3ef2c5e9-b9c3-458d-bcf8-abc4f7d92eea"},{"x":12780,"y":756,"width":72,"height":72,"isGround":false,"objectType":"solid-block","dragMode":false,"log":false,"isNew":false,"originalX":12780,"originalY":756,"dontUpdatePosition":false,"id":"e86ed2c5-864a-4eb7-8388-4be38e0f87ca"},{"x":12780,"y":684,"width":72,"height":72,"isGround":false,"objectType":"solid-block","dragMode":false,"log":false,"isNew":false,"originalX":12780,"originalY":684,"dontUpdatePosition":false,"id":"a6b9a96d-5157-4e7c-a223-027f00949ffe"},{"x":12312,"y":612,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":12312,"originalY":612,"dontUpdatePosition":false,"id":"f8994f05-8862-457f-ae62-0c317093340b","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":8964,"y":108,"width":72,"height":72,"isGround":false,"objectType":"Screwdriver","dragMode":false,"log":false,"isNew":false,"originalX":8964,"originalY":108,"dontUpdatePosition":false,"id":"e5afe1ba-b79f-457f-9e18-a9ae1a9c4d4d"},{"x":8820,"y":540,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":8820,"originalY":540,"dontUpdatePosition":false,"id":"1e5960a7-27fb-41c1-bf00-4d66b814fa21","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":9576,"y":180,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":9576,"originalY":180,"dontUpdatePosition":false,"id":"62ab9bba-8bf9-4252-b9b0-5442db339f1b","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":9612,"y":108,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":9612,"originalY":108,"dontUpdatePosition":false,"id":"4a208cd7-6fe9-4a21-9a1d-813c4bc6e531","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":10224,"y":180,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":10224,"originalY":180,"dontUpdatePosition":false,"id":"7224c033-1fcd-40ae-abb7-8b5c7b15aebc","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":10152,"y":180,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":10152,"originalY":180,"dontUpdatePosition":false,"id":"eec266f0-facf-4324-899d-a4e1776d7a99","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":10080,"y":180,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":10080,"originalY":180,"dontUpdatePosition":false,"id":"5cacca68-0b47-4b90-8762-7f4496e5cf2c","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":10008,"y":180,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":10008,"originalY":180,"dontUpdatePosition":false,"id":"b224f9f8-2396-414a-a94a-161da0d068b9","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":9936,"y":180,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":9936,"originalY":180,"dontUpdatePosition":false,"id":"480f3762-838f-4301-b0f4-ce5491760265","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":9864,"y":180,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":9864,"originalY":180,"dontUpdatePosition":false,"id":"d14b2cdf-e215-4480-b387-53b462fe53a5","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":9792,"y":180,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":9792,"originalY":180,"dontUpdatePosition":false,"id":"1f872d2a-bd87-4939-8794-e8670e5aa740","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":9720,"y":180,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":9720,"originalY":180,"dontUpdatePosition":false,"id":"38052065-cc72-4bba-bd3c-06903ca6669c","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":9648,"y":180,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":9648,"originalY":180,"dontUpdatePosition":false,"id":"def1bd9b-cb61-4f11-8ced-98ca9dba2072","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":9900,"y":108,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":9900,"originalY":108,"dontUpdatePosition":false,"id":"9c1e6cc5-889c-4f7e-b6b5-7e2da4377c4f","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":9828,"y":108,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":9828,"originalY":108,"dontUpdatePosition":false,"id":"6a924b9a-ff9d-41e6-91d0-86670f468df8","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":9756,"y":108,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":9756,"originalY":108,"dontUpdatePosition":false,"id":"d7bcc530-ddf1-4eb0-8a86-ab055957ada9","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":9684,"y":108,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":9684,"originalY":108,"dontUpdatePosition":false,"id":"75a93be7-6a99-4e45-a7aa-bcfc415895b3","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":10188,"y":108,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":10188,"originalY":108,"dontUpdatePosition":false,"id":"0074e022-eb6f-45bb-be8b-a811c6a6f0fb","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":10116,"y":108,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":10116,"originalY":108,"dontUpdatePosition":false,"id":"711a4bb0-be7f-4a48-90eb-0957df4e5857","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":9108,"y":108,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":9108,"originalY":108,"dontUpdatePosition":false,"id":"45ab5802-7174-4bd1-ad02-e172e47700b8","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":9108,"y":180,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":9108,"originalY":180,"dontUpdatePosition":false,"id":"ac143935-948f-411b-ada3-cde84a9fe8bb","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":8820,"y":108,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":8820,"originalY":108,"dontUpdatePosition":false,"id":"f5c4c134-50bf-4b41-963b-b3a48135670d","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":9108,"y":540,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":9108,"originalY":540,"dontUpdatePosition":false,"id":"cd5794e3-6fb4-4f6b-9a48-4557ed284669","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":8820,"y":468,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":8820,"originalY":468,"dontUpdatePosition":false,"id":"cbbf223b-b28d-4418-80d1-c02970b9aad6","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":9108,"y":396,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":9108,"originalY":396,"dontUpdatePosition":false,"id":"ca813a6a-6709-45be-afc4-b153c90a92c8","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":8820,"y":396,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":8820,"originalY":396,"dontUpdatePosition":false,"id":"781b0dea-9d17-42fe-8e69-b63d340c1c77","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":9108,"y":252,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":9108,"originalY":252,"dontUpdatePosition":false,"id":"1f26e6d0-6a75-4388-bee7-bfa7f12644c1","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":8820,"y":252,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":8820,"originalY":252,"dontUpdatePosition":false,"id":"ef679538-6c77-41d4-b2fd-1b2349328fa2","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":11304,"y":396,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":11304,"originalY":396,"dontUpdatePosition":false,"id":"2ea98db9-6714-4a81-9ae7-09350d652269","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":8820,"y":324,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":8820,"originalY":324,"dontUpdatePosition":false,"id":"14c6de33-4462-47a5-bc81-ce99d9b637dc","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":8820,"y":180,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":8820,"originalY":180,"dontUpdatePosition":false,"id":"4d0ca3e8-dfe2-466c-b91a-4e0558a7be8f","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":9108,"y":324,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":9108,"originalY":324,"dontUpdatePosition":false,"id":"0bc4e424-b295-4860-b8fd-7be6efc17847","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":9108,"y":468,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":9108,"originalY":468,"dontUpdatePosition":false,"id":"3f412290-3b14-4b74-b23f-74e879f7bb3b","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":11304,"y":324,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":11304,"originalY":324,"dontUpdatePosition":false,"id":"d0f1b80c-99b2-4e47-a83c-21a25230f966","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":11232,"y":396,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":11232,"originalY":396,"dontUpdatePosition":false,"id":"37f3d564-e517-45cb-9fdb-66f3cdab2200","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":11232,"y":324,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":11232,"originalY":324,"dontUpdatePosition":false,"id":"45e70102-a60d-4dfe-95ad-d36842981572","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":2772,"y":144,"width":72,"height":72,"isGround":false,"objectType":"Saw","dragMode":false,"log":false,"isNew":false,"originalX":2772,"originalY":144,"dontUpdatePosition":false,"id":"5ebeeacd-df32-48c1-a942-8bfd86b9dc3e"},{"x":6804,"y":216,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":6804,"originalY":216,"dontUpdatePosition":false,"id":"9fe9c613-a26e-42a1-9d5b-880a127f2cc8","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":6768,"y":288,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":6768,"originalY":288,"dontUpdatePosition":false,"id":"c8c1480a-050e-4186-a991-b28265fc52e3","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":6840,"y":288,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":6840,"originalY":288,"dontUpdatePosition":false,"id":"3f6c99fb-6a43-4d2e-95e3-231e7fd3cffb","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":6912,"y":288,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":6912,"originalY":288,"dontUpdatePosition":false,"id":"3a509d46-9dd6-43e0-bf9d-c489d6a1def4","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":6876,"y":216,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":6876,"originalY":216,"dontUpdatePosition":false,"id":"a04a8357-900e-4c96-9cca-45e91f2bd51f","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":7020,"y":216,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":7020,"originalY":216,"dontUpdatePosition":false,"id":"93c1a0eb-a470-4ad8-9dd4-fb5618ee9e50","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":6984,"y":288,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":6984,"originalY":288,"dontUpdatePosition":false,"id":"527b47db-a4ff-4aed-a54d-ec214d9603f0","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":6948,"y":216,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":6948,"originalY":216,"dontUpdatePosition":false,"id":"99c66623-2dc3-4d65-98d0-753c5d287f00","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":7056,"y":288,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":7056,"originalY":288,"dontUpdatePosition":false,"id":"d0145d7d-798c-4e9e-8dfd-b89cb13ce6b5","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":6732,"y":216,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":6732,"originalY":216,"dontUpdatePosition":false,"id":"87ad478a-d6d5-4044-903f-fdb362403d59","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":7092,"y":216,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":7092,"originalY":216,"dontUpdatePosition":false,"id":"66f40ab3-a2a4-409d-a6d9-2297d26e81f5","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":11232,"y":612,"width":72,"height":72,"isGround":false,"objectType":"Brick","dragMode":false,"log":false,"isNew":false,"originalX":11232,"originalY":612,"dontUpdatePosition":false,"id":"7c7b3daf-cb12-4c8f-9209-2d6dc95ba370"},{"x":11304,"y":612,"width":72,"height":72,"isGround":false,"objectType":"Brick","dragMode":false,"log":false,"isNew":false,"originalX":11304,"originalY":612,"dontUpdatePosition":false,"id":"e6758f06-d51c-471c-b3ea-a61fd7ccbb41"},{"x":13914,"y":823.5,"width":210,"height":75,"isGround":false,"objectType":"trampoline","dragMode":false,"log":false,"isNew":false,"originalX":13914,"originalY":823.5,"dontUpdatePosition":false,"id":"472a056a-e7b5-443a-9ea8-61058cbadd4f","lottieId":"7ba8e6b7-8f4c-47ee-b925-45a7774321f4"},{"x":12168,"y":756,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":12168,"originalY":756,"dontUpdatePosition":false,"id":"90914708-e205-49da-8d4a-fef3920f3144","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":12384,"y":540,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":12384,"originalY":540,"dontUpdatePosition":false,"id":"962c2e31-df69-424c-a925-bb3715382087","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":1209.4259199248854,"y":777.3350004166671,"width":95.43,"height":95.43,"isGround":false,"objectType":"Ram","dragMode":false,"log":true,"isNew":false,"originalX":1511.715,"originalY":795.715,"dontUpdatePosition":false,"id":"540510ee-914c-4d03-a289-ccd792e015d7","speedX":-5,"applyGravity":false,"isGrounded":false,"moveSprite":true,"moveDirection":"Left","initialX":1511.715,"initialY":795.715,"moveDistance":300,"moveSpeed":5,"lottieId":"1d28fd60-0125-49d2-a1e2-8bc78323c745","stationaryWait":0.5,"newlyCreated":false,"frame":2,"frameCount":5,"delayCount":5},{"x":12456,"y":468,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":12456,"originalY":468,"dontUpdatePosition":false,"id":"638d3bc3-6c1c-42e7-8487-0726f2b6ad54","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":12528,"y":396,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":12528,"originalY":396,"dontUpdatePosition":false,"id":"e5811a00-fecb-4c86-8552-845fe6bc829b","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":12240,"y":684,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":12240,"originalY":684,"dontUpdatePosition":false,"id":"889643c2-9974-46db-8929-bec15f918865","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":13680,"y":144,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":13680,"originalY":144,"dontUpdatePosition":false,"id":"c19ebb29-4159-4fad-9912-bf16cfc003ec","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":14040,"y":108,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":14040,"originalY":108,"dontUpdatePosition":false,"id":"3ca03c46-8b6e-4425-8548-692c9d169dbe","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":14112,"y":144,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":14112,"originalY":144,"dontUpdatePosition":false,"id":"4436df7c-1e7c-430e-8d82-bc727fc0cfcf","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":13752,"y":108,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":13752,"originalY":108,"dontUpdatePosition":false,"id":"ad748379-0258-4172-8369-2834a7ebe6c4","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":13968,"y":144,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":13968,"originalY":144,"dontUpdatePosition":false,"id":"0c9b7c3e-57a2-4a83-b216-a15dbf9861dc","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":13824,"y":144,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":13824,"originalY":144,"dontUpdatePosition":false,"id":"f46f7afb-28e8-469d-8bd4-e1f817e84171","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":13896,"y":108,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":13896,"originalY":108,"dontUpdatePosition":false,"id":"ab8ec069-9443-49bf-8912-0df4bfd44212","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":5148,"y":396,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":5148,"originalY":396,"dontUpdatePosition":false,"id":"03b3e7bd-43c0-4c72-abe1-a4d272b87fce","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":6948,"y":360,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":6948,"originalY":360,"dontUpdatePosition":false,"id":"0298c445-1b94-4e31-8407-c59f47bf5615","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":6876,"y":360,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":6876,"originalY":360,"dontUpdatePosition":false,"id":"b9a1e566-36b8-48b7-b31f-25e566e42562","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":11232,"y":468,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":11232,"originalY":468,"dontUpdatePosition":false,"id":"331c7555-39b0-4a38-9143-4c195fe5f37a","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":11304,"y":468,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":11304,"originalY":468,"dontUpdatePosition":false,"id":"8c65c39f-e25a-4feb-8e14-935c29a1efbf","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":5184,"y":324,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":5184,"originalY":324,"dontUpdatePosition":false,"id":"7fce8274-496f-4698-8a31-00e1553324d3","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":6804,"y":360,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":6804,"originalY":360,"dontUpdatePosition":false,"id":"3dff921b-d0f6-4243-b5d5-51e0fc2e10a3","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":6732,"y":360,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":6732,"originalY":360,"dontUpdatePosition":false,"id":"0f6e1df7-78cf-47b4-91da-40634477fca9","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":7020,"y":360,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":7020,"originalY":360,"dontUpdatePosition":false,"id":"410c3641-eb0d-45b2-9b3b-91a171072eaf","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":7092,"y":360,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":7092,"originalY":360,"dontUpdatePosition":false,"id":"a60e7440-9268-4854-bc8d-43082162adeb","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":5184,"y":468,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":5184,"originalY":468,"dontUpdatePosition":false,"id":"3212aaf6-9ab3-4af0-b78f-33d06e3074da","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":9972,"y":576,"width":72,"height":72,"isGround":false,"objectType":"Brick","dragMode":false,"log":false,"isNew":false,"originalX":9972,"originalY":576,"dontUpdatePosition":false,"id":"31944a1c-08f1-4098-ba81-1de2f142ee7d"},{"x":9900,"y":576,"width":72,"height":72,"isGround":false,"objectType":"Brick","dragMode":false,"log":false,"isNew":false,"originalX":9900,"originalY":576,"dontUpdatePosition":false,"id":"295f89d5-aba2-4694-88f7-04e0bd8f070e"},{"x":10008,"y":756,"width":72,"height":72,"isGround":false,"objectType":"dynamite","dragMode":false,"log":false,"isNew":false,"originalX":10008,"originalY":756,"dontUpdatePosition":false,"id":"4b13ecab-b267-428a-893b-62288b4375ff","lottieId":"628bf253-5117-47d7-8484-832781caabeb","playing":false},{"x":5859.75,"y":60,"width":187.5,"height":100,"isGround":false,"objectType":"Eagle","dragMode":false,"log":true,"isNew":false,"originalX":5974.75,"originalY":60,"dontUpdatePosition":false,"id":"c948f69a-00d4-4573-b0e0-c40ba1a98094","speedX":5,"applyGravity":false,"isGrounded":false,"moveSprite":true,"moveDirection":"Right","initialX":5974.75,"initialY":60,"moveDistance":600,"moveSpeed":5,"lottieId":"e0a720c8-d5df-4aa9-8532-e9f990f26f9b","stationaryWait":0.5,"newlyCreated":false,"frame":2,"frameCount":5,"delayCount":5,"lastDrop":"2024-12-20T04:15:21.037Z"},{"x":5357.06739030234,"y":777.3350004166671,"width":95.43,"height":95.43,"isGround":false,"objectType":"Ram","dragMode":false,"log":true,"isNew":false,"originalX":5258.708763711826,"originalY":777.3350004166706,"dontUpdatePosition":false,"id":"d1713d41-d47c-4a98-b1be-a55748d10ab8","speedX":-5,"applyGravity":false,"isGrounded":false,"moveSprite":true,"moveDirection":"Left","initialX":5258.708763711826,"initialY":777.3350004166706,"moveDistance":300,"moveSpeed":5,"lottieId":"9a291ae6-0f91-4ed1-a50a-86bc3523ea17","stationaryWait":0.5,"newlyCreated":false,"frame":2,"frameCount":5,"delayCount":5},{"x":7898,"y":789,"width":100,"height":150,"isGround":false,"objectType":"buzz-saw","dragMode":true,"log":false,"isNew":false,"originalX":7898,"originalY":789,"dontUpdatePosition":false,"id":"fbd5bc6b-60c5-4f48-aa47-fd935a016282","lottieId":"3cb8d46f-2390-4200-958a-f80de12073b9","sawSpinning":false},{"x":8424,"y":756,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":8424,"originalY":756,"dontUpdatePosition":false,"id":"1620fefc-960b-4dce-8432-de0d0ee5291a","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":8352,"y":756,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":8352,"originalY":756,"dontUpdatePosition":false,"id":"99e3ad0c-2e07-4d93-8104-9cab46fe40e1","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":8496,"y":756,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":8496,"originalY":756,"dontUpdatePosition":false,"id":"e72a1ac7-9e3c-4855-a4b2-4b6e69d7e189","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":8640,"y":756,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":8640,"originalY":756,"dontUpdatePosition":false,"id":"9817cede-f325-4ebe-95c5-46b3f5c27b9b","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":8568,"y":756,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":8568,"originalY":756,"dontUpdatePosition":false,"id":"0a9dd9d3-e1ae-4d40-8123-f3462567d760","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":8712,"y":756,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":8712,"originalY":756,"dontUpdatePosition":false,"id":"18480bf5-62c4-4620-8225-3f89b04179ff","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":4572,"y":756,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":4572,"originalY":756,"dontUpdatePosition":false,"id":"845432fb-cd61-4b7b-820d-9b7636e221c0","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":4428,"y":756,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":4428,"originalY":756,"dontUpdatePosition":false,"id":"b2e5ee90-c32e-4a7a-9886-dc2401e91b0f","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":4356,"y":756,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":4356,"originalY":756,"dontUpdatePosition":false,"id":"d6ddd695-13d2-43cf-a180-df947bd845ef","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":4500,"y":756,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":4500,"originalY":756,"dontUpdatePosition":false,"id":"4f8c3ac2-3845-46d2-bc11-456bb73a2c8e","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":3,"slower":2,"slowerFactor":7},{"x":5076,"y":396,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":5076,"originalY":396,"dontUpdatePosition":false,"id":"aee153f6-dfd5-4fb0-b014-8e0a233b70b9","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":8,"slower":2,"slowerFactor":7},{"x":5004,"y":396,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":5004,"originalY":396,"dontUpdatePosition":false,"id":"1833c202-6271-4418-bc69-eb5efadca229","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":8,"slower":2,"slowerFactor":7},{"x":4968,"y":468,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":4968,"originalY":468,"dontUpdatePosition":false,"id":"af5a561b-3433-4539-930c-77c203c10a2a","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":8,"slower":2,"slowerFactor":7},{"x":5112,"y":468,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":5112,"originalY":468,"dontUpdatePosition":false,"id":"faffe724-b8c5-4dd9-a24d-de0f491feddc","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":8,"slower":2,"slowerFactor":7},{"x":5040,"y":468,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":5040,"originalY":468,"dontUpdatePosition":false,"id":"d4e05889-6c45-4295-b866-843d57120e68","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":8,"slower":2,"slowerFactor":7},{"x":5076,"y":540,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":5076,"originalY":540,"dontUpdatePosition":false,"id":"feca60cd-a934-4200-b5e9-17c046854ae4","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":8,"slower":2,"slowerFactor":7},{"x":5148,"y":540,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":5148,"originalY":540,"dontUpdatePosition":false,"id":"aa8abd05-8f71-4a9f-bcbd-8653bfc8b2a2","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":8,"slower":2,"slowerFactor":7},{"x":5004,"y":540,"width":72,"height":72,"isGround":false,"objectType":"Coin","dragMode":false,"log":false,"isNew":false,"originalX":5004,"originalY":540,"dontUpdatePosition":false,"id":"37184685-431c-40e4-94dc-2f267b945302","speedX":0,"applyGravity":false,"isGrounded":false,"moveSprite":true,"frames":13,"runFrame":8,"slower":2,"slowerFactor":7}]
+[
+    {
+        "x": 80,
+        "y": 777.0500004166673,
+        "objectType": "Player2"
+    },
+    {
+        "x": 1500,
+        "y": 0,
+        "objectType": "Ground"
+    },
+    {
+        "x": 15850,
+        "y": 0,
+        "objectType": "Ground"
+    },
+    {
+        "x": 1295.4,
+        "y": 610.4,
+        "objectType": "MysteryBlock",
+        "originalX": 1295.4,
+        "originalY": 610.4,
+        "id": "390d62b9-7286-458e-8cdc-10f3195b4410"
+    },
+    {
+        "x": 1150.4,
+        "y": 610.4,
+        "objectType": "MysteryBlock",
+        "originalX": 1150.4,
+        "originalY": 610.4,
+        "id": "f4a579ab-b93a-4718-a570-625afaf90acc"
+    },
+    {
+        "x": 1077.4,
+        "y": 538.4,
+        "objectType": "MysteryBlock",
+        "originalX": 1077.4,
+        "originalY": 538.4,
+        "id": "77f5b105-e132-4d9a-94c7-bcca60de5dbc"
+    },
+    {
+        "x": 6695.4,
+        "y": 683.4,
+        "objectType": "MysteryBlock",
+        "originalX": 6695.4,
+        "originalY": 683.4,
+        "id": "843ab0c2-3bb3-4d15-a73d-3440d6db38a2"
+    },
+    {
+        "x": 6480,
+        "y": 214.4,
+        "objectType": "MysteryBlock",
+        "originalX": 6480,
+        "originalY": 214.4,
+        "id": "b60d8c33-eec9-40b6-9b91-aabf7ac598bd"
+    },
+    {
+        "x": 6587.4,
+        "y": 214.4,
+        "objectType": "MysteryBlock",
+        "originalX": 6587.4,
+        "originalY": 214.4,
+        "id": "b49f0fc7-1df6-46d7-8dca-2eb098cce1da"
+    },
+    {
+        "x": 6408,
+        "y": 214.4,
+        "objectType": "MysteryBlock",
+        "originalX": 6408,
+        "originalY": 214.4,
+        "id": "a56ccada-54c9-4ca4-b4a1-3d32e144d6a9"
+    },
+    {
+        "x": 15119.4,
+        "y": 683.4,
+        "objectType": "MysteryBlock",
+        "originalX": 15119.4,
+        "originalY": 683.4,
+        "id": "7c6396cb-8eb7-4883-9411-f8e3668726a9"
+    },
+    {
+        "x": 15191.4,
+        "y": 611.4,
+        "objectType": "MysteryBlock",
+        "originalX": 15191.4,
+        "originalY": 611.4,
+        "id": "e8a24bfa-c9e2-4732-9d04-3082fc137887"
+    },
+    {
+        "x": 14829.4,
+        "y": 465.4,
+        "objectType": "MysteryBlock",
+        "originalX": 14829.4,
+        "originalY": 465.4,
+        "id": "dcb5dd43-c181-4a1f-b065-a216c76f95ce"
+    },
+    {
+        "x": 14902.4,
+        "y": 466.4,
+        "objectType": "MysteryBlock",
+        "originalX": 14902.4,
+        "originalY": 466.4,
+        "id": "7f6d47ee-c36b-44dd-abb2-14ae79432077"
+    },
+    {
+        "x": 10542,
+        "y": 821.5,
+        "objectType": "trampoline",
+        "originalX": 10542,
+        "originalY": 821.5,
+        "id": "f29e9119-2d00-4456-b061-41174d209040"
+    },
+    {
+        "x": 12384,
+        "y": 684,
+        "objectType": "solid-block",
+        "originalX": 12384,
+        "originalY": 684,
+        "id": "45bda331-43c2-4a80-84cb-15e9e955bbd6"
+    },
+    {
+        "x": 12240,
+        "y": 828,
+        "objectType": "solid-block",
+        "originalX": 12240,
+        "originalY": 828,
+        "id": "7eec7664-2a85-4940-a398-5890ee35611b"
+    },
+    {
+        "x": 12168,
+        "y": 828,
+        "objectType": "solid-block",
+        "originalX": 12168,
+        "originalY": 828,
+        "id": "56b15120-28c7-4481-91d4-70e8a5f72fe5"
+    },
+    {
+        "x": 12240,
+        "y": 756,
+        "objectType": "solid-block",
+        "originalX": 12240,
+        "originalY": 756,
+        "id": "269f7832-658f-48f6-a13a-cb2a854cfa72"
+    },
+    {
+        "x": 12312,
+        "y": 756,
+        "objectType": "solid-block",
+        "originalX": 12312,
+        "originalY": 756,
+        "id": "cb5cf82c-1e36-4d92-9218-55a6b4d25424"
+    },
+    {
+        "x": 12312,
+        "y": 828,
+        "objectType": "solid-block",
+        "originalX": 12312,
+        "originalY": 828,
+        "id": "8070b730-d214-49f9-9df4-0ff70b2bd69a"
+    },
+    {
+        "x": 12312,
+        "y": 684,
+        "objectType": "solid-block",
+        "originalX": 12312,
+        "originalY": 684,
+        "id": "58697737-4a0e-4a99-aa8b-37ec3b47696b"
+    },
+    {
+        "x": 10116,
+        "y": 576,
+        "objectType": "Brick",
+        "originalX": 10116,
+        "originalY": 576,
+        "id": "c410b784-c9c2-41c1-a1b9-45cc886e1aaa"
+    },
+    {
+        "x": 10044,
+        "y": 576,
+        "objectType": "Brick",
+        "originalX": 10044,
+        "originalY": 576,
+        "id": "55c0b410-3a2a-4ffc-a6cc-d8fd92101d03"
+    },
+    {
+        "x": 10122.050000000001,
+        "y": 491.55000858313537,
+        "objectType": "cannon",
+        "originalX": 10122.050000000001,
+        "originalY": 491.5500086194249,
+        "id": "40342b0d-50a5-45dd-824a-11a98bdb7e51"
+    },
+    {
+        "x": 2592,
+        "y": 226,
+        "objectType": "i-beam",
+        "originalX": 2592,
+        "originalY": 226,
+        "id": "5cc41a66-63c6-4af9-92ed-5c2cadf13ed1"
+    },
+    {
+        "x": 10260,
+        "y": 504,
+        "objectType": "solid-block",
+        "originalX": 10260,
+        "originalY": 504,
+        "id": "3ea7907d-e34d-4a82-a2ef-819d1ed7bf1e"
+    },
+    {
+        "x": 2376,
+        "y": 36,
+        "objectType": "ceiling-spike",
+        "originalX": 2376,
+        "originalY": 36,
+        "id": "11e53d85-2f0b-4e5a-bdc2-abf170a17a2d"
+    },
+    {
+        "x": 2448,
+        "y": 0,
+        "objectType": "ceiling-spike",
+        "originalX": 2448,
+        "originalY": 0,
+        "id": "79e5c95b-f1be-4769-9c24-64db4e444e4d"
+    },
+    {
+        "x": 2556,
+        "y": 36,
+        "objectType": "ceiling-spike",
+        "originalX": 2556,
+        "originalY": 36,
+        "id": "0e6cb59e-5ab6-40bc-bb89-34aaa81ed3ff"
+    },
+    {
+        "x": 3888,
+        "y": 0,
+        "objectType": "ceiling-spike",
+        "originalX": 3888,
+        "originalY": 0,
+        "id": "d6f4bf2b-bee7-4bae-9f1e-a5da8262fd2f"
+    },
+    {
+        "x": 3960,
+        "y": 0,
+        "objectType": "ceiling-spike",
+        "originalX": 3960,
+        "originalY": 0,
+        "id": "99846e31-a220-483c-9f95-c51e94d3a3ee"
+    },
+    {
+        "x": 4032,
+        "y": 0,
+        "objectType": "ceiling-spike",
+        "originalX": 4032,
+        "originalY": 0,
+        "id": "5ae726d9-1504-4d30-95c3-9bfd405f7208"
+    },
+    {
+        "x": 6012,
+        "y": 36,
+        "objectType": "ceiling-spike",
+        "originalX": 6012,
+        "originalY": 36,
+        "id": "27666638-810a-4e9d-b2ce-b71bc254d7d5"
+    },
+    {
+        "x": 5940,
+        "y": 0,
+        "objectType": "ceiling-spike",
+        "originalX": 5940,
+        "originalY": 0,
+        "id": "b07ad126-9b9c-464f-9a67-97e776b8c444"
+    },
+    {
+        "x": 5000,
+        "y": 0,
+        "objectType": "ceiling-spike",
+        "originalX": 5000,
+        "originalY": 0,
+        "id": "fed33843-40a2-4999-a068-e674c5e6528c"
+    },
+    {
+        "x": 8172,
+        "y": 72,
+        "objectType": "ceiling-spike",
+        "originalX": 8172,
+        "originalY": 72,
+        "id": "be54f7d5-ae2d-4f53-8ebc-568ff3a0867d"
+    },
+    {
+        "x": 8100,
+        "y": 0,
+        "objectType": "ceiling-spike",
+        "originalX": 8100,
+        "originalY": 0,
+        "id": "bc98d83e-6b85-48be-bcc4-3c0bcfb95590"
+    },
+    {
+        "x": 8244,
+        "y": 72,
+        "objectType": "ceiling-spike",
+        "originalX": 8244,
+        "originalY": 72,
+        "id": "fab4385e-79c4-49cc-86e0-eb15514c782b"
+    },
+    {
+        "x": 8568,
+        "y": 72,
+        "objectType": "ceiling-spike",
+        "originalX": 8568,
+        "originalY": 72,
+        "id": "803d40fd-57e2-4fb4-a438-79d481016fd7"
+    },
+    {
+        "x": 14868,
+        "y": 396,
+        "objectType": "Drill",
+        "originalX": 14868,
+        "originalY": 396,
+        "id": "155446e3-0b0f-4595-9081-f738efb8da95"
+    },
+    {
+        "x": 15017.26500000005,
+        "y": 777.3350004166671,
+        "objectType": "Ram",
+        "originalX": 14675.715,
+        "originalY": 777.3350004000004,
+        "id": "30e4faad-8107-44f7-af20-b5a1b0b44c11"
+    },
+    {
+        "x": 12492,
+        "y": 756,
+        "objectType": "Hammer",
+        "originalX": 12492,
+        "originalY": 756,
+        "id": "4b293361-50a8-4f83-92bc-bc3c724272dd"
+    },
+    {
+        "x": 2988,
+        "y": 108,
+        "objectType": "Brick",
+        "originalX": 2988,
+        "originalY": 108,
+        "id": "158b588f-f5e6-4cba-9236-eb1d9b3db35a"
+    },
+    {
+        "x": 10188,
+        "y": 576,
+        "objectType": "Brick",
+        "originalX": 10188,
+        "originalY": 576,
+        "id": "cd67d096-e01a-4c8e-b35b-303499acd36d"
+    },
+    {
+        "x": 10260,
+        "y": 576,
+        "objectType": "Brick",
+        "originalX": 10260,
+        "originalY": 576,
+        "id": "5dacb75f-583c-4bc2-ba1e-8fba9dd77369"
+    },
+    {
+        "x": 10332,
+        "y": 576,
+        "objectType": "Brick",
+        "originalX": 10332,
+        "originalY": 576,
+        "id": "24610087-1787-4af1-81cb-5b5df114271c"
+    },
+    {
+        "x": 9360,
+        "y": 288,
+        "objectType": "solid-block",
+        "originalX": 9360,
+        "originalY": 288,
+        "id": "ae1e8bc5-4130-4ffd-b9b8-3bca15a71754"
+    },
+    {
+        "x": 10296,
+        "y": 180,
+        "objectType": "Coin",
+        "originalX": 10296,
+        "originalY": 180,
+        "id": "49e6d142-bd6b-4644-aeb9-43982bc0fb9a"
+    },
+    {
+        "x": 10044,
+        "y": 108,
+        "objectType": "Coin",
+        "originalX": 10044,
+        "originalY": 108,
+        "id": "8c17f649-77d9-4165-b110-bb937151fa1b"
+    },
+    {
+        "x": 9972,
+        "y": 108,
+        "objectType": "Coin",
+        "originalX": 9972,
+        "originalY": 108,
+        "id": "dfd0cb4e-82b6-4b72-8123-023fe6134f97"
+    },
+    {
+        "x": 5004,
+        "y": 108,
+        "objectType": "Coin",
+        "originalX": 5004,
+        "originalY": 108,
+        "id": "4ac5dd23-8ce9-4b73-8faa-b20ee235b48c"
+    },
+    {
+        "x": 5112,
+        "y": 324,
+        "objectType": "Coin",
+        "originalX": 5112,
+        "originalY": 324,
+        "id": "76b01772-bb70-40aa-b2af-63e0acf5af4f"
+    },
+    {
+        "x": 4968,
+        "y": 324,
+        "objectType": "Coin",
+        "originalX": 4968,
+        "originalY": 324,
+        "id": "c6366f02-90bd-450c-96fd-5dbb8f19d554"
+    },
+    {
+        "x": 5040,
+        "y": 324,
+        "objectType": "Coin",
+        "originalX": 5040,
+        "originalY": 324,
+        "id": "d1c4062d-5961-4ba5-87c1-1164e48987a0"
+    },
+    {
+        "x": 5040,
+        "y": 180,
+        "objectType": "Coin",
+        "originalX": 5040,
+        "originalY": 180,
+        "id": "86a84507-1933-48d0-bf80-a347f1f674ce"
+    },
+    {
+        "x": 5004,
+        "y": 252,
+        "objectType": "Coin",
+        "originalX": 5004,
+        "originalY": 252,
+        "id": "a2d4af08-5bbc-4937-bcf3-ad32d53e4293"
+    },
+    {
+        "x": 5148,
+        "y": 252,
+        "objectType": "Coin",
+        "originalX": 5148,
+        "originalY": 252,
+        "id": "aa947b26-4211-4389-831c-0f97cdf15402"
+    },
+    {
+        "x": 10512,
+        "y": 36,
+        "objectType": "Wrench",
+        "originalX": 10512,
+        "originalY": 36,
+        "id": "17a71cfc-df24-4257-bc84-1792440d2d42"
+    },
+    {
+        "x": 5112,
+        "y": 180,
+        "objectType": "Coin",
+        "originalX": 5112,
+        "originalY": 180,
+        "id": "e7cd616a-5d53-4d03-908f-4f1b322361d7"
+    },
+    {
+        "x": 5184,
+        "y": 180,
+        "objectType": "Coin",
+        "originalX": 5184,
+        "originalY": 180,
+        "id": "6dc9a348-1e48-47d4-b056-b1629b11d197"
+    },
+    {
+        "x": 5076,
+        "y": 108,
+        "objectType": "Coin",
+        "originalX": 5076,
+        "originalY": 108,
+        "id": "19524788-c70a-4ed9-8990-9fa650de2281"
+    },
+    {
+        "x": 4968,
+        "y": 180,
+        "objectType": "Coin",
+        "originalX": 4968,
+        "originalY": 180,
+        "id": "ca778f60-9116-4686-accd-11f8fd513000"
+    },
+    {
+        "x": 5076,
+        "y": 252,
+        "objectType": "Coin",
+        "originalX": 5076,
+        "originalY": 252,
+        "id": "adf2b431-d390-4b47-933d-6ba3992cd7a0"
+    },
+    {
+        "x": 1367.4,
+        "y": 539.4,
+        "objectType": "jet-pack-mystery-block",
+        "originalX": 1367.4,
+        "originalY": 539.4,
+        "id": "d08b7ab7-39f9-4e22-9ef0-cd5ff5d9a33b"
+    },
+    {
+        "x": 1764,
+        "y": 540,
+        "objectType": "solid-block",
+        "originalX": 1764,
+        "originalY": 540,
+        "id": "4dd618ef-def5-4a85-80d0-a1b5c83f9fdd"
+    },
+    {
+        "x": 1836,
+        "y": 540,
+        "objectType": "solid-block",
+        "originalX": 1836,
+        "originalY": 540,
+        "id": "32aae95c-395d-48dc-b8a0-83bd59971218"
+    },
+    {
+        "x": 2106.5,
+        "y": 661,
+        "objectType": "riser",
+        "originalX": 2106.5,
+        "originalY": 303,
+        "id": "3cb2a432-bc15-4ab8-ad2f-cd51a9ffc328"
+    },
+    {
+        "x": 3323,
+        "y": 820.5,
+        "objectType": "fire-vent",
+        "originalX": 3323,
+        "originalY": 820.5,
+        "id": "2dcd0071-c637-45c4-8bdb-7be82939ca9a"
+    },
+    {
+        "x": 3491,
+        "y": 820.5,
+        "objectType": "fire-vent",
+        "originalX": 3491,
+        "originalY": 820.5,
+        "id": "636a75b8-654c-485e-9d32-36581280eea0"
+    },
+    {
+        "x": 3661,
+        "y": 822.5,
+        "objectType": "fire-vent",
+        "originalX": 3661,
+        "originalY": 822.5,
+        "id": "e1fcf777-49bb-4bc2-819b-039129dded0d"
+    },
+    {
+        "x": 3780,
+        "y": 792,
+        "objectType": "spike-brick",
+        "originalX": 3780,
+        "originalY": 792,
+        "id": "a68776c9-6184-4db6-995f-bb9325983ea7"
+    },
+    {
+        "x": 3852,
+        "y": 792,
+        "objectType": "spike-brick",
+        "originalX": 3852,
+        "originalY": 792,
+        "id": "eec8507f-b7f7-419b-a19f-fe1e17461b47"
+    },
+    {
+        "x": 3924,
+        "y": 792,
+        "objectType": "spike-brick",
+        "originalX": 3924,
+        "originalY": 792,
+        "id": "85aad797-48ed-4973-9226-6e1aa52741c3"
+    },
+    {
+        "x": 3349.5,
+        "y": 672,
+        "objectType": "riser",
+        "originalX": 3349.5,
+        "originalY": 257,
+        "id": "82e27361-2f71-408d-96ec-71cabffb98e6"
+    },
+    {
+        "x": 3790.5,
+        "y": 639,
+        "objectType": "riser",
+        "originalX": 3790.5,
+        "originalY": 376,
+        "id": "c8b14e6d-c02e-4efe-ab2e-f7a2204bdc2c"
+    },
+    {
+        "x": 4068,
+        "y": 792,
+        "objectType": "spike-brick",
+        "originalX": 4068,
+        "originalY": 792,
+        "id": "577d2c50-ba20-4c19-b010-0bb40d4305c5"
+    },
+    {
+        "x": 3996,
+        "y": 792,
+        "objectType": "spike-brick",
+        "originalX": 3996,
+        "originalY": 792,
+        "id": "ead02d2e-ea98-425c-b934-5aa0dce67c6c"
+    },
+    {
+        "x": 4140,
+        "y": 792,
+        "objectType": "spike-brick",
+        "originalX": 4140,
+        "originalY": 792,
+        "id": "63ad21d5-02ca-4376-b579-012139106e10"
+    },
+    {
+        "x": 5148,
+        "y": 108,
+        "objectType": "Coin",
+        "originalX": 5148,
+        "originalY": 108,
+        "id": "263e9a90-cb40-4d27-b435-d9027ffeb3a5"
+    },
+    {
+        "x": 5076,
+        "y": 0,
+        "objectType": "ceiling-spike",
+        "originalX": 5076,
+        "originalY": 0,
+        "id": "e40fe986-7a47-4a5a-ab53-b4b2c40c9352"
+    },
+    {
+        "x": 5100.5,
+        "y": 676,
+        "objectType": "riser",
+        "originalX": 5100.5,
+        "originalY": 242,
+        "id": "4f6e4910-5d9d-4be7-9c42-e9e54142dc86"
+    },
+    {
+        "x": 5832,
+        "y": 522,
+        "objectType": "i-beam",
+        "originalX": 5832,
+        "originalY": 522,
+        "id": "23bb95fc-03e7-4df3-8cb2-9eda61392aed"
+    },
+    {
+        "x": 6336,
+        "y": 522,
+        "objectType": "i-beam",
+        "originalX": 6336,
+        "originalY": 522,
+        "id": "16a81ec9-73d8-4413-8543-1c4db566913b"
+    },
+    {
+        "x": 6840,
+        "y": 522,
+        "objectType": "i-beam",
+        "originalX": 6840,
+        "originalY": 522,
+        "id": "f114cc16-af69-465b-a296-a46aa0f40cc4"
+    },
+    {
+        "x": 7410,
+        "y": 434.36672549928824,
+        "objectType": "cannon",
+        "originalX": 7410,
+        "originalY": 433.56186206950554,
+        "id": "148e2d66-d0bf-4119-a195-f2782f9a3e3f"
+    },
+    {
+        "x": 7344,
+        "y": 522,
+        "objectType": "i-beam",
+        "originalX": 7344,
+        "originalY": 522,
+        "id": "96230495-d8f9-43a2-95aa-dd825a8caa6a"
+    },
+    {
+        "x": 7560,
+        "y": 468,
+        "objectType": "solid-block",
+        "originalX": 7560,
+        "originalY": 468,
+        "id": "7d404169-e82d-42d8-95d0-131d19e82a7c"
+    },
+    {
+        "x": 6696,
+        "y": 288,
+        "objectType": "Coin",
+        "originalX": 6696,
+        "originalY": 288,
+        "id": "1e86a2d6-f0a6-4c5f-aecf-fd6250f5478b"
+    },
+    {
+        "x": 4212,
+        "y": 792,
+        "objectType": "spike-brick",
+        "originalX": 4212,
+        "originalY": 792,
+        "id": "ff4e79d5-e5aa-49af-a515-d1cefee5786c"
+    },
+    {
+        "x": 4284,
+        "y": 792,
+        "objectType": "spike-brick",
+        "originalX": 4284,
+        "originalY": 792,
+        "id": "20126fdd-b03f-43f3-8edb-ea5baef003cb"
+    },
+    {
+        "x": 8963.5,
+        "y": 684,
+        "objectType": "riser",
+        "originalX": 8963.5,
+        "originalY": 212,
+        "id": "6d357191-4a77-49ce-a0c6-e768ee215151"
+    },
+    {
+        "x": 9864,
+        "y": 281,
+        "objectType": "i-beam",
+        "originalX": 9864,
+        "originalY": 281,
+        "id": "c1d1e851-f9c4-48b1-be58-aac5fda54305"
+    },
+    {
+        "x": 9288,
+        "y": 288,
+        "objectType": "solid-block",
+        "originalX": 9288,
+        "originalY": 288,
+        "id": "22a366ca-01fe-4349-aeeb-aed9722cae29"
+    },
+    {
+        "x": 9216,
+        "y": 288,
+        "objectType": "solid-block",
+        "originalX": 9216,
+        "originalY": 288,
+        "id": "f5579762-b810-4edf-a0a3-52f9e98ea13a"
+    },
+    {
+        "x": 11121,
+        "y": 795.5,
+        "objectType": "fire-vent",
+        "originalX": 11121,
+        "originalY": 795.5,
+        "id": "e1f93db3-d528-4be0-86b2-042fe7173f34"
+    },
+    {
+        "x": 11291,
+        "y": 795.5,
+        "objectType": "fire-vent",
+        "originalX": 11291,
+        "originalY": 795.5,
+        "id": "ea62aa79-0286-4f03-9ce1-db7fb51807f4"
+    },
+    {
+        "x": 11455,
+        "y": 799.5,
+        "objectType": "fire-vent",
+        "originalX": 11455,
+        "originalY": 799.5,
+        "id": "fd7d8a28-d434-45bd-833c-a122ca2e17ff"
+    },
+    {
+        "x": 11627,
+        "y": 799.5,
+        "objectType": "fire-vent",
+        "originalX": 11627,
+        "originalY": 799.5,
+        "id": "e740d5aa-e216-4149-8b15-4cb9513cd17a"
+    },
+    {
+        "x": 12384,
+        "y": 612,
+        "objectType": "solid-block",
+        "originalX": 12384,
+        "originalY": 612,
+        "id": "142d9a47-9aea-46d0-9082-1480b1b2f825"
+    },
+    {
+        "x": 12456,
+        "y": 540,
+        "objectType": "solid-block",
+        "originalX": 12456,
+        "originalY": 540,
+        "id": "7d238565-376b-4191-a104-48ac8ca8928c"
+    },
+    {
+        "x": 12456,
+        "y": 612,
+        "objectType": "solid-block",
+        "originalX": 12456,
+        "originalY": 612,
+        "id": "80311e59-7ed4-4669-a5b0-90fcc7ec5692"
+    },
+    {
+        "x": 12528,
+        "y": 540,
+        "objectType": "solid-block",
+        "originalX": 12528,
+        "originalY": 540,
+        "id": "f653d8a4-473b-496a-b879-22052b89d144"
+    },
+    {
+        "x": 12528,
+        "y": 612,
+        "objectType": "solid-block",
+        "originalX": 12528,
+        "originalY": 612,
+        "id": "7cee9521-52e0-4e04-a7b0-32b4221306d3"
+    },
+    {
+        "x": 12528,
+        "y": 468,
+        "objectType": "solid-block",
+        "originalX": 12528,
+        "originalY": 468,
+        "id": "0cc64dd1-73f6-470a-8e4c-be0e81cb77da"
+    },
+    {
+        "x": 12636,
+        "y": 828,
+        "objectType": "solid-block",
+        "originalX": 12636,
+        "originalY": 828,
+        "id": "b9c21b86-19a4-46db-90fe-0a6711081721"
+    },
+    {
+        "x": 12708,
+        "y": 828,
+        "objectType": "solid-block",
+        "originalX": 12708,
+        "originalY": 828,
+        "id": "8cc16373-2292-40f7-82b4-16a103b98bad"
+    },
+    {
+        "x": 12780,
+        "y": 828,
+        "objectType": "solid-block",
+        "originalX": 12780,
+        "originalY": 828,
+        "id": "3058f028-55bf-4968-b1a7-f937d2bf2ab6"
+    },
+    {
+        "x": 12708,
+        "y": 756,
+        "objectType": "solid-block",
+        "originalX": 12708,
+        "originalY": 756,
+        "id": "3ef2c5e9-b9c3-458d-bcf8-abc4f7d92eea"
+    },
+    {
+        "x": 12780,
+        "y": 756,
+        "objectType": "solid-block",
+        "originalX": 12780,
+        "originalY": 756,
+        "id": "e86ed2c5-864a-4eb7-8388-4be38e0f87ca"
+    },
+    {
+        "x": 12780,
+        "y": 684,
+        "objectType": "solid-block",
+        "originalX": 12780,
+        "originalY": 684,
+        "id": "a6b9a96d-5157-4e7c-a223-027f00949ffe"
+    },
+    {
+        "x": 12312,
+        "y": 612,
+        "objectType": "Coin",
+        "originalX": 12312,
+        "originalY": 612,
+        "id": "f8994f05-8862-457f-ae62-0c317093340b"
+    },
+    {
+        "x": 8964,
+        "y": 108,
+        "objectType": "Screwdriver",
+        "originalX": 8964,
+        "originalY": 108,
+        "id": "e5afe1ba-b79f-457f-9e18-a9ae1a9c4d4d"
+    },
+    {
+        "x": 8820,
+        "y": 540,
+        "objectType": "Coin",
+        "originalX": 8820,
+        "originalY": 540,
+        "id": "1e5960a7-27fb-41c1-bf00-4d66b814fa21"
+    },
+    {
+        "x": 9576,
+        "y": 180,
+        "objectType": "Coin",
+        "originalX": 9576,
+        "originalY": 180,
+        "id": "62ab9bba-8bf9-4252-b9b0-5442db339f1b"
+    },
+    {
+        "x": 9612,
+        "y": 108,
+        "objectType": "Coin",
+        "originalX": 9612,
+        "originalY": 108,
+        "id": "4a208cd7-6fe9-4a21-9a1d-813c4bc6e531"
+    },
+    {
+        "x": 10224,
+        "y": 180,
+        "objectType": "Coin",
+        "originalX": 10224,
+        "originalY": 180,
+        "id": "7224c033-1fcd-40ae-abb7-8b5c7b15aebc"
+    },
+    {
+        "x": 10152,
+        "y": 180,
+        "objectType": "Coin",
+        "originalX": 10152,
+        "originalY": 180,
+        "id": "eec266f0-facf-4324-899d-a4e1776d7a99"
+    },
+    {
+        "x": 10080,
+        "y": 180,
+        "objectType": "Coin",
+        "originalX": 10080,
+        "originalY": 180,
+        "id": "5cacca68-0b47-4b90-8762-7f4496e5cf2c"
+    },
+    {
+        "x": 10008,
+        "y": 180,
+        "objectType": "Coin",
+        "originalX": 10008,
+        "originalY": 180,
+        "id": "b224f9f8-2396-414a-a94a-161da0d068b9"
+    },
+    {
+        "x": 9936,
+        "y": 180,
+        "objectType": "Coin",
+        "originalX": 9936,
+        "originalY": 180,
+        "id": "480f3762-838f-4301-b0f4-ce5491760265"
+    },
+    {
+        "x": 9864,
+        "y": 180,
+        "objectType": "Coin",
+        "originalX": 9864,
+        "originalY": 180,
+        "id": "d14b2cdf-e215-4480-b387-53b462fe53a5"
+    },
+    {
+        "x": 9792,
+        "y": 180,
+        "objectType": "Coin",
+        "originalX": 9792,
+        "originalY": 180,
+        "id": "1f872d2a-bd87-4939-8794-e8670e5aa740"
+    },
+    {
+        "x": 9720,
+        "y": 180,
+        "objectType": "Coin",
+        "originalX": 9720,
+        "originalY": 180,
+        "id": "38052065-cc72-4bba-bd3c-06903ca6669c"
+    },
+    {
+        "x": 9648,
+        "y": 180,
+        "objectType": "Coin",
+        "originalX": 9648,
+        "originalY": 180,
+        "id": "def1bd9b-cb61-4f11-8ced-98ca9dba2072"
+    },
+    {
+        "x": 9900,
+        "y": 108,
+        "objectType": "Coin",
+        "originalX": 9900,
+        "originalY": 108,
+        "id": "9c1e6cc5-889c-4f7e-b6b5-7e2da4377c4f"
+    },
+    {
+        "x": 9828,
+        "y": 108,
+        "objectType": "Coin",
+        "originalX": 9828,
+        "originalY": 108,
+        "id": "6a924b9a-ff9d-41e6-91d0-86670f468df8"
+    },
+    {
+        "x": 9756,
+        "y": 108,
+        "objectType": "Coin",
+        "originalX": 9756,
+        "originalY": 108,
+        "id": "d7bcc530-ddf1-4eb0-8a86-ab055957ada9"
+    },
+    {
+        "x": 9684,
+        "y": 108,
+        "objectType": "Coin",
+        "originalX": 9684,
+        "originalY": 108,
+        "id": "75a93be7-6a99-4e45-a7aa-bcfc415895b3"
+    },
+    {
+        "x": 10188,
+        "y": 108,
+        "objectType": "Coin",
+        "originalX": 10188,
+        "originalY": 108,
+        "id": "0074e022-eb6f-45bb-be8b-a811c6a6f0fb"
+    },
+    {
+        "x": 10116,
+        "y": 108,
+        "objectType": "Coin",
+        "originalX": 10116,
+        "originalY": 108,
+        "id": "711a4bb0-be7f-4a48-90eb-0957df4e5857"
+    },
+    {
+        "x": 9108,
+        "y": 108,
+        "objectType": "Coin",
+        "originalX": 9108,
+        "originalY": 108,
+        "id": "45ab5802-7174-4bd1-ad02-e172e47700b8"
+    },
+    {
+        "x": 9108,
+        "y": 180,
+        "objectType": "Coin",
+        "originalX": 9108,
+        "originalY": 180,
+        "id": "ac143935-948f-411b-ada3-cde84a9fe8bb"
+    },
+    {
+        "x": 8820,
+        "y": 108,
+        "objectType": "Coin",
+        "originalX": 8820,
+        "originalY": 108,
+        "id": "f5c4c134-50bf-4b41-963b-b3a48135670d"
+    },
+    {
+        "x": 9108,
+        "y": 540,
+        "objectType": "Coin",
+        "originalX": 9108,
+        "originalY": 540,
+        "id": "cd5794e3-6fb4-4f6b-9a48-4557ed284669"
+    },
+    {
+        "x": 8820,
+        "y": 468,
+        "objectType": "Coin",
+        "originalX": 8820,
+        "originalY": 468,
+        "id": "cbbf223b-b28d-4418-80d1-c02970b9aad6"
+    },
+    {
+        "x": 9108,
+        "y": 396,
+        "objectType": "Coin",
+        "originalX": 9108,
+        "originalY": 396,
+        "id": "ca813a6a-6709-45be-afc4-b153c90a92c8"
+    },
+    {
+        "x": 8820,
+        "y": 396,
+        "objectType": "Coin",
+        "originalX": 8820,
+        "originalY": 396,
+        "id": "781b0dea-9d17-42fe-8e69-b63d340c1c77"
+    },
+    {
+        "x": 9108,
+        "y": 252,
+        "objectType": "Coin",
+        "originalX": 9108,
+        "originalY": 252,
+        "id": "1f26e6d0-6a75-4388-bee7-bfa7f12644c1"
+    },
+    {
+        "x": 8820,
+        "y": 252,
+        "objectType": "Coin",
+        "originalX": 8820,
+        "originalY": 252,
+        "id": "ef679538-6c77-41d4-b2fd-1b2349328fa2"
+    },
+    {
+        "x": 11304,
+        "y": 396,
+        "objectType": "Coin",
+        "originalX": 11304,
+        "originalY": 396,
+        "id": "2ea98db9-6714-4a81-9ae7-09350d652269"
+    },
+    {
+        "x": 8820,
+        "y": 324,
+        "objectType": "Coin",
+        "originalX": 8820,
+        "originalY": 324,
+        "id": "14c6de33-4462-47a5-bc81-ce99d9b637dc"
+    },
+    {
+        "x": 8820,
+        "y": 180,
+        "objectType": "Coin",
+        "originalX": 8820,
+        "originalY": 180,
+        "id": "4d0ca3e8-dfe2-466c-b91a-4e0558a7be8f"
+    },
+    {
+        "x": 9108,
+        "y": 324,
+        "objectType": "Coin",
+        "originalX": 9108,
+        "originalY": 324,
+        "id": "0bc4e424-b295-4860-b8fd-7be6efc17847"
+    },
+    {
+        "x": 9108,
+        "y": 468,
+        "objectType": "Coin",
+        "originalX": 9108,
+        "originalY": 468,
+        "id": "3f412290-3b14-4b74-b23f-74e879f7bb3b"
+    },
+    {
+        "x": 11304,
+        "y": 324,
+        "objectType": "Coin",
+        "originalX": 11304,
+        "originalY": 324,
+        "id": "d0f1b80c-99b2-4e47-a83c-21a25230f966"
+    },
+    {
+        "x": 11232,
+        "y": 396,
+        "objectType": "Coin",
+        "originalX": 11232,
+        "originalY": 396,
+        "id": "37f3d564-e517-45cb-9fdb-66f3cdab2200"
+    },
+    {
+        "x": 11232,
+        "y": 324,
+        "objectType": "Coin",
+        "originalX": 11232,
+        "originalY": 324,
+        "id": "45e70102-a60d-4dfe-95ad-d36842981572"
+    },
+    {
+        "x": 2772,
+        "y": 144,
+        "objectType": "Saw",
+        "originalX": 2772,
+        "originalY": 144,
+        "id": "5ebeeacd-df32-48c1-a942-8bfd86b9dc3e"
+    },
+    {
+        "x": 6804,
+        "y": 216,
+        "objectType": "Coin",
+        "originalX": 6804,
+        "originalY": 216,
+        "id": "9fe9c613-a26e-42a1-9d5b-880a127f2cc8"
+    },
+    {
+        "x": 6768,
+        "y": 288,
+        "objectType": "Coin",
+        "originalX": 6768,
+        "originalY": 288,
+        "id": "c8c1480a-050e-4186-a991-b28265fc52e3"
+    },
+    {
+        "x": 6840,
+        "y": 288,
+        "objectType": "Coin",
+        "originalX": 6840,
+        "originalY": 288,
+        "id": "3f6c99fb-6a43-4d2e-95e3-231e7fd3cffb"
+    },
+    {
+        "x": 6912,
+        "y": 288,
+        "objectType": "Coin",
+        "originalX": 6912,
+        "originalY": 288,
+        "id": "3a509d46-9dd6-43e0-bf9d-c489d6a1def4"
+    },
+    {
+        "x": 6876,
+        "y": 216,
+        "objectType": "Coin",
+        "originalX": 6876,
+        "originalY": 216,
+        "id": "a04a8357-900e-4c96-9cca-45e91f2bd51f"
+    },
+    {
+        "x": 7020,
+        "y": 216,
+        "objectType": "Coin",
+        "originalX": 7020,
+        "originalY": 216,
+        "id": "93c1a0eb-a470-4ad8-9dd4-fb5618ee9e50"
+    },
+    {
+        "x": 6984,
+        "y": 288,
+        "objectType": "Coin",
+        "originalX": 6984,
+        "originalY": 288,
+        "id": "527b47db-a4ff-4aed-a54d-ec214d9603f0"
+    },
+    {
+        "x": 6948,
+        "y": 216,
+        "objectType": "Coin",
+        "originalX": 6948,
+        "originalY": 216,
+        "id": "99c66623-2dc3-4d65-98d0-753c5d287f00"
+    },
+    {
+        "x": 7056,
+        "y": 288,
+        "objectType": "Coin",
+        "originalX": 7056,
+        "originalY": 288,
+        "id": "d0145d7d-798c-4e9e-8dfd-b89cb13ce6b5"
+    },
+    {
+        "x": 6732,
+        "y": 216,
+        "objectType": "Coin",
+        "originalX": 6732,
+        "originalY": 216,
+        "id": "87ad478a-d6d5-4044-903f-fdb362403d59"
+    },
+    {
+        "x": 7092,
+        "y": 216,
+        "objectType": "Coin",
+        "originalX": 7092,
+        "originalY": 216,
+        "id": "66f40ab3-a2a4-409d-a6d9-2297d26e81f5"
+    },
+    {
+        "x": 11232,
+        "y": 612,
+        "objectType": "Brick",
+        "originalX": 11232,
+        "originalY": 612,
+        "id": "7c7b3daf-cb12-4c8f-9209-2d6dc95ba370"
+    },
+    {
+        "x": 11304,
+        "y": 612,
+        "objectType": "Brick",
+        "originalX": 11304,
+        "originalY": 612,
+        "id": "e6758f06-d51c-471c-b3ea-a61fd7ccbb41"
+    },
+    {
+        "x": 13914,
+        "y": 823.5,
+        "objectType": "trampoline",
+        "originalX": 13914,
+        "originalY": 823.5,
+        "id": "472a056a-e7b5-443a-9ea8-61058cbadd4f"
+    },
+    {
+        "x": 12168,
+        "y": 756,
+        "objectType": "Coin",
+        "originalX": 12168,
+        "originalY": 756,
+        "id": "90914708-e205-49da-8d4a-fef3920f3144"
+    },
+    {
+        "x": 12384,
+        "y": 540,
+        "objectType": "Coin",
+        "originalX": 12384,
+        "originalY": 540,
+        "id": "962c2e31-df69-424c-a925-bb3715382087"
+    },
+    {
+        "x": 1763.8259199248905,
+        "y": 777.3350004166671,
+        "objectType": "Ram",
+        "originalX": 1511.715,
+        "originalY": 795.715,
+        "id": "540510ee-914c-4d03-a289-ccd792e015d7"
+    },
+    {
+        "x": 12456,
+        "y": 468,
+        "objectType": "Coin",
+        "originalX": 12456,
+        "originalY": 468,
+        "id": "638d3bc3-6c1c-42e7-8487-0726f2b6ad54"
+    },
+    {
+        "x": 12528,
+        "y": 396,
+        "objectType": "Coin",
+        "originalX": 12528,
+        "originalY": 396,
+        "id": "e5811a00-fecb-4c86-8552-845fe6bc829b"
+    },
+    {
+        "x": 12240,
+        "y": 684,
+        "objectType": "Coin",
+        "originalX": 12240,
+        "originalY": 684,
+        "id": "889643c2-9974-46db-8929-bec15f918865"
+    },
+    {
+        "x": 13680,
+        "y": 144,
+        "objectType": "Coin",
+        "originalX": 13680,
+        "originalY": 144,
+        "id": "c19ebb29-4159-4fad-9912-bf16cfc003ec"
+    },
+    {
+        "x": 14040,
+        "y": 108,
+        "objectType": "Coin",
+        "originalX": 14040,
+        "originalY": 108,
+        "id": "3ca03c46-8b6e-4425-8548-692c9d169dbe"
+    },
+    {
+        "x": 14112,
+        "y": 144,
+        "objectType": "Coin",
+        "originalX": 14112,
+        "originalY": 144,
+        "id": "4436df7c-1e7c-430e-8d82-bc727fc0cfcf"
+    },
+    {
+        "x": 13752,
+        "y": 108,
+        "objectType": "Coin",
+        "originalX": 13752,
+        "originalY": 108,
+        "id": "ad748379-0258-4172-8369-2834a7ebe6c4"
+    },
+    {
+        "x": 13968,
+        "y": 144,
+        "objectType": "Coin",
+        "originalX": 13968,
+        "originalY": 144,
+        "id": "0c9b7c3e-57a2-4a83-b216-a15dbf9861dc"
+    },
+    {
+        "x": 13824,
+        "y": 144,
+        "objectType": "Coin",
+        "originalX": 13824,
+        "originalY": 144,
+        "id": "f46f7afb-28e8-469d-8bd4-e1f817e84171"
+    },
+    {
+        "x": 13896,
+        "y": 108,
+        "objectType": "Coin",
+        "originalX": 13896,
+        "originalY": 108,
+        "id": "ab8ec069-9443-49bf-8912-0df4bfd44212"
+    },
+    {
+        "x": 5148,
+        "y": 396,
+        "objectType": "Coin",
+        "originalX": 5148,
+        "originalY": 396,
+        "id": "03b3e7bd-43c0-4c72-abe1-a4d272b87fce"
+    },
+    {
+        "x": 6948,
+        "y": 360,
+        "objectType": "Coin",
+        "originalX": 6948,
+        "originalY": 360,
+        "id": "0298c445-1b94-4e31-8407-c59f47bf5615"
+    },
+    {
+        "x": 6876,
+        "y": 360,
+        "objectType": "Coin",
+        "originalX": 6876,
+        "originalY": 360,
+        "id": "b9a1e566-36b8-48b7-b31f-25e566e42562"
+    },
+    {
+        "x": 11232,
+        "y": 468,
+        "objectType": "Coin",
+        "originalX": 11232,
+        "originalY": 468,
+        "id": "331c7555-39b0-4a38-9143-4c195fe5f37a"
+    },
+    {
+        "x": 11304,
+        "y": 468,
+        "objectType": "Coin",
+        "originalX": 11304,
+        "originalY": 468,
+        "id": "8c65c39f-e25a-4feb-8e14-935c29a1efbf"
+    },
+    {
+        "x": 5184,
+        "y": 324,
+        "objectType": "Coin",
+        "originalX": 5184,
+        "originalY": 324,
+        "id": "7fce8274-496f-4698-8a31-00e1553324d3"
+    },
+    {
+        "x": 6804,
+        "y": 360,
+        "objectType": "Coin",
+        "originalX": 6804,
+        "originalY": 360,
+        "id": "3dff921b-d0f6-4243-b5d5-51e0fc2e10a3"
+    },
+    {
+        "x": 6732,
+        "y": 360,
+        "objectType": "Coin",
+        "originalX": 6732,
+        "originalY": 360,
+        "id": "0f6e1df7-78cf-47b4-91da-40634477fca9"
+    },
+    {
+        "x": 7020,
+        "y": 360,
+        "objectType": "Coin",
+        "originalX": 7020,
+        "originalY": 360,
+        "id": "410c3641-eb0d-45b2-9b3b-91a171072eaf"
+    },
+    {
+        "x": 7092,
+        "y": 360,
+        "objectType": "Coin",
+        "originalX": 7092,
+        "originalY": 360,
+        "id": "a60e7440-9268-4854-bc8d-43082162adeb"
+    },
+    {
+        "x": 5184,
+        "y": 468,
+        "objectType": "Coin",
+        "originalX": 5184,
+        "originalY": 468,
+        "id": "3212aaf6-9ab3-4af0-b78f-33d06e3074da"
+    },
+    {
+        "x": 9972,
+        "y": 576,
+        "objectType": "Brick",
+        "originalX": 9972,
+        "originalY": 576,
+        "id": "31944a1c-08f1-4098-ba81-1de2f142ee7d"
+    },
+    {
+        "x": 9900,
+        "y": 576,
+        "objectType": "Brick",
+        "originalX": 9900,
+        "originalY": 576,
+        "id": "295f89d5-aba2-4694-88f7-04e0bd8f070e"
+    },
+    {
+        "x": 10008,
+        "y": 756,
+        "objectType": "dynamite",
+        "originalX": 10008,
+        "originalY": 756,
+        "id": "4b13ecab-b267-428a-893b-62288b4375ff"
+    },
+    {
+        "x": 6524.75,
+        "y": 60,
+        "objectType": "Eagle",
+        "originalX": 5974.75,
+        "originalY": 60,
+        "id": "c948f69a-00d4-4573-b0e0-c40ba1a98094"
+    },
+    {
+        "x": 5600.258763711813,
+        "y": 777.3350004166671,
+        "objectType": "Ram",
+        "originalX": 5258.708763711826,
+        "originalY": 777.3350004166706,
+        "id": "d1713d41-d47c-4a98-b1be-a55748d10ab8"
+    },
+    {
+        "x": 7898,
+        "y": 789,
+        "objectType": "buzz-saw",
+        "originalX": 7898,
+        "originalY": 789,
+        "id": "fbd5bc6b-60c5-4f48-aa47-fd935a016282"
+    },
+    {
+        "x": 8424,
+        "y": 756,
+        "objectType": "Coin",
+        "originalX": 8424,
+        "originalY": 756,
+        "id": "1620fefc-960b-4dce-8432-de0d0ee5291a"
+    },
+    {
+        "x": 8352,
+        "y": 756,
+        "objectType": "Coin",
+        "originalX": 8352,
+        "originalY": 756,
+        "id": "99e3ad0c-2e07-4d93-8104-9cab46fe40e1"
+    },
+    {
+        "x": 8496,
+        "y": 756,
+        "objectType": "Coin",
+        "originalX": 8496,
+        "originalY": 756,
+        "id": "e72a1ac7-9e3c-4855-a4b2-4b6e69d7e189"
+    },
+    {
+        "x": 8640,
+        "y": 756,
+        "objectType": "Coin",
+        "originalX": 8640,
+        "originalY": 756,
+        "id": "9817cede-f325-4ebe-95c5-46b3f5c27b9b"
+    },
+    {
+        "x": 8568,
+        "y": 756,
+        "objectType": "Coin",
+        "originalX": 8568,
+        "originalY": 756,
+        "id": "0a9dd9d3-e1ae-4d40-8123-f3462567d760"
+    },
+    {
+        "x": 8712,
+        "y": 756,
+        "objectType": "Coin",
+        "originalX": 8712,
+        "originalY": 756,
+        "id": "18480bf5-62c4-4620-8225-3f89b04179ff"
+    },
+    {
+        "x": 4572,
+        "y": 756,
+        "objectType": "Coin",
+        "originalX": 4572,
+        "originalY": 756,
+        "id": "845432fb-cd61-4b7b-820d-9b7636e221c0"
+    },
+    {
+        "x": 4428,
+        "y": 756,
+        "objectType": "Coin",
+        "originalX": 4428,
+        "originalY": 756,
+        "id": "b2e5ee90-c32e-4a7a-9886-dc2401e91b0f"
+    },
+    {
+        "x": 4356,
+        "y": 756,
+        "objectType": "Coin",
+        "originalX": 4356,
+        "originalY": 756,
+        "id": "d6ddd695-13d2-43cf-a180-df947bd845ef"
+    },
+    {
+        "x": 4500,
+        "y": 756,
+        "objectType": "Coin",
+        "originalX": 4500,
+        "originalY": 756,
+        "id": "4f8c3ac2-3845-46d2-bc11-456bb73a2c8e"
+    },
+    {
+        "x": 5076,
+        "y": 396,
+        "objectType": "Coin",
+        "originalX": 5076,
+        "originalY": 396,
+        "id": "aee153f6-dfd5-4fb0-b014-8e0a233b70b9"
+    },
+    {
+        "x": 5004,
+        "y": 396,
+        "objectType": "Coin",
+        "originalX": 5004,
+        "originalY": 396,
+        "id": "1833c202-6271-4418-bc69-eb5efadca229"
+    },
+    {
+        "x": 4968,
+        "y": 468,
+        "objectType": "Coin",
+        "originalX": 4968,
+        "originalY": 468,
+        "id": "af5a561b-3433-4539-930c-77c203c10a2a"
+    },
+    {
+        "x": 5112,
+        "y": 468,
+        "objectType": "Coin",
+        "originalX": 5112,
+        "originalY": 468,
+        "id": "faffe724-b8c5-4dd9-a24d-de0f491feddc"
+    },
+    {
+        "x": 5040,
+        "y": 468,
+        "objectType": "Coin",
+        "originalX": 5040,
+        "originalY": 468,
+        "id": "d4e05889-6c45-4295-b866-843d57120e68"
+    },
+    {
+        "x": 5076,
+        "y": 540,
+        "objectType": "Coin",
+        "originalX": 5076,
+        "originalY": 540,
+        "id": "feca60cd-a934-4200-b5e9-17c046854ae4"
+    },
+    {
+        "x": 5148,
+        "y": 540,
+        "objectType": "Coin",
+        "originalX": 5148,
+        "originalY": 540,
+        "id": "aa8abd05-8f71-4a9f-bcbd-8653bfc8b2a2"
+    },
+    {
+        "x": 5004,
+        "y": 540,
+        "objectType": "Coin",
+        "originalX": 5004,
+        "originalY": 540,
+        "id": "37184685-431c-40e4-94dc-2f267b945302"
+    }
+]

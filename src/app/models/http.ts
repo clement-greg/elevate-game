@@ -29,15 +29,34 @@ export class HTTP {
                     resolve(true);
                 }
             }
-            http.send(JSON.stringify(data,HTTP.replacer));
+            http.send(JSON.stringify(data, HTTP.replacer));
         });
     }
 
     static replacer(key, value) {
-        if(key === 'body' || key === 'frictionTop' || key === 'groundSprite' || key === 'engine' || key === 'parts' || key === 'parent' || key === 'collision' || key === 'eagle') {
+        if (key === 'body' || key === 'frictionTop' || key === 'groundSprite' || key === 'engine' || key === 'parts' || key === 'parent' || key === 'collision' || key === 'eagle') {
             return undefined;
         }
 
         return value;
+    }
+
+    static spriteReplacer(key, value) {
+        if (Array.isArray(value)) {
+            return value;
+        }
+
+        // Array items have a key that is numeric but still a string
+        const intRegEx = /^\d+$/gm;
+        if(intRegEx.test(key)) {
+            return value;
+        }
+
+        const keys = ['x', 'y', 'id', 'originalX', 'originalY', 'objectType'];
+        if(keys.indexOf(key) > -1) {
+            return value;
+        }
+
+        return undefined;
     }
 }

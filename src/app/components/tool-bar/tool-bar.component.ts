@@ -1,4 +1,4 @@
-import { Component, NgZone, OnDestroy } from '@angular/core';
+import { Component, inject, NgZone, OnDestroy } from '@angular/core';
 import { GameProviderService } from '../../services/game-provider.service';
 import { Brick, SolidBlock } from '../../models/brick';
 import { MysteryBlock } from '../../models/mystery-block';
@@ -31,16 +31,17 @@ import { Riser } from '../../models/riser';
 import { Eagle } from '../../models/eagle';
 import { ChoiceBrick } from '../../models/choice';
 import { BuzzSaw } from '../../models/buzz-saw';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-tool-bar',
   standalone: true,
-  imports: [CommonModule, MatExpansionModule, MatButtonModule],
+  imports: [CommonModule, MatExpansionModule, MatButtonModule, MatSnackBarModule],
   templateUrl: './tool-bar.component.html',
   styleUrl: './tool-bar.component.scss'
 })
 export class ToolBarComponent implements OnDestroy {
-
+  private _snackBar = inject(MatSnackBar);
   game: Game;
   constructor(private gameProvider: GameProviderService,
     private zone: NgZone
@@ -203,7 +204,9 @@ export class ToolBarComponent implements OnDestroy {
 
   async save() {
 
-    const striped: GameSprite[] = JSON.parse(JSON.stringify(this.game.gameSprites, HTTP.replacer));
+    const jsonString = JSON.stringify(this.game.gameSprites, HTTP.spriteReplacer);
+
+    let striped: GameSprite[] = JSON.parse(jsonString);
 
     for (const item of striped) {
       delete item.domObject;
@@ -211,23 +214,26 @@ export class ToolBarComponent implements OnDestroy {
       delete (item as any).pubsub;
     }
 
+    striped = striped.filter(i => i.objectType !== 'Player2' && i.objectType !== 'Ground');
+
     const ids = striped.filter(i => i.id).map(i => i.id);
     const itemsToBringBack = this.game.originalSprites.filter(i => i.id && ids.indexOf(i.id) === -1);
     for (const itemToBringBack of itemsToBringBack) {
       striped.push(itemToBringBack);
     }
 
-    navigator.clipboard.writeText(JSON.stringify(striped));
+    navigator.clipboard.writeText(JSON.stringify(striped, HTTP.spriteReplacer));
+    this._snackBar.open('JSON Copied');
 
-    const link = document.createElement('a');
-    link.setAttribute('download', 'level1.json');
-    link.href = this.makeFile();
-    document.body.appendChild(link);
-    window.requestAnimationFrame(() => {
-      const evt = new MouseEvent('click');
-      link.dispatchEvent(evt);
-      document.body.removeChild(link);
-    });
+    // const link = document.createElement('a');
+    // link.setAttribute('download', 'level1.json');
+    // link.href = this.makeFile();
+    // document.body.appendChild(link);
+    // window.requestAnimationFrame(() => {
+    //   const evt = new MouseEvent('click');
+    //   link.dispatchEvent(evt);
+    //   document.body.removeChild(link);
+    // });
   }
 
   private textFile = null;
