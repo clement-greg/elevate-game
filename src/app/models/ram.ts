@@ -33,7 +33,7 @@ export class Ram extends MoveableObject {
         Body.setMass(this.body, 100000);
         this.initialX = x;
         this.initialY = y;
-        ramDiv.innerHTML = `<lottie-player  autoplay="true" loop  id="${this.lottieId}" background="transparent" src="https://lottie.host/5fa4b884-5c3e-4f04-b90c-38d8b1475ff1/Ki2NB41wG4.json"></lottie-player>`
+        ramDiv.innerHTML = `<lottie-player  autoplay="true" loop  id="${this.lottieId}" background="transparent" src="https://lottie.host/5fa4b884-5c3e-4f04-b90c-38d8b1475ff1/Ki2NB41wG4.json"></lottie-player>`;
 
         //
     }

@@ -37,6 +37,7 @@ import { Riser } from './riser';
 import { Eagle } from './eagle';
 import { EagleDropping } from './eagle-dropping';
 import { ChoiceBrick } from './choice';
+import { BuzzSaw } from './buzz-saw';
 
 var Engine = Matter.Engine,
     MatterWorld = Matter.World,
@@ -489,6 +490,9 @@ export class Game {
             } else if (sprite.objectType === 'choice-brick') {
                 const newSprite = new ChoiceBrick(this.engine, sprite.originalX, sprite.originalY);
                 this.initializeSprite(sprite, newSprite);
+            } else if (sprite.objectType === 'buzz-saw') {
+                const newSprite = new BuzzSaw(this.engine, sprite.originalX, sprite.originalY);
+                this.initializeSprite(sprite, newSprite);
             }
         }
 
@@ -515,7 +519,7 @@ export class Game {
     }
 
     private colletableLabels = ['saw', 'wrench', 'hammer', 'screwdriver', 'drill', 'coin'];
-    private enemyLabels = ['spike-ball', 'man-hole', 'eagle', 'choice-brick'];
+    private enemyLabels = ['spike-ball', 'man-hole', 'eagle', 'choice-brick' ];
     private impactObjectsLabels = ['trampoline', 'riser', 'cannon-ball', 'spike-brick', 'dynamite', 'eagle-dropping', 'ceiling-spike', 'cannon', 'Ram', 'Brick', 'i-beam', 'brick-top', 'mystery-top', 'jet-pack-mystery-block', 'Ice', 'Mystery', 'log-short', 'log', 'solid-block', 'fire-vent', 'flame-thrower-mystery-block'];
     private flameTargetLabels = ['spike-ball', 'Ram', 'dynamite', 'cannon-ball', 'eagle'];
 
@@ -988,9 +992,38 @@ Check the fine print. Unlimited is not unlimited when there are out of pocket co
 Their coverage will leave you feeling crushed.
                             ` });
                         break;
-                        break;
                     case 'eagle':
                         break;
+                }
+            }
+        }
+
+        const buzzSawCollision = playerCollisions.find(i=>i.bodyA.label === 'buzz-saw' || i.bodyB.label === 'buzz-saw');
+
+        if(buzzSawCollision) {
+            const buzzSawBody = buzzSawCollision.bodyA.label === 'Player' ? buzzSawCollision.bodyB : buzzSawCollision.bodyA;
+            const buzzSaw: BuzzSaw = this.gameSprites.find(i=>i.body === buzzSawBody);
+
+            if(buzzSaw.sawSpinning) {
+                this.loseLife();
+            } else {
+                if (buzzSawCollision.penetration.y < 0) {
+                    playSound('kill-enemy-sound');
+                    this.removeSprite(buzzSaw);
+                    let multiplier = 1;
+                    for (let i = 0; i < 5; i++) {
+                        const coin = new Coin(this.engine, buzzSaw.x, buzzSaw.y, 'static', false);
+
+                        this.addSprite(coin);
+                        coin.body.isStatic = false;
+                        Matter.Body.setStatic(coin.body, false);
+                        Matter.Body.setVelocity(coin.body, { x: 0.1 * multiplier, y: -5.3 });
+                        multiplier *= -1;
+                    }
+                    Matter.Body.applyForce(this.player2.body, { x: this.player2.body.position.x, y: this.player2.body.position.y }, { x: 0, y: -0.4 });
+                    PubSub.getInstance().publish('eli-popup', {
+                        message: `Nice Move!!!. 
+                        `});
                 }
             }
         }

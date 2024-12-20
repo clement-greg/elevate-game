@@ -386,6 +386,15 @@ font-style: normal !important;
     background-repeat: no-repeat;
 }
 
+.buzz-saw {
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+    position: absolute;
+    background-repeat: no-repeat;
+    transform: translateX(-25px);
+}
+
 .choice-brick {
     display: inline;
     width: 125px;

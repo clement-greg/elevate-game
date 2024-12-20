@@ -30,6 +30,7 @@ import { FlameThrowerMysteryBlock } from '../../models/flame-thrower-mystery-blo
 import { Riser } from '../../models/riser';
 import { Eagle } from '../../models/eagle';
 import { ChoiceBrick } from '../../models/choice';
+import { BuzzSaw } from '../../models/buzz-saw';
 
 @Component({
   selector: 'app-tool-bar',
@@ -118,6 +119,11 @@ export class ToolBarComponent implements OnDestroy {
 
   addChoiceBrick() {
     const sprite = new ChoiceBrick(this.game.engine, 0, 0);
+    this.createSprite(sprite);
+  }
+
+  addBuzzSaw() {
+    const sprite = new BuzzSaw(this.game.engine, 0, 0);
     this.createSprite(sprite);
   }
 

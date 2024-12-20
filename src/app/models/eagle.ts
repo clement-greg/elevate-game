@@ -44,7 +44,7 @@ export class Eagle extends MoveableObject {
     doDropping(game: Game) {
         if (this.isInViewport) {
             const elapsed = new Date().getTime() - this.lastDrop.getTime();
-            if (elapsed > 2000) {
+            if (elapsed > 3000) {
                 const dropping = new EagleDropping(this, game, this.body.velocity.x);
                 this.lastDrop = new Date();
                 game.addSprite(dropping);
