@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, CUSTOM_ELEMENTS_SCHEMA, Input } from '@angular/core';
 import { ToolBarComponent } from '../tool-bar/tool-bar.component';
+import { newid } from '../../models/utilities/misc-utils';
 
 @Component({
   selector: 'app-lottie-player',
@@ -17,7 +18,7 @@ export class LottiePlayerComponent implements AfterViewInit {
     @Input() loop: boolean | number = true;
     @Input() autoPlay: boolean = true;
     @Input() intermission: number = 0;
-    id = ToolBarComponent.newid();
+    id = newid();
 
     show = false;
     constructor() {

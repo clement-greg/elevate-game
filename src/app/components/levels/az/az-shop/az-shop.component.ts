@@ -8,6 +8,7 @@ import { ToolBarComponent } from '../../../tool-bar/tool-bar.component';
 import { pauseSound, playSound } from '../../../../models/utilities/sound-utils';
 import { JoystickState } from '../../../../models/utilities/joystick-state';
 import { GameInstanceManager } from '../../../../models/base/game-instance';
+import { newid } from '../../../../models/utilities/misc-utils';
 
 @Component({
   selector: 'app-nv-shop',
@@ -22,7 +23,7 @@ export class AzShopComponent implements OnDestroy {
   selectedItem: any;
   @ViewChild('player') player: LottiePlayerComponent;
   wordBubbleVisible = true;
-  id = ToolBarComponent.newid();
+  id = newid();
 
   items: Item[] = [
     {
@@ -54,11 +55,7 @@ Wander through our collection, pick your favorite, and head to checkout. Any A/C
     'R22 and R410a systems are no longer manufactured, so any upgrade in on side of a split system will create incompatibility on the other side.',
     'That unfortunately means more cost to you!'
   ];
-  //   private message = `Hey Jimmy!
 
-  // Welcome to Elevate A/C! 🎉 We've got the goods to keep you cool. 🏠
-
-  // Wander through our collection, pick your favorite, and head to checkout. Any A/C unit will do, but here’s a tip: the fancier the A/C, the bigger the smiles. 😊✨`;
   purchased = false;
 
   joystickState = new JoystickState(0);
@@ -174,7 +171,6 @@ Wander through our collection, pick your favorite, and head to checkout. Any A/C
       setTimeout(() => {
         this.statements = [`Thanks for your purchase.  Come again soon.`];
         this.statementNumber = 0;
-        //this.message = `Thanks for your purchase.  Come again soon.`;
         this.doWords();
         GameInstanceManager.getInstance().gameHUD.coinCount = GameInstanceManager.getInstance().gameHUD.coinCount - (this.selectedItem.price / 20);
         setTimeout(() => this.dialogRef.close(), 2500);

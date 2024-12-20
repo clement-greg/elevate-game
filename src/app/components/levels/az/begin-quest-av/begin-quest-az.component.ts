@@ -4,6 +4,7 @@ import { LottiePlayerComponent } from '../../../lottie-player/lottie-player.comp
 import { PressAComponent } from '../../../press-a/press-a.component';
 import { pauseSound, playSound } from '../../../../models/utilities/sound-utils';
 import { CommonModule } from '@angular/common';
+import { newid } from '../../../../models/utilities/misc-utils';
 
 @Component({
   selector: 'app-begin-quest-az',
@@ -22,7 +23,7 @@ Guess what? Your A/C has decided to take an early retirement, and you're going t
   The new A2L incompatabilities are going to end up costing you thousands. 💰💰💰💰`,
     `Oh, and look out for the old school warranty guys. Sketchy out of pocket costs, contract loopholes and plan limits could end up costing you thousands on a 'Covered' warranty claim😡😡😡😡😡`
   ];
-  id = ToolBarComponent.newid();
+  id = newid();
   statementNumber = 0;
   showA = false;
 

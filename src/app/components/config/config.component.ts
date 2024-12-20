@@ -31,7 +31,6 @@ export class ConfigComponent {
   ]
 
   save() {
-
     Config.setInstance(this.config);
     this.dialogRef.close(true);
   }

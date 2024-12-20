@@ -5,10 +5,11 @@ declare var Matter: any;
 import { ToolBarComponent } from "../../components/tool-bar/tool-bar.component";
 import { playSound } from "../utilities/sound-utils";
 import { GameSprite } from "../base/game-sprite";
+import { newid } from "../utilities/misc-utils";
 
 export class Cannon extends GameSprite {
 
-    lottieId = ToolBarComponent.newid();
+    lottieId = newid();
     lastFire: Date = new Date();
     timeBetweenFire = 3000;
 

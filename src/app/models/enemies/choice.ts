@@ -4,6 +4,7 @@ import { ToolBarComponent } from "../../components/tool-bar/tool-bar.component";
 import { playSound } from "../utilities/sound-utils";
 import { GameSprite } from "../base/game-sprite";
 import { World } from "../environment/world";
+import { newid } from "../utilities/misc-utils";
 declare var Matter: any;
 
 export class ChoiceBrick extends GameSprite {
@@ -19,7 +20,7 @@ export class ChoiceBrick extends GameSprite {
     delayCount = 0;
     sign = 1;
     waiting = false;
-    lottieId = ToolBarComponent.newid();
+    lottieId = newid();
 
     constructor(engine, x, y) {
         // 1.16 ratio

@@ -3,6 +3,7 @@ import { LottiePlayerComponent } from '../lottie-player/lottie-player.component'
 import { ToolBarComponent } from '../tool-bar/tool-bar.component';
 import { CommonModule } from '@angular/common';
 import { pauseSound, playSound } from '../../models/utilities/sound-utils';
+import { newid } from '../../models/utilities/misc-utils';
 
 @Component({
   selector: 'app-eli-popup',
@@ -14,7 +15,7 @@ import { pauseSound, playSound } from '../../models/utilities/sound-utils';
 export class EliPopupComponent implements OnChanges {
 
   @Input() message: string;
-  id: string = ToolBarComponent.newid();
+  id: string = newid();
   wordBubbleVisible = false; lastVoice = new Date(2020, 1, 1);
   @ViewChild('player') player: LottiePlayerComponent;
   @Output() messageComplete: EventEmitter<boolean> = new EventEmitter();

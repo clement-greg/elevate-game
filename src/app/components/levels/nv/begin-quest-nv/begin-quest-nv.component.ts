@@ -3,6 +3,7 @@ import { ToolBarComponent } from '../../../tool-bar/tool-bar.component';
 import { LottiePlayerComponent } from '../../../lottie-player/lottie-player.component';
 import { PressAComponent } from '../../../press-a/press-a.component';
 import { pauseSound, playSound } from '../../../../models/utilities/sound-utils';
+import { newid } from '../../../../models/utilities/misc-utils';
 
 @Component({
   selector: 'app-begin-quest-nv',
@@ -19,7 +20,7 @@ export class BeginQuestNvComponent implements OnDestroy {
 Guess what? It's nothing but cold showers for you, your water heater is officially on strike! My toolkit is doing a fantastic job of hiding from me! If you can gather my runaway tools and snag a brand-new water heater from the store, I’ll be right there to work my magic.`,
     `Oh, and look out for the old school warranty guys. Working with them will only bring you pain😡😡😡😡😡`
   ];
-  id = ToolBarComponent.newid();
+  id = newid();
   statementNumber = 0;
 
   @ViewChild('lottiePlayer') lottiePlayer: LottiePlayerComponent;

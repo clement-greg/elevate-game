@@ -8,6 +8,7 @@ import { ToolBarComponent } from '../../../tool-bar/tool-bar.component';
 import { pauseSound, playSound } from '../../../../models/utilities/sound-utils';
 import { JoystickState } from '../../../../models/utilities/joystick-state';
 import { GameInstanceManager } from '../../../../models/base/game-instance';
+import { newid } from '../../../../models/utilities/misc-utils';
 
 @Component({
   selector: 'app-shop',
@@ -22,7 +23,7 @@ export class ShopComponent implements OnDestroy {
   selectedItem: any;
   @ViewChild('player') player: LottiePlayerComponent;
   wordBubbleVisible = true;
-  id = ToolBarComponent.newid();
+  id = newid();
 
   items: Item[] = [
     {

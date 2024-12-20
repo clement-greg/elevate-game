@@ -31,6 +31,7 @@ import { Eagle } from '../../models/enemies/eagle';
 import { ChoiceBrick } from '../../models/enemies/choice';
 import { BuzzSaw } from '../../models/enemies/buzz-saw';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { newid } from '../../models/utilities/misc-utils';
 
 @Component({
   selector: 'app-tool-bar',
@@ -269,16 +270,16 @@ export class ToolBarComponent implements OnDestroy {
     }
     sprite.isNew = true;
     this.addDoubleClickHandler(sprite, this.game);
-    sprite.id = ToolBarComponent.newid();
+    sprite.id = newid();
   }
 
-  public static newid() {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
-      const r = Math.random() * 16 | 0;
-      const v = c === 'x' ? r : (r & 0x3 | 0x8);
-      return v.toString(16);
-    });
-  }
+  // public static newid() {
+  //   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+  //     const r = Math.random() * 16 | 0;
+  //     const v = c === 'x' ? r : (r & 0x3 | 0x8);
+  //     return v.toString(16);
+  //   });
+  // }
 
   addDoubleClickHandler(sprite, game: Game) {
     sprite.domObject.addEventListener('dblclick', e => {

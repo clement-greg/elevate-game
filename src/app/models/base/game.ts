@@ -38,6 +38,7 @@ import { Eagle } from '../enemies/eagle';
 import { EagleDropping } from '../enemies/eagle-dropping';
 import { ChoiceBrick } from '../enemies/choice';
 import { BuzzSaw } from '../enemies/buzz-saw';
+import { newid } from '../utilities/misc-utils';
 
 var Engine = Matter.Engine,
     MatterWorld = Matter.World,
@@ -399,7 +400,7 @@ export class Game {
     initializeSprite(template: GameSprite, instance: GameSprite) {
         instance.x = template.originalX;
         instance.y = template.originalY;
-        instance.id = template.id ?? ToolBarComponent.newid();
+        instance.id = template.id ?? newid();
         instance.originalX = template.originalX;
         instance.originalY = template.originalY;
         this.addSprite(instance);

@@ -1,9 +1,9 @@
-import { ToolBarComponent } from "../../components/tool-bar/tool-bar.component";
 import { GameSprite } from "../base/game-sprite";
+import { newid } from "../utilities/misc-utils";
 
 export class Dynamite extends GameSprite {
 
-    lottieId = ToolBarComponent.newid();
+    lottieId = newid();
     playing = false;
     constructor(engine, x, y) {
         super(engine, x, y, 72, 72);
@@ -14,7 +14,6 @@ export class Dynamite extends GameSprite {
         this.body.isStatic = true;
         this.body.friction = 0;
         this.body.label = 'dynamite';
-        //this.id = ToolBarComponent.newid();
         this.objectType = 'dynamite';
         div.innerHTML = `<div style="position: absolute; width: 400px; height: 400px; margin-top: -147px;margin-left: -166px"><lottie-player speed="2" id="${this.lottieId}" background="transparent" src="https://lottie.host/738cd3df-d2aa-4870-93aa-9f77afea25b7/hElPz5c5rN.json"></lottie-player></div>`
     }

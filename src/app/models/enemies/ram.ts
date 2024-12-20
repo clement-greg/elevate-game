@@ -2,6 +2,7 @@ declare var Matter: any;
 import { ToolBarComponent } from "../../components/tool-bar/tool-bar.component";
 import { Config } from "../utilities/config";
 import { MoveableObject } from "../base/moveable-object";
+import { newid } from "../utilities/misc-utils";
 var Engine = Matter.Engine,
     MatterWorld = Matter.World,
     Bodies = Matter.Bodies,
@@ -16,7 +17,7 @@ export class Ram extends MoveableObject {
     initialY;
     moveDistance = 300;
     moveSpeed = 5;
-    lottieId = ToolBarComponent.newid();
+    lottieId = newid();
     stationaryWait = .5;
     newlyCreated = false;
     frame = 0;

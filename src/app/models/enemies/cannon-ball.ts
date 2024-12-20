@@ -2,10 +2,11 @@ declare var Matter: any;
 import { ToolBarComponent } from "../../components/tool-bar/tool-bar.component";
 import { Config } from "../utilities/config";
 import { MoveableObject } from "../base/moveable-object";
+import { newid } from "../utilities/misc-utils";
 
 export class CannonBall extends MoveableObject {
 
-    lottieId = ToolBarComponent.newid();
+    lottieId = newid();
     lastFire: Date = new Date();
     timeBetweenFire = 6000;
     timeout: any;

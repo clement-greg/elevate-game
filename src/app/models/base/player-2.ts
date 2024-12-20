@@ -11,6 +11,7 @@ import { Config } from '../utilities/config';
 import { GameInstanceManager } from './game-instance';
 import { GameSprite } from './game-sprite';
 import { PubSub } from '../utilities/pub-sub';
+import { newid } from '../utilities/misc-utils';
 
 export class Player2 extends GameSprite {
     //keyboardHandler;
@@ -23,8 +24,8 @@ export class Player2 extends GameSprite {
     pubsub;
     isGrounded = false;
     subscriptionEvents: any;
-    lottieId = ToolBarComponent.newid();
-    flameThrowerId = ToolBarComponent.newid();
+    lottieId = newid();
+    flameThrowerId = newid();
     accelerating = false;
     dead: boolean;
     flameBody: any;

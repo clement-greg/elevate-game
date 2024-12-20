@@ -3,6 +3,7 @@ import { LottiePlayerComponent } from '../../../lottie-player/lottie-player.comp
 import { PressAComponent } from '../../../press-a/press-a.component';
 import { ToolBarComponent } from '../../../tool-bar/tool-bar.component';
 import { pauseSound, playSound } from '../../../../models/utilities/sound-utils';
+import { newid } from '../../../../models/utilities/misc-utils';
 
 
 @Component({
@@ -22,7 +23,7 @@ Guess what? Your fridge has decided to take an early retirement, and my toolkit 
 But hurry—those snacks won’t stay fresh forever! 🍏🍦🚀`,
     `Oh, and look out for the old school warranty guys. Working with them will only bring you pain😡😡😡😡😡`
   ];
-  id = ToolBarComponent.newid();
+  id = newid();
   statementNumber = 0;
 
   @ViewChild('lottiePlayer') lottiePlayer: LottiePlayerComponent;

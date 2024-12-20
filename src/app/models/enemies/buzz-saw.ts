@@ -1,10 +1,11 @@
 import { ToolBarComponent } from "../../components/tool-bar/tool-bar.component";
 import { playSound } from "../utilities/sound-utils";
 import { GameSprite } from "../base/game-sprite";
+import { newid } from "../utilities/misc-utils";
 
 export class BuzzSaw extends GameSprite {
 
-    lottieId = ToolBarComponent.newid();
+    lottieId = newid();
     // 
     sawSpinning = false;
 

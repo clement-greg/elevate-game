@@ -3,6 +3,7 @@ import { Eagle } from "./eagle";
 import { Game } from "../base/game";
 import { MoveableObject } from "../base/moveable-object";
 import { World } from "../environment/world";
+import { newid } from "../utilities/misc-utils";
 declare var Matter: any;
 var Engine = Matter.Engine,
     MatterWorld = Matter.World,
@@ -12,7 +13,7 @@ var Engine = Matter.Engine,
 
 export class EagleDropping extends MoveableObject {
 
-    lottieId = ToolBarComponent.newid();
+    lottieId = newid();
     lastY: number = 0;
 
 

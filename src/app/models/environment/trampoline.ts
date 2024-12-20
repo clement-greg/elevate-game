@@ -1,9 +1,9 @@
-import { ToolBarComponent } from "../../components/tool-bar/tool-bar.component";
 import { GameSprite } from "../base/game-sprite";
+import { newid } from "../utilities/misc-utils";
 
 export class Trampoline extends GameSprite {
 
-    lottieId = ToolBarComponent.newid();
+    lottieId = newid();
     constructor(engine, x, y) {
         super(engine, x, y, 210, 75);
         const div = document.createElement('div');

@@ -1,12 +1,12 @@
 
 
-import { ToolBarComponent } from "../../components/tool-bar/tool-bar.component";
 import { GameSprite } from "../base/game-sprite";
+import { newid } from "../utilities/misc-utils";
 declare var Matter: any;
 
 
 export class FireVent extends GameSprite {
-    lottieId = ToolBarComponent.newid();
+    lottieId = newid();
     timeBetweenFires = 5000;
     fireTime = 5000;
     lastFireTime = new Date();

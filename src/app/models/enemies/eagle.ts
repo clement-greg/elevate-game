@@ -6,6 +6,7 @@ import { Config } from "../utilities/config";
 import { EagleDropping } from "./eagle-dropping";
 import { Game } from "../base/game";
 import { MoveableObject } from "../base/moveable-object";
+import { newid } from "../utilities/misc-utils";
 var Engine = Matter.Engine,
     MatterWorld = Matter.World,
     Bodies = Matter.Bodies,
@@ -17,7 +18,7 @@ export class Eagle extends MoveableObject {
     initialY;
     moveDistance = 600;
     moveSpeed = 5;
-    lottieId = ToolBarComponent.newid();
+    lottieId = newid();
     stationaryWait = .5;
     newlyCreated = false;
     frame = 0;

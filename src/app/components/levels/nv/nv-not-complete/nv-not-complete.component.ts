@@ -3,6 +3,7 @@ import { LottiePlayerComponent } from '../../../lottie-player/lottie-player.comp
 import { PressAComponent } from '../../../press-a/press-a.component';
 import { ToolBarComponent } from '../../../tool-bar/tool-bar.component';
 import { pauseSound, playSound } from '../../../../models/utilities/sound-utils';
+import { newid } from '../../../../models/utilities/misc-utils';
 
 
 @Component({
@@ -16,7 +17,7 @@ export class NvNotCompleteComponent implements OnDestroy {
   private message = `You're not done yet!
   
   Collect all the tools and then buy a refrigerator.  Once your done with those two things, come back here.`;
-  id = ToolBarComponent.newid();
+  id = newid();
 
   @ViewChild('lottiePlayer') lottiePlayer :LottiePlayerComponent;
 
