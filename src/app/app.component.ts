@@ -3,17 +3,17 @@ import { Level1Component } from './components/levels/ut/ut-level/ut-level.compon
 import { CommonModule } from '@angular/common';
 import { TitleScreenComponent } from './components/title-screen/title-screen.component';
 import { GameWonComponent } from './components/game-won/game-won.component';
-import { PubSub } from './models/pub-sub';
+import { PubSub } from './models/utilities/pub-sub';
 import { GameLostComponent } from './components/game-lost/game-lost.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfigComponent } from './components/config/config.component';
-import { Config } from './models/config';
-import { JoystickState } from './models/joystick-state';
+import { Config } from './models/utilities/config';
+import { JoystickState } from './models/utilities/joystick-state';
 import { LocationChooserComponent } from './components/location-chooser/location-chooser.component';
 import { NvLevelComponent } from './components/levels/nv/nv-level/nv-level.component';
-import { GameInstanceManager } from './models/game-instance';
+import { GameInstanceManager } from './models/base/game-instance';
 import { AzLevelComponent } from './components/levels/az/az-level/az-level.component';
-import { EliPopupComponent } from './eli-popup/eli-popup.component';
+import { EliPopupComponent } from './components/eli-popup/eli-popup.component';
 
 @Component({
   selector: 'app-root',

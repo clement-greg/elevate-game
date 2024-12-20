@@ -2,7 +2,7 @@ import { Component, OnDestroy, ViewChild } from '@angular/core';
 import { ToolBarComponent } from '../../../tool-bar/tool-bar.component';
 import { LottiePlayerComponent } from '../../../lottie-player/lottie-player.component';
 import { PressAComponent } from '../../../press-a/press-a.component';
-import { pauseSound, playSound } from '../../../../utilities/sound-utils';
+import { pauseSound, playSound } from '../../../../models/utilities/sound-utils';
 import { CommonModule } from '@angular/common';
 
 @Component({

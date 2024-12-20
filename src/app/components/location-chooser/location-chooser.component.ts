@@ -1,8 +1,8 @@
 import { Component, HostListener, inject, OnDestroy } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { JoystickState } from '../../models/joystick-state';
+import { JoystickState } from '../../models/utilities/joystick-state';
 import { PressAComponent } from '../press-a/press-a.component';
-import { playSound } from '../../utilities/sound-utils';
+import { playSound } from '../../models/utilities/sound-utils';
 
 @Component({
   selector: 'app-location-chooser',

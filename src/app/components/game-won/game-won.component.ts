@@ -2,8 +2,8 @@ import { Component, Input, OnDestroy } from '@angular/core';
 import { LottiePlayerComponent } from '../lottie-player/lottie-player.component';
 import { PressAComponent } from '../press-a/press-a.component';
 import { CommonModule } from '@angular/common';
-import { pauseSound, playSound } from '../../utilities/sound-utils';
-import { GameInstanceManager } from '../../models/game-instance';
+import { pauseSound, playSound } from '../../models/utilities/sound-utils';
+import { GameInstanceManager } from '../../models/base/game-instance';
 
 @Component({
   selector: 'app-game-won',

@@ -1,17 +1,17 @@
 import { Component, HostListener, Input, NgZone } from '@angular/core';
-import { Config } from '../../../../models/config';
-import { PubSub } from '../../../../models/pub-sub';
+import { Config } from '../../../../models/utilities/config';
+import { PubSub } from '../../../../models/utilities/pub-sub';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { RouterOutlet } from '@angular/router';
 import { ToolBarComponent } from '../../../tool-bar/tool-bar.component';
 import { CommonModule } from '@angular/common';
 import { HudComponent } from '../../../hud/hud.component';
 import { LottiePlayerComponent } from '../../../lottie-player/lottie-player.component';
-import { GameInstanceManager } from '../../../../models/game-instance';
+import { GameInstanceManager } from '../../../../models/base/game-instance';
 import { AzShopComponent } from '../az-shop/az-shop.component';
 import { AzNotCompleteComponent } from '../az-not-complete/az-not-complete.component';
 import { BeginQuestAzComponent } from '../begin-quest-av/begin-quest-az.component';
-import { Game } from '../../../../models/game';
+import { Game } from '../../../../models/base/game';
 
 @Component({
   selector: 'app-az-level',

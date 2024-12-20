@@ -1,17 +1,17 @@
 import { Component, HostListener, Input, NgZone } from '@angular/core';
-import { Config } from '../../../../models/config';
-import { PubSub } from '../../../../models/pub-sub';
+import { Config } from '../../../../models/utilities/config';
+import { PubSub } from '../../../../models/utilities/pub-sub';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { RouterOutlet } from '@angular/router';
 import { ToolBarComponent } from '../../../tool-bar/tool-bar.component';
 import { CommonModule } from '@angular/common';
 import { HudComponent } from '../../../hud/hud.component';
 import { LottiePlayerComponent } from '../../../lottie-player/lottie-player.component';
-import { GameInstanceManager } from '../../../../models/game-instance';
+import { GameInstanceManager } from '../../../../models/base/game-instance';
 import { BeginQuestNvComponent } from '../begin-quest-nv/begin-quest-nv.component';
 import { NvShopComponent } from '../nv-shop/nv-shop.component';
 import { NvNotCompleteComponent } from '../nv-not-complete/nv-not-complete.component';
-import { Game } from '../../../../models/game';
+import { Game } from '../../../../models/base/game';
 
 @Component({
   selector: 'app-nv-level',

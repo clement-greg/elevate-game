@@ -2,7 +2,7 @@ import { Component, Input, OnDestroy, ViewChild } from '@angular/core';
 import { LottiePlayerComponent } from '../lottie-player/lottie-player.component';
 import { PressAComponent } from '../press-a/press-a.component';
 import { CommonModule } from '@angular/common';
-import { pauseSound, playSound } from '../../utilities/sound-utils';
+import { pauseSound, playSound } from '../../models/utilities/sound-utils';
 
 @Component({
   selector: 'app-game-lost',

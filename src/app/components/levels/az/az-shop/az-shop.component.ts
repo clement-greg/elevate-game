@@ -5,9 +5,9 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { PressAComponent } from '../../../press-a/press-a.component';
 import { LottiePlayerComponent } from '../../../lottie-player/lottie-player.component';
 import { ToolBarComponent } from '../../../tool-bar/tool-bar.component';
-import { pauseSound, playSound } from '../../../../utilities/sound-utils';
-import { JoystickState } from '../../../../models/joystick-state';
-import { GameInstanceManager } from '../../../../models/game-instance';
+import { pauseSound, playSound } from '../../../../models/utilities/sound-utils';
+import { JoystickState } from '../../../../models/utilities/joystick-state';
+import { GameInstanceManager } from '../../../../models/base/game-instance';
 
 @Component({
   selector: 'app-nv-shop',

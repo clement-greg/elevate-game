@@ -5,13 +5,13 @@ import { CommonModule } from '@angular/common';
 import { HudComponent } from '../../../hud/hud.component';
 import { LottiePlayerComponent } from '../../../lottie-player/lottie-player.component';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { PubSub } from '../../../../models/pub-sub';
+import { PubSub } from '../../../../models/utilities/pub-sub';
 import { ShopComponent } from '../shop/shop.component';
 import { NotCompleteComponent } from '../not-complete/not-complete.component';
-import { Config } from '../../../../models/config';
-import { GameInstanceManager } from '../../../../models/game-instance';
+import { Config } from '../../../../models/utilities/config';
+import { GameInstanceManager } from '../../../../models/base/game-instance';
 import { BeginQuestComponent } from '../begin-quest/begin-quest.component';
-import { Game } from '../../../../models/game';
+import { Game } from '../../../../models/base/game';
 
 @Component({
   selector: 'app-ut-level',

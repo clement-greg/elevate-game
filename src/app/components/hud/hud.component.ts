@@ -1,5 +1,5 @@
 import { Component, NgZone } from '@angular/core';
-import { GameProviderService } from '../../services/game-provider.service';
+import { GameProviderService } from '../../models/services/game-provider.service';
 import { HudCoinComponent } from '../hud-coin/hud-coin.component';
 import { CommonModule } from '@angular/common';
 
