@@ -150,6 +150,9 @@ export class Game {
             case 'NV':
                 level = 'nv.json';
                 break;
+            case 'UT':
+                level = 'ut.json';
+                break;
         }
         HTTP.getData(`./assets/levels/${level}`).then(json => {
             this.setupGame(json);
@@ -519,7 +522,7 @@ export class Game {
     }
 
     private colletableLabels = ['saw', 'wrench', 'hammer', 'screwdriver', 'drill', 'coin'];
-    private enemyLabels = ['spike-ball', 'man-hole', 'eagle', 'choice-brick' ];
+    private enemyLabels = ['spike-ball', 'man-hole', 'eagle', 'choice-brick'];
     private impactObjectsLabels = ['trampoline', 'riser', 'cannon-ball', 'spike-brick', 'dynamite', 'eagle-dropping', 'ceiling-spike', 'cannon', 'Ram', 'Brick', 'i-beam', 'brick-top', 'mystery-top', 'jet-pack-mystery-block', 'Ice', 'Mystery', 'log-short', 'log', 'solid-block', 'fire-vent', 'flame-thrower-mystery-block'];
     private flameTargetLabels = ['spike-ball', 'Ram', 'dynamite', 'cannon-ball', 'eagle'];
 
@@ -998,13 +1001,13 @@ Their coverage will leave you feeling crushed.
             }
         }
 
-        const buzzSawCollision = playerCollisions.find(i=>i.bodyA.label === 'buzz-saw' || i.bodyB.label === 'buzz-saw');
+        const buzzSawCollision = playerCollisions.find(i => i.bodyA.label === 'buzz-saw' || i.bodyB.label === 'buzz-saw');
 
-        if(buzzSawCollision) {
+        if (buzzSawCollision) {
             const buzzSawBody = buzzSawCollision.bodyA.label === 'Player' ? buzzSawCollision.bodyB : buzzSawCollision.bodyA;
-            const buzzSaw: BuzzSaw = this.gameSprites.find(i=>i.body === buzzSawBody);
+            const buzzSaw: BuzzSaw = this.gameSprites.find(i => i.body === buzzSawBody);
 
-            if(buzzSaw.sawSpinning) {
+            if (buzzSaw.sawSpinning) {
                 this.loseLife();
                 this.pubSub.publish('eli-popup', {
                     message: `Ugghhhh!! 

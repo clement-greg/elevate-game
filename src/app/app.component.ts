@@ -1,5 +1,5 @@
 import { Component, HostListener, NgZone } from '@angular/core';
-import { Level1Component } from './components/levels/ut/level1/level1.component';
+import { Level1Component } from './components/levels/ut/ut-level/ut-level.component';
 import { CommonModule } from '@angular/common';
 import { TitleScreenComponent } from './components/title-screen/title-screen.component';
 import { GameWonComponent } from './components/game-won/game-won.component';
@@ -157,9 +157,6 @@ export class AppComponent {
         });
         this.locationChooserOpen = true;
       }
-
-
     }
   }
-
 }

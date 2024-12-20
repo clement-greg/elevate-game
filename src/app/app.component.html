@@ -4,7 +4,7 @@
     <app-title-screen *ngIf="!hideTitleScreen"></app-title-screen>
   </div>
   <div style="height: 100vh;width: 100vw;">
-    <app-level1 [location]="location" *ngIf="startGame && location === 'UT'"></app-level1>
+    <app-ut-level [location]="location" *ngIf="startGame && location === 'UT'"></app-ut-level>
     <app-nv-level [location]="location" *ngIf="startGame && location === 'NV'"></app-nv-level>
     <app-az-level [location]="location" *ngIf="startGame && location === 'AZ'"></app-az-level>
   </div>
@@ -19,6 +19,21 @@
 
   <app-eli-popup [message]="eliPopupMessage" (messageComplete)="showEliPopup = false"></app-eli-popup>
 </div>
+
+<audio src="/assets/sounds/chime.aac" id="chime"></audio>
+<audio src="/assets/sounds/die.aac" id="die-sound"></audio>
+<audio src="/assets/sounds/break-brick.aac" id="break-brick-sound"></audio>
+<audio src="/assets/sounds/kill-enemy.aac" id="kill-enemy-sound"></audio>
+<audio src="/assets/sounds/bounce.aac" id="bounce-sound"></audio>
+<audio src="/assets/sounds/collect-tool.aac" id="collect-tool-sound"></audio>
+<audio src="/assets/sounds/cannon.aac" [volume]=".5" id="cannon-sound"></audio>
+<audio src="/assets/sounds/select.aac" id="select-sound"></audio>
+<audio src="/assets/sounds/thrust.aac" id="thrust-sound"></audio>
+<audio src="/assets/sounds/jump.aac" id="jump-sound"></audio>
+<audio src="/assets/sounds/explosion.aac" id="explosion-sound"></audio>
+<audio src="/assets/sounds/goat.aac" id="goat-sound"></audio>
+<audio src="/assets/sounds/synth-voice-2_01.aac" [volume]=".2" id="synth-voice"></audio>
+<audio src="/assets/sounds/warning-alarm.aac" [volume]=".2" id="warning-sound-game-end"></audio>
 
 <audio src="/assets/sounds/game-over-lost.aac" id="game-over-lost-sound"></audio>
 <audio src="/assets/sounds/game-over-won.aac" id="game-over-won-sound"></audio>
