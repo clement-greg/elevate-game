@@ -5,6 +5,7 @@ export class JoystickState {
     up = false;
     right = false;
     down = false;
+    start: number;
     onLeftJoyStick: () => void;
     onRightJoyStick: () => void;
     onUpJoyStick: () => void;
@@ -72,9 +73,6 @@ export class JoystickState {
                 }
                 i++;
             }
-
-
-
             const js1 = this;
             if (js1.left && gp.axes[0] != -1) {
                 if (this.onLeftJoyStick) {
@@ -103,10 +101,6 @@ export class JoystickState {
             js1.down = gp.axes[1] === 1;
 
         }
-
-
         this.start = requestAnimationFrame(this.gameLoop.bind(this));
     }
-
-    start: any;
 }
