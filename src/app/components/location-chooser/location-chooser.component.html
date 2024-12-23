@@ -1,22 +1,26 @@
 <div  class="outer-container">
-    <h1>Pick Your Challenge</h1>
+    
+    <div style="text-align: center;margin-bottom: 20px;">
+        <img src="/assets/images/pick-your-challenge.svg" style="height: 150px;">
+
+    </div>
     <ul class="location-container" [class.one-selected]="selectedIndex === 0" [class.two-selected]="selectedIndex === 1"
         [class.three-selected]="selectedIndex ==2">
-        <li [class.selected]="selectedIndex === 0" [class.right]="selectedIndex === 1" [class.center]="selectedIndex === 0" (click)="location = 'AZ'"
+        <li [class.selected]="selectedIndex === 0" [class.right]="selectedIndex === 1" [class.center]="selectedIndex === 0" (click)="location = 'AZ';setVideoState()"
             [class.very-right]="selectedIndex === 2">
             <video src="/assets/video/az-demo.mp4" [id]="azId"></video><br>
-            Arizona
+            Desert Heat
         </li>
-        <li [class.selected]="selectedIndex === 1" [class.center]="selectedIndex === 1" [class.right]="selectedIndex === 2" (click)="location = 'UT'"
+        <li [class.selected]="selectedIndex === 1" [class.center]="selectedIndex === 1" [class.right]="selectedIndex === 2" (click)="location = 'UT';setVideoState()"
             [class.left]="selectedIndex === 0">
             <!-- <img src="/assets/images/ut-thumb.png"><br> -->
              <video src="/assets/video/ut-demo.mp4" [id]="utahId"></video><br>
-            Utah
+            Majestic Mountains
         </li>
-        <li [class.selected]="selectedIndex === 2" [class.center]="selectedIndex === 2" [class.left]="selectedIndex === 1" (click)="location = 'NV'"
+        <li [class.selected]="selectedIndex === 2" [class.center]="selectedIndex === 2" [class.left]="selectedIndex === 1" (click)="location = 'NV';setVideoState()"
             [class.very-left]="selectedIndex === 0">
             <video src="/assets/video/nv-demo.mp4" [id]="nvId"></video><br>
-            Nevada
+            Vegas Nights
         </li>
     </ul>
 

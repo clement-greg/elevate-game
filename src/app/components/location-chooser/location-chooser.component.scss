@@ -1,9 +1,11 @@
 .outer-container {
-    height: 500px;
+    height: 600px;
     width: 900px;
     padding-top: 60px;
     overflow: hidden;
     background: linear-gradient(360deg, rgb(3, 121, 3) 0%, rgb(80, 212, 137) 100%);
+    padding-left: 80px;
+    padding-right: 80px;
 }
 
 h1 {
@@ -99,10 +101,10 @@ h1 {
 // }
 
 .three-selected {
-    transform: translateX(-280px);
+    transform: translateX(-306px);
 }
 
 .one-selected {
-    transform: translateX(239px);
+    transform: translateX(263px);
     ;
 }
