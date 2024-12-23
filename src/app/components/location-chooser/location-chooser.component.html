@@ -4,17 +4,18 @@
         [class.three-selected]="selectedIndex ==2">
         <li [class.selected]="selectedIndex === 0" [class.right]="selectedIndex === 1" [class.center]="selectedIndex === 0" (click)="location = 'AZ'"
             [class.very-right]="selectedIndex === 2">
-            <img src="/assets/images/az-thumb.png"><br>
+            <video src="/assets/video/az-demo.mp4" [id]="azId"></video><br>
             Arizona
         </li>
         <li [class.selected]="selectedIndex === 1" [class.center]="selectedIndex === 1" [class.right]="selectedIndex === 2" (click)="location = 'UT'"
             [class.left]="selectedIndex === 0">
-            <img src="/assets/images/ut-thumb.png"><br>
+            <!-- <img src="/assets/images/ut-thumb.png"><br> -->
+             <video src="/assets/video/ut-demo.mp4" [id]="utahId"></video><br>
             Utah
         </li>
         <li [class.selected]="selectedIndex === 2" [class.center]="selectedIndex === 2" [class.left]="selectedIndex === 1" (click)="location = 'NV'"
             [class.very-left]="selectedIndex === 0">
-            <img src="/assets/images/nv-thumb.png"><br>
+            <video src="/assets/video/nv-demo.mp4" [id]="nvId"></video><br>
             Nevada
         </li>
     </ul>

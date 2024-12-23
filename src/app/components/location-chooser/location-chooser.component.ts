@@ -3,6 +3,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { JoystickState } from '../../models/utilities/joystick-state';
 import { PressAComponent } from '../press-a/press-a.component';
 import { playSound } from '../../models/utilities/sound-utils';
+import { newid } from '../../models/utilities/misc-utils';
 
 @Component({
   selector: 'app-location-chooser',
@@ -16,9 +17,13 @@ export class LocationChooserComponent implements OnDestroy {
 
   location: 'AZ' | 'UT' | 'NV' = 'UT';
   joystickState = new JoystickState(0);
+  utahId = newid();
+  nvId = newid();
+  azId = newid();
 
   constructor() {
     this.setupJoystick();
+    this.setVideoState();
   }
   ngOnDestroy(): void {
     this.joystickState.dispose();
@@ -52,6 +57,7 @@ export class LocationChooserComponent implements OnDestroy {
     } else {
       playSound('alert-sound', .3);
     }
+    this.setVideoState();
   }
 
   joystickRightPress() {
@@ -63,6 +69,39 @@ export class LocationChooserComponent implements OnDestroy {
       playSound('menu-move', .5);
     } else {
       playSound('alert-sound', .3);
+    }
+    this.setVideoState();
+  }
+
+  setVideoState() {
+
+    const utVideo = document.getElementById(this.utahId) as HTMLVideoElement;
+    const nvVideo = document.getElementById(this.nvId) as HTMLVideoElement;
+    const azVideo = document.getElementById(this.azId) as HTMLVideoElement;
+
+    if (!utVideo) {
+      setTimeout(() => this.setVideoState(), 50);
+      return;
+    }
+    switch (this.location) {
+      case 'UT':
+        utVideo.loop = true;
+        utVideo.play();
+        nvVideo.pause();
+        azVideo.pause();
+        break;
+      case 'AZ':
+        utVideo.pause();
+        nvVideo.pause();
+        azVideo.loop = true;
+        azVideo.play();
+        break;
+      case 'NV':
+        nvVideo.loop = true;
+        nvVideo.play();
+        utVideo.pause();
+        azVideo.pause();
+        break;
     }
   }
 
