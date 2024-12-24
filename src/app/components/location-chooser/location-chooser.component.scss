@@ -67,6 +67,10 @@ h1 {
             background: linear-gradient(360deg, rgba(3, 121, 3, 1) 0%, rgba(80, 212, 137, 1) 100%);
             animation: throb-shadow 3s ease;
             animation-iteration-count: infinite;
+            color: rgb(255, 255, 149);
+        }
+        &:not(.selected) {
+            color: #aaa;
         }
 
         &.left {
