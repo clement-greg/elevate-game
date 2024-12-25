@@ -34,6 +34,7 @@ export class AppComponent {
   location: 'AZ' | 'UT' | 'NV' = 'UT';
   showEliPopup = false;
   eliPopupMessage: string;
+  wentFullScreen = false;
 
 
 
@@ -61,13 +62,16 @@ export class AppComponent {
           this.backToHomeScreen();
         }
         break;
-        
+
     }
   }
 
   goFullScreen() {
-    const elem = document.documentElement;
-    elem.requestFullscreen();
+    if (!this.wentFullScreen) {
+      const elem = document.documentElement;
+      elem.requestFullscreen();
+      this.wentFullScreen = true;
+    }
 
   }
 
@@ -96,13 +100,13 @@ export class AppComponent {
     });
 
 
-    PubSub.getInstance().subscribe('close-begin-quest',()=> {
+    PubSub.getInstance().subscribe('close-begin-quest', () => {
       clearTimeout(this.gameTimeout);
     });
 
-    PubSub.getInstance().subscribe('eli-popup', args=> {
+    PubSub.getInstance().subscribe('eli-popup', args => {
       this.showEliPopup = false;
-      setTimeout(()=> {
+      setTimeout(() => {
         this.eliPopupMessage = args.message;
         this.showEliPopup = true;
       }, 5);
@@ -143,10 +147,10 @@ export class AppComponent {
   doGameStart() {
 
     if (!this.startGame && this.canRestart) {
-      if(!this.locationChooserOpen) {
+      if (!this.locationChooserOpen) {
         const ref = this.dialog.open(LocationChooserComponent);
-        ref.afterClosed().subscribe(result=> {
-          if(result) {
+        ref.afterClosed().subscribe(result => {
+          if (result) {
             this.location = result;
             GameInstanceManager.location = result;
             clearTimeout(this.gameTimeout);
@@ -157,7 +161,7 @@ export class AppComponent {
             this.startGame = true;
             clearTimeout(this.gameWonTimeout);
             setTimeout(() => this.hideTitleScreen = true, 1000);
-            this.gameTimeout = setTimeout(()=> this.backToHomeScreen(), 300000);
+            this.gameTimeout = setTimeout(() => this.backToHomeScreen(), 300000);
           }
           this.locationChooserOpen = false;
 
