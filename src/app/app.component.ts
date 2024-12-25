@@ -42,7 +42,6 @@ export class AppComponent {
   ) {
 
     this.setupJoystick();
-
   }
 
   setupJoystick() {
@@ -50,6 +49,7 @@ export class AppComponent {
   }
 
   joystickButtonPress(btn: number) {
+    this.goFullScreen();
 
     switch (btn) {
       case 0:
@@ -63,6 +63,12 @@ export class AppComponent {
         break;
         
     }
+  }
+
+  goFullScreen() {
+    const elem = document.documentElement;
+    elem.requestFullscreen();
+
   }
 
   backToHomeScreen() {
@@ -124,6 +130,7 @@ export class AppComponent {
   handleKeyDown(event: KeyboardEvent) {
     if (this.primaryButtons.indexOf(event.key) > -1 && !this.startGame && this.canRestart) {
       this.doGameStart();
+      this.goFullScreen();
     }
     if ((event.key === 'c' || event.key === 'C') && !this.startGame) {
       this.dialog.open(ConfigComponent);
