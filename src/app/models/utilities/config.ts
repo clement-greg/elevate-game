@@ -36,12 +36,12 @@ export class Config {
                 i.framesPerSecond = 60;
                 i.gravity = 1.5;
                 i.playerJumpForce = -0.4;
-                i.playerMoveForceGrounded = 0.1;
+                i.playerMoveForceGrounded = 0.125;
                 i.playerMoveForceNotGrounded = 0.01;
                 i.playerMaxXVelocity = 7;
                 i.trampolineYForce = -0.7;
                 i.ramSpeed = 5;
-                i.cannonBallSpeed = 20;
+                i.cannonBallSpeed = 10;
                 i.gameSeconds = 241;
                 i.showGameLostTime = 30000;
                 i.showGameWinTime = 30000;
