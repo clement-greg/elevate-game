@@ -234,13 +234,16 @@ export class Game {
 
     joystickButtonPress(btn: number) {
         switch (btn) {
+            case 7:
             case 0:
                 this.doPrimaryKey();
                 break;
+            case 6:
             case 1:
                 this.doSecondaryKey();
                 break;
         }
+        //console.log(btn);
     }
 
     doSecondaryKey() {

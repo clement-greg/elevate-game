@@ -1,28 +1,5 @@
 [
     {
-        "x": 80,
-        "y": 777.0500004166673,
-        "objectType": "Player2"
-    },
-    {
-        "x": 1500,
-        "y": 0,
-        "objectType": "Ground"
-    },
-    {
-        "x": 15850,
-        "y": 0,
-        "objectType": "Ground"
-    },
-    {
-        "x": 1078.4,
-        "y": 429.4,
-        "objectType": "MysteryBlock",
-        "originalX": 1078.4,
-        "originalY": 429.4,
-        "id": "f4a579ab-b93a-4718-a570-625afaf90acc"
-    },
-    {
         "x": 6588,
         "y": 504,
         "objectType": "Brick",
@@ -69,30 +46,6 @@
         "originalX": 15119.4,
         "originalY": 683.4,
         "id": "7c6396cb-8eb7-4883-9411-f8e3668726a9"
-    },
-    {
-        "x": 15191.4,
-        "y": 611.4,
-        "objectType": "MysteryBlock",
-        "originalX": 15191.4,
-        "originalY": 611.4,
-        "id": "e8a24bfa-c9e2-4732-9d04-3082fc137887"
-    },
-    {
-        "x": 15333.4,
-        "y": 609.4,
-        "objectType": "MysteryBlock",
-        "originalX": 15333.4,
-        "originalY": 609.4,
-        "id": "dcb5dd43-c181-4a1f-b065-a216c76f95ce"
-    },
-    {
-        "x": 15262.4,
-        "y": 610.4,
-        "objectType": "MysteryBlock",
-        "originalX": 15262.4,
-        "originalY": 610.4,
-        "id": "7f6d47ee-c36b-44dd-abb2-14ae79432077"
     },
     {
         "x": 7029,
@@ -288,7 +241,7 @@
     },
     {
         "x": 10122.050000000001,
-        "y": 491.5500086184413,
+        "y": 491.55000861983234,
         "objectType": "cannon",
         "originalX": 10122.050000000001,
         "originalY": 491.5500086195489,
@@ -365,14 +318,6 @@
         "originalX": 15408,
         "originalY": 540,
         "id": "155446e3-0b0f-4595-9081-f738efb8da95"
-    },
-    {
-        "x": 14749.965000000011,
-        "y": 777.3350004166671,
-        "objectType": "Ram",
-        "originalX": 14675.715,
-        "originalY": 777.3350004000004,
-        "id": "30e4faad-8107-44f7-af20-b5a1b0b44c11"
     },
     {
         "x": 1080,
@@ -477,14 +422,6 @@
         "originalX": 1300,
         "originalY": 772.5,
         "id": "1c608b19-c90c-422f-84e3-f6f7e5ff2f2b"
-    },
-    {
-        "x": 1006.4,
-        "y": 430.4,
-        "objectType": "flame-thrower-mystery-block",
-        "originalX": 1006.4,
-        "originalY": 430.4,
-        "id": "e419d454-3754-439b-9a67-7b688965dfa6"
     },
     {
         "x": 1008,
@@ -719,68 +656,12 @@
         "id": "5eb09a2f-bd57-41bb-a719-1669c0520c0a"
     },
     {
-        "x": 14796,
-        "y": 648,
-        "objectType": "Coin",
-        "originalX": 14796,
-        "originalY": 648,
-        "id": "c06cfc0f-6ace-49ef-abc4-4c8e541c6da5"
-    },
-    {
-        "x": 14220,
-        "y": 576,
-        "objectType": "Coin",
-        "originalX": 14220,
-        "originalY": 576,
-        "id": "c19ebb29-4159-4fad-9912-bf16cfc003ec"
-    },
-    {
-        "x": 14328,
-        "y": 648,
-        "objectType": "Coin",
-        "originalX": 14328,
-        "originalY": 648,
-        "id": "3ca03c46-8b6e-4425-8548-692c9d169dbe"
-    },
-    {
         "x": 14256,
         "y": 648,
         "objectType": "Coin",
         "originalX": 14256,
         "originalY": 648,
         "id": "4436df7c-1e7c-430e-8d82-bc727fc0cfcf"
-    },
-    {
-        "x": 14292,
-        "y": 576,
-        "objectType": "Coin",
-        "originalX": 14292,
-        "originalY": 576,
-        "id": "ad748379-0258-4172-8369-2834a7ebe6c4"
-    },
-    {
-        "x": 14400,
-        "y": 648,
-        "objectType": "Coin",
-        "originalX": 14400,
-        "originalY": 648,
-        "id": "0c9b7c3e-57a2-4a83-b216-a15dbf9861dc"
-    },
-    {
-        "x": 14364,
-        "y": 576,
-        "objectType": "Coin",
-        "originalX": 14364,
-        "originalY": 576,
-        "id": "f46f7afb-28e8-469d-8bd4-e1f817e84171"
-    },
-    {
-        "x": 14436,
-        "y": 576,
-        "objectType": "Coin",
-        "originalX": 14436,
-        "originalY": 576,
-        "id": "ab8ec069-9443-49bf-8912-0df4bfd44212"
     },
     {
         "x": 13068,
@@ -807,7 +688,7 @@
         "id": "e5afe1ba-b79f-457f-9e18-a9ae1a9c4d4d"
     },
     {
-        "x": 6451.964999999997,
+        "x": 6836.786139058118,
         "y": 777.3350004166671,
         "objectType": "Ram",
         "originalX": 6377.715,
@@ -1167,46 +1048,6 @@
         "id": "0298c445-1b94-4e31-8407-c59f47bf5615"
     },
     {
-        "x": 7668,
-        "y": 216,
-        "objectType": "Coin",
-        "originalX": 7668,
-        "originalY": 216,
-        "id": "c8c1480a-050e-4186-a991-b28265fc52e3"
-    },
-    {
-        "x": 7740,
-        "y": 216,
-        "objectType": "Coin",
-        "originalX": 7740,
-        "originalY": 216,
-        "id": "b9a1e566-36b8-48b7-b31f-25e566e42562"
-    },
-    {
-        "x": 7596,
-        "y": 144,
-        "objectType": "Coin",
-        "originalX": 7596,
-        "originalY": 144,
-        "id": "cd5794e3-6fb4-4f6b-9a48-4557ed284669"
-    },
-    {
-        "x": 7668,
-        "y": 144,
-        "objectType": "Coin",
-        "originalX": 7668,
-        "originalY": 144,
-        "id": "ca813a6a-6709-45be-afc4-b153c90a92c8"
-    },
-    {
-        "x": 7740,
-        "y": 144,
-        "objectType": "Coin",
-        "originalX": 7740,
-        "originalY": 144,
-        "id": "3f412290-3b14-4b74-b23f-74e879f7bb3b"
-    },
-    {
         "x": 7740,
         "y": 360,
         "objectType": "Coin",
@@ -1295,22 +1136,6 @@
         "id": "19524788-c70a-4ed9-8990-9fa650de2281"
     },
     {
-        "x": 2598.8140876986267,
-        "y": 760.0500004166671,
-        "objectType": "SpikeBall",
-        "originalX": 2301.814087698624,
-        "originalY": 760.0500004166671,
-        "id": "8211f338-41d7-4784-a15d-62073b62ad39"
-    },
-    {
-        "x": 3816,
-        "y": 324,
-        "objectType": "Coin",
-        "originalX": 3816,
-        "originalY": 324,
-        "id": "691f30e2-4d1c-47fb-9e10-31d9ad057ce6"
-    },
-    {
         "x": 5652,
         "y": 540,
         "objectType": "Coin",
@@ -1325,6 +1150,442 @@
         "originalX": 5544,
         "originalY": 468,
         "id": "ca778f60-9116-4686-accd-11f8fd513000"
+    },
+    {
+        "x": 7980.75,
+        "y": 110,
+        "objectType": "Eagle",
+        "originalX": 7805.75,
+        "originalY": 110,
+        "id": "9d4f404b-0b1b-4d5f-beac-de434c0c41be"
+    },
+    {
+        "x": 6300,
+        "y": 504,
+        "objectType": "Brick",
+        "originalX": 6300,
+        "originalY": 504,
+        "id": "e411390e-8e8d-4016-a818-ad0802727563"
+    },
+    {
+        "x": 6444,
+        "y": 504,
+        "objectType": "Brick",
+        "originalX": 6444,
+        "originalY": 504,
+        "id": "081a2a80-f76a-4bf2-8d55-439077f51d60"
+    },
+    {
+        "x": 6372,
+        "y": 504,
+        "objectType": "Brick",
+        "originalX": 6372,
+        "originalY": 504,
+        "id": "fcd22af9-1d1c-4279-9582-747e0aac882f"
+    },
+    {
+        "x": 4212,
+        "y": 756,
+        "objectType": "Coin",
+        "originalX": 4212,
+        "originalY": 756,
+        "id": "4f8c3ac2-3845-46d2-bc11-456bb73a2c8e"
+    },
+    {
+        "x": 4284,
+        "y": 756,
+        "objectType": "Coin",
+        "originalX": 4284,
+        "originalY": 756,
+        "id": "845432fb-cd61-4b7b-820d-9b7636e221c0"
+    },
+    {
+        "x": 805.5,
+        "y": 329,
+        "objectType": "choice-brick",
+        "originalX": 805.5,
+        "originalY": 467,
+        "id": "834a22d8-1f14-4142-81ba-f2cf3745c08f"
+    },
+    {
+        "x": 12605,
+        "y": 789,
+        "objectType": "buzz-saw",
+        "originalX": 12605,
+        "originalY": 789,
+        "id": "1f682525-1e48-4c8e-8324-1f1547a5a418"
+    },
+    {
+        "x": 5292,
+        "y": 792,
+        "objectType": "dynamite",
+        "originalX": 5292,
+        "originalY": 792,
+        "id": "ad5e1184-0424-417f-bdb3-33947c851c19"
+    },
+    {
+        "x": 5184,
+        "y": 468,
+        "objectType": "Coin",
+        "originalX": 5184,
+        "originalY": 468,
+        "id": "aee153f6-dfd5-4fb0-b014-8e0a233b70b9"
+    },
+    {
+        "x": 9179.4,
+        "y": 0,
+        "objectType": "jet-pack-mystery-block",
+        "originalX": 9179.4,
+        "originalY": 0,
+        "id": "24029c0f-bbff-4c18-9c0d-74a24d16b9df"
+    },
+    {
+        "x": 5580,
+        "y": 540,
+        "objectType": "Coin",
+        "originalX": 5580,
+        "originalY": 540,
+        "id": "e7cd616a-5d53-4d03-908f-4f1b322361d7"
+    },
+    {
+        "x": 5436,
+        "y": 540,
+        "objectType": "Coin",
+        "originalX": 5436,
+        "originalY": 540,
+        "id": "a2d4af08-5bbc-4937-bcf3-ad32d53e4293"
+    },
+    {
+        "x": 5508,
+        "y": 540,
+        "objectType": "Coin",
+        "originalX": 5508,
+        "originalY": 540,
+        "id": "aa947b26-4211-4389-831c-0f97cdf15402"
+    },
+    {
+        "x": 5400,
+        "y": 468,
+        "objectType": "Coin",
+        "originalX": 5400,
+        "originalY": 468,
+        "id": "3212aaf6-9ab3-4af0-b78f-33d06e3074da"
+    },
+    {
+        "x": 5472,
+        "y": 468,
+        "objectType": "Coin",
+        "originalX": 5472,
+        "originalY": 468,
+        "id": "adf2b431-d390-4b47-933d-6ba3992cd7a0"
+    },
+    {
+        "x": 6156,
+        "y": 504,
+        "objectType": "Brick",
+        "originalX": 6156,
+        "originalY": 504,
+        "id": "a4bdb9eb-a875-4c7c-8db9-d1cc70c02a8c"
+    },
+    {
+        "x": 6228,
+        "y": 504,
+        "objectType": "Brick",
+        "originalX": 6228,
+        "originalY": 504,
+        "id": "abe06af7-a44a-4cc9-a727-c6f1871d65bc"
+    },
+    {
+        "x": 5256,
+        "y": 468,
+        "objectType": "Coin",
+        "originalX": 5256,
+        "originalY": 468,
+        "id": "c6366f02-90bd-450c-96fd-5dbb8f19d554"
+    },
+    {
+        "x": 5148,
+        "y": 540,
+        "objectType": "Coin",
+        "originalX": 5148,
+        "originalY": 540,
+        "id": "aa8abd05-8f71-4a9f-bcbd-8653bfc8b2a2"
+    },
+    {
+        "x": 5328,
+        "y": 468,
+        "objectType": "Coin",
+        "originalX": 5328,
+        "originalY": 468,
+        "id": "76b01772-bb70-40aa-b2af-63e0acf5af4f"
+    },
+    {
+        "x": 5364,
+        "y": 540,
+        "objectType": "Coin",
+        "originalX": 5364,
+        "originalY": 540,
+        "id": "7fce8274-496f-4698-8a31-00e1553324d3"
+    },
+    {
+        "x": 5220,
+        "y": 540,
+        "objectType": "Coin",
+        "originalX": 5220,
+        "originalY": 540,
+        "id": "03b3e7bd-43c0-4c72-abe1-a4d272b87fce"
+    },
+    {
+        "x": 5292,
+        "y": 540,
+        "objectType": "Coin",
+        "originalX": 5292,
+        "originalY": 540,
+        "id": "d1c4062d-5961-4ba5-87c1-1164e48987a0"
+    },
+    {
+        "x": 4139.4,
+        "y": 0,
+        "objectType": "jet-pack-mystery-block",
+        "originalX": 4139.4,
+        "originalY": 0,
+        "id": "2dc742c0-efcf-42f8-802c-3a6a53e7c468"
+    },
+    {
+        "x": null,
+        "y": null,
+        "objectType": "Coin",
+        "id": "b26b6f8a-a055-4104-af48-cee470626a5c"
+    },
+    {
+        "x": null,
+        "y": null,
+        "objectType": "Coin",
+        "id": "c2700017-3d80-4e8b-84f7-7dcf9fa66cf7"
+    },
+    {
+        "x": null,
+        "y": null,
+        "objectType": "Coin",
+        "id": "32f938f9-d93d-4f98-a53b-d14f7f9719d4"
+    },
+    {
+        "x": null,
+        "y": null,
+        "objectType": "Coin",
+        "id": "1f886745-aa48-4d6e-a844-712e5880d98f"
+    },
+    {
+        "x": null,
+        "y": null,
+        "objectType": "Coin",
+        "id": "01206305-ad46-4f4f-8f13-60ef725cfc92"
+    },
+    {
+        "x": null,
+        "y": null,
+        "objectType": "Coin",
+        "id": "6ef55345-7605-4f92-aadd-58d820d6ed13"
+    },
+    {
+        "x": null,
+        "y": null,
+        "objectType": "Coin",
+        "id": "886ee1e8-a520-4cd0-9f50-68261c94af6f"
+    },
+    {
+        "x": null,
+        "y": null,
+        "objectType": "Coin",
+        "id": "1e3a7ad9-d5a9-4f35-9ca1-6d8e508192f8"
+    },
+    {
+        "x": null,
+        "y": null,
+        "objectType": "Coin",
+        "id": "b9aaab7a-4bfa-4d00-b305-53a15839f1ba"
+    },
+    {
+        "x": null,
+        "y": null,
+        "objectType": "Coin",
+        "id": "dd0a56f5-6c27-49b0-a5a9-22eb081d7f0b"
+    },
+    {
+        "x": 15335.4,
+        "y": 611.4,
+        "objectType": "MysteryBlock",
+        "originalX": 15335.4,
+        "originalY": 611.4,
+        "id": "e286ff95-92bd-4540-a7db-50eba321f2bd"
+    },
+    {
+        "x": 15263.4,
+        "y": 611.4,
+        "objectType": "MysteryBlock",
+        "originalX": 15263.4,
+        "originalY": 611.4,
+        "id": "2370267f-4457-43a1-8f24-d3c180fdef93"
+    },
+    {
+        "x": 15191.4,
+        "y": 611.4,
+        "objectType": "MysteryBlock",
+        "originalX": 15191.4,
+        "originalY": 611.4,
+        "id": "1df4a5a2-7bea-4e3e-a7d8-b1b7432b5f99"
+    },
+    {
+        "x": 14871.291440947662,
+        "y": 777.3350004166671,
+        "objectType": "Ram",
+        "originalX": 14675.715,
+        "originalY": 777.3350004000004,
+        "id": "30e4faad-8107-44f7-af20-b5a1b0b44c11"
+    },
+    {
+        "x": 14796,
+        "y": 648,
+        "objectType": "Coin",
+        "originalX": 14796,
+        "originalY": 648,
+        "id": "c06cfc0f-6ace-49ef-abc4-4c8e541c6da5"
+    },
+    {
+        "x": 14220,
+        "y": 576,
+        "objectType": "Coin",
+        "originalX": 14220,
+        "originalY": 576,
+        "id": "c19ebb29-4159-4fad-9912-bf16cfc003ec"
+    },
+    {
+        "x": 14328,
+        "y": 648,
+        "objectType": "Coin",
+        "originalX": 14328,
+        "originalY": 648,
+        "id": "3ca03c46-8b6e-4425-8548-692c9d169dbe"
+    },
+    {
+        "x": 14292,
+        "y": 576,
+        "objectType": "Coin",
+        "originalX": 14292,
+        "originalY": 576,
+        "id": "ad748379-0258-4172-8369-2834a7ebe6c4"
+    },
+    {
+        "x": 14400,
+        "y": 648,
+        "objectType": "Coin",
+        "originalX": 14400,
+        "originalY": 648,
+        "id": "0c9b7c3e-57a2-4a83-b216-a15dbf9861dc"
+    },
+    {
+        "x": 14364,
+        "y": 576,
+        "objectType": "Coin",
+        "originalX": 14364,
+        "originalY": 576,
+        "id": "f46f7afb-28e8-469d-8bd4-e1f817e84171"
+    },
+    {
+        "x": 14436,
+        "y": 576,
+        "objectType": "Coin",
+        "originalX": 14436,
+        "originalY": 576,
+        "id": "ab8ec069-9443-49bf-8912-0df4bfd44212"
+    },
+    {
+        "x": 7668,
+        "y": 216,
+        "objectType": "Coin",
+        "originalX": 7668,
+        "originalY": 216,
+        "id": "c8c1480a-050e-4186-a991-b28265fc52e3"
+    },
+    {
+        "x": 7740,
+        "y": 216,
+        "objectType": "Coin",
+        "originalX": 7740,
+        "originalY": 216,
+        "id": "b9a1e566-36b8-48b7-b31f-25e566e42562"
+    },
+    {
+        "x": 7596,
+        "y": 144,
+        "objectType": "Coin",
+        "originalX": 7596,
+        "originalY": 144,
+        "id": "cd5794e3-6fb4-4f6b-9a48-4557ed284669"
+    },
+    {
+        "x": 7668,
+        "y": 144,
+        "objectType": "Coin",
+        "originalX": 7668,
+        "originalY": 144,
+        "id": "ca813a6a-6709-45be-afc4-b153c90a92c8"
+    },
+    {
+        "x": 7740,
+        "y": 144,
+        "objectType": "Coin",
+        "originalX": 7740,
+        "originalY": 144,
+        "id": "3f412290-3b14-4b74-b23f-74e879f7bb3b"
+    },
+    {
+        "x": 4428,
+        "y": 756,
+        "objectType": "Coin",
+        "originalX": 4428,
+        "originalY": 756,
+        "id": "b2e5ee90-c32e-4a7a-9886-dc2401e91b0f"
+    },
+    {
+        "x": 4356,
+        "y": 756,
+        "objectType": "Coin",
+        "originalX": 4356,
+        "originalY": 756,
+        "id": "d6ddd695-13d2-43cf-a180-df947bd845ef"
+    },
+    {
+        "x": 9972,
+        "y": 576,
+        "objectType": "Brick",
+        "originalX": 9972,
+        "originalY": 576,
+        "id": "31944a1c-08f1-4098-ba81-1de2f142ee7d"
+    },
+    {
+        "x": 9900,
+        "y": 576,
+        "objectType": "Brick",
+        "originalX": 9900,
+        "originalY": 576,
+        "id": "295f89d5-aba2-4694-88f7-04e0bd8f070e"
+    },
+    {
+        "x": 10008,
+        "y": 756,
+        "objectType": "dynamite",
+        "originalX": 10008,
+        "originalY": 756,
+        "id": "4b13ecab-b267-428a-893b-62288b4375ff"
+    },
+    {
+        "x": 2477.0646640777627,
+        "y": 760.0500004166671,
+        "objectType": "SpikeBall",
+        "originalX": 2301.814087698624,
+        "originalY": 760.0500004166671,
+        "id": "8211f338-41d7-4784-a15d-62073b62ad39"
     },
     {
         "x": 2340,
@@ -1343,6 +1604,30 @@
         "id": "9f4c749c-b1f1-4abc-98fb-335c494742e3"
     },
     {
+        "x": 2340,
+        "y": 576,
+        "objectType": "Coin",
+        "originalX": 2340,
+        "originalY": 576,
+        "id": "4cf92696-2d87-4586-849c-645823faefe3"
+    },
+    {
+        "x": 2340,
+        "y": 648,
+        "objectType": "Coin",
+        "originalX": 2340,
+        "originalY": 648,
+        "id": "7978a302-e284-4917-84d0-8b8dbb098967"
+    },
+    {
+        "x": 3816,
+        "y": 324,
+        "objectType": "Coin",
+        "originalX": 3816,
+        "originalY": 324,
+        "id": "691f30e2-4d1c-47fb-9e10-31d9ad057ce6"
+    },
+    {
         "x": 3960,
         "y": 324,
         "objectType": "Coin",
@@ -1357,46 +1642,6 @@
         "originalX": 3888,
         "originalY": 324,
         "id": "39c871b0-cb52-48a8-ac45-7c9871ffb2ac"
-    },
-    {
-        "x": 8305.75,
-        "y": 110,
-        "objectType": "Eagle",
-        "originalX": 7805.75,
-        "originalY": 110,
-        "id": "9d4f404b-0b1b-4d5f-beac-de434c0c41be"
-    },
-    {
-        "x": 6300,
-        "y": 504,
-        "objectType": "Brick",
-        "originalX": 6300,
-        "originalY": 504,
-        "id": "e411390e-8e8d-4016-a818-ad0802727563"
-    },
-    {
-        "x": 5580,
-        "y": 540,
-        "objectType": "Coin",
-        "originalX": 5580,
-        "originalY": 540,
-        "id": "e7cd616a-5d53-4d03-908f-4f1b322361d7"
-    },
-    {
-        "x": 6444,
-        "y": 504,
-        "objectType": "Brick",
-        "originalX": 6444,
-        "originalY": 504,
-        "id": "081a2a80-f76a-4bf2-8d55-439077f51d60"
-    },
-    {
-        "x": 6372,
-        "y": 504,
-        "objectType": "Brick",
-        "originalX": 6372,
-        "originalY": 504,
-        "id": "fcd22af9-1d1c-4279-9582-747e0aac882f"
     },
     {
         "x": 3060,
@@ -1463,203 +1708,19 @@
         "id": "26b0c843-80d8-4295-b7d6-0b5b92e8e7d0"
     },
     {
-        "x": 4428,
-        "y": 756,
-        "objectType": "Coin",
-        "originalX": 4428,
-        "originalY": 756,
-        "id": "b2e5ee90-c32e-4a7a-9886-dc2401e91b0f"
+        "x": 1079.4,
+        "y": 431.4,
+        "objectType": "MysteryBlock",
+        "originalX": 1079.4,
+        "originalY": 431.4,
+        "id": "6b4f7991-acf3-432f-96dd-dfeeaa881351"
     },
     {
-        "x": 4212,
-        "y": 756,
-        "objectType": "Coin",
-        "originalX": 4212,
-        "originalY": 756,
-        "id": "4f8c3ac2-3845-46d2-bc11-456bb73a2c8e"
-    },
-    {
-        "x": 4356,
-        "y": 756,
-        "objectType": "Coin",
-        "originalX": 4356,
-        "originalY": 756,
-        "id": "d6ddd695-13d2-43cf-a180-df947bd845ef"
-    },
-    {
-        "x": 4284,
-        "y": 756,
-        "objectType": "Coin",
-        "originalX": 4284,
-        "originalY": 756,
-        "id": "845432fb-cd61-4b7b-820d-9b7636e221c0"
-    },
-    {
-        "x": 5436,
-        "y": 540,
-        "objectType": "Coin",
-        "originalX": 5436,
-        "originalY": 540,
-        "id": "a2d4af08-5bbc-4937-bcf3-ad32d53e4293"
-    },
-    {
-        "x": 5508,
-        "y": 540,
-        "objectType": "Coin",
-        "originalX": 5508,
-        "originalY": 540,
-        "id": "aa947b26-4211-4389-831c-0f97cdf15402"
-    },
-    {
-        "x": 5400,
-        "y": 468,
-        "objectType": "Coin",
-        "originalX": 5400,
-        "originalY": 468,
-        "id": "3212aaf6-9ab3-4af0-b78f-33d06e3074da"
-    },
-    {
-        "x": 5472,
-        "y": 468,
-        "objectType": "Coin",
-        "originalX": 5472,
-        "originalY": 468,
-        "id": "adf2b431-d390-4b47-933d-6ba3992cd7a0"
-    },
-    {
-        "x": 805.5,
-        "y": 479,
-        "objectType": "choice-brick",
-        "originalX": 805.5,
-        "originalY": 94.5,
-        "id": "834a22d8-1f14-4142-81ba-f2cf3745c08f"
-    },
-    {
-        "x": 12605,
-        "y": 789,
-        "objectType": "buzz-saw",
-        "originalX": 12605,
-        "originalY": 789,
-        "id": "1f682525-1e48-4c8e-8324-1f1547a5a418"
-    },
-    {
-        "x": 6156,
-        "y": 504,
-        "objectType": "Brick",
-        "originalX": 6156,
-        "originalY": 504,
-        "id": "a4bdb9eb-a875-4c7c-8db9-d1cc70c02a8c"
-    },
-    {
-        "x": 9972,
-        "y": 576,
-        "objectType": "Brick",
-        "originalX": 9972,
-        "originalY": 576,
-        "id": "31944a1c-08f1-4098-ba81-1de2f142ee7d"
-    },
-    {
-        "x": 9900,
-        "y": 576,
-        "objectType": "Brick",
-        "originalX": 9900,
-        "originalY": 576,
-        "id": "295f89d5-aba2-4694-88f7-04e0bd8f070e"
-    },
-    {
-        "x": 10008,
-        "y": 756,
-        "objectType": "dynamite",
-        "originalX": 10008,
-        "originalY": 756,
-        "id": "4b13ecab-b267-428a-893b-62288b4375ff"
-    },
-    {
-        "x": 5292,
-        "y": 792,
-        "objectType": "dynamite",
-        "originalX": 5292,
-        "originalY": 792,
-        "id": "ad5e1184-0424-417f-bdb3-33947c851c19"
-    },
-    {
-        "x": 6228,
-        "y": 504,
-        "objectType": "Brick",
-        "originalX": 6228,
-        "originalY": 504,
-        "id": "abe06af7-a44a-4cc9-a727-c6f1871d65bc"
-    },
-    {
-        "x": 2340,
-        "y": 576,
-        "objectType": "Coin",
-        "originalX": 2340,
-        "originalY": 576,
-        "id": "4cf92696-2d87-4586-849c-645823faefe3"
-    },
-    {
-        "x": 2340,
-        "y": 648,
-        "objectType": "Coin",
-        "originalX": 2340,
-        "originalY": 648,
-        "id": "7978a302-e284-4917-84d0-8b8dbb098967"
-    },
-    {
-        "x": 5184,
-        "y": 468,
-        "objectType": "Coin",
-        "originalX": 5184,
-        "originalY": 468,
-        "id": "aee153f6-dfd5-4fb0-b014-8e0a233b70b9"
-    },
-    {
-        "x": 5256,
-        "y": 468,
-        "objectType": "Coin",
-        "originalX": 5256,
-        "originalY": 468,
-        "id": "c6366f02-90bd-450c-96fd-5dbb8f19d554"
-    },
-    {
-        "x": 5148,
-        "y": 540,
-        "objectType": "Coin",
-        "originalX": 5148,
-        "originalY": 540,
-        "id": "aa8abd05-8f71-4a9f-bcbd-8653bfc8b2a2"
-    },
-    {
-        "x": 5328,
-        "y": 468,
-        "objectType": "Coin",
-        "originalX": 5328,
-        "originalY": 468,
-        "id": "76b01772-bb70-40aa-b2af-63e0acf5af4f"
-    },
-    {
-        "x": 5364,
-        "y": 540,
-        "objectType": "Coin",
-        "originalX": 5364,
-        "originalY": 540,
-        "id": "7fce8274-496f-4698-8a31-00e1553324d3"
-    },
-    {
-        "x": 5220,
-        "y": 540,
-        "objectType": "Coin",
-        "originalX": 5220,
-        "originalY": 540,
-        "id": "03b3e7bd-43c0-4c72-abe1-a4d272b87fce"
-    },
-    {
-        "x": 5292,
-        "y": 540,
-        "objectType": "Coin",
-        "originalX": 5292,
-        "originalY": 540,
-        "id": "d1c4062d-5961-4ba5-87c1-1164e48987a0"
+        "x": 1007.4,
+        "y": 431.4,
+        "objectType": "flame-thrower-mystery-block",
+        "originalX": 1007.4,
+        "originalY": 431.4,
+        "id": "0eef951e-6bca-4c5c-92d8-62b9dd56a123"
     }
 ]
