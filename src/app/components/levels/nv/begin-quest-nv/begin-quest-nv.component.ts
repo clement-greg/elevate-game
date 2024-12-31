@@ -18,7 +18,7 @@ export class BeginQuestNvComponent implements OnDestroy {
     `Uh-oh, Jimmy!!!!! 🛠️🚨
 
 Guess what? It's nothing but cold showers for you, your water heater is officially on strike! My toolkit is doing a fantastic job of hiding from me! If you can gather my runaway tools and snag a brand-new water heater from the store, I’ll be right there to work my magic.`,
-    `Oh, and look out for the old school warranty guys. Working with them will only bring you pain😡😡😡😡😡`
+    `But be careful, the old school home warranty guys have contract limits, exclusions and loopholes that'll leave you hurting😡😡😡😡😡`
   ];
   id = newid();
   statementNumber = 0;

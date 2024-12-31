@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { pauseSound } from '../../models/utilities/sound-utils';
 
 @Component({
   selector: 'app-title-screen',
@@ -9,4 +10,7 @@ import { Component } from '@angular/core';
 })
 export class TitleScreenComponent {
 
+  constructor() {
+    pauseSound('synth-voice');
+  }
 }
