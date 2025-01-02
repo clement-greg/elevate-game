@@ -728,7 +728,12 @@ Don't let those old school warranty guys stick it to you.
             this.gameHUD = new GameHUD(this.zone);
         }
 
-        const collisions = Matter.Detector.collisions(this.engine.world);
+        let collisions = Matter.Detector.collisions(this.engine.world);
+        if(this.editorOpen) {
+            this.player2.isGrounded = true;
+            this.player2.lastGroundedTime = new Date();
+            collisions = [];
+        }
         const playerCollisions = collisions.filter(i => i.bodyA.label === 'Player' || i.bodyB.label === 'Player');
 
         const groundCollision = playerCollisions.find(i => i.bodyA.label === 'Ground' || i.bodyB.label === 'Ground');

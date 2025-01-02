@@ -14,11 +14,12 @@ import { NvLevelComponent } from './components/levels/nv/nv-level/nv-level.compo
 import { GameInstanceManager } from './models/base/game-instance';
 import { AzLevelComponent } from './components/levels/az/az-level/az-level.component';
 import { EliPopupComponent } from './components/eli-popup/eli-popup.component';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [Level1Component, CommonModule, TitleScreenComponent, GameWonComponent, EliPopupComponent, GameLostComponent, NvLevelComponent, AzLevelComponent],
+  imports: [Level1Component, CommonModule, TitleScreenComponent, GameWonComponent, EliPopupComponent, GameLostComponent, NvLevelComponent, AzLevelComponent, RouterModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

@@ -92,6 +92,22 @@ body {
     background-position-y: -147px !important;
 }
 
+@keyframes tool-blink {
+    from {
+        transform: scale(1) rotate(0deg);
+    }
+    50% {
+        transform: scale(1.2) rotate(10deg);
+
+    }
+    100% {
+        transform: scale(1) rotate(0deg);
+    }
+}
+.tool {
+    animation: tool-blink 1s ease 0s infinite;
+}
+
 .player.has-jet-pack::after {
     content: " ";
     background-image: url(/assets/images/jet-pack-side.svg);
@@ -614,6 +630,10 @@ font-style: normal !important;
 
 }
 
+#bg-sky.snow {
+    background-image: url(/assets/images/bg-sky-snow.png);
+}
+
 #bg-buildings {
     background-image: url(/assets/images/bg-buildings-2.png);
     background-repeat: repeat-x;
@@ -628,6 +648,10 @@ font-style: normal !important;
 
 #bg-buildings.az {
     background-image: url(/assets/images/bg-buildings-az.png);
+}
+
+#bg-buildings.snow {
+    background-image: url(/assets/images/bg-buildings-snow.png);
 }
 
 
@@ -648,6 +672,10 @@ font-style: normal !important;
 #bg-plants.az {
     background-image: url(/assets/images/bg-plants-az.png);
 
+}
+
+#bg-plants.snow {
+    background-image: url(/assets/images/bg-plans-snow.png);
 }
 
 #foreground {

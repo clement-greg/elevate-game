@@ -6,7 +6,7 @@ export class Saw extends GameSprite {
     constructor(engine, x, y) {
         super(engine, x, y, 72, 72);
         const brickDiv = document.createElement('div');
-        brickDiv.className = 'saw';
+        brickDiv.className = 'saw tool';
         this.domObject = brickDiv;
 
         this.body.isStatic = true;
@@ -21,7 +21,7 @@ export class Screwdriver extends GameSprite {
     constructor(engine, x, y) {
         super(engine, x, y, 72, 72);
         const brickDiv = document.createElement('div');
-        brickDiv.className = 'screwdriver';
+        brickDiv.className = 'screwdriver tool';
         this.domObject = brickDiv;
 
         this.body.isStatic = true;
@@ -36,7 +36,7 @@ export class Wrench extends GameSprite {
     constructor(engine, x, y) {
         super(engine, x, y, 72, 72);
         const brickDiv = document.createElement('div');
-        brickDiv.className = 'wrench';
+        brickDiv.className = 'wrench tool';
         this.domObject = brickDiv;
 
         this.body.isStatic = true;
@@ -51,7 +51,7 @@ export class Hammer extends GameSprite {
     constructor(engine, x, y) {
         super(engine, x, y, 72, 72);
         const brickDiv = document.createElement('div');
-        brickDiv.className = 'hammer';
+        brickDiv.className = 'hammer tool';
         this.domObject = brickDiv;
 
         this.body.isStatic = true;
@@ -66,7 +66,7 @@ export class Drill extends GameSprite {
     constructor(engine, x, y) {
         super(engine, x, y, 72, 72);
         const brickDiv = document.createElement('div');
-        brickDiv.className = 'drill';
+        brickDiv.className = 'drill tool';
         this.domObject = brickDiv;
 
         this.body.isStatic = true;
