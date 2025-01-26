@@ -75,7 +75,7 @@ Guess what? Your A/C has decided to take an early retirement, and you're going t
 
           this.doWords();
 
-        }, 1000);
+        }, 1500);
       } else {
         this.lottiePlayer.pause();
         pauseSound('synth-voice');

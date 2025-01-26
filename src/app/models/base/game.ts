@@ -112,7 +112,7 @@ export class Game {
         this.addSprite(this.player2);
 
         zone.run(() => {
-            this.gameHUD = new GameHUD(zone);
+            this.gameHUD = new GameHUD(zone, this.location);
         });
 
         this.world = World.getInstance();
@@ -725,7 +725,7 @@ Don't let those old school warranty guys stick it to you.
 
         if (left > Game.homeLeft && left < Game.homeLeftEnd && this.gameHUD.hasAllTools && this.fridgeContraint) {
             this.doWin();
-            this.gameHUD = new GameHUD(this.zone);
+            this.gameHUD = new GameHUD(this.zone, this.location);
         }
 
         let collisions = Matter.Detector.collisions(this.engine.world);
@@ -1369,7 +1369,7 @@ export class GameHUD {
     isJetPackMode: any;
     isFlameThrower: boolean;
 
-    constructor(private zone: NgZone) {
+    constructor(private zone: NgZone,  private location: 'AZ' | 'UT' | 'NV') {
 
     }
 
@@ -1402,7 +1402,7 @@ export class GameHUD {
 
 
     get money() {
-        return this._coinCount * 20;
+        return this._coinCount * (this.location === 'AZ' ? 150 : 20);
     }
 
     setTimeRemaining(value: string) {

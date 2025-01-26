@@ -28,18 +28,18 @@ export class AzShopComponent implements OnDestroy {
   items: Item[] = [
     {
       src: '/assets/images/ac3.svg',
-      price: 1200,
+      price: 12000,
       title: 'Goodman'
     },
     {
       src: '/assets/images/ac1.svg',
-      price: 2000,
+      price: 15000,
       title: 'Carrier'
     },
 
     {
       src: '/assets/images/ac2.svg',
-      price: 3000,
+      price: 25000,
       title: 'Trane'
     },
 
@@ -172,7 +172,7 @@ Wander through our collection, pick your favorite, and head to checkout. Any A/C
         this.statements = [`Thanks for your purchase.  Come again soon.`];
         this.statementNumber = 0;
         this.doWords();
-        GameInstanceManager.getInstance().gameHUD.coinCount = GameInstanceManager.getInstance().gameHUD.coinCount - (this.selectedItem.price / 20);
+        GameInstanceManager.getInstance().gameHUD.coinCount = GameInstanceManager.getInstance().gameHUD.coinCount - (this.selectedItem.price / 150);
         setTimeout(() => this.dialogRef.close(), 2500);
       });
     }, 500);
