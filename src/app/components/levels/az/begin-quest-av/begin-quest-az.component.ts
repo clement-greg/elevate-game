@@ -19,9 +19,9 @@ export class BeginQuestAzComponent implements OnDestroy {
     `Uh-oh, Jimmy! 🛠️🚨
 
 Guess what? Your A/C has decided to take an early retirement, and you're going to be sweating from head to crack. My tools are lost! If you can gather them and snag a brand-new A/C from the store, I’ll be right there to work my magic.`,
-    `You're going to need a lot of coins 💰.
+    `Bad news Bruh! You're going to need a lot of coin 💰.
   The new A2L incompatabilities are going to end up costing you thousands. 💰💰💰💰`,
-    `Oh, and look out for the old school warranty guys. Sketchy out of pocket costs, contract loopholes and plan limits could end up costing you thousands on a 'Covered' warranty claim😡😡😡😡😡`
+    `Oh, and look out for the dirt-bag warranty guys. Sketchy out of pocket costs, contract loopholes and plan limits could end up costing you thousands on a 'Covered' warranty claim😡😡😡😡😡`
   ];
   id = newid();
   statementNumber = 0;
