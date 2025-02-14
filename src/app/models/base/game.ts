@@ -264,6 +264,7 @@ export class Game {
     }
 
     doPrimaryKey() {
+        console.log({ infotBarier: this.infoBarier, showCloseBarrier: this.showCloseBarrier });
         if (this.infoBarier) {
             if (this.showQuestBegin) {
                 PubSub.getInstance().publish('close-begin-quest');
@@ -294,7 +295,7 @@ export class Game {
             this.player2.arrowLeft = false;
             this.isMovingLeft = false;
         }
-        if (this.primaryButtonKeys.indexOf(key.key) > -1 && this.infoBarier) {
+        if (this.primaryButtonKeys.indexOf(key.key) > -1 && (this.infoBarier || this.showCloseBarrier)) {
             this.doPrimaryKey();
         }
 
@@ -729,7 +730,7 @@ Don't let those old school warranty guys stick it to you.
         }
 
         let collisions = Matter.Detector.collisions(this.engine.world);
-        if(this.editorOpen) {
+        if (this.editorOpen) {
             this.player2.isGrounded = true;
             this.player2.lastGroundedTime = new Date();
             collisions = [];
@@ -1369,7 +1370,7 @@ export class GameHUD {
     isJetPackMode: any;
     isFlameThrower: boolean;
 
-    constructor(private zone: NgZone,  private location: 'AZ' | 'UT' | 'NV') {
+    constructor(private zone: NgZone, private location: 'AZ' | 'UT' | 'NV') {
 
     }
 
