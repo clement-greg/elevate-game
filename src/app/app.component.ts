@@ -14,7 +14,7 @@ import { NvLevelComponent } from './components/levels/nv/nv-level/nv-level.compo
 import { GameInstanceManager } from './models/base/game-instance';
 import { AzLevelComponent } from './components/levels/az/az-level/az-level.component';
 import { EliPopupComponent } from './components/eli-popup/eli-popup.component';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -40,10 +40,19 @@ export class AppComponent {
 
 
   constructor(private zone: NgZone,
+    private activatedRoute: ActivatedRoute,
     private dialog: MatDialog
   ) {
 
     this.setupJoystick();
+
+    activatedRoute.queryParams.subscribe(params=> {
+      if(params['state']) {
+        this.location = params['state'];
+        GameInstanceManager.location = this.location;
+        this.beginGame();
+      }
+    });
   }
 
   setupJoystick() {
@@ -154,15 +163,7 @@ export class AppComponent {
           if (result) {
             this.location = result;
             GameInstanceManager.location = result;
-            clearTimeout(this.gameTimeout);
-            this.showGameWon = false;
-            this.showGameLost = false;
-            GameInstanceManager.deleteInstance();
-            this.setupHandlers();
-            this.startGame = true;
-            clearTimeout(this.gameWonTimeout);
-            setTimeout(() => this.hideTitleScreen = true, 1000);
-            this.gameTimeout = setTimeout(() => this.backToHomeScreen(), 300000);
+            this.beginGame();
           }
           this.locationChooserOpen = false;
 
@@ -170,5 +171,17 @@ export class AppComponent {
         this.locationChooserOpen = true;
       }
     }
+  }
+
+  beginGame() {
+    clearTimeout(this.gameTimeout);
+    this.showGameWon = false;
+    this.showGameLost = false;
+    GameInstanceManager.deleteInstance();
+    this.setupHandlers();
+    this.startGame = true;
+    clearTimeout(this.gameWonTimeout);
+    setTimeout(() => this.hideTitleScreen = true, 1000);
+    this.gameTimeout = setTimeout(() => this.backToHomeScreen(), 300000);
   }
 }
