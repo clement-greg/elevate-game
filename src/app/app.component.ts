@@ -174,6 +174,7 @@ export class AppComponent {
   }
 
   beginGame() {
+  
     clearTimeout(this.gameTimeout);
     this.showGameWon = false;
     this.showGameLost = false;

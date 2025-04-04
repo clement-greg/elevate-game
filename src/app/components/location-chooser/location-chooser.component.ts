@@ -129,7 +129,7 @@ export class LocationChooserComponent implements OnDestroy {
     if (event.key === 'b' || event.key === 'B') {
       this.dialogRef.close();
     }
-    if (event.key === ' ') {
+    if (event.key === ' ' || event.key === 'a' || event.key === 'A') {
       this.select();
     }
   }
