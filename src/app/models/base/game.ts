@@ -1153,7 +1153,8 @@ Don't let those old school warranty guys stick it to you.
             return;
         }
         //const leftPosition = 150;
-        const leftPosition = this.player2.x;
+        const easyMode = Config.getInstance().easyMode;
+        const leftPosition = easyMode ? this.player2.x : 150;
         this.player2.domObject.style.visibility = 'hidden';
         this.player2.x = leftPosition;
         this.player2.dead = true;
@@ -1161,10 +1162,13 @@ Don't let those old school warranty guys stick it to you.
         Matter.Body.setPosition(this.player2.body, { x: this.player2.x, y: 0 });
         Matter.Body.setVelocity(this.player2.body, { x: 0, y: 0 });
         playSound('die-sound');
-        // this.gameHUD.isJetPackMode = false;
-        // this.gameHUD.isFlameThrower = false;
-        // PubSub.getInstance().publish('jet-pack-change');
-        // PubSub.getInstance().publish('flame-thrower-change');
+        if (!easyMode) {
+            this.gameHUD.isJetPackMode = false;
+            this.gameHUD.isFlameThrower = false;
+            PubSub.getInstance().publish('jet-pack-change');
+            PubSub.getInstance().publish('flame-thrower-change');
+        }
+
         this.player2.die();
 
         const playerDying = document.createElement('div');

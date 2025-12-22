@@ -21,6 +21,7 @@ export class Config {
     showBilboardVideos: boolean;
     level: string;
     allowDebug: boolean;
+    easyMode: boolean;
 
     private static instance: Config;
     static getInstance() {
@@ -48,6 +49,8 @@ export class Config {
                 i.scrollBackground = true;
                 i.showBilboardVideos = true;
                 i.level = 'level1';
+                i.easyMode = true;
+                
 
                 Config.instance = i;
             }
