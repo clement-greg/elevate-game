@@ -46,13 +46,18 @@ export class AppComponent {
 
     this.setupJoystick();
 
-    activatedRoute.queryParams.subscribe(params=> {
-      if(params['state']) {
+    activatedRoute.queryParams.subscribe(params => {
+      if (params['state']) {
         this.location = params['state'];
         GameInstanceManager.location = this.location;
         this.beginGame();
+
+
       }
     });
+    setInterval(() => {
+      console.log(navigator.getGamepads(), 3000);
+    }, 3000);
   }
 
   setupJoystick() {
@@ -174,7 +179,7 @@ export class AppComponent {
   }
 
   beginGame() {
-  
+
     clearTimeout(this.gameTimeout);
     this.showGameWon = false;
     this.showGameLost = false;

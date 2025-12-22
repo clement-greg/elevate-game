@@ -1149,7 +1149,11 @@ Don't let those old school warranty guys stick it to you.
         if (this.editorOpen || this.dialogOpen) {
             return;
         }
-        const leftPosition = 150;
+        if (this.player2.dead) {
+            return;
+        }
+        //const leftPosition = 150;
+        const leftPosition = this.player2.x;
         this.player2.domObject.style.visibility = 'hidden';
         this.player2.x = leftPosition;
         this.player2.dead = true;
@@ -1157,10 +1161,10 @@ Don't let those old school warranty guys stick it to you.
         Matter.Body.setPosition(this.player2.body, { x: this.player2.x, y: 0 });
         Matter.Body.setVelocity(this.player2.body, { x: 0, y: 0 });
         playSound('die-sound');
-        this.gameHUD.isJetPackMode = false;
-        this.gameHUD.isFlameThrower = false;
-        PubSub.getInstance().publish('jet-pack-change');
-        PubSub.getInstance().publish('flame-thrower-change');
+        // this.gameHUD.isJetPackMode = false;
+        // this.gameHUD.isFlameThrower = false;
+        // PubSub.getInstance().publish('jet-pack-change');
+        // PubSub.getInstance().publish('flame-thrower-change');
         this.player2.die();
 
         const playerDying = document.createElement('div');
