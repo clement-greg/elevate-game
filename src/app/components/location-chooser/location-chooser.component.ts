@@ -15,11 +15,12 @@ import { newid } from '../../models/utilities/misc-utils';
 export class LocationChooserComponent implements OnDestroy {
   readonly dialogRef = inject(MatDialogRef<LocationChooserComponent>);
 
-  location: 'AZ' | 'UT' | 'NV' = 'UT';
+  location: 'AZ' | 'UT' | 'NV' | 'TX' = 'UT';
   joystickState = new JoystickState(0);
   utahId = newid();
   nvId = newid();
   azId = newid();
+  txId = newid();
 
   constructor() {
     this.setupJoystick();
@@ -54,6 +55,12 @@ export class LocationChooserComponent implements OnDestroy {
     } else if (this.location === 'UT') {
       this.location = 'AZ';
       playSound('menu-move', .5);
+    } else if(this.location === 'TX') {
+      this.location = 'NV';
+      playSound('menu-move', .5);
+    } else if(this.location === 'AZ') {
+      this.location = 'TX';
+      playSound('menu-move', .5);
     } else {
       playSound('alert-sound', .3);
     }
@@ -67,6 +74,12 @@ export class LocationChooserComponent implements OnDestroy {
     } else if (this.location === 'UT') {
       this.location = 'NV';
       playSound('menu-move', .5);
+    } else if (this.location === 'NV') {
+      this.location = 'TX';
+      playSound('menu-move', .5);
+    } else if (this.location === 'TX') {
+      this.location = 'AZ';
+      playSound('menu-move', .5);
     } else {
       playSound('alert-sound', .3);
     }
@@ -78,6 +91,7 @@ export class LocationChooserComponent implements OnDestroy {
     const utVideo = document.getElementById(this.utahId) as HTMLVideoElement;
     const nvVideo = document.getElementById(this.nvId) as HTMLVideoElement;
     const azVideo = document.getElementById(this.azId) as HTMLVideoElement;
+    const txVideo = document.getElementById(this.txId) as HTMLVideoElement;
 
     if (!utVideo) {
       setTimeout(() => this.setVideoState(), 50);
@@ -89,6 +103,7 @@ export class LocationChooserComponent implements OnDestroy {
         utVideo.play();
         nvVideo.pause();
         azVideo.pause();
+        txVideo.pause();
         break;
       case 'AZ':
         utVideo.pause();
@@ -102,6 +117,13 @@ export class LocationChooserComponent implements OnDestroy {
         utVideo.pause();
         azVideo.pause();
         break;
+      case 'TX':
+        txVideo.loop = true;
+        txVideo.play();
+        utVideo.pause();
+        azVideo.pause();
+        nvVideo.pause();
+        break;
     }
   }
 
@@ -114,6 +136,9 @@ export class LocationChooserComponent implements OnDestroy {
     }
     if (this.location === 'NV') {
       return 2;
+    }
+    if (this.location === 'TX') {
+      return 3;
     }
     return 1;
   }

@@ -16,7 +16,7 @@ export class GameWonComponent implements OnDestroy {
 
   showNextText = false;
   showPressA = false;
-  @Input() location: 'AZ' | 'UT' | 'NV' = 'UT';
+  @Input() location: 'AZ' | 'UT' | 'NV' | 'TX' = 'UT';
 
   constructor() {
     setTimeout(() => this.showNextText = true, 1500);

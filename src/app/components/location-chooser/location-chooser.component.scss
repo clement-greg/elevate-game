@@ -53,6 +53,10 @@ h1 {
             transform: scale(.3) perspective(200px) rotateY(-10deg) translateX(350px) !important;
             z-index: 1;
         }
+        &.very-very-right {
+            transform: scale(.05) perspective(200px) rotateY(-10deg) translateX(450px) !important;
+            z-index: 0;
+        }
 
         &.right {
             transform: scale(.8) perspective(200px) rotateY(-10deg) !important;
@@ -111,4 +115,8 @@ h1 {
 .one-selected {
     transform: translateX(238px);
     ;
+}
+
+.four-selected {
+    transform: translateX(-450px);
 }

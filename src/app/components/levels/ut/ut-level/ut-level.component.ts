@@ -26,7 +26,7 @@ export class Level1Component implements AfterViewInit {
   // isVegas = false;
   // isAz = false;
 
-  @Input() location: 'AZ' | 'UT' | 'NV';
+  @Input() location: 'AZ' | 'UT' | 'NV' | 'TX';
 
 
   constructor(private zone: NgZone, dialog: MatDialog) {
@@ -80,6 +80,9 @@ export class Level1Component implements AfterViewInit {
     }
     if (location === 'AZ') {
       this.location = 'AZ';
+    }
+    if (location === 'TX') {
+      this.location = 'TX';
     }
   }
   ngAfterViewInit(): void {

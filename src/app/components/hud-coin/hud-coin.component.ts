@@ -10,21 +10,21 @@ import { Component, OnDestroy } from '@angular/core';
 export class HudCoinComponent implements OnDestroy {
   interval: any;
 
-      frames = 13;
-    runFrame = 0;
+  frames = 13;
+  runFrame = 0;
 
   constructor() {
-    this.interval = setInterval(()=> this.advance(), 100);
+    this.interval = setInterval(() => this.advance(), 100);
   }
   ngOnDestroy(): void {
     clearInterval(this.interval);
   }
 
   private advance() {
-        this.runFrame++;
-        if (this.runFrame > this.frames) {
-            this.runFrame = 0;
-        }
+    this.runFrame++;
+    if (this.runFrame > this.frames) {
+      this.runFrame = 0;
+    }
   }
 
   get backgroundPosition() {

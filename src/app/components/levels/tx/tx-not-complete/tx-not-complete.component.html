@@ -1,0 +1,31 @@
+<div class="conversation-container">
+
+    <div style="    position: absolute;
+    height: 400px;
+    bottom: -87px;
+    left: -48px;
+    z-index: 1;">
+        <app-lottie-player height="400px" [loop]="true" [speed]="1" #lottiePlayer
+            src="https://lottie.host/ebb6e9d8-5e14-4395-af97-3db930873ed4/XWygbcvUgc.json"></app-lottie-player>
+    </div>
+
+    <div style="height: 100%;display: flex;flex-direction: column;">
+        <div style="flex: auto;">
+            <div style="margin-left: 210px;" class="speech-bubble" [id]="id">
+
+            </div>
+        </div>
+
+        <div style="flex: none;">
+            <div style="display: flex;">
+                <div style="flex: 1;">
+
+                </div>
+                <div>
+                    <app-press-a></app-press-a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -15,11 +15,21 @@ import { GameInstanceManager } from './models/base/game-instance';
 import { AzLevelComponent } from './components/levels/az/az-level/az-level.component';
 import { EliPopupComponent } from './components/eli-popup/eli-popup.component';
 import { ActivatedRoute, RouterModule } from '@angular/router';
+import { TxLevelComponent } from './components/levels/tx/tx-level/tx-level.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [Level1Component, CommonModule, TitleScreenComponent, GameWonComponent, EliPopupComponent, GameLostComponent, NvLevelComponent, AzLevelComponent, RouterModule],
+  imports: [Level1Component, 
+    CommonModule, 
+    TitleScreenComponent, 
+    GameWonComponent, 
+    EliPopupComponent, 
+    GameLostComponent, 
+    NvLevelComponent, 
+    AzLevelComponent, 
+    TxLevelComponent,
+    RouterModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -32,7 +42,7 @@ export class AppComponent {
   showGameLost;
   canRestart = true;
   joystickState = new JoystickState(0);
-  location: 'AZ' | 'UT' | 'NV' = 'UT';
+  location: 'AZ' | 'UT' | 'NV' | 'TX' = 'UT';
   showEliPopup = false;
   eliPopupMessage: string;
   wentFullScreen = false;
@@ -55,9 +65,7 @@ export class AppComponent {
 
       }
     });
-    setInterval(() => {
-      console.log(navigator.getGamepads(), 3000);
-    }, 3000);
+
   }
 
   setupJoystick() {
@@ -84,7 +92,7 @@ export class AppComponent {
   goFullScreen() {
     if (!this.wentFullScreen) {
       const elem = document.documentElement;
-      elem.requestFullscreen();
+      //elem.requestFullscreen();
       this.wentFullScreen = true;
     }
 
@@ -166,6 +174,7 @@ export class AppComponent {
         const ref = this.dialog.open(LocationChooserComponent);
         ref.afterClosed().subscribe(result => {
           if (result) {
+            console.log('Location chosen', result);
             this.location = result;
             GameInstanceManager.location = result;
             this.beginGame();

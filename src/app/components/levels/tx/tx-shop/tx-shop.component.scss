@@ -1,0 +1,94 @@
+.choices {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 40px;
+    text-align: center;
+    img {
+        display: inline-block;
+        height: 150px;
+    }
+    >div {
+        position: relative;
+    }
+}
+
+.speech-bubble:after {
+    top: 50px;
+}
+
+.price-container {
+    position: absolute;
+    top: 50px;
+    left: 0;
+
+}
+
+.dialog-container {
+    height: 700px;width: 850px;
+    padding: 30px;
+    position: relative;
+}
+
+.selector-arrow {
+    position: absolute;
+
+}
+
+.cls-1-arrow {
+    opacity: .17;
+}
+
+.cls-1-arrow,
+.cls-2-arrow {
+    fill: #fff;
+}
+
+.cls-2-arrow {
+    opacity: .21;
+}
+
+.cls-3-arrow {
+    fill: #f7931e;
+}
+
+.cls-4-arrow {
+    fill: url(#linear-gradient);
+}
+
+.selector-arrow {
+    transform: translateX(97px);
+    height: 30px;
+    transition: 1s ease;
+}
+
+@keyframes selectedimg {
+    from {
+        transform: scale(.90);
+    }
+    to {
+        transform: scale(1.1);
+    }
+}
+div.selected:not(.purchased) {
+    animation-name: selectedimg;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+@keyframes out {
+    from {
+        scale: 1;
+    }
+    10% {
+        scale: 1.2;
+    }
+    100% {
+        scale: 0;
+    }
+}
+
+div.purchased {
+    animation: out 1s ease;
+    animation-fill-mode: forwards;
+}

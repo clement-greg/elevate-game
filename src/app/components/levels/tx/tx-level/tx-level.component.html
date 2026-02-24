@@ -1,0 +1,72 @@
+<div id="game-container">
+    <div id="bottom-filler" [class.az]="true" >
+    </div>
+    <div id="bg-sky" [class.tx]="true" ></div>
+    <div id="bg-buildings" [class.tx]="true" >
+        <img src="/assets/images/bill-board.png" style="    height: 400px;
+        position: absolute;
+        bottom: 200px;
+        left: 700px;">
+        <video class="bill-board video1" [autoplay]="'autoplay'" [loop]="'loop'" [muted]="'muted'" *ngIf="showBilboardVideos"
+            src="https://elevateh.blob.core.windows.net/cdn/video/hard-knock-life-2025.mp4"></video>
+        <img src="/assets/images/bill-board-2.png" style="    height: 400px;
+        position: absolute;
+        bottom: 200px;
+        left: 2500px;">
+        <video class="bill-board video2" [autoplay]="'autoplay'" [loop]="'loop'" [muted]="'muted'" *ngIf="showBilboardVideos"
+            src="https://elevateh.blob.core.windows.net/cdn/video/pool-and-pest-2025.mp4"></video>
+
+    </div>
+    <div id="bg-plants" [class.tx]="true">
+
+    </div>
+
+    <div id="game-div">
+
+        <img src="/assets/images/elevate-ac.svg" style="height: 400px;position: absolute;bottom: 143px;"
+            [style.left]="applianceShopLeft">
+        <img src="/assets/images/home.svg" [style.left]="homeLeft"
+            style="height: 400px;position: absolute;bottom: 162px;">
+
+        <div id="construction-worker" style="position: absolute;bottom: 64px;height: 135px;" [style.left]="initialLeft">
+            <app-lottie-player src="https://lottie.host/b9dca8c1-8e8a-46fc-9096-7ae9fab3aa4c/tVDtL91sWN.json"
+                height="135px" [intermission]="3000">
+
+            </app-lottie-player>
+
+
+        </div>
+
+
+        <div [style.left]="lastGuyLeft" style="position: absolute;bottom: 64px;height: 135px">
+            <app-lottie-player src="https://lottie.host/b9dca8c1-8e8a-46fc-9096-7ae9fab3aa4c/tVDtL91sWN.json"
+                height="135px" [intermission]="5000"></app-lottie-player>
+        </div>
+
+        <div *ngIf="shopEntranceVisible" [style.left]="shopEntranceAvailableSignLeft" style="position: absolute; top: 100px;">
+
+            <app-lottie-player src="https://lottie.host/47543bb4-b0a3-4bef-9e26-fa824720d4f4/0c6OcFneVE.json" height="300px"></app-lottie-player>
+        </div>
+
+
+    </div>
+
+</div>
+
+<app-tool-bar *ngIf="showToolbar"></app-tool-bar>
+
+<div id="snackbar">
+    Here is a snackbar message
+</div>
+<div id="debugger"></div>
+
+<app-hud></app-hud>
+
+
+<audio src="/assets/music/az-bg.aac" loop [volume]=".1" id="bg-music"></audio>
+
+
+<div class="disco-time" *ngIf="showDiscoTime">
+    <img src="/assets/images/disco-boy.png" style="height: 100px;">
+    <h1>It's<br>Go<br>Time</h1>
+</div>

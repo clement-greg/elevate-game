@@ -80,7 +80,6 @@ Guess what? Your A/C has decided to take an early retirement, and you're going t
         this.lottiePlayer.pause();
         pauseSound('synth-voice');
         this.showA = true;
-        console.log('here')
       }
     }
   }

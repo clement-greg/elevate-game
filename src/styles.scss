@@ -634,6 +634,10 @@ font-style: normal !important;
     background-image: url(/assets/images/bg-sky-snow.png);
 }
 
+#bg-sky.tx {
+    background-image: url(/assets/images/bg-sky-tx.png);
+}
+
 #bg-buildings {
     background-image: url(/assets/images/bg-buildings-2.png);
     background-repeat: repeat-x;
@@ -648,6 +652,10 @@ font-style: normal !important;
 
 #bg-buildings.az {
     background-image: url(/assets/images/bg-buildings-az.png);
+}
+
+#bg-buildings.tx {
+    background-image: url(/assets/images/bg-buildings-tx.png);
 }
 
 #bg-buildings.snow {
@@ -672,6 +680,12 @@ font-style: normal !important;
 #bg-plants.az {
     background-image: url(/assets/images/bg-plants-az.png);
 
+
+
+}
+
+#bg-plants.tx {
+    background-image: url(/assets/images/bg-plants-tx.png); 
 }
 
 #bg-plants.snow {

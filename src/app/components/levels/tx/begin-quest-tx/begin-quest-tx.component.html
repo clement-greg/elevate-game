@@ -1,0 +1,24 @@
+<div class="conversation-container">
+
+
+    <div style="position: absolute;height: 400px;bottom: -54px; left: -116px;">
+        <app-lottie-player height="400px" [loop]="true" [speed]="1" #lottiePlayer
+            src="https://lottie.host/ebb6e9d8-5e14-4395-af97-3db930873ed4/XWygbcvUgc.json"></app-lottie-player>
+    </div>
+
+    <div style="display: flex; flex-direction: column;height: 100%;">
+        <div style="flex: 1;">
+            <div style="margin-left: 138px;max-width: 378px;;" class="speech-bubble" [id]="id">
+
+            </div>
+        </div>
+        <div style="flex: none;text-align: center;">
+            <app-press-a *ngIf="showA"></app-press-a>
+        </div>
+    </div>
+
+    <div style="position: absolute;height: 400px;bottom: -87px; right: 0">
+        <img src="/assets/images/jimmy-single.svg" style="height: 100%; width: 100%; transform: scaleX(-1);">
+    </div>
+
+</div>

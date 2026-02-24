@@ -84,7 +84,7 @@ export class Game {
         return Game.applianceShopLeft + 450;
     }
 
-    constructor(private zone: NgZone, private location: 'AZ' | 'UT' | 'NV') {
+    constructor(private zone: NgZone, private location: 'AZ' | 'UT' | 'NV' | 'TX') {
         this.initialize(zone);
         this.joystickState.onButtonPress = this.joystickButtonPress.bind(this);
     }
@@ -153,6 +153,9 @@ export class Game {
                 break;
             case 'UT':
                 level = 'ut.json';
+                break;
+            case 'TX':
+                level = 'tx.json';
                 break;
         }
         HTTP.getData(`./assets/levels/${level}`).then(json => {
@@ -243,7 +246,6 @@ export class Game {
                 this.doSecondaryKey();
                 break;
         }
-        //console.log(btn);
     }
 
     doSecondaryKey() {
@@ -264,7 +266,6 @@ export class Game {
     }
 
     doPrimaryKey() {
-        console.log({ infotBarier: this.infoBarier, showCloseBarrier: this.showCloseBarrier });
         if (this.infoBarier) {
             if (this.showQuestBegin) {
                 PubSub.getInstance().publish('close-begin-quest');
@@ -1378,7 +1379,7 @@ export class GameHUD {
     isJetPackMode: any;
     isFlameThrower: boolean;
 
-    constructor(private zone: NgZone, private location: 'AZ' | 'UT' | 'NV') {
+    constructor(private zone: NgZone, private location: 'AZ' | 'UT' | 'NV' | 'TX') {
 
     }
 
@@ -1411,7 +1412,7 @@ export class GameHUD {
 
 
     get money() {
-        return this._coinCount * (this.location === 'AZ' ? 150 : 20);
+        return this._coinCount * (this.location === 'AZ' || this.location === 'TX' ? 150 : 20);
     }
 
     setTimeRemaining(value: string) {

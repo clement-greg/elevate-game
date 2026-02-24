@@ -229,7 +229,6 @@ Wander through our collection, pick your favorite, and head to checkout. Any A/C
         this.player.pause();
         pauseSound('synth-voice');
         this.showA = true;
-        console.log('here')
       }
     }
   }

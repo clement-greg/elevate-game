@@ -7,7 +7,7 @@ import { Game } from "./game";
 
 export class GameInstanceManager {
 
-    static location: 'AZ' | 'UT' | 'NV';
+    static location: 'AZ' | 'UT' | 'NV' | 'TX';
     static gameInstance: Game;
 
     static getInstance(zone: NgZone = null): Game {

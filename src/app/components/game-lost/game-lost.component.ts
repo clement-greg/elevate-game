@@ -16,7 +16,7 @@ export class GameLostComponent implements OnDestroy {
   showPressA = false;
   pulseCount = 0;
   @ViewChild('jimmy') jimmy: LottiePlayerComponent;
-  @Input() location: 'AZ' | 'UT' | 'NV' = 'UT';
+  @Input() location: 'AZ' | 'UT' | 'NV' | 'TX' = 'UT';
 
   constructor() {
     setTimeout(() => this.showNextText = true, 1500);
