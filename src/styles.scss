@@ -31,6 +31,9 @@ body {
     background-image: url(/assets/images/bg-sidewalk.png);
     background-repeat: repeat-x;
     background-position-y: bottom;
+    &.tx {
+        background-image: url(/assets/images/bg-path.png);
+    }
 }
 
 
@@ -692,12 +695,15 @@ font-style: normal !important;
     background-image: url(/assets/images/bg-plans-snow.png);
 }
 
-#foreground {
-    background-image: url(/assets/images/bg-sidewalk.png);
-    background-repeat: repeat-x;
-    height: var(--game-height);
-    position: absolute;
-}
+// #foreground {
+//     background-image: url(/assets/images/bg-sidewalk.png);
+//     background-repeat: repeat-x;
+//     height: var(--game-height);
+//     position: absolute;
+//     &.tx {
+//         background-image: url(/assets/images/bg-path.png);
+//     }
+// }
 
 #snackbar {
     position: fixed;

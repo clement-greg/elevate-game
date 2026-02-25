@@ -362,6 +362,19 @@ export class Game {
                         break;
                 }
                 break;
+            case 'TX':
+                switch (number) {
+                    case 1:
+                        this.fridge = new AC3(this.engine, this.playerLeft - 30, this.playerTop - 72);
+                        break;
+                    case 2:
+                        this.fridge = new AC1(this.engine, this.playerLeft - 30, this.playerTop - 72);
+                        break;
+                    case 3:
+                        this.fridge = new AC2(this.engine, this.playerLeft - 30, this.playerTop - 72);
+                        break;
+                }
+                break;
             default:
                 switch (number) {
                     case 1:

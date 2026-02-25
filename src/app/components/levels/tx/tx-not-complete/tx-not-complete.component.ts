@@ -14,9 +14,11 @@ import { newid } from '../../../../models/utilities/misc-utils';
   styleUrl: './tx-not-complete.component.scss'
 })
 export class TxNotCompleteComponent implements OnDestroy {
-  private message = `You're not done yet!
-  
-  Collect all the tools and then buy an A/C.  Once your done with those two things, come back here.`;
+  private message = `You ain’t done just yet!
+
+Round up all them tools, then go on and snag yourself an A/C unit.
+
+Once you’ve checked both those boxes, mosey on back here.`;
   id = newid();
 
   @ViewChild('lottiePlayer') lottiePlayer :LottiePlayerComponent;

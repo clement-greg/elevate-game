@@ -46,15 +46,25 @@ export class TxShopComponent implements OnDestroy {
 
   ];
 
+//   statements = [
+//     `Howdy Jimmy!
+
+// Welcome to Elevate A/C! 🎉 We've got the goods to keep you cool. 🏠
+
+// Wander through our collection, pick your favorite, and head to checkout. Any A/C unit will do, but here’s a tip: the fancier the A/C, the bigger the smiles. 😊✨`,
+//     'R22 and R410a systems are no longer manufactured, so any upgrade in on side of a split system will create incompatibility on the other side.',
+//     'That unfortunately means more cost to you!'
+//   ];
+
   statements = [
-    `Hey Jimmy!
+    `Howdy Jimmy!
+Welcome to Elevate A/C, friend! 🎉
+We’ve got everything you need to keep your home cooler than a tall glass of sweet tea on a July afternoon. 🏠`,
+`Take a stroll through our lineup, pick what suits your fancy, and mosey on over to checkout. Any A/C unit’ll get the job done, but here’s a little insider wisdom: the fancier the unit, the bigger the grin on your face. 😊✨`,
+`Now, just so you’re in the know — R22 and R410a systems ain’t bein’ made anymore, so if you upgrade one side of a split system, the other side won’t play nice with it.`,
+`And sadly, partner… that means it’ll cost ya a bit more.`
 
-Welcome to Elevate A/C! 🎉 We've got the goods to keep you cool. 🏠
-
-Wander through our collection, pick your favorite, and head to checkout. Any A/C unit will do, but here’s a tip: the fancier the A/C, the bigger the smiles. 😊✨`,
-    'R22 and R410a systems are no longer manufactured, so any upgrade in on side of a split system will create incompatibility on the other side.',
-    'That unfortunately means more cost to you!'
-  ];
+  ]
 
   purchased = false;
 

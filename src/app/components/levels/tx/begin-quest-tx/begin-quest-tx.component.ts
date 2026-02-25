@@ -16,12 +16,17 @@ import { newid } from '../../../../models/utilities/misc-utils';
 export class BeginQuestTxComponent implements OnDestroy {
 
   statements = [
-    `Uh-oh, Jimmy! 🛠️🚨
+    `Uh‑oh, Jimmy! 🛠️🚨
+Looks like your A/C done hung up its spurs and rode off into the sunset, and you’re fixin’ to sweat from your hairline clear down to your hind end.
+And wouldn’t ya know it — my dang tools have gone missin’!
+If you can round ’em up and mosey over to the store for a brand‑spankin’ new A/C, I’ll come on by and work my magic like a good ol’ Texas handyman.`,
 
-Guess what? Your A/C has decided to take an early retirement, and you're going to be sweating from head to crack. My tools are lost! If you can gather them and snag a brand-new A/C from the store, I’ll be right there to work my magic.`,
-    `Bad news Bruh! You're going to need a lot of coin 💰.
-  The new A2L incompatabilities are going to end up costing you thousands. 💰💰💰💰`,
-    `Oh, and look out for the dirt-bag warranty guys. Sketchy out of pocket costs, contract loopholes and plan limits could end up costing you thousands on a 'Covered' warranty claim😡😡😡😡😡`
+`Bad news, partner…
+You’re gonna need a whole heap o’ cash 💰.
+These new A2L incompatibilities are rougher than a cactus saddle and liable to cost you thousands. 💰💰💰💰`,
+
+`And one more thing — keep your eyes peeled for them no‑good warranty varmints.
+Shady out‑of‑pocket charges, sneaky contract loopholes, and “gotcha” plan limits can leave you payin’ big bucks on a claim that’s supposed to be “covered.” 😡😡😡😡`
   ];
   id = newid();
   statementNumber = 0;
