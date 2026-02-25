@@ -92,6 +92,9 @@ export class AppComponent {
   goFullScreen() {
     if (!this.wentFullScreen) {
       const elem = document.documentElement;
+      if(Config.getInstance().goFullScreenOnStart) {
+         elem.requestFullscreen();
+      }
       //elem.requestFullscreen();
       this.wentFullScreen = true;
     }

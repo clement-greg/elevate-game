@@ -22,6 +22,7 @@ export class Config {
     level: string;
     allowDebug: boolean;
     easyMode: boolean;
+    goFullScreenOnStart: boolean;
 
     private static instance: Config;
     static getInstance() {
