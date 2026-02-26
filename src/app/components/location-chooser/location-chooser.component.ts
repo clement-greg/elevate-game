@@ -110,12 +110,14 @@ export class LocationChooserComponent implements OnDestroy {
         nvVideo.pause();
         azVideo.loop = true;
         azVideo.play();
+        txVideo.pause();
         break;
       case 'NV':
         nvVideo.loop = true;
         nvVideo.play();
         utVideo.pause();
         azVideo.pause();
+        txVideo.pause();
         break;
       case 'TX':
         txVideo.loop = true;
