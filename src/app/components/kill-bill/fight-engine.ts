@@ -181,7 +181,7 @@ export class FightEngine {
         this.updateBow(timestamp);
         break;
       case 'countdown':
-        this.updateCountdown(timestamp);
+        this.updateCountdown(timestamp, inputState);
         break;
       case 'fight':
         this.updateFight(timestamp, inputState);
@@ -229,7 +229,7 @@ export class FightEngine {
     }
   }
 
-  private updateCountdown(timestamp: number) {
+  private updateCountdown(timestamp: number, input: InputState) {
     const elapsed = timestamp - this.countdownStartTime;
     const newCount = 3 - Math.floor(elapsed / 1000);
 
@@ -238,10 +238,16 @@ export class FightEngine {
       this.callbacks.onCountdownTick(this.countdownValue);
     }
 
-    if (elapsed >= 4000) {
-      // "FIGHT!" has been shown for 1 second
+    if (elapsed >= 3000) {
+      // Enable controls as soon as "FIGHT!" appears
       this.jimmy.isControllable = true;
       this.bill.isControllable = true;
+      this.processPlayerInput(input);
+      this.ai.update(timestamp);
+    }
+
+    if (elapsed >= 4000) {
+      // "FIGHT!" has been shown for 1 second
       this.setPhase('fight');
     }
 
