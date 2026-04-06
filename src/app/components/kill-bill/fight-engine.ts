@@ -1,6 +1,7 @@
 import { Fighter } from './fighter';
 import { AIController, Difficulty } from './ai-controller';
 import { InputManager, InputState } from './input-manager';
+import { RainEffect } from './rain-effect';
 
 export type GamePhase = 'title' | 'bow' | 'countdown' | 'fight' | 'roundEnd' | 'result';
 
@@ -42,6 +43,7 @@ export class FightEngine {
   private jimmyLogo!: HTMLImageElement;
   private billLogo!: HTMLImageElement;
   private bloodPool!: HTMLImageElement;
+  private rain: RainEffect;
 
   constructor(canvas: HTMLCanvasElement, callbacks: GameCallbacks) {
     this.canvas = canvas;
@@ -50,6 +52,7 @@ export class FightEngine {
     this.input = new InputManager();
 
     const groundY = canvas.height - 250;
+    this.rain = new RainEffect(canvas.width, canvas.height, groundY);
 
     this.jimmy = new Fighter({
       name: 'Jimmy',
@@ -86,7 +89,7 @@ export class FightEngine {
 
   private loadImage(key: string): Promise<HTMLImageElement> {
     const paths: Record<string, string> = {
-      bg: 'assets/images/kill-bill/bg-3.png',
+      bg: 'assets/images/kill-bill/bg-4.png',
       jimmyLogo: 'assets/images/kill-bill/elevate.png',
       billLogo: 'assets/images/kill-bill/merica-home-warrany.png',
       bloodPool: 'assets/images/kill-bill/blood-pool.png',
@@ -165,6 +168,7 @@ export class FightEngine {
 
   private gameLoop = (timestamp: number) => {
     this.update(timestamp);
+    this.rain.update();
     this.render(timestamp);
     this.input.savePreviousState();
     this.animationFrameId = requestAnimationFrame(this.gameLoop);
@@ -203,6 +207,7 @@ export class FightEngine {
     this.bill.update(timestamp, this.canvas.width);
 
     if (this.input.isJustPressed(input, 'start') || this.input.isJustPressed(input, 'punch')) {
+      document.documentElement.requestFullscreen?.();
       this.startMatch();
     }
   }
@@ -444,12 +449,14 @@ export class FightEngine {
         break;
       case 'bow':
         this.renderArena();
+        this.rain.render(this.ctx);
         this.renderScoreboard();
         this.renderFighters();
         this.renderHealthBars();
         break;
       case 'countdown':
         this.renderArena();
+        this.rain.render(this.ctx);
         this.renderScoreboard();
         this.renderFighters();
         this.renderHealthBars();
@@ -457,12 +464,14 @@ export class FightEngine {
         break;
       case 'fight':
         this.renderArena();
+        this.rain.render(this.ctx);
         this.renderScoreboard();
         this.renderFighters();
         this.renderHealthBars();
         break;
       case 'roundEnd':
         this.renderArena();
+        this.rain.render(this.ctx);
         this.renderScoreboard();
         this.renderFighters();
         this.renderHealthBars();
@@ -470,6 +479,7 @@ export class FightEngine {
         break;
       case 'result':
         this.renderArena();
+        this.rain.render(this.ctx);
         this.renderScoreboard();
         this.renderBloodPool(timestamp);
         this.renderFighters();
@@ -631,6 +641,9 @@ export class FightEngine {
 
     // Background image
     ctx.drawImage(this.bgImage, 0, 0, canvas.width, canvas.height);
+
+    // Rain & steam behind overlay
+    this.rain.render(ctx);
 
     // Dark overlay for contrast
     ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
@@ -838,10 +851,10 @@ export class FightEngine {
     this.jimmy.groundY = groundY;
     this.bill.groundY = groundY;
 
-    if (this.phase === 'title' || this.phase === 'countdown') {
-      this.jimmy.y = groundY;
-      this.bill.y = groundY;
-    }
+    this.jimmy.y = groundY;
+    this.bill.y = groundY;
+
+    this.rain.resize(width, height, groundY);
   }
 
   destroy() {
