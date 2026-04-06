@@ -43,6 +43,10 @@ export class FightEngine {
   private jimmyLogo!: HTMLImageElement;
   private billLogo!: HTMLImageElement;
   private bloodPool!: HTMLImageElement;
+  private evilWinsVideo!: HTMLVideoElement;
+  private evilWinsLoopVideo!: HTMLVideoElement;
+  private goodWinsVideo!: HTMLVideoElement;
+  private goodWinsLoopVideo!: HTMLVideoElement;
   private rain: RainEffect;
 
   constructor(canvas: HTMLCanvasElement, callbacks: GameCallbacks) {
@@ -83,6 +87,42 @@ export class FightEngine {
       this.loadImage('billLogo').then(img => this.billLogo = img),
       this.loadImage('bloodPool').then(img => this.bloodPool = img),
     ]);
+
+    // Preload evil wins video
+    this.evilWinsVideo = document.createElement('video');
+    this.evilWinsVideo.src = 'assets/images/kill-bill/evil-wins.mp4';
+    this.evilWinsVideo.muted = true;
+    this.evilWinsVideo.playsInline = true;
+    this.evilWinsVideo.preload = 'auto';
+    this.evilWinsVideo.addEventListener('ended', () => {
+      this.evilWinsLoopVideo.currentTime = 0;
+      this.evilWinsLoopVideo.play();
+    });
+
+    this.evilWinsLoopVideo = document.createElement('video');
+    this.evilWinsLoopVideo.src = 'assets/images/kill-bill/evil-wins-loop.mp4';
+    this.evilWinsLoopVideo.muted = true;
+    this.evilWinsLoopVideo.playsInline = true;
+    this.evilWinsLoopVideo.preload = 'auto';
+    this.evilWinsLoopVideo.loop = true;
+
+    this.goodWinsVideo = document.createElement('video');
+    this.goodWinsVideo.src = 'assets/images/kill-bill/good-wins.mp4';
+    this.goodWinsVideo.muted = true;
+    this.goodWinsVideo.playsInline = true;
+    this.goodWinsVideo.preload = 'auto';
+    this.goodWinsVideo.addEventListener('ended', () => {
+      this.goodWinsLoopVideo.currentTime = 0;
+      this.goodWinsLoopVideo.play();
+    });
+
+    this.goodWinsLoopVideo = document.createElement('video');
+    this.goodWinsLoopVideo.src = 'assets/images/kill-bill/good-wins-loop.mp4';
+    this.goodWinsLoopVideo.muted = true;
+    this.goodWinsLoopVideo.playsInline = true;
+    this.goodWinsLoopVideo.preload = 'auto';
+    this.goodWinsLoopVideo.loop = true;
+
     this.setPhase('title');
     this.gameLoop(0);
   }
@@ -298,6 +338,9 @@ export class FightEngine {
         this.resultTime = timestamp;
         this.setPhase('result');
         this.callbacks.onMatchEnd(this.winner);
+        // Play evil wins video
+        this.evilWinsVideo.currentTime = 0;
+        this.evilWinsVideo.play();
       } else {
         this.roundEndTime = timestamp;
         this.setPhase('roundEnd');
@@ -312,6 +355,9 @@ export class FightEngine {
         this.resultTime = timestamp;
         this.setPhase('result');
         this.callbacks.onMatchEnd(this.winner);
+        // Play good wins video
+        this.goodWinsVideo.currentTime = 0;
+        this.goodWinsVideo.play();
       } else {
         this.roundEndTime = timestamp;
         this.setPhase('roundEnd');
@@ -340,9 +386,23 @@ export class FightEngine {
     this.jimmy.update(timestamp, this.canvas.width);
     this.bill.update(timestamp, this.canvas.width);
 
+    // Stop rain after 4 seconds when Jimmy wins
+    if (this.winner === 'Jimmy' && timestamp - this.resultTime > 4000) {
+      this.rain.pause();
+    }
+
     // Allow restart after 3 seconds
     if (timestamp - this.resultTime > 3000) {
       if (this.input.isJustPressed(input, 'start') || this.input.isJustPressed(input, 'punch')) {
+        this.evilWinsVideo.pause();
+        this.evilWinsVideo.currentTime = 0;
+        this.evilWinsLoopVideo.pause();
+        this.evilWinsLoopVideo.currentTime = 0;
+        this.goodWinsVideo.pause();
+        this.goodWinsVideo.currentTime = 0;
+        this.goodWinsLoopVideo.pause();
+        this.goodWinsLoopVideo.currentTime = 0;
+        this.rain.resume();
         this.resetFighters();
         this.setPhase('title');
       }
@@ -478,7 +538,11 @@ export class FightEngine {
         this.renderRoundEnd(timestamp);
         break;
       case 'result':
-        this.renderArena();
+        if (this.winner === 'Bill') {
+          this.renderWinsBackground(this.evilWinsVideo);
+        } else {
+          this.renderWinsBackground(this.goodWinsVideo);
+        }
         this.rain.render(this.ctx);
         this.renderScoreboard();
         this.renderBloodPool(timestamp);
@@ -494,6 +558,33 @@ export class FightEngine {
 
     // Background image
     ctx.drawImage(this.bgImage, 0, 0, canvas.width, canvas.height);
+  }
+
+  private renderWinsBackground(video: HTMLVideoElement) {
+    const { ctx, canvas } = this;
+
+    // For Bill wins, switch to loop video once intro ends
+    if (this.winner === 'Bill' && this.evilWinsVideo.ended && this.evilWinsLoopVideo.readyState >= 2) {
+      ctx.drawImage(this.evilWinsLoopVideo, 0, 0, canvas.width, canvas.height);
+      return;
+    }
+
+    // For Jimmy wins, switch to loop video once intro ends
+    if (this.winner === 'Jimmy' && this.goodWinsVideo.ended && this.goodWinsLoopVideo.readyState >= 2) {
+      ctx.drawImage(this.goodWinsLoopVideo, 0, 0, canvas.width, canvas.height);
+      return;
+    }
+
+    if (video.readyState >= 2) {
+      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+      // Freeze on last frame (for good-wins)
+      if (video.ended) {
+        video.pause();
+      }
+    } else {
+      // Fallback to static bg until video is ready
+      ctx.drawImage(this.bgImage, 0, 0, canvas.width, canvas.height);
+    }
   }
 
   private renderFighters() {
@@ -796,9 +887,11 @@ export class FightEngine {
   private renderResult(timestamp: number) {
     const { ctx, canvas } = this;
 
-    // Darken background
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    // Darken background (only for Bill wins)
+    if (this.winner === 'Bill') {
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }
 
     const pulse = Math.sin(timestamp / 200) * 0.3 + 0.7;
     const isJimmy = this.winner === 'Jimmy';

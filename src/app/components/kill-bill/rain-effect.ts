@@ -51,6 +51,10 @@ export class RainEffect {
   private groundY: number;
   private canvasW: number;
   private canvasH: number;
+  private _paused = false;
+
+  pause() { this._paused = true; }
+  resume() { this._paused = false; }
 
   constructor(canvasWidth: number, canvasHeight: number, groundY: number, dropCount = 200) {
     this.canvasW = canvasWidth;
@@ -93,6 +97,8 @@ export class RainEffect {
   }
 
   update() {
+    if (this._paused) return;
+
     // Update drops
     for (const drop of this.drops) {
       drop.y += drop.speed;
@@ -189,6 +195,8 @@ export class RainEffect {
   }
 
   render(ctx: CanvasRenderingContext2D) {
+    if (this._paused) return;
+
     ctx.save();
     ctx.lineCap = 'round';
     ctx.lineWidth = 1.5;
