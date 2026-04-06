@@ -41,6 +41,7 @@ export class FightEngine {
   private bgImage!: HTMLImageElement;
   private jimmyLogo!: HTMLImageElement;
   private billLogo!: HTMLImageElement;
+  private bloodPool!: HTMLImageElement;
 
   constructor(canvas: HTMLCanvasElement, callbacks: GameCallbacks) {
     this.canvas = canvas;
@@ -77,6 +78,7 @@ export class FightEngine {
       this.loadImage('bg').then(img => this.bgImage = img),
       this.loadImage('jimmyLogo').then(img => this.jimmyLogo = img),
       this.loadImage('billLogo').then(img => this.billLogo = img),
+      this.loadImage('bloodPool').then(img => this.bloodPool = img),
     ]);
     this.setPhase('title');
     this.gameLoop(0);
@@ -87,6 +89,7 @@ export class FightEngine {
       bg: 'assets/images/kill-bill/bg-3.png',
       jimmyLogo: 'assets/images/kill-bill/elevate.png',
       billLogo: 'assets/images/kill-bill/merica-home-warrany.png',
+      bloodPool: 'assets/images/kill-bill/blood-pool.png',
     };
     return new Promise((resolve, reject) => {
       const img = new Image();
@@ -462,6 +465,7 @@ export class FightEngine {
       case 'result':
         this.renderArena();
         this.renderScoreboard();
+        this.renderBloodPool(timestamp);
         this.renderFighters();
         this.renderHealthBars();
         this.renderResult(timestamp);
@@ -479,6 +483,25 @@ export class FightEngine {
   private renderFighters() {
     this.jimmy.draw(this.ctx);
     this.bill.draw(this.ctx);
+  }
+
+  private renderBloodPool(timestamp: number) {
+    const delay = 2000;
+    const elapsed = timestamp - this.resultTime - delay;
+    if (elapsed < 0) return;
+
+    const growDuration = 800; // ms to reach full size
+    const scale = Math.min(1, elapsed / growDuration);
+    const loser = this.winner === 'Jimmy' ? this.bill : this.jimmy;
+
+    const fullW = 200;
+    const fullH = fullW * (this.bloodPool.height / this.bloodPool.width);
+    const w = fullW * scale;
+    const h = fullH * scale;
+
+    // Position at loser's feet
+    const groundY = loser.y + loser.height / 2;
+    this.ctx.drawImage(this.bloodPool, loser.x - w / 2, groundY - h * 0.3, w, h);
   }
 
   private renderScoreboard() {

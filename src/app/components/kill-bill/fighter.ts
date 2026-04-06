@@ -65,7 +65,7 @@ export class Fighter {
   private hitRegistered = false;
 
   // Attack hitbox
-  attackRange = 110;
+  attackRange = 50;
   attackDamage = 8;
   kickDamage = 12;
 
