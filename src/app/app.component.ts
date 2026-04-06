@@ -14,7 +14,7 @@ import { NvLevelComponent } from './components/levels/nv/nv-level/nv-level.compo
 import { GameInstanceManager } from './models/base/game-instance';
 import { AzLevelComponent } from './components/levels/az/az-level/az-level.component';
 import { EliPopupComponent } from './components/eli-popup/eli-popup.component';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { TxLevelComponent } from './components/levels/tx/tx-level/tx-level.component';
 
 @Component({
@@ -51,7 +51,8 @@ export class AppComponent {
 
   constructor(private zone: NgZone,
     private activatedRoute: ActivatedRoute,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private router: Router
   ) {
 
     this.setupJoystick();
@@ -72,7 +73,12 @@ export class AppComponent {
     this.joystickState.onButtonPress = this.joystickButtonPress.bind(this);
   }
 
+  private get isKillBillActive(): boolean {
+    return this.router.url.startsWith('/kill-bill');
+  }
+
   joystickButtonPress(btn: number) {
+    if (this.isKillBillActive) return;
     this.goFullScreen();
 
     switch (btn) {
@@ -158,6 +164,7 @@ export class AppComponent {
 
   @HostListener('window:keydown', ['$event'])
   handleKeyDown(event: KeyboardEvent) {
+    if (this.isKillBillActive) return;
     if (this.primaryButtons.indexOf(event.key) > -1 && !this.startGame && this.canRestart) {
       this.doGameStart();
       this.goFullScreen();

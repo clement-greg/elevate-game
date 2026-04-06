@@ -1,0 +1,25 @@
+<div class="kill-bill-container">
+  <div class="loading-screen" *ngIf="loading">
+    <div class="loading-text">LOADING...</div>
+  </div>
+  <canvas #fightCanvas class="fight-canvas"></canvas>
+  <div class="controls-overlay" *ngIf="phase === 'title'">
+    <div class="controls-hint">
+      <span class="key-group">
+        <span class="key">W/A/S/D</span> Move
+      </span>
+      <span class="key-group">
+        <span class="key">J</span> Punch
+      </span>
+      <span class="key-group">
+        <span class="key">K</span> Kick
+      </span>
+      <span class="key-group">
+        <span class="key">L</span> Block
+      </span>
+      <span class="key-group">
+        <span class="key">SPACE</span> Jump
+      </span>
+    </div>
+  </div>
+</div>
