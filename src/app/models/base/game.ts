@@ -91,6 +91,10 @@ export class Game {
     completionBarrier: any;
 
     advanceInterval;
+    private rafId = 0;
+    private lastTimestamp = 0;
+    private accumulator = 0;
+    private readonly FIXED_STEP = 1000 / 60;
 
     initialize(zone: NgZone) {
         if (!zone) {
@@ -104,8 +108,10 @@ export class Game {
 
 
         this.engine = Engine.create();
-        clearInterval(this.advanceInterval);
-        this.advanceInterval = setInterval(() => this.run(), 1000 / Config.getInstance().framesPerSecond);
+        cancelAnimationFrame(this.rafId);
+        this.lastTimestamp = 0;
+        this.accumulator = 0;
+        this.rafId = requestAnimationFrame(this.gameLoop);
         this.engine.gravity.y = Config.getInstance().gravity;
 
         this.player2 = new Player2(this.engine, 80, 0, 71, 96);
@@ -226,8 +232,28 @@ export class Game {
 
     }
 
+    private gameLoop = (timestamp: number) => {
+        if (this.lastTimestamp === 0) {
+            this.lastTimestamp = timestamp;
+        }
+
+        const frameTime = Math.min(timestamp - this.lastTimestamp, 100);
+        this.lastTimestamp = timestamp;
+        this.accumulator += frameTime;
+
+        while (this.accumulator >= this.FIXED_STEP) {
+            Engine.update(this.engine, this.FIXED_STEP);
+            this.advance();
+            this.accumulator -= this.FIXED_STEP;
+        }
+
+        if (this.running) {
+            this.rafId = requestAnimationFrame(this.gameLoop);
+        }
+    };
+
     run() {
-        Engine.update(this.engine, 1000 / Config.getInstance().framesPerSecond);
+        Engine.update(this.engine, this.FIXED_STEP);
         this.advance();
     }
 
@@ -1347,6 +1373,7 @@ Don't let those old school warranty guys stick it to you.
     stop() {
 
         this.running = false;
+        cancelAnimationFrame(this.rafId);
         clearInterval(this.internval);
         clearInterval(this.advanceInterval);
         pauseSound('flame-thrower')

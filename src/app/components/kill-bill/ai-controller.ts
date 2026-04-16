@@ -110,14 +110,12 @@ export class AIController {
       case 'approach': {
         const direction = this.opponent.x > this.fighter.x ? 1 : -1;
         this.fighter.velocityX = direction * this.fighter.moveSpeed * this.config.moveSpeed;
-        this.fighter.x += this.fighter.velocityX;
         this.fighter.setState('run');
         break;
       }
       case 'retreat': {
         const direction = this.opponent.x > this.fighter.x ? -1 : 1;
         this.fighter.velocityX = direction * this.fighter.moveSpeed * this.config.moveSpeed * 0.7;
-        this.fighter.x += this.fighter.velocityX;
         this.fighter.setState('run');
         break;
       }

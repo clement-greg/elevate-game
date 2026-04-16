@@ -49,6 +49,12 @@ export class FightEngine {
   private goodWinsLoopVideo!: HTMLVideoElement;
   private rain: RainEffect;
 
+  // Fixed timestep for consistent speed across refresh rates
+  private readonly FIXED_STEP = 1000 / 60;
+  private accumulator = 0;
+  private lastTimestamp = 0;
+  private simTime = 0;
+
   constructor(canvas: HTMLCanvasElement, callbacks: GameCallbacks) {
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d')!;
@@ -161,13 +167,13 @@ export class FightEngine {
       this.isFirstRound = false;
       this.setPhase('bow');
       this.bowPhase = 1;
-      this.bowStartTime = performance.now();
+      this.bowStartTime = this.simTime;
       this.jimmy.forceState('bow');
       this.bill.forceState('bow');
     } else {
       this.setPhase('countdown');
       this.countdownValue = 3;
-      this.countdownStartTime = performance.now();
+      this.countdownStartTime = this.simTime;
     }
     this.jimmy.isControllable = false;
     this.bill.isControllable = false;
@@ -207,9 +213,23 @@ export class FightEngine {
   }
 
   private gameLoop = (timestamp: number) => {
-    this.update(timestamp);
-    this.rain.update();
-    this.render(timestamp);
+    if (this.lastTimestamp === 0) {
+      this.lastTimestamp = timestamp;
+      this.simTime = timestamp;
+    }
+
+    const frameTime = Math.min(timestamp - this.lastTimestamp, 100);
+    this.lastTimestamp = timestamp;
+    this.accumulator += frameTime;
+
+    while (this.accumulator >= this.FIXED_STEP) {
+      this.simTime += this.FIXED_STEP;
+      this.update(this.simTime);
+      this.rain.update();
+      this.accumulator -= this.FIXED_STEP;
+    }
+
+    this.render(this.simTime);
     this.input.savePreviousState();
     this.animationFrameId = requestAnimationFrame(this.gameLoop);
   };
@@ -269,7 +289,7 @@ export class FightEngine {
         this.bill.forceState('idle');
         this.setPhase('countdown');
         this.countdownValue = 3;
-        this.countdownStartTime = performance.now();
+        this.countdownStartTime = timestamp;
       }
     }
   }
