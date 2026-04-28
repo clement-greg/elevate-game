@@ -184,10 +184,14 @@ export class AppComponent {
         const ref = this.dialog.open(LocationChooserComponent);
         ref.afterClosed().subscribe(result => {
           if (result) {
-            console.log('Location chosen', result);
-            this.location = result;
-            GameInstanceManager.location = result;
-            this.beginGame();
+            if (result === 'KB') {
+              this.router.navigate(['/kill-bill']);
+            } else {
+              console.log('Location chosen', result);
+              this.location = result;
+              GameInstanceManager.location = result;
+              this.beginGame();
+            }
           }
           this.locationChooserOpen = false;
 

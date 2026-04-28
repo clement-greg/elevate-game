@@ -57,6 +57,10 @@ h1 {
             transform: scale(.05) perspective(200px) rotateY(-10deg) translateX(450px) !important;
             z-index: 0;
         }
+        &.very-very-very-right {
+            transform: scale(.02) perspective(200px) rotateY(-10deg) translateX(500px) !important;
+            z-index: -1;
+        }
 
         &.right {
             transform: scale(.8) perspective(200px) rotateY(-10deg) !important;
@@ -86,6 +90,14 @@ h1 {
             transform: scale(.3) perspective(200px) rotateY(10deg) translateX(-350px) !important;
             z-index: -1;
         }
+        &.very-very-left {
+            transform: scale(.05) perspective(200px) rotateY(10deg) translateX(-450px) !important;
+            z-index: -2;
+        }
+        &.very-very-very-left {
+            transform: scale(.02) perspective(200px) rotateY(10deg) translateX(-500px) !important;
+            z-index: -3;
+        }
         &.center {
             z-index: 10;
         }
@@ -103,6 +115,10 @@ h1 {
 
 .four-selected {
     transform: translateX(-500px);
+}
+
+.five-selected {
+    transform: translateX(-760px);
 }
 
 .two-selected {

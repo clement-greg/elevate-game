@@ -5,27 +5,32 @@
 
     </div>
     <ul class="location-container" [class.one-selected]="selectedIndex === 0"  [class.two-selected]="selectedIndex === 1"
-        [class.three-selected]="selectedIndex ==2" [class.four-selected]="selectedIndex === 3">
+        [class.three-selected]="selectedIndex ==2" [class.four-selected]="selectedIndex === 3" [class.five-selected]="selectedIndex === 4">
         <li [class.selected]="selectedIndex === 0"  [class.right]="selectedIndex === 1" [class.center]="selectedIndex === 0" [class.very-very-right]="selectedIndex === 3" (click)="location = 'AZ';setVideoState()"
-            [class.very-right]="selectedIndex === 2">
+            [class.very-right]="selectedIndex === 2" [class.very-very-very-right]="selectedIndex === 4">
             <video src="/assets/video/az-demo.mp4" [id]="azId"></video><br>
             Sonoran Heat
         </li>
         <li [class.selected]="selectedIndex === 1" [class.center]="selectedIndex === 1" [class.right]="selectedIndex === 2" [class.very-right]="selectedIndex === 3" (click)="location = 'UT';setVideoState()"
-            [class.left]="selectedIndex === 0">
+            [class.left]="selectedIndex === 0" [class.very-very-right]="selectedIndex === 4">
             <!-- <img src="/assets/images/ut-thumb.png"><br> -->
              <video src="/assets/video/ut-demo.mp4" [id]="utahId"></video><br>
              Wasatch Front
         </li>
         <li [class.selected]="selectedIndex === 2" [class.center]="selectedIndex === 2" [class.left]="selectedIndex === 1" [class.right]="selectedIndex === 3" (click)="location = 'NV';setVideoState()"
-            [class.very-left]="selectedIndex === 0">
+            [class.very-left]="selectedIndex === 0" [class.very-right]="selectedIndex === 4">
             <video src="/assets/video/nv-demo.mp4" [id]="nvId"></video><br>
             Vegas Nights
         </li>
         <li [class.selected]="selectedIndex === 3" [class.center]="selectedIndex === 3" [class.left]="selectedIndex === 2" (click)="location = 'TX';setVideoState()"
-            [class.very-left]="selectedIndex === 1">
+            [class.very-left]="selectedIndex === 1" [class.right]="selectedIndex === 4" [class.very-very-left]="selectedIndex === 0">
             <video src="/assets/video/tx-demo-complete.mp4" style="width: 200px;" [id]="txId"></video><br>
             Lone Star
+        </li>
+        <li [class.selected]="selectedIndex === 4" [class.center]="selectedIndex === 4" [class.left]="selectedIndex === 3" (click)="location = 'KB';setVideoState()"
+            [class.very-left]="selectedIndex === 2" [class.very-very-left]="selectedIndex === 1" [class.very-very-very-left]="selectedIndex === 0">
+            <video src="/assets/video/kill-bill-demo.mp4" [id]="kbId"></video><br>
+            Kill Bill
         </li>
     </ul>
 
