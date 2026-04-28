@@ -95,7 +95,7 @@ export class InputManager {
     this.gamepadState = {
       left: axes[0] < -deadzone || (buttons[14]?.pressed ?? false),
       right: axes[0] > deadzone || (buttons[15]?.pressed ?? false),
-      up: axes[1] < -deadzone || (buttons[12]?.pressed ?? false),
+      up: axes[1] < -deadzone || (buttons[12]?.pressed ?? false) || (buttons[3]?.pressed ?? false) || (buttons[6]?.pressed ?? false),
       down: axes[1] > deadzone || (buttons[13]?.pressed ?? false),
       punch: buttons[0]?.pressed ?? false,     // A / Cross
       kick: buttons[2]?.pressed ?? false,       // X / Square

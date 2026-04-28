@@ -1,5 +1,6 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef, HostListener } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef, HostListener, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { FightEngine, GamePhase } from './fight-engine';
 
 @Component({
@@ -12,6 +13,7 @@ import { FightEngine, GamePhase } from './fight-engine';
 export class KillBillComponent implements OnInit, OnDestroy {
   @ViewChild('fightCanvas', { static: true }) canvasRef!: ElementRef<HTMLCanvasElement>;
 
+  private router = inject(Router);
   private engine!: FightEngine;
   phase: GamePhase = 'title';
   loading = true;
@@ -32,7 +34,9 @@ export class KillBillComponent implements OnInit, OnDestroy {
         this.phase = phase;
       },
       onCountdownTick: (_count) => {},
-      onMatchEnd: (_winner) => {},
+      onMatchEnd: (_winner) => {
+        setTimeout(() => this.router.navigate(['/'], { queryParams: { chooser: 'true' } }), 15000);
+      },
     });
 
     await this.engine.init();

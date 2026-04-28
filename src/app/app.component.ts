@@ -62,8 +62,9 @@ export class AppComponent {
         this.location = params['state'];
         GameInstanceManager.location = this.location;
         this.beginGame();
-
-
+      }
+      if (params['chooser']) {
+        setTimeout(() => this.doGameStart(), 0);
       }
     });
 
