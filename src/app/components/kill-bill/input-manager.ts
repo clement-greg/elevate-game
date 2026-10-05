@@ -1,3 +1,5 @@
+import { getActiveGamepad } from '../../models/utilities/joystick-state';
+
 export interface InputState {
   left: boolean;
   right: boolean;
@@ -84,8 +86,7 @@ export class InputManager {
   }
 
   private pollGamepad(): InputState {
-    const gamepads = navigator.getGamepads ? navigator.getGamepads() : [];
-    const gp = gamepads[0];
+    const gp = getActiveGamepad();
     if (!gp) return this.emptyState();
 
     const deadzone = 0.3;

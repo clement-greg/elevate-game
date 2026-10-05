@@ -1,3 +1,16 @@
+// Returns the gamepad at the requested index, or the first connected gamepad if
+// that slot is empty. Browsers don't guarantee a lone controller lands in slot 0
+// (e.g. Chrome/Edge on macOS often report it at index 1).
+export function getActiveGamepad(preferredIndex = 0): Gamepad | null {
+    const gamepads = navigator.getGamepads ? navigator.getGamepads() : [];
+    if (!gamepads) {
+        return null;
+    }
+    return gamepads[preferredIndex] ?? Array.from(gamepads).find(gp => !!gp) ?? null;
+}
+
+const AXIS_THRESHOLD = 0.5;
+
 // Simple wrapper around the browser GamePad API to expose
 // a more event driven API
 export class JoystickState {
@@ -45,12 +58,7 @@ export class JoystickState {
     }
 
     gameLoop() {
-        const gamepads = navigator.getGamepads();
-        if (!gamepads) {
-            return;
-        }
-
-        const gp = gamepads[this.index];
+        const gp = getActiveGamepad(this.index);
         if (gp) {
 
 
@@ -73,33 +81,31 @@ export class JoystickState {
                 }
                 i++;
             }
-            const js1 = this;
-            if (js1.left && gp.axes[0] != -1) {
-                if (this.onLeftJoyStick) {
-                    this.onLeftJoyStick();
-                }
+            // Analog sticks rarely report exactly +/-1 (especially on macOS), so use a
+            // threshold, and also honor the D-pad (standard mapping buttons 12-15).
+            const dpad = (i: number) => this.buttonPressed(gp.buttons[i]);
+            const left = gp.axes[0] < -AXIS_THRESHOLD || dpad(14);
+            const right = gp.axes[0] > AXIS_THRESHOLD || dpad(15);
+            const up = gp.axes[1] < -AXIS_THRESHOLD || dpad(12);
+            const down = gp.axes[1] > AXIS_THRESHOLD || dpad(13);
+
+            if (this.left && !left && this.onLeftJoyStick) {
+                this.onLeftJoyStick();
             }
-            if (js1.right && gp.axes[0] != 1) {
-                if (this.onRightJoyStick) {
-                    this.onRightJoyStick();
-                }
+            if (this.right && !right && this.onRightJoyStick) {
+                this.onRightJoyStick();
             }
-            if (js1.up && gp.axes[1] !== -1) {
-                if (this.onUpJoyStick) {
-                    this.onUpJoyStick();
-                }
+            if (this.up && !up && this.onUpJoyStick) {
+                this.onUpJoyStick();
             }
-            if (js1.down && gp.axes[1] !== 1) {
-                if (this.onDownJoyStick) {
-                    this.onDownJoyStick();
-                }
+            if (this.down && !down && this.onDownJoyStick) {
+                this.onDownJoyStick();
             }
 
-            js1.left = gp.axes[0] === -1;
-            js1.right = gp.axes[0] === 1;
-            js1.up = gp.axes[1] === -1;
-            js1.down = gp.axes[1] === 1;
-
+            this.left = left;
+            this.right = right;
+            this.up = up;
+            this.down = down;
         }
         this.start = requestAnimationFrame(this.gameLoop.bind(this));
     }
