@@ -29,7 +29,7 @@ import { Config } from '../utilities/config';
 import { CeilingSpike } from '../deadly-obsticles/ceiling-spike';
 import { Dynamite } from '../enemies/ahs';
 import { pauseSound, playSound } from '../utilities/sound-utils';
-import { JoystickState } from '../utilities/joystick-state';
+import { JoystickState, getActiveGamepad } from '../utilities/joystick-state';
 import { GameInstanceManager } from './game-instance';
 import { FireVent } from '../deadly-obsticles/fire-vent';
 import { FlameThrowerMysteryBlock } from '../collectables/flame-thrower-mystery-block';
@@ -1262,7 +1262,7 @@ Don't let those old school warranty guys stick it to you.
 
 
 
-        const gamepad = navigator.getGamepads()[0];
+        const gamepad = getActiveGamepad();
         if (gamepad) {
             if (gamepad.vibrationActuator) {
                 gamepad.vibrationActuator.playEffect("dual-rumble", {
