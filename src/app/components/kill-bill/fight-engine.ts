@@ -266,6 +266,15 @@ export class FightEngine {
     this.jimmy.update(timestamp, this.canvas.width);
     this.bill.update(timestamp, this.canvas.width);
 
+    // Cycle difficulty with left/right (D-pad, stick, arrows, A/D)
+    const difficulties: Difficulty[] = ['easy', 'medium', 'hard'];
+    const idx = difficulties.indexOf(this.difficulty);
+    if (this.input.isJustPressed(input, 'left') && idx > 0) {
+      this.setDifficulty(difficulties[idx - 1]);
+    } else if (this.input.isJustPressed(input, 'right') && idx < difficulties.length - 1) {
+      this.setDifficulty(difficulties[idx + 1]);
+    }
+
     if (this.input.isJustPressed(input, 'start') || this.input.isJustPressed(input, 'punch')) {
       document.documentElement.requestFullscreen?.();
       this.startMatch();
@@ -876,7 +885,7 @@ export class FightEngine {
     // Keyboard hints
     ctx.fillStyle = '#555';
     ctx.font = '10px "Press Start 2P", monospace';
-    ctx.fillText('[1] EASY  [2] MEDIUM  [3] HARD', canvas.width / 2, canvas.height - 48);
+    ctx.fillText('[< >] OR [1] EASY  [2] MEDIUM  [3] HARD', canvas.width / 2, canvas.height - 48);
   }
 
   private renderCountdown(timestamp: number) {

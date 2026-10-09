@@ -76,6 +76,9 @@ export class InputManager {
       case 'block': return this.prevKeys.has('KeyL') || this.prevGamepadState.block;
       case 'up': return this.prevKeys.has('KeyW') || this.prevKeys.has('ArrowUp') || this.prevKeys.has('Space') || this.prevGamepadState.up;
       case 'start': return this.prevKeys.has('Enter') || this.prevGamepadState.start;
+      case 'left': return this.prevKeys.has('KeyA') || this.prevKeys.has('ArrowLeft') || this.prevGamepadState.left;
+      case 'right': return this.prevKeys.has('KeyD') || this.prevKeys.has('ArrowRight') || this.prevGamepadState.right;
+      case 'down': return this.prevKeys.has('KeyS') || this.prevKeys.has('ArrowDown') || this.prevGamepadState.down;
       default: return false;
     }
   }
